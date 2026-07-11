@@ -212,6 +212,26 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
 </style>
 </head>
 <body>
+<div id="roleScreen" style="position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px">
+  <div style="text-align:center;margin-bottom:40px">
+    <div style="font-size:48px;color:var(--primary);margin-bottom:12px">HC</div>
+    <div style="font-size:28px;font-weight:800;font-family:'Inter',sans-serif;letter-spacing:-0.5px">豪车之家</div>
+    <div style="font-size:13px;color:var(--text2);margin-top:6px">大湾区高端豪车车主平台</div>
+  </div>
+  <div style="width:100%;max-width:300px;display:flex;flex-direction:column;gap:14px">
+    <button onclick="selectRole('admin')" style="width:100%;padding:18px;border-radius:14px;background:var(--surface);border:2px solid var(--primary);color:var(--primary);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.background='rgba(200,164,92,0.1)'" onmouseout="this.style.background='var(--surface)'">
+      <div>👑 管理员</div>
+      <div style="font-size:11px;font-weight:400;opacity:0.7;margin-top:2px">豪哥 · COO</div>
+    </button>
+    <button onclick="selectRole('client')" style="width:100%;padding:18px;border-radius:14px;background:var(--surface);border:1px solid var(--border);color:var(--text1);font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div>🚗 车友会员</div>
+      <div style="font-size:11px;font-weight:400;opacity:0.5;margin-top:2px">张先生 · 高端私董</div>
+    </button>
+    <button onclick="selectRole('guest')" style="width:100%;padding:16px;border-radius:14px;background:transparent;border:1px solid var(--border);color:var(--text2);font-size:14px;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.borderColor='var(--text3)'" onmouseout="this.style.borderColor='var(--border)'">
+      游客浏览
+    </button>
+  </div>
+</div>
 <div id="app">
   <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
@@ -221,52 +241,55 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
 
   <!-- HOME PAGE -->
   <div class="page active" id="page-home">
-    <div class="header">
-      <h1>豪车之家</h1>
-      <div class="notification-bell" onclick="showToast('您有3条未读通知')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        <span class="notif-badge">3</span>
+    <div id="adminHome">
+      <div class="header">
+        <h1>豪车之家</h1>
+        <div class="notification-bell" onclick="showToast('您有3条未读通知')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          <span class="notif-badge">3</span>
+        </div>
+      </div>
+      <div style="padding:16px 16px 8px">
+        <div style="font-size:13px;color:var(--text2)" id="welcomeText">豪哥，下午好</div>
+        <div style="font-size:15px;font-weight:600;margin-top:2px">欢迎回来，今天有新动态</div>
+      </div>
+      <div class="stat-row" id="homeStats">
+        <div class="stat-card" onclick="navigateTo('members')"><div class="val">128</div><div class="lbl">会员总数</div></div>
+        <div class="stat-card" onclick="navigateTo('inventory')"><div class="val">23</div><div class="lbl">在售车辆</div></div>
+        <div class="stat-card"><div class="val">¥86万</div><div class="lbl">本月成交</div></div>
+      </div>
+      <div class="quick-grid">
+        <div class="quick-item" onclick="navigateTo('members')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>会员管理</span>
+        </div>
+        <div class="quick-item" onclick="navigateTo('inventory')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M2 8h20"/><path d="M6 12h.01"/></svg>
+          <span>库存台账</span>
+        </div>
+        <div class="quick-item" onclick="showToast('活动报名功能开发中')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          <span>活动报名</span>
+        </div>
+        <div class="quick-item" onclick="showToast('佣金核算功能开发中')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>佣金核算</span>
+        </div>
+      </div>
+      <div class="section-title">近期活动</div>
+      <div id="activities"></div>
+      <div class="section-title">待办事项</div>
+      <div class="card" id="tasks" style="padding:0"></div>
+      <div class="section-title">本月业绩</div>
+      <div class="card">
+        <div style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:2px">¥186,800</div>
+        <div style="font-size:11px;color:var(--text2);margin-bottom:12px">本月累计佣金收入</div>
+        <div class="revenue-bar"><div class="revenue-bar-label">新车销售</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:75%;background:var(--primary)"></div></div><div class="revenue-bar-val">¥128,000</div></div>
+        <div class="revenue-bar"><div class="revenue-bar-label">会员费</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:40%;background:var(--success)"></div></div><div class="revenue-bar-val">¥38,800</div></div>
+        <div class="revenue-bar"><div class="revenue-bar-label">活动收入</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:20%;background:var(--info)"></div></div><div class="revenue-bar-val">¥20,000</div></div>
       </div>
     </div>
-    <div style="padding:16px 16px 8px">
-      <div style="font-size:13px;color:var(--text2)" id="welcomeText">豪哥，下午好</div>
-      <div style="font-size:15px;font-weight:600;margin-top:2px">欢迎回来，今天有新动态</div>
-    </div>
-    <div class="stat-row" id="homeStats">
-      <div class="stat-card" onclick="navigateTo('members')"><div class="val">128</div><div class="lbl">会员总数</div></div>
-      <div class="stat-card" onclick="navigateTo('inventory')"><div class="val">23</div><div class="lbl">在售车辆</div></div>
-      <div class="stat-card"><div class="val">¥86万</div><div class="lbl">本月成交</div></div>
-    </div>
-    <div class="quick-grid">
-      <div class="quick-item" onclick="navigateTo('members')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span>会员管理</span>
-      </div>
-      <div class="quick-item" onclick="navigateTo('inventory')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M2 8h20"/><path d="M6 12h.01"/></svg>
-        <span>库存台账</span>
-      </div>
-      <div class="quick-item" onclick="showToast('活动报名功能开发中')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        <span>活动报名</span>
-      </div>
-      <div class="quick-item" onclick="showToast('佣金核算功能开发中')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        <span>佣金核算</span>
-      </div>
-    </div>
-    <div class="section-title">近期活动</div>
-    <div id="activities"></div>
-    <div class="section-title">待办事项</div>
-    <div class="card" id="tasks" style="padding:0"></div>
-    <div class="section-title">本月业绩</div>
-    <div class="card">
-      <div style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:2px">¥186,800</div>
-      <div style="font-size:11px;color:var(--text2);margin-bottom:12px">本月累计佣金收入</div>
-      <div class="revenue-bar"><div class="revenue-bar-label">新车销售</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:75%;background:var(--primary)"></div></div><div class="revenue-bar-val">¥128,000</div></div>
-      <div class="revenue-bar"><div class="revenue-bar-label">会员费</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:40%;background:var(--success)"></div></div><div class="revenue-bar-val">¥38,800</div></div>
-      <div class="revenue-bar"><div class="revenue-bar-label">活动收入</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:20%;background:var(--info)"></div></div><div class="revenue-bar-val">¥20,000</div></div>
-    </div>
+    <div id="clientHome" style="display:none"></div>
   </div>
 
   <!-- SHOWROOM PAGE -->
@@ -361,10 +384,11 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
 
   <!-- PROFILE PAGE -->
   <div class="page" id="page-profile">
+    <button onclick="switchRole()" style="width:calc(100% - 32px);margin:0 16px 16px;padding:12px;border-radius:10px;background:var(--surface);border:1px solid var(--border);color:var(--primary);font-size:13px;cursor:pointer;font-family:inherit">切换角色 (当前: <span id="profileRole">管理员</span>)</button>
     <div class="profile-header">
-      <div class="profile-avatar">豪</div>
-      <div class="profile-name">豪哥</div>
-      <span class="badge badge-gold" style="margin-top:6px">高端私董</span>
+      <div class="profile-avatar" id="profileAvatar">豪</div>
+      <div class="profile-name" id="profileName">豪哥</div>
+      <span class="badge badge-gold" id="profileTitle" style="margin-top:6px">COO · 管理员</span>
     </div>
     <div class="profile-stats">
       <div class="profile-stat"><div class="val">5</div><div class="lbl">我的收藏</div></div>
@@ -426,6 +450,90 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
 </div>
 
 <script>
+// ============= ROLE SYSTEM =============
+let currentUser = null;
+
+const ROLES = {
+  admin: {
+    name: '豪哥',
+    title: 'COO · 管理员',
+    tabs: [
+      { key: 'home', label: '工作台', icon: 'layout-dashboard' },
+      { key: 'inventory', label: '库存', icon: 'package' },
+      { key: 'members', label: '会员', icon: 'users' },
+      { key: 'chat', label: 'AI顾问', icon: 'bot' },
+      { key: 'profile', label: '我的', icon: 'user' }
+    ],
+    greeting: '豪哥',
+    canManage: true
+  },
+  client: {
+    name: '张先生',
+    title: '高端私董会员',
+    tabs: [
+      { key: 'home', label: '首页', icon: 'home' },
+      { key: 'showroom', label: '展厅', icon: 'car' },
+      { key: 'chat', label: 'AI顾问', icon: 'bot' },
+      { key: 'profile', label: '我的', icon: 'user' }
+    ],
+    greeting: '张先生',
+    canManage: false
+  },
+  guest: {
+    name: '游客',
+    title: '未登录',
+    tabs: [
+      { key: 'showroom', label: '展厅', icon: 'car' },
+      { key: 'chat', label: 'AI咨询', icon: 'bot' }
+    ],
+    greeting: '尊贵的客户',
+    canManage: false
+  }
+};
+
+function selectRole(role) {
+  currentUser = ROLES[role];
+  document.getElementById('roleScreen').style.display = 'none';
+
+  // Update tab bar HTML
+  renderTabBar();
+
+  // Update profile page
+  const profileName = document.getElementById('profileName');
+  const profileTitle = document.getElementById('profileTitle');
+  const profileAvatar = document.getElementById('profileAvatar');
+  const profileRole = document.getElementById('profileRole');
+  if (profileName) profileName.textContent = currentUser.name;
+  if (profileTitle) profileTitle.textContent = currentUser.title;
+  if (profileAvatar) profileAvatar.textContent = currentUser.name[0];
+  if (profileRole) profileRole.textContent = currentUser.name;
+
+  // Navigate to first tab
+  const firstTab = currentUser.tabs[0].key;
+  navigateTo(firstTab);
+}
+
+function switchRole() {
+  document.getElementById('roleScreen').style.display = 'flex';
+}
+
+function renderTabBar() {
+  const tabBar = document.querySelector('.tab-bar');
+  tabBar.innerHTML = currentUser.tabs.map(t => `
+    <div class="tab-item ${t.key === 'home' ? 'active' : ''}" data-tab="${t.key}" onclick="navigateTo('${t.key}')">
+      <i data-lucide="${t.icon}"></i>
+      <span>${t.label}</span>
+    </div>
+  `).join('');
+
+  // Show/hide tab bar for car-detail
+  const app = document.getElementById('app');
+  app.classList.remove('tab-hidden');
+
+  // Re-initialize lucide icons
+  if (window.lucide) lucide.createIcons();
+}
+
 // ============= DATA =============
 const cars = [
   { id:1, name:'迈巴赫 S480 4MATIC', brand:'Maybach', year:2024, mileage:'0.8万公里', engine:'4.0T V8', price:1680000, originalPrice:2100000, status:'在售', daysInStock:92, depreciation:80000, cost:1600000, tags:['S级','黑色','四驱'], aiScore:9.2, aiInsight:'性价比极高·同级最低价', match:98, image:'maybach', category:'轿车' },
@@ -502,22 +610,59 @@ function closeModal() {
 
 // ============= NAVIGATION =============
 function navigateTo(page, param) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const el = document.getElementById('page-' + page);
-  if (el) el.classList.add('active');
+  // Check if current role has access to this page
+  const roleTabs = currentUser ? currentUser.tabs.map(t => t.key) : [];
+  const adminPages = ['car-detail']; // pages accessible to all roles even if not in tabs
 
-  const tabMap = { home:'home', showroom:'showroom', inventory:'inventory', chat:'chat', profile:'profile', members:'members' };
+  if (!roleTabs.includes(page) && !adminPages.includes(page)) {
+    showToast('当前角色无法访问此页面');
+    return;
+  }
+
+  // Update greeting if going to home
+  if (page === 'home') {
+    const h = new Date().getHours();
+    let greeting = '上午好';
+    if (h >= 12 && h < 18) greeting = '下午好';
+    else if (h >= 18) greeting = '晚上好';
+    const welcomeEl = document.getElementById('welcomeText');
+    if (welcomeEl) welcomeEl.textContent = currentUser.greeting + '，' + greeting;
+  }
+
+  // Show/hide role-specific home content
+  const adminHome = document.getElementById('adminHome');
+  const clientHome = document.getElementById('clientHome');
+  if (adminHome && clientHome) {
+    if (currentUser && currentUser.canManage) {
+      adminHome.style.display = 'block';
+      clientHome.style.display = 'none';
+    } else {
+      adminHome.style.display = 'none';
+      clientHome.style.display = 'block';
+      renderClientHome();
+    }
+  }
+
+  // Update tab bar active state
+  const tabMap = currentUser ? currentUser.tabs.reduce((m, t) => { m[t.key] = t.key; return m; }, {}) : {};
   const app = document.getElementById('app');
+
   if (page === 'car-detail') {
     app.classList.add('tab-hidden');
   } else {
     app.classList.remove('tab-hidden');
-    const tab = tabMap[page] || 'home';
-    currentTab = tab;
-    document.querySelectorAll('.tab-item').forEach(t => {
-      t.classList.toggle('active', t.dataset.tab === tab);
-    });
+    if (tabMap[page]) {
+      document.querySelectorAll('.tab-item').forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === page);
+      });
+    }
   }
+
+  // Show/hide pages based on role
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-' + page);
+  if (el) el.classList.add('active');
+
   window.location.hash = page + (param ? '?' + param : '');
 
   if (page === 'car-detail' && param) {
@@ -526,7 +671,7 @@ function navigateTo(page, param) {
   if (page === 'chat') {
     setTimeout(() => {
       const msgs = document.getElementById('chatMessages');
-      msgs.scrollTop = msgs.scrollHeight;
+      if (msgs) msgs.scrollTop = msgs.scrollHeight;
     }, 100);
   }
 }
@@ -576,6 +721,76 @@ function completeTask(i) {
   tasks[i].done = true;
   renderTasks();
   showToast('任务已完成');
+}
+
+// ============= CLIENT HOME =============
+function renderClientHome() {
+  const el = document.getElementById('clientHome');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="header"><h1>豪车之家</h1><div style="position:relative;cursor:pointer" onclick="navigateTo('chat')"><i data-lucide="bell" style="width:22px;height:22px;color:var(--text2)"></i><span style="position:absolute;top:-4px;right:-4px;width:8px;height:8px;background:var(--error);border-radius:50%"></span></div></div>
+    
+    <div style="padding:16px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--bg)">${currentUser.name[0]}</div>
+        <div>
+          <div style="font-size:16px;font-weight:700">${currentUser.name}</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
+            <span class="badge badge-gold" style="font-size:10px">高端私董</span>
+            <span style="font-size:11px;color:var(--text3)">有效期至 2027-03</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section-title">热门车型推荐</div>
+    <div style="padding:0 16px;display:flex;gap:10px;overflow-x:auto;padding-bottom:6px">
+      ${cars.slice(0, 3).map(c => `
+        <div class="card" style="min-width:200px;padding:12px;cursor:pointer" onclick="navigateTo('car-detail','id=${c.id}')">
+          <div style="height:100px;border-radius:8px;background:linear-gradient(135deg,#1a1a26,#222);display:flex;align-items:center;justify-content:center;margin-bottom:8px">
+            <span style="font-size:28px;color:var(--primary);opacity:0.5">🚗</span>
+          </div>
+          <div style="font-size:13px;font-weight:600">${c.name.split(' ').slice(0,2).join(' ')}</div>
+          <div style="font-size:15px;font-weight:800;color:var(--primary);margin-top:2px">¥${(c.price/10000).toFixed(0)}万</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px">AI匹配度 ${c.match}%</div>
+        </div>
+      `).join('')}
+    </div>
+    
+    <div class="section-title">近期活动</div>
+    <div style="padding:0 16px">
+      ${activities.filter(a => a.status === '报名中').map(a => `
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <div style="font-size:14px;font-weight:600">${a.name}</div>
+              <div style="font-size:11px;color:var(--text2);margin-top:2px">${a.date} · ${a.location || '深圳'}</div>
+            </div>
+            <span class="badge badge-gold">${a.status}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+            <span style="font-size:11px;color:var(--text3)">${a.enrolled}/${a.total}人</span>
+            <button class="btn btn-primary" style="padding:6px 16px;font-size:12px" onclick="showToast('报名成功！')">报名</button>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    
+    <div class="section-title">我的收藏</div>
+    <div style="padding:0 16px">
+      ${cars.slice(0, 2).map(c => `
+        <div class="card" style="display:flex;gap:12px;cursor:pointer" onclick="navigateTo('car-detail','id=${c.id}')">
+          <div style="width:80px;height:60px;border-radius:8px;background:linear-gradient(135deg,#1a1a26,#222);flex-shrink:0;display:flex;align-items:center;justify-content:center"><span style="font-size:20px;color:var(--primary);opacity:0.5">🚗</span></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</div>
+            <div style="font-size:13px;font-weight:800;color:var(--primary);margin-top:2px">¥${(c.price/10000).toFixed(0)}万</div>
+          </div>
+          <i data-lucide="chevron-right" style="width:18px;height:18px;color:var(--text3);flex-shrink:0"></i>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  if (window.lucide) lucide.createIcons();
 }
 
 // ============= SHOWROOM =============
@@ -1073,9 +1288,12 @@ document.addEventListener('touchend', function(e) {
 function handleHash() {
   const hash = window.location.hash.slice(1);
   const [page, paramStr] = hash.split('?');
-  const validPages = ['home','showroom','car-detail','members','inventory','chat','profile'];
-  if (validPages.includes(page)) {
-    navigateTo(page, paramStr);
+  if (currentUser && page) {
+    const roleTabs = currentUser.tabs.map(t => t.key);
+    const validPages = ['car-detail'];
+    if (roleTabs.includes(page) || validPages.includes(page)) {
+      navigateTo(page, paramStr);
+    }
   }
 }
 
@@ -1087,10 +1305,8 @@ function init() {
   renderInventory();
   renderChat();
 
-  // Handle initial hash
-  if (window.location.hash) {
-    handleHash();
-  }
+  // Don't auto-navigate, show role selection first
+  // Role selection screen handles navigation after choice
 }
 
 window.addEventListener('hashchange', handleHash);
