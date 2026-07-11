@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>展厅管理 — 豪车之家工作台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors ── */
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: rgba(200, 164, 92, 0.1);
+  --color-primary-dark: #A6893F;
+
+  --color-background: #0C0C14;
+  --color-background-secondary: #111119;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1C1C28;
+  --color-surface-hover: #222232;
+
+  --color-sidebar-bg: #0E0E16;
+  --color-sidebar-active: rgba(200, 164, 92, 0.08);
+
+  --color-text-primary: #F0ECE4;
+  --color-text-secondary: #8A867E;
+  --color-text-tertiary: #5A5750;
+  --color-text-inverse: #0C0C14;
+
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-subtle: rgba(255, 255, 255, 0.04);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  /* ── State Colors ── */
+  --state-success: #34D399;
+  --state-success-bg: rgba(52, 211, 153, 0.1);
+  --state-warning: #FBBF24;
+  --state-warning-bg: rgba(251, 191, 36, 0.1);
+  --state-error: #F87171;
+  --state-error-bg: rgba(248, 113, 113, 0.1);
+  --state-info: #60A5FA;
+  --state-info-bg: rgba(96, 165, 250, 0.1);
+
+  /* ── Typography ── */
+  --font-display: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+
+  /* ── Spacing ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ── Layout ── */
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 64px;
+  --header-height: 56px;
+  --content-max-width: 1400px;
+
+  /* ── Radius ── */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        background: var(--color-background);
+        color: var(--color-text-primary);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── Layout Shell ── */
+      .layout { display: flex; min-height: 100vh; }
+
+      /* ── Sidebar ── */
+      .sidebar {
+        width: var(--sidebar-width);
+        min-width: var(--sidebar-width);
+        background: var(--color-sidebar-bg);
+        border-right: 1px solid var(--color-border);
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      .sidebar-brand {
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: 0 var(--space-5);
+        border-bottom: 1px solid var(--color-border);
+        flex-shrink: 0;
+      }
+      .sidebar-brand-icon {
+        width: 28px;
+        height: 28px;
+        background: var(--color-primary);
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-inverse);
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .sidebar-brand-name {
+        font-size: var(--text-lg);
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
+      .sidebar-nav { flex: 1; padding: var(--space-3) var(--space-3); overflow-y: auto; }
+      .nav-section-label {
+        font-size: var(--text-xs);
+        color: var(--color-text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: var(--space-4) var(--space-3) var(--space-2);
+        font-weight: 500;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-md);
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none;
+        margin-bottom: 2px;
+      }
+      .nav-item:hover { background: var(--color-surface-hover); color: var(--color-text-primary); }
+      .nav-item.active {
+        background: var(--color-sidebar-active);
+        color: var(--color-primary);
+      }
+      .nav-item.active .nav-icon { color: var(--color-primary); }
+      .nav-icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.7; }
+      .nav-item.active .nav-icon { opacity: 1; }
+      .nav-item-badge {
+        margin-left: auto;
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: var(--radius-full);
+        font-weight: 600;
+      }
+
+      /* ── Main Area ── */
+      .main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+      /* ── Header ── */
+      .top-header {
+        height: var(--header-height);
+        background: var(--color-sidebar-bg);
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 var(--space-6);
+        flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        z-index: 30;
+      }
+      .header-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+      }
+      .header-breadcrumb .sep { color: var(--color-text-tertiary); }
+      .header-breadcrumb .current { color: var(--color-text-primary); font-weight: 500; }
+      .header-actions { display: flex; align-items: center; gap: var(--space-3); }
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-1) var(--space-3);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-surface);
+        min-width: 200px;
+      }
+      .search-box input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--color-text-primary);
+        font-size: var(--text-sm);
+        font-family: var(--font-body);
+        width: 100%;
+      }
+      .search-box input::placeholder { color: var(--color-text-tertiary); }
+      .search-box .search-icon { width: 14px; height: 14px; color: var(--color-text-tertiary); flex-shrink: 0; }
+      .header-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: var(--radius-full);
+        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-inverse);
+        font-size: var(--text-xs);
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-gold {
+        padding: var(--space-1) var(--space-4);
+        border-radius: var(--radius-md);
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        font-family: var(--font-body);
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        white-space: nowrap;
+      }
+      .btn-gold:hover { background: var(--color-primary-light); }
+      .btn-ghost {
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        font-family: var(--font-body);
+        border: 1px solid var(--color-border);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .btn-ghost:hover { border-color: var(--color-text-tertiary); color: var(--color-text-primary); }
+      .header-icon-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-border);
+        background: var(--color-surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--color-text-secondary);
+        transition: all 0.15s;
+        position: relative;
+      }
+      .header-icon-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+      .notification-dot {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 6px;
+        height: 6px;
+        background: var(--state-error);
+        border-radius: var(--radius-full);
+      }
+
+      /* ── Content ── */
+      .content { flex: 1; padding: var(--space-6); overflow-y: auto; }
+      .content-max { max-width: var(--content-max-width); margin: 0 auto; }
+
+      /* ── KPI Cards ── */
+      .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-bottom: var(--space-6); }
+      .kpi-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        transition: border-color 0.2s;
+      }
+      .kpi-card:hover { border-color: rgba(200, 164, 92, 0.2); }
+      .kpi-label { font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: var(--space-2); }
+      .kpi-value { font-size: var(--text-3xl); font-weight: 700; color: var(--color-text-primary); margin-bottom: var(--space-2); font-family: var(--font-body); }
+      .kpi-change { display: inline-flex; align-items: center; gap: 4px; font-size: var(--text-sm); font-weight: 500; padding: 2px 8px; border-radius: var(--radius-full); }
+      .kpi-change.up { color: var(--state-success); background: var(--state-success-bg); }
+      .kpi-change.gold { color: var(--color-primary); background: var(--color-primary-lightest); }
+
+      /* ── Two Column Layout ── */
+      .two-col-uneven { display: grid; grid-template-columns: 3fr 2fr; gap: var(--space-4); margin-bottom: var(--space-6); }
+
+      /* ── Table Card ── */
+      .table-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+      }
+      .table-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--space-4);
+      }
+      .table-title { font-size: var(--text-lg); font-weight: 600; }
+      .table-actions { display: flex; align-items: center; gap: var(--space-2); }
+      .btn-dropdown {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-md);
+        background: transparent;
+        border: 1px solid var(--color-border);
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+        font-family: var(--font-body);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .btn-dropdown:hover { border-color: var(--color-text-tertiary); color: var(--color-text-primary); }
+      .btn-export {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-md);
+        background: transparent;
+        border: 1px solid var(--color-border);
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+        font-family: var(--font-body);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .btn-export:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+      /* ── Data Table ── */
+      .data-table { width: 100%; border-collapse: collapse; }
+      .data-table thead th {
+        text-align: left;
+        font-size: var(--text-xs);
+        font-weight: 500;
+        color: var(--color-text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: var(--space-3) var(--space-3);
+        border-bottom: 1px solid var(--color-divider);
+        white-space: nowrap;
+      }
+      .data-table tbody tr {
+        border-bottom: 1px solid var(--color-border-subtle);
+        transition: background 0.12s ease;
+      }
+      .data-table tbody tr:nth-child(even) { background: var(--color-background-secondary); }
+      .data-table tbody tr:hover { background: var(--color-surface-hover); }
+      .data-table tbody td {
+        padding: var(--space-3) var(--space-3);
+        font-size: var(--text-sm);
+        vertical-align: middle;
+      }
+      .car-cell { display: flex; align-items: center; gap: var(--space-3); min-width: 180px; }
+      .car-thumb {
+        width: 48px;
+        height: 32px;
+        border-radius: var(--radius-sm);
+        background: var(--color-surface-elevated);
+        flex-shrink: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .car-thumb img { width: 100%; height: 100%; object-fit: cover; }
+      .car-name { font-weight: 500; color: var(--color-text-primary); white-space: nowrap; }
+
+      /* Status badges */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 8px;
+        border-radius: var(--radius-full);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .badge-green { color: var(--state-success); background: var(--state-success-bg); }
+      .badge-gold { color: var(--color-primary); background: var(--color-primary-lightest); }
+
+      /* Monospace numbers */
+      .mono { font-family: var(--font-mono); }
+
+      /* AI score */
+      .ai-score { color: var(--color-primary); font-weight: 600; }
+      .ai-score-normal { color: var(--color-text-secondary); }
+
+      /* Age indicator */
+      .age-green { color: var(--state-success); }
+      .age-yellow { color: var(--state-warning); }
+      .age-normal { color: var(--color-text-secondary); }
+
+      /* Action buttons */
+      .action-btns { display: flex; align-items: center; gap: var(--space-2); }
+      .action-btn {
+        padding: 2px 8px;
+        border-radius: var(--radius-sm);
+        font-size: var(--text-xs);
+        font-family: var(--font-body);
+        cursor: pointer;
+        transition: all 0.12s;
+        border: none;
+        background: transparent;
+      }
+      .action-btn-edit { color: var(--color-text-secondary); }
+      .action-btn-edit:hover { color: var(--color-primary); background: var(--color-primary-lightest); }
+      .action-btn-danger { color: var(--color-text-secondary); }
+      .action-btn-danger:hover { color: var(--state-error); background: var(--state-error-bg); }
+      .action-btn-sold { color: var(--color-text-secondary); }
+      .action-btn-sold:hover { color: var(--color-primary); background: var(--color-primary-lightest); }
+
+      /* ── Checkbox ── */
+      .custom-checkbox {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        border: 1.5px solid var(--color-border);
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      /* ── AI Insight Cards ── */
+      .insight-panel { display: flex; flex-direction: column; gap: var(--space-4); }
+      .ai-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        border-left: 3px solid var(--color-primary);
+      }
+      .ai-card-title {
+        font-size: var(--text-lg);
+        font-weight: 600;
+        margin-bottom: var(--space-1);
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+      }
+      .ai-card-subtitle {
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-4);
+      }
+      .ai-price-row {
+        display: flex;
+        align-items: baseline;
+        gap: var(--space-4);
+        margin-bottom: var(--space-5);
+        flex-wrap: wrap;
+      }
+      .ai-price-label { font-size: var(--text-sm); color: var(--color-text-secondary); }
+      .ai-price-value { font-size: var(--text-2xl); font-weight: 700; color: var(--color-primary); font-family: var(--font-mono); }
+      .ai-market-price { font-size: var(--text-sm); color: var(--color-text-tertiary); text-decoration: line-through; font-family: var(--font-mono); }
+
+      /* CSS-only price comparison chart */
+      .price-chart { margin-bottom: var(--space-5); }
+      .price-chart-title { font-size: var(--text-xs); color: var(--color-text-tertiary); margin-bottom: var(--space-3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+      .price-chart-container { position: relative; height: 120px; }
+      .price-bars { display: flex; align-items: flex-end; justify-content: space-around; height: 100%; gap: var(--space-2); position: relative; z-index: 2; }
+      .price-bar-col { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 4px; }
+      .price-bar-val { font-size: var(--text-xs); font-family: var(--font-mono); color: var(--color-text-secondary); white-space: nowrap; }
+      .price-bar {
+        width: 100%;
+        max-width: 32px;
+        border-radius: 3px 3px 0 0;
+        background: var(--color-surface-elevated);
+        border: 1px solid var(--color-border);
+        transition: height 0.3s;
+      }
+      .price-bar-label { font-size: 10px; color: var(--color-text-tertiary); white-space: nowrap; }
+      .price-dash-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        border-top: 2px dashed var(--color-primary);
+        z-index: 1;
+        opacity: 0.7;
+      }
+      .price-dash-label {
+        position: absolute;
+        right: 0;
+        top: -18px;
+        font-size: var(--text-xs);
+        font-family: var(--font-mono);
+        color: var(--color-primary);
+        font-weight: 600;
+      }
+
+      .ai-card-actions { display: flex; gap: var(--space-2); }
+
+      /* ── Health Score ── */
+      .health-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
+      .health-score {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-full);
+        font-size: var(--text-sm);
+        font-weight: 600;
+      }
+      .health-score.good { color: var(--state-success); background: var(--state-success-bg); }
+      .health-warnings { display: flex; flex-direction: column; gap: var(--space-2); }
+      .health-warning {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-2);
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-sm);
+        font-size: var(--text-sm);
+        line-height: 1.5;
+      }
+      .health-warning.yellow { background: var(--state-warning-bg); color: var(--state-warning); }
+      .health-warning.green { background: var(--state-success-bg); color: var(--state-success); }
+      .health-warning-icon { flex-shrink: 0; margin-top: 2px; }
+
+      /* ── Quick Action Cards ── */
+      .quick-actions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-bottom: var(--space-6); }
+      .quick-action-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .quick-action-card:hover { border-color: rgba(200, 164, 92, 0.25); background: var(--color-surface-elevated); }
+      .qa-icon-wrap {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
+        background: var(--color-primary-lightest);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-3);
+      }
+      .qa-title { font-size: var(--text-base); font-weight: 600; margin-bottom: var(--space-2); color: var(--color-text-primary); }
+      .qa-desc { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 1.5; }
+
+      /* ── Lucide Icon Helper ── */
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+
+      /* ── Scrollbar ── */
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <!-- ═══════ SIDEBAR ═══════ -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="sidebar-brand-icon">HC</div>
+            <span class="sidebar-brand-name">豪车之家</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">概览</div>
+            <a class="nav-item" href="#">
+                <i data-lucide="layout-dashboard" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>工作台</span>
+            </a>
+
+            <div class="nav-section-label">营销中心</div>
+            <a class="nav-item" href="#">
+                <i data-lucide="bar-chart-3" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>数据分析</span>
+                <span class="nav-item-badge">New</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="pen-line" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>AI内容发布</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="users" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>客户管理</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="megaphone" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>投放管理</span>
+            </a>
+
+            <div class="nav-section-label">管理</div>
+            <a class="nav-item active" href="#">
+                <i data-lucide="building-2" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>展厅管理</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="car" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>车型库</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="image" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>素材中心</span>
+            </a>
+
+            <div class="nav-section-label">系统</div>
+            <a class="nav-item" href="#">
+                <i data-lucide="settings" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>设置</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ═══════ MAIN AREA ═══════ -->
+    <div class="main-area">
+        <!-- Header -->
+        <header class="top-header">
+            <div class="header-breadcrumb">
+                <span>管理</span>
+                <span class="sep">/</span>
+                <span class="current">展厅管理</span>
+            </div>
+            <div class="header-actions">
+                <div class="search-box">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" placeholder="搜索车辆...">
+                </div>
+                <button class="btn-gold">
+                    <i data-lucide="plus" style="width:14px;height:14px;"></i>
+                    上架新车
+                </button>
+                <div class="header-icon-btn">
+                    <i data-lucide="bell" style="width:16px;height:16px;"></i>
+                    <span class="notification-dot"></span>
+                </div>
+                <div class="header-avatar">王</div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="content">
+            <div class="content-max">
+
+                <!-- ═══ ROW 1: KPI Cards ═══ -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">在售车辆</div>
+                        <div class="kpi-value">23台</div>
+                        <span class="kpi-change gold">
+                            <i data-lucide="trending-up" style="width:14px;height:14px;"></i>
+                            本周+2
+                        </span>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">展厅曝光</div>
+                        <div class="kpi-value">8.6万</div>
+                        <span class="kpi-change up">
+                            <i data-lucide="trending-up" style="width:14px;height:14px;"></i>
+                            +18%
+                        </span>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">咨询量</div>
+                        <div class="kpi-value">156次</div>
+                        <span class="kpi-change gold">
+                            <i data-lucide="trending-up" style="width:14px;height:14px;"></i>
+                            +32%
+                        </span>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">本月成交</div>
+                        <div class="kpi-value" style="color:var(--color-primary);">&#165;2,850万</div>
+                        <span class="kpi-change gold">
+                            <i data-lucide="trophy" style="width:14px;height:14px;"></i>
+                            目标达成
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ═══ ROW 2: Two Columns (60/40) ═══ -->
+                <div class="two-col-uneven">
+
+                    <!-- LEFT: Vehicle Management Table -->
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h2 class="table-title">车辆管理</h2>
+                            <div class="table-actions">
+                                <button class="btn-dropdown">
+                                    批量操作
+                                    <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+                                </button>
+                                <button class="btn-export">
+                                    <i data-lucide="download" style="width:14px;height:14px;"></i>
+                                    导出
+                                </button>
+                            </div>
+                        </div>
+                        <div style="overflow-x:auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:36px;"><div class="custom-checkbox"></div></th>
+                                    <th>车辆</th>
+                                    <th>状态</th>
+                                    <th>价格</th>
+                                    <th>库龄</th>
+                                    <th>AI评分</th>
+                                    <th>咨询量</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Row 1: Maybach -->
+                                <tr>
+                                    <td><div class="custom-checkbox"></div></td>
+                                    <td>
+                                        <div class="car-cell">
+                                            <div class="car-thumb">
+                                                <img src="../desktop-assets/car-porsche.jpg" alt="迈巴赫 S480" loading="lazy">
+                                            </div>
+                                            <span class="car-name">迈巴赫 S480</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-green">在售</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-primary);">&#165;168万</span></td>
+                                    <td><span class="mono age-yellow">92天</span></td>
+                                    <td><span class="mono ai-score">9.2</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-secondary);">12</span></td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="action-btn action-btn-edit">编辑</button>
+                                            <button class="action-btn action-btn-danger">下架</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Row 2: Porsche -->
+                                <tr>
+                                    <td><div class="custom-checkbox"></div></td>
+                                    <td>
+                                        <div class="car-cell">
+                                            <div class="car-thumb">
+                                                <img src="../desktop-assets/car-porsche.jpg" alt="保时捷 911" loading="lazy">
+                                            </div>
+                                            <span class="car-name">保时捷 911 Turbo S</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-green">在售</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-primary);">&#165;258万</span></td>
+                                    <td><span class="mono age-green">28天</span></td>
+                                    <td><span class="mono ai-score">9.5</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-secondary);">8</span></td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="action-btn action-btn-edit">编辑</button>
+                                            <button class="action-btn action-btn-danger">下架</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Row 3: Mercedes G63 -->
+                                <tr>
+                                    <td><div class="custom-checkbox"></div></td>
+                                    <td>
+                                        <div class="car-cell">
+                                            <div class="car-thumb">
+                                                <img src="../desktop-assets/car-porsche.jpg" alt="奔驰 G63" loading="lazy">
+                                            </div>
+                                            <span class="car-name">奔驰 G63 AMG</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-green">在售</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-primary);">&#165;228万</span></td>
+                                    <td><span class="mono age-green">15天</span></td>
+                                    <td><span class="mono ai-score-normal">9.0</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-secondary);">15</span></td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="action-btn action-btn-edit">编辑</button>
+                                            <button class="action-btn action-btn-danger">下架</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Row 4: BMW 740Li -->
+                                <tr>
+                                    <td><div class="custom-checkbox"></div></td>
+                                    <td>
+                                        <div class="car-cell">
+                                            <div class="car-thumb">
+                                                <img src="../desktop-assets/car-porsche.jpg" alt="宝马 740Li" loading="lazy">
+                                            </div>
+                                            <span class="car-name">宝马 740Li</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-gold">已预定</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-primary);">&#165;72万</span></td>
+                                    <td><span class="mono age-normal">45天</span></td>
+                                    <td><span class="mono ai-score-normal">8.5</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-secondary);">6</span></td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="action-btn action-btn-edit">编辑</button>
+                                            <button class="action-btn action-btn-sold">已售</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Row 5: Bentley -->
+                                <tr>
+                                    <td><div class="custom-checkbox"></div></td>
+                                    <td>
+                                        <div class="car-cell">
+                                            <div class="car-thumb">
+                                                <img src="../desktop-assets/car-porsche.jpg" alt="宾利 飞驰" loading="lazy">
+                                            </div>
+                                            <span class="car-name">宾利 飞驰</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-green">在售</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-primary);">&#165;298万</span></td>
+                                    <td><span class="mono age-yellow">60天</span></td>
+                                    <td><span class="mono ai-score">9.8</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-secondary);">4</span></td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="action-btn action-btn-edit">编辑</button>
+                                            <button class="action-btn action-btn-danger">下架</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Row 6: Audi RS7 -->
+                                <tr>
+                                    <td><div class="custom-checkbox"></div></td>
+                                    <td>
+                                        <div class="car-cell">
+                                            <div class="car-thumb">
+                                                <img src="../desktop-assets/car-porsche.jpg" alt="奥迪 RS7" loading="lazy">
+                                            </div>
+                                            <span class="car-name">奥迪 RS7</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-green">在售</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-primary);">&#165;128万</span></td>
+                                    <td><span class="mono age-green">8天</span></td>
+                                    <td><span class="mono ai-score-normal">8.8</span></td>
+                                    <td><span class="mono" style="color:var(--color-text-secondary);">9</span></td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="action-btn action-btn-edit">编辑</button>
+                                            <button class="action-btn action-btn-danger">下架</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: AI Insights Panel -->
+                    <div class="insight-panel">
+
+                        <!-- AI Pricing Assistant -->
+                        <div class="ai-card">
+                            <div class="ai-card-title">
+                                <i data-lucide="sparkles" style="width:18px;height:18px;color:var(--color-primary);"></i>
+                                AI定价助手
+                            </div>
+                            <div class="ai-card-subtitle">迈巴赫 S480</div>
+                            <div class="ai-price-row">
+                                <div>
+                                    <div class="ai-price-label">AI建议价格</div>
+                                    <div class="ai-price-value">&#165;168万</div>
+                                </div>
+                                <div>
+                                    <div class="ai-price-label">市场均价</div>
+                                    <div class="ai-market-price">&#165;182万</div>
+                                </div>
+                            </div>
+
+                            <!-- CSS-only price comparison chart -->
+                            <div class="price-chart">
+                                <div class="price-chart-title">同类成交</div>
+                                <div class="price-chart-container">
+                                    <!-- Gold dashed line at AI建议价 ¥168万 (bottom position) -->
+                                    <div class="price-dash-line" style="bottom: 16px;">
+                                        <span class="price-dash-label">AI建议 &#165;168万</span>
+                                    </div>
+                                    <div class="price-bars">
+                                        <!-- ¥178万 -->
+                                        <div class="price-bar-col">
+                                            <span class="price-bar-val">&#165;178万</span>
+                                            <div class="price-bar" style="height:68%;"></div>
+                                        </div>
+                                        <!-- ¥175万 -->
+                                        <div class="price-bar-col">
+                                            <span class="price-bar-val">&#165;175万</span>
+                                            <div class="price-bar" style="height:55%;"></div>
+                                        </div>
+                                        <!-- ¥182万 -->
+                                        <div class="price-bar-col">
+                                            <span class="price-bar-val">&#165;182万</span>
+                                            <div class="price-bar" style="height:88%;"></div>
+                                        </div>
+                                        <!-- ¥170万 -->
+                                        <div class="price-bar-col">
+                                            <span class="price-bar-val">&#165;170万</span>
+                                            <div class="price-bar" style="height:38%;"></div>
+                                        </div>
+                                        <!-- ¥168万 -->
+                                        <div class="price-bar-col">
+                                            <span class="price-bar-val" style="color:var(--color-primary);">&#165;168万</span>
+                                            <div class="price-bar" style="height:24%;background:linear-gradient(180deg, var(--color-primary), var(--color-primary-dark));border-color:var(--color-primary);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ai-card-actions">
+                                <button class="btn-gold">
+                                    <i data-lucide="zap" style="width:14px;height:14px;"></i>
+                                    一键调价
+                                </button>
+                                <button class="btn-ghost">忽略</button>
+                            </div>
+                        </div>
+
+                        <!-- Inventory Health -->
+                        <div class="ai-card">
+                            <div class="ai-card-title">
+                                <i data-lucide="heart-pulse" style="width:18px;height:18px;color:var(--color-primary);"></i>
+                                库存健康度
+                            </div>
+                            <div class="health-header">
+                                <span class="health-score good">
+                                    <i data-lucide="check-circle-2" style="width:14px;height:14px;"></i>
+                                    良好 82/100
+                                </span>
+                            </div>
+                            <div class="health-warnings">
+                                <div class="health-warning yellow">
+                                    <i data-lucide="alert-triangle" class="health-warning-icon" style="width:14px;height:14px;"></i>
+                                    <span>迈巴赫S480 库龄92天，建议降价促销</span>
+                                </div>
+                                <div class="health-warning yellow">
+                                    <i data-lucide="alert-triangle" class="health-warning-icon" style="width:14px;height:14px;"></i>
+                                    <span>宾利飞驰 60天未咨询，建议增加曝光</span>
+                                </div>
+                                <div class="health-warning green">
+                                    <i data-lucide="trending-up" class="health-warning-icon" style="width:14px;height:14px;"></i>
+                                    <span>保时捷911 咨询量高，建议维持价格</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ═══ ROW 3: Quick Actions ═══ -->
+                <div class="quick-actions-grid">
+                    <div class="quick-action-card">
+                        <div class="qa-icon-wrap">
+                            <i data-lucide="upload-cloud" style="width:20px;height:20px;color:var(--color-primary);"></i>
+                        </div>
+                        <div class="qa-title">AI一键上架</div>
+                        <div class="qa-desc">上传车辆照片，AI自动识别车型、填写参数、生成描述文案并建议定价</div>
+                    </div>
+                    <div class="quick-action-card">
+                        <div class="qa-icon-wrap">
+                            <i data-lucide="wand-2" style="width:20px;height:20px;color:var(--color-primary);"></i>
+                        </div>
+                        <div class="qa-title">生成营销内容</div>
+                        <div class="qa-desc">一键生成抖音、小红书平台营销图文与视频脚本，自动匹配热门话题标签</div>
+                    </div>
+                    <div class="quick-action-card">
+                        <div class="qa-icon-wrap">
+                            <i data-lucide="git-compare-arrows" style="width:20px;height:20px;color:var(--color-primary);"></i>
+                        </div>
+                        <div class="qa-title">竞品分析</div>
+                        <div class="qa-desc">对比大湾区同款车型定价与库存周转，获取智能调价与库存优化策略</div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>

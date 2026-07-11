@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI内容发布工作台 — 豪车之家</title>
+    <style id="theme-vars">
+:root {
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: rgba(200, 164, 92, 0.1);
+  --color-primary-dark: #A6893F;
+
+  --color-background: #0C0C14;
+  --color-background-secondary: #111119;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1C1C28;
+  --color-surface-hover: #222232;
+
+  --color-sidebar-bg: #0E0E16;
+  --color-sidebar-active: rgba(200, 164, 92, 0.08);
+
+  --color-text-primary: #F0ECE4;
+  --color-text-secondary: #8A867E;
+  --color-text-tertiary: #5A5750;
+  --color-text-inverse: #0C0C14;
+
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-subtle: rgba(255, 255, 255, 0.04);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  --state-success: #34D399;
+  --state-success-bg: rgba(52, 211, 153, 0.1);
+  --state-warning: #FBBF24;
+  --state-warning-bg: rgba(251, 191, 36, 0.1);
+  --state-error: #F87171;
+  --state-error-bg: rgba(248, 113, 113, 0.1);
+  --state-info: #60A5FA;
+  --state-info-bg: rgba(96, 165, 250, 0.1);
+
+  --font-display: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 64px;
+  --header-height: 56px;
+  --content-max-width: 1400px;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <!-- ========== SIDEBAR ========== -->
+    <aside id="sidebar" style="position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-width);background:var(--color-sidebar-bg);border-right:1px solid var(--color-divider);z-index:40;display:flex;flex-direction:column;padding:var(--space-5) 0;overflow-y:auto;">
+        <!-- Logo -->
+        <div style="display:flex;align-items:center;gap:var(--space-3);padding:0 var(--space-5) var(--space-6);margin-bottom:var(--space-4);">
+            <div style="width:32px;height:32px;background:var(--color-primary);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;">
+                <i data-lucide="car" style="width:18px;height:18px;color:var(--color-text-inverse);"></i>
+            </div>
+            <span style="font-size:var(--text-lg);font-weight:600;color:var(--color-primary);letter-spacing:-0.01em;">豪车之家</span>
+        </div>
+
+        <!-- Nav: 工作台 -->
+        <div style="margin-bottom:var(--space-1);">
+            <div style="padding:0 var(--space-5);margin-bottom:var(--space-2);">
+                <span style="font-size:var(--text-xs);font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.05em;">工作台</span>
+            </div>
+            <a href="#" class="nav-item active" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-5);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);transition:all 0.15s;position:relative;">
+                <i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item active" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-5);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);transition:all 0.15s;position:relative;background:var(--color-sidebar-active);color:var(--color-primary);">
+                <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;background:var(--color-primary);border-radius:0 3px 3px 0;"></span>
+                <i data-lucide="file-text" style="width:16px;height:16px;"></i>
+                <span>内容工作台</span>
+            </a>
+            <a href="#" class="nav-item" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-5);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);transition:all 0.15s;position:relative;">
+                <i data-lucide="bar-chart-3" style="width:16px;height:16px;"></i>
+                <span>数据分析</span>
+            </a>
+        </div>
+
+        <!-- Divider -->
+        <div style="height:1px;background:var(--color-divider);margin:var(--space-4) var(--space-5);"></div>
+
+        <!-- Nav: 工具 -->
+        <div style="margin-bottom:var(--space-1);">
+            <div style="padding:0 var(--space-5);margin-bottom:var(--space-2);">
+                <span style="font-size:var(--text-xs);font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.05em;">工具</span>
+            </div>
+            <a href="#" class="nav-item" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-5);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);transition:all 0.15s;position:relative;">
+                <i data-lucide="video" style="width:16px;height:16px;"></i>
+                <span>数字人</span>
+            </a>
+            <a href="#" class="nav-item" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-5);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);transition:all 0.15s;position:relative;">
+                <i data-lucide="message-circle" style="width:16px;height:16px;"></i>
+                <span>AI 聊天助手</span>
+            </a>
+        </div>
+
+        <!-- Divider -->
+        <div style="height:1px;background:var(--color-divider);margin:var(--space-4) var(--space-5);"></div>
+
+        <!-- Nav: 管理 -->
+        <div style="margin-bottom:var(--space-1);">
+            <div style="padding:0 var(--space-5);margin-bottom:var(--space-2);">
+                <span style="font-size:var(--text-xs);font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.05em;">管理</span>
+            </div>
+            <a href="#" class="nav-item" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-5);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);transition:all 0.15s;position:relative;">
+                <i data-lucide="users" style="width:16px;height:16px;"></i>
+                <span>CRM 客户管理</span>
+            </a>
+            <a href="#" class="nav-item" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-5);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);transition:all 0.15s;position:relative;">
+                <i data-lucide="credit-card" style="width:16px;height:16px;"></i>
+                <span>支付管理</span>
+            </a>
+            <a href="#" class="nav-item" style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-5);color:var(--color-text-secondary);text-decoration:none;font-size:var(--text-sm);transition:all 0.15s;position:relative;">
+                <i data-lucide="settings" style="width:16px;height:16px;"></i>
+                <span>系统设置</span>
+            </a>
+        </div>
+
+        <!-- Spacer -->
+        <div style="flex:1;"></div>
+
+        <!-- User -->
+        <div style="padding:var(--space-4) var(--space-5);border-top:1px solid var(--color-divider);margin-top:var(--space-4);display:flex;align-items:center;gap:var(--space-3);">
+            <div style="position:relative;">
+                <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg, #C8A45C, #A6893F);display:flex;align-items:center;justify-content:center;font-size:var(--text-xs);font-weight:600;color:var(--color-text-inverse);">豪</div>
+                <div style="position:absolute;bottom:0;right:0;width:8px;height:8px;border-radius:50%;background:var(--state-success);border:2px solid var(--color-sidebar-bg);"></div>
+            </div>
+            <div>
+                <div style="font-size:var(--text-sm);font-weight:500;color:var(--color-text-primary);line-height:1.2;">豪哥</div>
+                <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);">COO</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ========== MAIN SHELL ========== -->
+    <div style="margin-left:var(--sidebar-width);min-height:100vh;display:flex;flex-direction:column;">
+        <!-- ========== TOP HEADER ========== -->
+        <header style="height:var(--header-height);border-bottom:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-8);background:var(--color-background);position:sticky;top:0;z-index:30;flex-shrink:0;">
+            <!-- Breadcrumb -->
+            <div style="display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);">
+                <span style="color:var(--color-text-tertiary);">工作台</span>
+                <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--color-text-tertiary);"></i>
+                <span style="color:var(--color-text-secondary);">AI内容发布</span>
+            </div>
+            <!-- Right actions -->
+            <div style="display:flex;align-items:center;gap:var(--space-4);">
+                <!-- Search -->
+                <div style="position:relative;">
+                    <i data-lucide="search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--color-text-tertiary);pointer-events:none;"></i>
+                    <input type="text" placeholder="搜索内容..." style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:6px 12px 6px 32px;font-size:var(--text-sm);color:var(--color-text-primary);width:220px;outline:none;font-family:var(--font-body);transition:border-color 0.15s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--color-border)'">
+                </div>
+                <!-- Notification bell -->
+                <button style="position:relative;background:none;border:none;color:var(--color-text-secondary);cursor:pointer;padding:6px;border-radius:var(--radius-md);transition:background 0.15s;" onmouseenter="this.style.background='var(--color-surface-hover)'" onmouseleave="this.style.background='none'">
+                    <i data-lucide="bell" style="width:18px;height:18px;"></i>
+                    <span style="position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--state-error);border:1.5px solid var(--color-background);"></span>
+                </button>
+                <!-- Avatar -->
+                <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg, #C8A45C, #A6893F);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--color-text-inverse);cursor:pointer;">豪</div>
+            </div>
+        </header>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main style="flex:1;padding:var(--space-8);max-width:var(--content-max-width);">
+            <!-- Page Title -->
+            <div style="margin-bottom:var(--space-6);">
+                <h1 style="font-size:var(--text-2xl);font-weight:600;color:var(--color-text-primary);margin-bottom:var(--space-1);">AI 内容发布工作台</h1>
+                <p style="font-size:var(--text-sm);color:var(--color-text-secondary);">管理多平台内容发布、AI 智能生成营销文案，一站式内容运营</p>
+            </div>
+
+            <!-- Row 1: KPI Stats -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-bottom:var(--space-6);">
+                <!-- KPI 1 -->
+                <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3);">
+                        <span style="font-size:var(--text-sm);color:var(--color-text-secondary);">今日发布</span>
+                        <i data-lucide="send" style="width:16px;height:16px;color:var(--color-text-tertiary);"></i>
+                    </div>
+                    <div style="font-size:var(--text-3xl);font-weight:600;color:var(--color-text-primary);line-height:1;">12</div>
+                    <div style="display:flex;align-items:center;gap:var(--space-1);margin-top:var(--space-2);font-size:var(--text-xs);">
+                        <span style="color:var(--state-success);display:flex;align-items:center;gap:2px;"><i data-lucide="trending-up" style="width:12px;height:12px;"></i>+12%</span>
+                        <span style="color:var(--color-text-tertiary);">较昨日</span>
+                    </div>
+                </div>
+                <!-- KPI 2 -->
+                <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3);">
+                        <span style="font-size:var(--text-sm);color:var(--color-text-secondary);">全网曝光</span>
+                        <i data-lucide="eye" style="width:16px;height:16px;color:var(--color-text-tertiary);"></i>
+                    </div>
+                    <div style="font-size:var(--text-3xl);font-weight:600;color:var(--color-text-primary);line-height:1;">28.5<span style="font-size:var(--text-lg);font-weight:400;color:var(--color-text-secondary);margin-left:2px;">万</span></div>
+                    <div style="display:flex;align-items:center;gap:var(--space-1);margin-top:var(--space-2);font-size:var(--text-xs);">
+                        <span style="color:var(--state-info);display:flex;align-items:center;gap:2px;"><i data-lucide="trending-up" style="width:12px;height:12px;"></i>+8%</span>
+                        <span style="color:var(--color-text-tertiary);">较昨日</span>
+                    </div>
+                </div>
+                <!-- KPI 3 -->
+                <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3);">
+                        <span style="font-size:var(--text-sm);color:var(--color-text-secondary);">线索获取</span>
+                        <i data-lucide="target" style="width:16px;height:16px;color:var(--color-text-tertiary);"></i>
+                    </div>
+                    <div style="font-size:var(--text-3xl);font-weight:600;color:var(--color-text-primary);line-height:1;">46</div>
+                    <div style="display:flex;align-items:center;gap:var(--space-1);margin-top:var(--space-2);font-size:var(--text-xs);">
+                        <span style="color:var(--color-primary);display:flex;align-items:center;gap:2px;"><i data-lucide="trending-up" style="width:12px;height:12px;"></i>+23%</span>
+                        <span style="color:var(--color-text-tertiary);">较昨日</span>
+                    </div>
+                </div>
+                <!-- KPI 4 -->
+                <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3);">
+                        <span style="font-size:var(--text-sm);color:var(--color-text-secondary);">AI 生成内容</span>
+                        <i data-lucide="sparkles" style="width:16px;height:16px;color:var(--color-text-tertiary);"></i>
+                    </div>
+                    <div style="font-size:var(--text-3xl);font-weight:600;color:var(--color-text-primary);line-height:1;">38<span style="font-size:var(--text-lg);font-weight:400;color:var(--color-text-secondary);margin-left:4px;">篇</span></div>
+                    <div style="display:flex;align-items:center;gap:var(--space-1);margin-top:var(--space-2);font-size:var(--text-xs);">
+                        <span style="color:var(--color-primary);display:flex;align-items:center;gap:2px;"><i data-lucide="zap" style="width:12px;height:12px;"></i>本月累计</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Two columns -->
+            <div style="display:grid;grid-template-columns:3fr 2fr;gap:var(--space-6);align-items:start;">
+
+                <!-- ===== LEFT: Content Queue ===== -->
+                <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden;">
+                    <!-- Heading -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-5) var(--space-5) var(--space-4);border-bottom:1px solid var(--color-divider);">
+                        <h2 style="font-size:var(--text-lg);font-weight:600;color:var(--color-text-primary);display:flex;align-items:center;gap:var(--space-2);">
+                            <i data-lucide="list" style="width:18px;height:18px;color:var(--color-primary);"></i>
+                            内容发布队列
+                        </h2>
+                        <button style="background:var(--color-primary);color:var(--color-text-inverse);border:none;border-radius:var(--radius-md);padding:6px 14px;font-size:var(--text-sm);font-weight:500;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;gap:var(--space-2);transition:background 0.15s;" onmouseenter="this.style.background='var(--color-primary-light)'" onmouseleave="this.style.background='var(--color-primary)'">
+                            <i data-lucide="plus" style="width:14px;height:14px;"></i>
+                            新建内容
+                        </button>
+                    </div>
+
+                    <!-- Table header -->
+                    <div style="display:grid;grid-template-columns:8px 1fr 140px 100px 50px;gap:var(--space-4);padding:var(--space-3) var(--space-5);font-size:var(--text-xs);color:var(--color-text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:0.04em;border-bottom:1px solid var(--color-border-subtle);">
+                        <span></span>
+                        <span>标题</span>
+                        <span>发布平台</span>
+                        <span>定时</span>
+                        <span></span>
+                    </div>
+
+                    <!-- Row 1: Published -->
+                    <div style="display:grid;grid-template-columns:8px 1fr 140px 100px 50px;gap:var(--space-4);padding:var(--space-3) var(--space-5);align-items:center;border-bottom:1px solid var(--color-border-subtle);transition:background 0.12s;cursor:pointer;" onmouseenter="this.style.background='var(--color-surface-hover)'" onmouseleave="this.style.background='none'">
+                        <div style="width:8px;height:8px;border-radius:50%;background:var(--state-success);flex-shrink:0;"></div>
+                        <div>
+                            <div style="font-size:var(--text-sm);font-weight:500;color:var(--color-text-primary);line-height:1.3;">保时捷 911 Turbo S 到货通知</div>
+                            <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:2px;">已成功发布至3个平台</div>
+                        </div>
+                        <div style="display:flex;gap:var(--space-2);">
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#FE2C55;">抖</span>
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#07C160;">微</span>
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#FF2442;">红</span>
+                        </div>
+                        <span style="font-size:var(--text-xs);color:var(--color-text-secondary);">今天 14:00</span>
+                        <button style="font-size:var(--text-xs);color:var(--color-primary);background:none;border:none;cursor:pointer;font-family:var(--font-body);opacity:0.7;transition:opacity 0.15s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.7'">编辑</button>
+                    </div>
+
+                    <!-- Row 2: Published -->
+                    <div style="display:grid;grid-template-columns:8px 1fr 140px 100px 50px;gap:var(--space-4);padding:var(--space-3) var(--space-5);align-items:center;border-bottom:1px solid var(--color-border-subtle);transition:background 0.12s;cursor:pointer;" onmouseenter="this.style.background='var(--color-surface-hover)'" onmouseleave="this.style.background='none'">
+                        <div style="width:8px;height:8px;border-radius:50%;background:var(--state-success);flex-shrink:0;"></div>
+                        <div>
+                            <div style="font-size:var(--text-sm);font-weight:500;color:var(--color-text-primary);line-height:1.3;">迈巴赫 S480 限时特价活动</div>
+                            <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:2px;">已成功发布至2个平台</div>
+                        </div>
+                        <div style="display:flex;gap:var(--space-2);">
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#FE2C55;">抖</span>
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#07C160;">微</span>
+                        </div>
+                        <span style="font-size:var(--text-xs);color:var(--color-text-secondary);">今天 10:00</span>
+                        <button style="font-size:var(--text-xs);color:var(--color-primary);background:none;border:none;cursor:pointer;font-family:var(--font-body);opacity:0.7;transition:opacity 0.15s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.7'">编辑</button>
+                    </div>
+
+                    <!-- Row 3: Pending -->
+                    <div style="display:grid;grid-template-columns:8px 1fr 140px 100px 50px;gap:var(--space-4);padding:var(--space-3) var(--space-5);align-items:center;border-bottom:1px solid var(--color-border-subtle);transition:background 0.12s;cursor:pointer;" onmouseenter="this.style.background='var(--color-surface-hover)'" onmouseleave="this.style.background='none'">
+                        <div style="width:8px;height:8px;border-radius:50%;background:var(--state-warning);flex-shrink:0;"></div>
+                        <div>
+                            <div style="font-size:var(--text-sm);font-weight:500;color:var(--color-text-primary);line-height:1.3;">宾利飞驰 2024款 新车品鉴</div>
+                            <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:2px;">等待审核发布</div>
+                        </div>
+                        <div style="display:flex;gap:var(--space-2);">
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#FE2C55;">抖</span>
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#FF2442;">红</span>
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#1DA1F2;">今</span>
+                        </div>
+                        <span style="font-size:var(--text-xs);color:var(--color-text-secondary);">明天 10:30</span>
+                        <button style="font-size:var(--text-xs);color:var(--color-primary);background:none;border:none;cursor:pointer;font-family:var(--font-body);opacity:0.7;transition:opacity 0.15s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.7'">编辑</button>
+                    </div>
+
+                    <!-- Row 4: Generating -->
+                    <div style="display:grid;grid-template-columns:8px 1fr 140px 100px 50px;gap:var(--space-4);padding:var(--space-3) var(--space-5);align-items:center;border-bottom:1px solid var(--color-border-subtle);transition:background 0.12s;cursor:pointer;" onmouseenter="this.style.background='var(--color-surface-hover)'" onmouseleave="this.style.background='none'">
+                        <div style="width:8px;height:8px;border-radius:50%;background:var(--state-info);flex-shrink:0;animation:pulse-dot 1.5s ease-in-out infinite;"></div>
+                        <div>
+                            <div style="font-size:var(--text-sm);font-weight:500;color:var(--color-text-primary);line-height:1.3;">劳斯莱斯库里南 VIP试驾邀约</div>
+                            <div style="font-size:var(--text-xs);color:var(--state-info);margin-top:2px;display:flex;align-items:center;gap:4px;">
+                                <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--state-info);animation:pulse-dot 1.5s ease-in-out infinite;"></span>
+                                AI 正在生成中...
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:var(--space-2);">
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:var(--color-surface);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--color-text-tertiary);">微</span>
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:var(--color-surface);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--color-text-tertiary);">红</span>
+                        </div>
+                        <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">待定</span>
+                        <button style="font-size:var(--text-xs);color:var(--color-primary);background:none;border:none;cursor:pointer;font-family:var(--font-body);opacity:0.7;transition:opacity 0.15s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.7'">编辑</button>
+                    </div>
+
+                    <!-- Row 5: Pending -->
+                    <div style="display:grid;grid-template-columns:8px 1fr 140px 100px 50px;gap:var(--space-4);padding:var(--space-3) var(--space-5);align-items:center;transition:background 0.12s;cursor:pointer;" onmouseenter="this.style.background='var(--color-surface-hover)'" onmouseleave="this.style.background='none'">
+                        <div style="width:8px;height:8px;border-radius:50%;background:var(--state-warning);flex-shrink:0;"></div>
+                        <div>
+                            <div style="font-size:var(--text-sm);font-weight:500;color:var(--color-text-primary);line-height:1.3;">兰博基尼 Huracán EVO 车友聚会</div>
+                            <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:2px;">定时发布中</div>
+                        </div>
+                        <div style="display:flex;gap:var(--space-2);">
+                            <span style="width:24px;height:24px;border-radius:var(--radius-sm);background:#161623;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#FE2C55;">抖</span>
+                        </div>
+                        <span style="font-size:var(--text-xs);color:var(--color-text-secondary);">明天 18:00</span>
+                        <button style="font-size:var(--text-xs);color:var(--color-primary);background:none;border:none;cursor:pointer;font-family:var(--font-body);opacity:0.7;transition:opacity 0.15s;" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0.7'">编辑</button>
+                    </div>
+                </div>
+
+                <!-- ===== RIGHT: AI Generation Panel ===== -->
+                <div style="display:flex;flex-direction:column;gap:var(--space-5);">
+                    <!-- Input card -->
+                    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);">
+                        <h2 style="font-size:var(--text-lg);font-weight:600;color:var(--color-text-primary);display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-4);">
+                            <i data-lucide="sparkles" style="width:18px;height:18px;color:var(--color-primary);"></i>
+                            AI 一键生成
+                        </h2>
+
+                        <!-- Textarea -->
+                        <textarea placeholder="输入车型名称或营销主题，例如：保时捷 Cayenne 新年限时优惠" style="width:100%;min-height:88px;background:var(--color-background-secondary);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);font-size:var(--text-sm);color:var(--color-text-primary);resize:vertical;outline:none;font-family:var(--font-body);line-height:1.5;transition:border-color 0.15s;box-sizing:border-box;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--color-border)'"></textarea>
+
+                        <!-- Quick tags -->
+                        <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin:var(--space-3) 0 var(--space-4);">
+                            <button style="background:var(--color-primary-lightest);color:var(--color-primary);border:1px solid rgba(200,164,92,0.15);border-radius:var(--radius-full);padding:4px 12px;font-size:var(--text-xs);cursor:pointer;font-family:var(--font-body);transition:all 0.15s;" onmouseenter="this.style.background='rgba(200,164,92,0.18)'" onmouseleave="this.style.background='var(--color-primary-lightest)'">新车到货</button>
+                            <button style="background:var(--color-primary-lightest);color:var(--color-primary);border:1px solid rgba(200,164,92,0.15);border-radius:var(--radius-full);padding:4px 12px;font-size:var(--text-xs);cursor:pointer;font-family:var(--font-body);transition:all 0.15s;" onmouseenter="this.style.background='rgba(200,164,92,0.18)'" onmouseleave="this.style.background='var(--color-primary-lightest)'">限时优惠</button>
+                            <button style="background:var(--color-primary-lightest);color:var(--color-primary);border:1px solid rgba(200,164,92,0.15);border-radius:var(--radius-full);padding:4px 12px;font-size:var(--text-xs);cursor:pointer;font-family:var(--font-body);transition:all 0.15s;" onmouseenter="this.style.background='rgba(200,164,92,0.18)'" onmouseleave="this.style.background='var(--color-primary-lightest)'">车友活动</button>
+                            <button style="background:var(--color-primary-lightest);color:var(--color-primary);border:1px solid rgba(200,164,92,0.15);border-radius:var(--radius-full);padding:4px 12px;font-size:var(--text-xs);cursor:pointer;font-family:var(--font-body);transition:all 0.15s;" onmouseenter="this.style.background='rgba(200,164,92,0.18)'" onmouseleave="this.style.background='var(--color-primary-lightest)'">行业资讯</button>
+                        </div>
+
+                        <!-- Generate button -->
+                        <button style="width:100%;background:var(--color-primary);color:var(--color-text-inverse);border:none;border-radius:var(--radius-md);padding:10px;font-size:var(--text-sm);font-weight:500;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;justify-content:center;gap:var(--space-2);transition:background 0.15s;" onmouseenter="this.style.background='var(--color-primary-light)'" onmouseleave="this.style.background='var(--color-primary)'">
+                            <i data-lucide="wand-2" style="width:16px;height:16px;"></i>
+                            生成文案
+                        </button>
+                    </div>
+
+                    <!-- Generated output -->
+                    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-4);">
+                            <h3 style="font-size:var(--text-base);font-weight:600;color:var(--color-text-primary);display:flex;align-items:center;gap:var(--space-2);">
+                                <i data-lucide="file-check" style="width:16px;height:16px;color:var(--state-success);"></i>
+                                AI 已生成 3 条内容
+                            </h3>
+                            <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">刚刚</span>
+                        </div>
+
+                        <!-- Preview 1 -->
+                        <div style="background:var(--color-background-secondary);border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:var(--space-4);margin-bottom:var(--space-3);">
+                            <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2);">
+                                <span style="width:20px;height:20px;border-radius:4px;background:#161623;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#FE2C55;">抖</span>
+                                <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">抖音</span>
+                            </div>
+                            <p style="font-size:var(--text-sm);color:var(--color-text-primary);line-height:1.5;margin-bottom:var(--space-3);">提车现场！这台保时捷 911 让整条街都安静了... #豪车 #保时捷 #提车仪式</p>
+                            <div style="display:flex;gap:var(--space-2);">
+                                <button style="flex:1;background:var(--color-primary);color:var(--color-text-inverse);border:none;border-radius:var(--radius-sm);padding:5px;font-size:var(--text-xs);font-weight:500;cursor:pointer;font-family:var(--font-body);transition:background 0.15s;" onmouseenter="this.style.background='var(--color-primary-light)'" onmouseleave="this.style.background='var(--color-primary)'">发布</button>
+                                <button style="flex:1;background:none;color:var(--color-text-secondary);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:5px;font-size:var(--text-xs);cursor:pointer;font-family:var(--font-body);transition:all 0.15s;" onmouseenter="this.style.borderColor='var(--color-text-secondary)'" onmouseleave="this.style.borderColor='var(--color-border)'">编辑</button>
+                            </div>
+                        </div>
+
+                        <!-- Preview 2 -->
+                        <div style="background:var(--color-background-secondary);border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:var(--space-4);margin-bottom:var(--space-3);">
+                            <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2);">
+                                <span style="width:20px;height:20px;border-radius:4px;background:#161623;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#07C160;">微</span>
+                                <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">公众号</span>
+                            </div>
+                            <p style="font-size:var(--text-sm);color:var(--color-text-primary);line-height:1.5;margin-bottom:var(--space-3);">深圳保时捷中心限量现车，Turbo S 专属配置解读，心动不如行动...</p>
+                            <div style="display:flex;gap:var(--space-2);">
+                                <button style="flex:1;background:var(--color-primary);color:var(--color-text-inverse);border:none;border-radius:var(--radius-sm);padding:5px;font-size:var(--text-xs);font-weight:500;cursor:pointer;font-family:var(--font-body);transition:background 0.15s;" onmouseenter="this.style.background='var(--color-primary-light)'" onmouseleave="this.style.background='var(--color-primary)'">发布</button>
+                                <button style="flex:1;background:none;color:var(--color-text-secondary);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:5px;font-size:var(--text-xs);cursor:pointer;font-family:var(--font-body);transition:all 0.15s;" onmouseenter="this.style.borderColor='var(--color-text-secondary)'" onmouseleave="this.style.borderColor='var(--color-border)'">编辑</button>
+                            </div>
+                        </div>
+
+                        <!-- Preview 3 -->
+                        <div style="background:var(--color-background-secondary);border:1px solid var(--color-border-subtle);border-radius:var(--radius-md);padding:var(--space-4);">
+                            <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2);">
+                                <span style="width:20px;height:20px;border-radius:4px;background:#161623;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#FF2442;">红</span>
+                                <span style="font-size:var(--text-xs);color:var(--color-text-tertiary);">小红书</span>
+                            </div>
+                            <p style="font-size:var(--text-sm);color:var(--color-text-primary);line-height:1.5;margin-bottom:var(--space-3);">刚从展厅出来，这台迈巴赫 S480 的内饰真的绝了...</p>
+                            <div style="display:flex;gap:var(--space-2);">
+                                <button style="flex:1;background:var(--color-primary);color:var(--color-text-inverse);border:none;border-radius:var(--radius-sm);padding:5px;font-size:var(--text-xs);font-weight:500;cursor:pointer;font-family:var(--font-body);transition:background 0.15s;" onmouseenter="this.style.background='var(--color-primary-light)'" onmouseleave="this.style.background='var(--color-primary)'">发布</button>
+                                <button style="flex:1;background:none;color:var(--color-text-secondary);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:5px;font-size:var(--text-xs);cursor:pointer;font-family:var(--font-body);transition:all 0.15s;" onmouseenter="this.style.borderColor='var(--color-text-secondary)'" onmouseleave="this.style.borderColor='var(--color-border)'">编辑</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== CUSTOM STYLES ========== -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-background);
+            color: var(--color-text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: rgba(200, 164, 92, 0.25);
+            color: var(--color-text-primary);
+        }
+
+        /* Sidebar nav hover */
+        .nav-item:hover {
+            background: var(--color-sidebar-active);
+            color: var(--color-text-primary) !important;
+        }
+
+        /* Scrollbar for sidebar */
+        #sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        #sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #sidebar::-webkit-scrollbar-thumb {
+            background: var(--color-divider);
+            border-radius: 4px;
+        }
+
+        /* Textarea placeholder */
+        textarea::placeholder,
+        input::placeholder {
+            color: var(--color-text-tertiary);
+        }
+
+        /* Pulse animation for generating status */
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+    </style>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豪车之家 — CRM首页</title>
+    <style id="theme-vars">
+:root {
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: rgba(200, 164, 92, 0.1);
+  --color-primary-dark: #A6893F;
+
+  --color-background: #0C0C14;
+  --color-background-secondary: #111119;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1C1C28;
+  --color-surface-hover: #222232;
+
+  --color-text-primary: #F0ECE4;
+  --color-text-secondary: #8A867E;
+  --color-text-tertiary: #5A5750;
+
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  --state-success: #34D399;
+  --state-success-bg: rgba(52, 211, 153, 0.1);
+  --state-warning: #FBBF24;
+  --state-warning-bg: rgba(251, 191, 36, 0.1);
+  --state-error: #F87171;
+  --state-error-bg: rgba(248, 113, 113, 0.1);
+  --state-info: #60A5FA;
+  --state-info-bg: rgba(96, 165, 250, 0.1);
+
+  --font-display: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.75rem;
+  --text-base: 0.8125rem;
+  --text-lg: 0.875rem;
+  --text-xl: 1rem;
+  --text-2xl: 1.125rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="mobile-shell">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>14:32</span>
+            <div class="status-icons">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                    <rect x="0" y="6" width="3" height="6" rx="0.5" fill="currentColor" opacity="0.4"/>
+                    <rect x="4.5" y="4" width="3" height="8" rx="0.5" fill="currentColor" opacity="0.6"/>
+                    <rect x="9" y="1.5" width="3" height="10.5" rx="0.5" fill="currentColor" opacity="0.8"/>
+                    <rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="currentColor"/>
+                </svg>
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                    <path d="M1 4C4.5 0.5 11.5 0.5 15 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+                    <path d="M3.5 6.5C5.5 4 10.5 4 12.5 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                    <path d="M6 9C7 8 9 8 10 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+                    <circle cx="8" cy="11" r="1" fill="currentColor"/>
+                </svg>
+                <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
+                    <rect x="0" y="1" width="18" height="10" rx="2" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+                    <rect x="1.5" y="2.5" width="12" height="7" rx="1" fill="currentColor" opacity="0.9"/>
+                    <rect x="19" y="4" width="2" height="4" rx="0.5" fill="currentColor" opacity="0.4"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- App Header -->
+        <div class="app-header">
+            <h1>豪车之家</h1>
+            <div class="header-actions">
+                <button aria-label="通知">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="header-notification-badge"></span>
+                </button>
+            </div>
+        </div>
+        <div class="gold-separator"></div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Section 1: Welcome + Quick Stats -->
+            <div class="section">
+                <div class="greeting">豪哥，下午好</div>
+                <div class="greeting-sub">今日新增 2 位会员，3 辆车入库</div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-value">128</div>
+                        <div class="stat-label">车友会员</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">23</div>
+                        <div class="stat-label">在售车辆</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">¥86万</div>
+                        <div class="stat-label">本月成交</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Quick Actions -->
+            <div class="section">
+                <div class="section-heading">
+                    <h2>快捷操作</h2>
+                </div>
+                <div class="actions-grid">
+                    <a class="action-item" href="#">
+                        <div class="action-icon-circle gold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <span class="action-label">会员管理</span>
+                    </a>
+                    <a class="action-item" href="#">
+                        <div class="action-icon-circle blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                        </div>
+                        <span class="action-label">库存台账</span>
+                    </a>
+                    <a class="action-item" href="#">
+                        <div class="action-icon-circle green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                        </div>
+                        <span class="action-label">活动报名</span>
+                    </a>
+                    <a class="action-item" href="#">
+                        <div class="action-icon-circle orange">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="12" x="4" y="4" rx="2"/><line x1="4" x2="20" y1="10" y2="10"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="16" x2="16" y1="2" y2="6"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
+                        </div>
+                        <span class="action-label">佣金核算</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Section 3: Recent Activities -->
+            <div class="section">
+                <div class="section-heading">
+                    <h2>近期活动</h2>
+                    <a href="#">查看全部 ></a>
+                </div>
+
+                <!-- Activity 1 -->
+                <div class="activity-card">
+                    <div class="activity-title">
+                        <span>高尔夫联谊赛</span>
+                        <span class="activity-status-badge badge-active">报名中</span>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="activity-meta-row">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                            <span>7月15日 周二 14:00</span>
+                        </div>
+                        <div class="activity-meta-row">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>深圳观澜湖高尔夫球会</span>
+                        </div>
+                    </div>
+                    <div class="activity-progress">
+                        <div class="activity-progress-label">
+                            <span>已报名 18/30 人</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="progress-bar-track">
+                            <div class="progress-bar-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity 2 -->
+                <div class="activity-card">
+                    <div class="activity-title">
+                        <span>超跑品鉴晚宴</span>
+                        <span class="activity-status-badge badge-active">报名中</span>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="activity-meta-row">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                            <span>7月20日 周日 19:00</span>
+                        </div>
+                        <div class="activity-meta-row">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>深圳柏悦酒店宴会厅</span>
+                        </div>
+                    </div>
+                    <div class="activity-progress">
+                        <div class="activity-progress-label">
+                            <span>已报名 8/20 人</span>
+                            <span>40%</span>
+                        </div>
+                        <div class="progress-bar-track">
+                            <div class="progress-bar-fill" style="width: 40%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity 3 -->
+                <div class="activity-card">
+                    <div class="activity-title">
+                        <span>新车交付仪式</span>
+                        <span class="activity-status-badge badge-ended">已结束</span>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="activity-meta-row">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                            <span>7月5日 周六 10:00</span>
+                        </div>
+                        <div class="activity-meta-row">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>深圳湾壹号展厅</span>
+                        </div>
+                    </div>
+                    <div class="activity-progress">
+                        <div class="activity-progress-label">
+                            <span>参与 15/15 人</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress-bar-track">
+                            <div class="progress-bar-fill" style="width: 100%; opacity: 0.4;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Pending Tasks -->
+            <div class="section">
+                <div class="section-heading">
+                    <h2>待处理</h2>
+                </div>
+                <div class="card">
+                    <div class="task-list">
+                        <div class="task-item">
+                            <div class="task-dot"></div>
+                            <div class="task-content">
+                                <div class="task-text">3位会员年费即将到期</div>
+                                <div class="task-date">截止日期：7月20日</div>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-tertiary); flex-shrink: 0; margin-top: 2px;"><path d="m9 18 6-6-6-6"/></svg>
+                        </div>
+                        <div class="task-item task-warning">
+                            <div class="task-dot" style="background: var(--state-warning);"></div>
+                            <div class="task-content">
+                                <div class="task-text">迈巴赫S480 库存超过90天</div>
+                                <div class="task-date">入库：2026年4月8日</div>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-tertiary); flex-shrink: 0; margin-top: 2px;"><path d="m9 18 6-6-6-6"/></svg>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-dot" style="background: var(--state-info);"></div>
+                            <div class="task-content">
+                                <div class="task-text">张先生佣金结算待确认</div>
+                                <div class="task-date">金额：¥12,800</div>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-tertiary); flex-shrink: 0; margin-top: 2px;"><path d="m9 18 6-6-6-6"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Revenue Overview -->
+            <div class="section">
+                <div class="section-heading">
+                    <h2>本月收入概览</h2>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-total">¥186,800</div>
+                    <div>
+                        <div class="revenue-row">
+                            <span class="revenue-row-label">会员费</span>
+                            <span class="revenue-row-value">¥128,000</span>
+                        </div>
+                        <div class="revenue-row">
+                            <span class="revenue-row-label">课程收入</span>
+                            <span class="revenue-row-value">¥38,400</span>
+                        </div>
+                        <div class="revenue-row">
+                            <span class="revenue-row-label">其他</span>
+                            <span class="revenue-row-value">¥7,900</span>
+                        </div>
+                    </div>
+                    <div class="revenue-chart">
+                        <div class="chart-row">
+                            <span class="chart-row-label">会员费</span>
+                            <div class="chart-bar-track">
+                                <div class="chart-bar-fill gold" style="width: 100%"></div>
+                            </div>
+                            <span class="chart-row-value">128K</span>
+                        </div>
+                        <div class="chart-row">
+                            <span class="chart-row-label">课程</span>
+                            <div class="chart-bar-track">
+                                <div class="chart-bar-fill green" style="width: 30%"></div>
+                            </div>
+                            <span class="chart-row-value">38.4K</span>
+                        </div>
+                        <div class="chart-row">
+                            <span class="chart-row-label">其他</span>
+                            <div class="chart-bar-track">
+                                <div class="chart-bar-fill blue" style="width: 6%"></div>
+                            </div>
+                            <span class="chart-row-value">7.9K</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab-item active" aria-label="首页">
+                <div class="tab-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <span class="tab-label">首页</span>
+            </button>
+            <button class="tab-item" aria-label="会员">
+                <div class="tab-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <span class="tab-label">会员</span>
+            </button>
+            <button class="tab-item" aria-label="库存">
+                <div class="tab-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                </div>
+                <span class="tab-label">库存</span>
+            </button>
+            <button class="tab-item" aria-label="消息">
+                <div class="tab-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                    <span class="tab-badge">3</span>
+                </div>
+                <span class="tab-label">消息</span>
+            </button>
+            <button class="tab-item" aria-label="我的">
+                <div class="tab-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <span class="tab-label">我的</span>
+            </button>
+        </div>
+    </div>
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+      body {
+        font-family: 'Inter', 'Noto Sans SC', sans-serif;
+        background: var(--color-background);
+        color: var(--color-text-primary);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+
+      /* Mobile container */
+      .mobile-shell {
+        width: 375px;
+        min-height: 100vh;
+        margin: 0 auto;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Status bar */
+      .status-bar {
+        height: 44px;
+        background: #0a0a12;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 var(--space-5);
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--color-text-primary);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .status-bar .status-icons { display: flex; align-items: center; gap: 6px; }
+
+      /* App header */
+      .app-header {
+        height: 48px;
+        background: var(--color-background-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 0 var(--space-4);
+      }
+      .app-header h1 {
+        font-size: var(--text-lg);
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: 0.02em;
+      }
+      .app-header .header-actions {
+        position: absolute;
+        right: var(--space-4);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .app-header .header-actions button {
+        background: none;
+        border: none;
+        color: var(--color-text-secondary);
+        padding: var(--space-1);
+        cursor: pointer;
+        position: relative;
+      }
+      .app-header .header-actions button svg { width: 20px; height: 20px; }
+      .header-notification-badge {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 8px;
+        height: 8px;
+        background: var(--state-error);
+        border-radius: 50%;
+        border: 1.5px solid var(--color-background-secondary);
+      }
+      .gold-separator {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+      }
+
+      /* Main content */
+      .main-content {
+        padding: var(--space-4);
+        padding-bottom: calc(60px + var(--space-6) + var(--space-4));
+      }
+
+      /* Section headings */
+      .section-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--space-3);
+      }
+      .section-heading h2 {
+        font-size: var(--text-base);
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
+      .section-heading a {
+        font-size: var(--text-xs);
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      /* Card base */
+      .card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-3);
+      }
+
+      /* Section 1: Stats */
+      .greeting {
+        font-size: var(--text-xl);
+        font-weight: 600;
+        margin-bottom: var(--space-1);
+        color: var(--color-text-primary);
+      }
+      .greeting-sub {
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-4);
+      }
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-2);
+        margin-bottom: var(--space-5);
+      }
+      .stat-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-3) var(--space-2);
+        text-align: center;
+      }
+      .stat-value {
+        font-size: 1.375rem;
+        font-weight: 700;
+        color: var(--color-primary);
+        line-height: 1.2;
+      }
+      .stat-label {
+        font-size: var(--text-xs);
+        color: var(--color-text-secondary);
+        margin-top: 2px;
+      }
+
+      /* Section 2: Quick Actions */
+      .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+        margin-bottom: var(--space-5);
+      }
+      .action-item {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-2);
+        cursor: pointer;
+        min-height: 44px;
+        transition: background 0.15s ease;
+        text-decoration: none;
+      }
+      .action-item:active { background: var(--color-surface-hover); }
+      .action-icon-circle {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-full);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .action-icon-circle svg { width: 20px; height: 20px; }
+      .action-icon-circle.gold { background: rgba(200, 164, 92, 0.15); color: var(--color-primary); }
+      .action-icon-circle.blue { background: var(--state-info-bg); color: var(--state-info); }
+      .action-icon-circle.green { background: var(--state-success-bg); color: var(--state-success); }
+      .action-icon-circle.orange { background: var(--state-warning-bg); color: var(--state-warning); }
+      .action-label {
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--color-text-primary);
+      }
+
+      /* Section 3: Activities */
+      .activity-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-3) var(--space-4);
+        margin-bottom: var(--space-2);
+      }
+      .activity-card:last-child { margin-bottom: 0; }
+      .activity-title {
+        font-size: var(--text-base);
+        font-weight: 600;
+        color: var(--color-text-primary);
+        margin-bottom: var(--space-2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .activity-status-badge {
+        font-size: var(--text-xs);
+        font-weight: 600;
+        padding: 2px var(--space-2);
+        border-radius: var(--radius-full);
+        white-space: nowrap;
+      }
+      .badge-active {
+        background: rgba(200, 164, 92, 0.15);
+        color: var(--color-primary);
+      }
+      .badge-ended {
+        background: rgba(138, 134, 126, 0.15);
+        color: var(--color-text-tertiary);
+      }
+      .activity-meta {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        margin-bottom: var(--space-3);
+      }
+      .activity-meta-row {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: var(--text-xs);
+        color: var(--color-text-secondary);
+      }
+      .activity-meta-row svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.6; }
+      .activity-progress {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+      }
+      .activity-progress-label {
+        font-size: var(--text-xs);
+        color: var(--color-text-secondary);
+        display: flex;
+        justify-content: space-between;
+      }
+      .progress-bar-track {
+        height: 4px;
+        background: rgba(200, 164, 92, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+
+      /* Section 4: Pending Tasks */
+      .task-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .task-item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-3);
+        padding: var(--space-3) 0;
+        border-bottom: 1px solid var(--color-border);
+        cursor: pointer;
+        min-height: 44px;
+      }
+      .task-item:last-child { border-bottom: none; }
+      .task-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--state-error);
+        flex-shrink: 0;
+        margin-top: 5px;
+      }
+      .task-content { flex: 1; }
+      .task-text {
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--color-text-primary);
+        line-height: 1.4;
+      }
+      .task-date {
+        font-size: var(--text-xs);
+        color: var(--color-text-tertiary);
+        margin-top: 2px;
+      }
+      .task-warning .task-text { color: var(--state-warning); }
+
+      /* Section 5: Revenue */
+      .revenue-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-4);
+      }
+      .revenue-total {
+        font-size: 1.625rem;
+        font-weight: 700;
+        color: var(--color-primary);
+        margin-bottom: var(--space-3);
+        text-align: center;
+      }
+      .revenue-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-2) 0;
+        border-bottom: 1px solid var(--color-border);
+        font-size: var(--text-sm);
+      }
+      .revenue-row:last-of-type { border-bottom: none; }
+      .revenue-row-label { color: var(--color-text-secondary); }
+      .revenue-row-value { color: var(--color-text-primary); font-weight: 600; font-family: 'Inter', sans-serif; }
+      .revenue-chart {
+        margin-top: var(--space-4);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+      .chart-row {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        font-size: var(--text-xs);
+      }
+      .chart-row-label {
+        width: 44px;
+        color: var(--color-text-secondary);
+        flex-shrink: 0;
+        text-align: right;
+      }
+      .chart-bar-track {
+        flex: 1;
+        height: 8px;
+        background: rgba(200, 164, 92, 0.08);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .chart-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.4s ease;
+      }
+      .chart-bar-fill.gold { background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary)); }
+      .chart-bar-fill.green { background: linear-gradient(90deg, rgba(52,211,153,0.7), var(--state-success)); }
+      .chart-bar-fill.blue { background: linear-gradient(90deg, rgba(96,165,250,0.7), var(--state-info)); }
+      .chart-row-value {
+        width: 50px;
+        color: var(--color-text-tertiary);
+        font-family: 'Inter', sans-serif;
+        flex-shrink: 0;
+      }
+
+      /* Bottom Tab Bar */
+      .tab-bar {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 375px;
+        height: 60px;
+        background: #0e0e16;
+        border-top: 1px solid var(--color-primary);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 100;
+        padding-bottom: env(safe-area-inset-bottom, 0);
+      }
+      .tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        cursor: pointer;
+        min-width: 44px;
+        min-height: 44px;
+        text-decoration: none;
+        background: none;
+        border: none;
+        padding: var(--space-1);
+      }
+      .tab-item svg { width: 22px; height: 22px; }
+      .tab-item .tab-label {
+        font-size: 10px;
+        font-weight: 500;
+      }
+      .tab-item.active { color: var(--color-primary); }
+      .tab-item.active .tab-label { color: var(--color-primary); }
+      .tab-item:not(.active) { color: var(--color-text-tertiary); }
+      .tab-item:not(.active) .tab-label { color: var(--color-text-tertiary); }
+      .tab-badge {
+        position: absolute;
+        top: 2px;
+        right: 50%;
+        transform: translateX(14px);
+        min-width: 16px;
+        height: 16px;
+        background: var(--state-error);
+        color: white;
+        font-size: 10px;
+        font-weight: 700;
+        border-radius: var(--radius-full);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+        line-height: 1;
+      }
+      .tab-icon-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Section spacing */
+      .section { margin-bottom: var(--space-5); }
+      .section:last-child { margin-bottom: 0; }
+
+      /* Active tab indicator */
+      .tab-item.active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background: var(--color-primary);
+        border-radius: 1px;
+      }
+      .tab-item { position: relative; }
+
+      /* Scrollbar hide */
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</body>
+</html>

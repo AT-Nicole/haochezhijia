@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据分析 — 豪车之家工作台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors ── */
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: rgba(200, 164, 92, 0.1);
+  --color-primary-dark: #A6893F;
+
+  --color-background: #0C0C14;
+  --color-background-secondary: #111119;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1C1C28;
+  --color-surface-hover: #222232;
+
+  --color-sidebar-bg: #0E0E16;
+  --color-sidebar-active: rgba(200, 164, 92, 0.08);
+
+  --color-text-primary: #F0ECE4;
+  --color-text-secondary: #8A867E;
+  --color-text-tertiary: #5A5750;
+  --color-text-inverse: #0C0C14;
+
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-subtle: rgba(255, 255, 255, 0.04);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  /* ── State Colors ── */
+  --state-success: #34D399;
+  --state-success-bg: rgba(52, 211, 153, 0.1);
+  --state-warning: #FBBF24;
+  --state-warning-bg: rgba(251, 191, 36, 0.1);
+  --state-error: #F87171;
+  --state-error-bg: rgba(248, 113, 113, 0.1);
+  --state-info: #60A5FA;
+  --state-info-bg: rgba(96, 165, 250, 0.1);
+
+  /* ── Typography ── */
+  --font-display: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+
+  /* ── Spacing ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ── Layout ── */
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 64px;
+  --header-height: 56px;
+  --content-max-width: 1400px;
+
+  /* ── Radius ── */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        background: var(--color-background);
+        color: var(--color-text-primary);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── Layout Shell ── */
+      .layout { display: flex; min-height: 100vh; }
+
+      /* ── Sidebar ── */
+      .sidebar {
+        width: var(--sidebar-width);
+        min-width: var(--sidebar-width);
+        background: var(--color-sidebar-bg);
+        border-right: 1px solid var(--color-border);
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      .sidebar-brand {
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: 0 var(--space-5);
+        border-bottom: 1px solid var(--color-border);
+        flex-shrink: 0;
+      }
+      .sidebar-brand-icon {
+        width: 28px;
+        height: 28px;
+        background: var(--color-primary);
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-inverse);
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .sidebar-brand-name {
+        font-size: var(--text-lg);
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
+      .sidebar-nav { flex: 1; padding: var(--space-3) var(--space-3); overflow-y: auto; }
+      .nav-section-label {
+        font-size: var(--text-xs);
+        color: var(--color-text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: var(--space-4) var(--space-3) var(--space-2);
+        font-weight: 500;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-md);
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none;
+        margin-bottom: 2px;
+      }
+      .nav-item:hover { background: var(--color-surface-hover); color: var(--color-text-primary); }
+      .nav-item.active {
+        background: var(--color-sidebar-active);
+        color: var(--color-primary);
+      }
+      .nav-item.active .nav-icon { color: var(--color-primary); }
+      .nav-icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.7; }
+      .nav-item.active .nav-icon { opacity: 1; }
+      .nav-item-badge {
+        margin-left: auto;
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: var(--radius-full);
+        font-weight: 600;
+      }
+
+      /* ── Main Area ── */
+      .main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+      /* ── Header ── */
+      .top-header {
+        height: var(--header-height);
+        background: var(--color-sidebar-bg);
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 var(--space-6);
+        flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        z-index: 30;
+      }
+      .header-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+      }
+      .header-breadcrumb .sep { color: var(--color-text-tertiary); }
+      .header-breadcrumb .current { color: var(--color-text-primary); font-weight: 500; }
+      .header-actions { display: flex; align-items: center; gap: var(--space-3); }
+      .date-selector {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-1) var(--space-3);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-surface);
+        color: var(--color-text-primary);
+        font-size: var(--text-sm);
+        cursor: pointer;
+        transition: border-color 0.15s;
+      }
+      .date-selector:hover { border-color: var(--color-primary); }
+      .date-selector .chevron { width: 14px; height: 14px; color: var(--color-text-tertiary); }
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-1) var(--space-3);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-surface);
+        min-width: 200px;
+      }
+      .search-box input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--color-text-primary);
+        font-size: var(--text-sm);
+        font-family: var(--font-body);
+        width: 100%;
+      }
+      .search-box input::placeholder { color: var(--color-text-tertiary); }
+      .search-box .search-icon { width: 14px; height: 14px; color: var(--color-text-tertiary); flex-shrink: 0; }
+      .header-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: var(--radius-full);
+        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-inverse);
+        font-size: var(--text-xs);
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* ── Content ── */
+      .content { flex: 1; padding: var(--space-6); overflow-y: auto; }
+      .content-max { max-width: var(--content-max-width); margin: 0 auto; }
+
+      /* ── KPI Cards ── */
+      .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-bottom: var(--space-6); }
+      .kpi-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        transition: border-color 0.2s;
+      }
+      .kpi-card:hover { border-color: rgba(200, 164, 92, 0.2); }
+      .kpi-label { font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: var(--space-2); }
+      .kpi-value { font-size: var(--text-3xl); font-weight: 700; color: var(--color-text-primary); margin-bottom: var(--space-2); font-family: var(--font-body); }
+      .kpi-change { display: inline-flex; align-items: center; gap: 4px; font-size: var(--text-sm); font-weight: 500; padding: 2px 8px; border-radius: var(--radius-full); }
+      .kpi-change.up { color: var(--state-success); background: var(--state-success-bg); }
+      .kpi-change.gold { color: var(--color-primary); background: var(--color-primary-lightest); }
+
+      /* ── Chart Card ── */
+      .chart-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        margin-bottom: var(--space-6);
+      }
+      .chart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-5); flex-wrap: wrap; gap: var(--space-3); }
+      .chart-title { font-size: var(--text-lg); font-weight: 600; }
+      .chart-filters { display: flex; gap: var(--space-2); }
+      .chart-filter-btn {
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-full);
+        border: 1px solid var(--color-border);
+        background: transparent;
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+        font-family: var(--font-body);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .chart-filter-btn:hover { border-color: var(--color-primary); color: var(--color-text-primary); }
+      .chart-filter-btn.active {
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+        border-color: var(--color-primary);
+        font-weight: 500;
+      }
+
+      /* ── Bar Chart (CSS-only) ── */
+      .bar-chart-container {
+        position: relative;
+        height: 300px;
+        padding: 0 40px 0 48px;
+        display: flex;
+        flex-direction: column;
+      }
+      .chart-y-axis {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 32px;
+        width: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding-right: 8px;
+      }
+      .chart-y-label {
+        font-size: var(--text-xs);
+        color: var(--color-text-tertiary);
+        font-family: var(--font-mono);
+      }
+      .chart-gridlines {
+        position: absolute;
+        left: 48px;
+        right: 40px;
+        top: 0;
+        bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+      .chart-gridline {
+        height: 1px;
+        background: var(--color-border-subtle);
+      }
+      .chart-area {
+        flex: 1;
+        position: relative;
+        margin-bottom: 32px;
+        border-bottom: 1px solid var(--color-divider);
+      }
+      .chart-bars {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        height: 100%;
+        position: relative;
+        z-index: 2;
+      }
+      .chart-bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; }
+      .chart-bar-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+      .chart-bar-value {
+        font-size: var(--text-xs);
+        color: var(--color-primary);
+        font-weight: 600;
+        font-family: var(--font-mono);
+        margin-bottom: 6px;
+        white-space: nowrap;
+      }
+      .chart-bar {
+        width: 36px;
+        border-radius: 4px 4px 0 0;
+        background: linear-gradient(180deg, var(--color-primary), var(--color-primary-dark));
+        position: relative;
+        transition: height 0.3s ease;
+      }
+      .chart-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--color-primary-light);
+        border-radius: 4px 4px 0 0;
+        opacity: 0.6;
+      }
+      .chart-x-axis {
+        display: flex;
+        justify-content: space-around;
+        padding-left: 48px;
+        padding-right: 40px;
+      }
+      .chart-x-label {
+        flex: 1;
+        text-align: center;
+        font-size: var(--text-xs);
+        color: var(--color-text-tertiary);
+        padding-top: var(--space-2);
+      }
+      /* SVG line overlay */
+      .chart-line-overlay {
+        position: absolute;
+        left: 48px;
+        right: 40px;
+        top: 0;
+        bottom: 32px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* ── Platform Summary ── */
+      .platform-summary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-6);
+        padding-top: var(--space-4);
+        border-top: 1px solid var(--color-border-subtle);
+        margin-top: var(--space-4);
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+        flex-wrap: wrap;
+      }
+      .platform-summary-item { display: flex; align-items: center; gap: var(--space-2); }
+      .platform-dot { width: 8px; height: 8px; border-radius: var(--radius-full); }
+
+      /* ── Two Column Layout ── */
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-6); }
+
+      /* ── Platform Cards ── */
+      .platform-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        margin-bottom: var(--space-4);
+      }
+      .platform-card:last-child { margin-bottom: 0; }
+      .platform-card-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
+      .platform-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+      .platform-icon.tiktok { background: rgba(254, 44, 85, 0.12); }
+      .platform-icon.wechat-video { background: rgba(7, 193, 96, 0.12); }
+      .platform-name { font-size: var(--text-lg); font-weight: 600; }
+      .platform-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); margin-bottom: var(--space-4); }
+      .platform-stat { text-align: center; }
+      .platform-stat-value { font-size: var(--text-xl); font-weight: 700; color: var(--color-text-primary); }
+      .platform-stat-label { font-size: var(--text-xs); color: var(--color-text-tertiary); margin-top: 2px; }
+      .content-list-title { font-size: var(--text-sm); color: var(--color-text-tertiary); margin-bottom: var(--space-2); font-weight: 500; }
+      .content-list-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-2) 0;
+        border-bottom: 1px solid var(--color-border-subtle);
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+      }
+      .content-list-item:last-child { border-bottom: none; }
+      .content-list-item .views {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-text-tertiary);
+      }
+      .content-list-item .rank {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 600;
+        margin-right: var(--space-2);
+        flex-shrink: 0;
+      }
+      .content-list-item .rank.top { background: var(--color-primary-lightest); color: var(--color-primary); }
+      .content-list-item .rank.normal { background: var(--color-border-subtle); color: var(--color-text-tertiary); }
+      .content-list-item .title-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+      /* ── Customer Insights ── */
+      .insight-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        height: 100%;
+      }
+      .insight-title {
+        font-size: var(--text-lg);
+        font-weight: 600;
+        margin-bottom: var(--space-5);
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+      }
+      .insight-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-5); }
+      .insight-metric-label { font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: var(--space-1); }
+      .insight-metric-value { font-size: var(--text-2xl); font-weight: 700; }
+      .insight-metric-value.gold { color: var(--color-primary); }
+      .insight-section-title { font-size: var(--text-sm); color: var(--color-text-tertiary); margin-bottom: var(--space-3); font-weight: 500; }
+      .region-list { margin-bottom: var(--space-5); }
+      .region-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        margin-bottom: var(--space-2);
+        font-size: var(--text-sm);
+      }
+      .region-item:last-child { margin-bottom: 0; }
+      .region-name { width: 40px; color: var(--color-text-secondary); flex-shrink: 0; }
+      .region-bar-bg {
+        flex: 1;
+        height: 6px;
+        background: var(--color-border-subtle);
+        border-radius: var(--radius-full);
+        overflow: hidden;
+      }
+      .region-bar-fill { height: 100%; border-radius: var(--radius-full); }
+      .region-bar-fill.gold { background: var(--color-primary); }
+      .region-bar-fill.light { background: var(--color-primary-lighter); opacity: 0.5; }
+      .region-pct { width: 36px; text-align: right; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-tertiary); }
+      .tag-pills { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+      .tag-pill {
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-full);
+        border: 1px solid var(--color-border);
+        background: var(--color-primary-lightest);
+        color: var(--color-primary);
+        font-size: var(--text-sm);
+        font-weight: 500;
+      }
+
+      /* ── AI Recommendations ── */
+      .ai-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+      }
+      .ai-title {
+        font-size: var(--text-lg);
+        font-weight: 600;
+        margin-bottom: var(--space-4);
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+      }
+      .ai-sparkle { color: var(--color-primary); }
+      .ai-list { display: flex; flex-direction: column; gap: var(--space-3); }
+      .ai-item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-3);
+        padding: var(--space-3) var(--space-4);
+        background: var(--color-background-secondary);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-border-subtle);
+      }
+      .ai-item-number {
+        width: 22px;
+        height: 22px;
+        border-radius: var(--radius-full);
+        background: var(--color-primary-lightest);
+        color: var(--color-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--text-xs);
+        font-weight: 600;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .ai-item-content { flex: 1; }
+      .ai-item-text { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 1.5; }
+      .ai-item-action { flex-shrink: 0; }
+      .btn-execute {
+        padding: var(--space-1) var(--space-4);
+        border-radius: var(--radius-md);
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        font-family: var(--font-body);
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .btn-execute:hover { background: var(--color-primary-light); }
+
+      /* ── Scrollbar ── */
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* ── Lucide Icon Helper ── */
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <!-- ═══════ SIDEBAR ═══════ -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="sidebar-brand-icon">HC</div>
+            <span class="sidebar-brand-name">豪车之家</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">概览</div>
+            <a class="nav-item" href="#">
+                <i data-lucide="layout-dashboard" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>工作台</span>
+            </a>
+
+            <div class="nav-section-label">营销中心</div>
+            <a class="nav-item active" href="#">
+                <i data-lucide="bar-chart-3" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>数据分析</span>
+                <span class="nav-item-badge">New</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="pen-line" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>AI内容发布</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="users" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>客户管理</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="megaphone" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>投放管理</span>
+            </a>
+
+            <div class="nav-section-label">资产</div>
+            <a class="nav-item" href="#">
+                <i data-lucide="car" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>车型库</span>
+            </a>
+            <a class="nav-item" href="#">
+                <i data-lucide="image" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>素材中心</span>
+            </a>
+
+            <div class="nav-section-label">系统</div>
+            <a class="nav-item" href="#">
+                <i data-lucide="settings" class="nav-icon" style="width:18px;height:18px;"></i>
+                <span>设置</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ═══════ MAIN AREA ═══════ -->
+    <div class="main-area">
+        <!-- Header -->
+        <header class="top-header">
+            <div class="header-breadcrumb">
+                <span>工作台</span>
+                <span class="sep">/</span>
+                <span class="current">数据分析</span>
+            </div>
+            <div class="header-actions">
+                <div class="date-selector">
+                    <i data-lucide="calendar" style="width:14px;height:14px;color:var(--color-text-tertiary);"></i>
+                    <span>近7天</span>
+                    <i data-lucide="chevron-down" class="chevron"></i>
+                </div>
+                <div class="search-box">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" placeholder="搜索数据...">
+                </div>
+                <div class="header-avatar">王</div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="content">
+            <div class="content-max">
+
+                <!-- ═══ ROW 1: KPI Cards ═══ -->
+                <div class="kpi-grid">
+                    <!-- KPI 1 -->
+                    <div class="kpi-card">
+                        <div class="kpi-label">总曝光量</div>
+                        <div class="kpi-value">142.8万</div>
+                        <span class="kpi-change up">
+                            <i data-lucide="trending-up" style="width:14px;height:14px;"></i>
+                            +22%
+                        </span>
+                    </div>
+                    <!-- KPI 2 -->
+                    <div class="kpi-card">
+                        <div class="kpi-label">线索转化率</div>
+                        <div class="kpi-value">3.2%</div>
+                        <span class="kpi-change up">
+                            <i data-lucide="trending-up" style="width:14px;height:14px;"></i>
+                            +0.8%
+                        </span>
+                    </div>
+                    <!-- KPI 3 -->
+                    <div class="kpi-card">
+                        <div class="kpi-label">高净值客户</div>
+                        <div class="kpi-value">128位</div>
+                        <span class="kpi-change gold">
+                            <i data-lucide="trending-up" style="width:14px;height:14px;"></i>
+                            +15
+                        </span>
+                    </div>
+                    <!-- KPI 4 -->
+                    <div class="kpi-card">
+                        <div class="kpi-label">成交金额</div>
+                        <div class="kpi-value" style="color:var(--color-primary);">¥2,850万</div>
+                        <span class="kpi-change gold">
+                            <i data-lucide="target" style="width:14px;height:14px;"></i>
+                            本月目标
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ═══ ROW 2: Traffic Trend Chart ═══ -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2 class="chart-title">流量趋势</h2>
+                        <div class="chart-filters">
+                            <button class="chart-filter-btn active">全部</button>
+                            <button class="chart-filter-btn">抖音</button>
+                            <button class="chart-filter-btn">视频号</button>
+                            <button class="chart-filter-btn">小红书</button>
+                            <button class="chart-filter-btn">公众号</button>
+                        </div>
+                    </div>
+                    <div class="bar-chart-container">
+                        <!-- Y-Axis -->
+                        <div class="chart-y-axis">
+                            <span class="chart-y-label">50万</span>
+                            <span class="chart-y-label">40万</span>
+                            <span class="chart-y-label">30万</span>
+                            <span class="chart-y-label">20万</span>
+                            <span class="chart-y-label">10万</span>
+                            <span class="chart-y-label">0</span>
+                        </div>
+                        <!-- Gridlines -->
+                        <div class="chart-gridlines">
+                            <div class="chart-gridline"></div>
+                            <div class="chart-gridline"></div>
+                            <div class="chart-gridline"></div>
+                            <div class="chart-gridline"></div>
+                            <div class="chart-gridline"></div>
+                            <div class="chart-gridline"></div>
+                        </div>
+                        <!-- SVG line connecting bar tops -->
+                        <svg class="chart-line-overlay" preserveAspectRatio="none" viewBox="0 0 1000 268" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#C8A45C;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#D4B76E;stop-opacity:0.6" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M80 80 L240 134 L400 40 L560 107 L720 188 L880 268 L940 54" stroke="url(#lineGrad)" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.7"/>
+                            <circle cx="80" cy="80" r="4" fill="#C8A45C"/>
+                            <circle cx="240" cy="134" r="4" fill="#C8A45C"/>
+                            <circle cx="400" cy="40" r="4" fill="#C8A45C"/>
+                            <circle cx="560" cy="107" r="4" fill="#C8A45C"/>
+                            <circle cx="720" cy="188" r="4" fill="#C8A45C"/>
+                            <circle cx="880" cy="268" r="4" fill="#C8A45C"/>
+                            <circle cx="940" cy="54" r="4" fill="#C8A45C"/>
+                        </svg>
+                        <!-- Bar Chart -->
+                        <div class="chart-area">
+                            <div class="chart-bars">
+                                <!-- 周一 -->
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar-wrapper">
+                                        <span class="chart-bar-value">18.5万</span>
+                                        <div class="chart-bar" style="height:37%;"></div>
+                                    </div>
+                                </div>
+                                <!-- 周二 -->
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar-wrapper">
+                                        <span class="chart-bar-value">22.3万</span>
+                                        <div class="chart-bar" style="height:45%;"></div>
+                                    </div>
+                                </div>
+                                <!-- 周三 -->
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar-wrapper">
+                                        <span class="chart-bar-value">28.6万</span>
+                                        <div class="chart-bar" style="height:57%;"></div>
+                                    </div>
+                                </div>
+                                <!-- 周四 -->
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar-wrapper">
+                                        <span class="chart-bar-value">20.1万</span>
+                                        <div class="chart-bar" style="height:40%;"></div>
+                                    </div>
+                                </div>
+                                <!-- 周五 -->
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar-wrapper">
+                                        <span class="chart-bar-value">15.8万</span>
+                                        <div class="chart-bar" style="height:32%;"></div>
+                                    </div>
+                                </div>
+                                <!-- 周六 -->
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar-wrapper">
+                                        <span class="chart-bar-value">12.4万</span>
+                                        <div class="chart-bar" style="height:25%;"></div>
+                                    </div>
+                                </div>
+                                <!-- 周日 -->
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar-wrapper">
+                                        <span class="chart-bar-value">25.1万</span>
+                                        <div class="chart-bar" style="height:50%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- X-Axis -->
+                        <div class="chart-x-axis">
+                            <span class="chart-x-label">周一</span>
+                            <span class="chart-x-label">周二</span>
+                            <span class="chart-x-label">周三</span>
+                            <span class="chart-x-label">周四</span>
+                            <span class="chart-x-label">周五</span>
+                            <span class="chart-x-label">周六</span>
+                            <span class="chart-x-label">周日</span>
+                        </div>
+                    </div>
+                    <!-- Platform summary -->
+                    <div class="platform-summary">
+                        <div class="platform-summary-item">
+                            <span class="platform-dot" style="background:#FE2C55;"></span>
+                            <span>抖音贡献42%流量</span>
+                        </div>
+                        <div class="platform-summary-item">
+                            <span class="platform-dot" style="background:#07C160;"></span>
+                            <span>视频号28%</span>
+                        </div>
+                        <div class="platform-summary-item">
+                            <span class="platform-dot" style="background:#FF2442;"></span>
+                            <span>小红书18%</span>
+                        </div>
+                        <div class="platform-summary-item">
+                            <span class="platform-dot" style="background:#60A5FA;"></span>
+                            <span>公众号12%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ ROW 3: Two Columns ═══ -->
+                <div class="two-col">
+                    <!-- LEFT: Platform Breakdown -->
+                    <div>
+                        <!-- 抖音 Card -->
+                        <div class="platform-card">
+                            <div class="platform-card-header">
+                                <div class="platform-icon tiktok">
+                                    <i data-lucide="music" style="width:18px;height:18px;color:#FE2C55;"></i>
+                                </div>
+                                <span class="platform-name">抖音</span>
+                            </div>
+                            <div class="platform-stats">
+                                <div class="platform-stat">
+                                    <div class="platform-stat-value">60.0万</div>
+                                    <div class="platform-stat-label">曝光</div>
+                                </div>
+                                <div class="platform-stat">
+                                    <div class="platform-stat-value">2.3万</div>
+                                    <div class="platform-stat-label">粉丝</div>
+                                </div>
+                                <div class="platform-stat">
+                                    <div class="platform-stat-value">19位</div>
+                                    <div class="platform-stat-label">获客</div>
+                                </div>
+                            </div>
+                            <div class="content-list-title">热门内容 TOP 3</div>
+                            <div class="content-list-item">
+                                <span class="rank top">1</span>
+                                <span class="title-text">迈巴赫S级深港澳首发体验</span>
+                                <span class="views">12.5万</span>
+                            </div>
+                            <div class="content-list-item">
+                                <span class="rank top">2</span>
+                                <span class="title-text">深圳湾一号车主的一天</span>
+                                <span class="views">8.3万</span>
+                            </div>
+                            <div class="content-list-item">
+                                <span class="rank top">3</span>
+                                <span class="title-text">保时捷Taycan对比测评</span>
+                                <span class="views">6.1万</span>
+                            </div>
+                        </div>
+
+                        <!-- 视频号 Card -->
+                        <div class="platform-card">
+                            <div class="platform-card-header">
+                                <div class="platform-icon wechat-video">
+                                    <i data-lucide="play-circle" style="width:18px;height:18px;color:#07C160;"></i>
+                                </div>
+                                <span class="platform-name">视频号</span>
+                            </div>
+                            <div class="platform-stats">
+                                <div class="platform-stat">
+                                    <div class="platform-stat-value">40.0万</div>
+                                    <div class="platform-stat-label">曝光</div>
+                                </div>
+                                <div class="platform-stat">
+                                    <div class="platform-stat-value">1.8万</div>
+                                    <div class="platform-stat-label">粉丝</div>
+                                </div>
+                                <div class="platform-stat">
+                                    <div class="platform-stat-value">12位</div>
+                                    <div class="platform-stat-label">获客</div>
+                                </div>
+                            </div>
+                            <div class="content-list-title">热门内容 TOP 3</div>
+                            <div class="content-list-item">
+                                <span class="rank top">1</span>
+                                <span class="title-text">宾利飞驰W12最终版交付仪式</span>
+                                <span class="views">9.2万</span>
+                            </div>
+                            <div class="content-list-item">
+                                <span class="rank top">2</span>
+                                <span class="title-text">大湾区豪车牌照摇号攻略</span>
+                                <span class="views">7.6万</span>
+                            </div>
+                            <div class="content-list-item">
+                                <span class="rank top">3</span>
+                                <span class="title-text">劳斯莱斯库里南升级套件</span>
+                                <span class="views">5.4万</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Customer Insights -->
+                    <div>
+                        <div class="insight-card">
+                            <div class="insight-title">
+                                <i data-lucide="scan-face" style="width:20px;height:20px;color:var(--color-primary);"></i>
+                                高净值客户画像
+                            </div>
+                            <div class="insight-metrics">
+                                <div>
+                                    <div class="insight-metric-label">全款购房能力</div>
+                                    <div class="insight-metric-value gold">42位</div>
+                                </div>
+                                <div>
+                                    <div class="insight-metric-label">豪车购买意向</div>
+                                    <div class="insight-metric-value">86位</div>
+                                </div>
+                            </div>
+                            <div class="insight-section-title">地区分布</div>
+                            <div class="region-list">
+                                <div class="region-item">
+                                    <span class="region-name">深圳</span>
+                                    <div class="region-bar-bg"><div class="region-bar-fill gold" style="width:45%;"></div></div>
+                                    <span class="region-pct">45%</span>
+                                </div>
+                                <div class="region-item">
+                                    <span class="region-name">广州</span>
+                                    <div class="region-bar-bg"><div class="region-bar-fill gold" style="width:28%;"></div></div>
+                                    <span class="region-pct">28%</span>
+                                </div>
+                                <div class="region-item">
+                                    <span class="region-name">东莞</span>
+                                    <div class="region-bar-bg"><div class="region-bar-fill light" style="width:15%;"></div></div>
+                                    <span class="region-pct">15%</span>
+                                </div>
+                                <div class="region-item">
+                                    <span class="region-name">其他</span>
+                                    <div class="region-bar-bg"><div class="region-bar-fill light" style="width:12%;"></div></div>
+                                    <span class="region-pct">12%</span>
+                                </div>
+                            </div>
+                            <div class="insight-section-title">标签分布</div>
+                            <div class="tag-pills">
+                                <span class="tag-pill">企业主</span>
+                                <span class="tag-pill">投资人</span>
+                                <span class="tag-pill">房产</span>
+                                <span class="tag-pill">高尔夫</span>
+                                <span class="tag-pill">收藏</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ ROW 4: AI Recommendations ═══ -->
+                <div class="ai-card">
+                    <div class="ai-title">
+                        <i data-lucide="sparkles" class="ai-sparkle" style="width:20px;height:20px;"></i>
+                        AI优化建议
+                    </div>
+                    <div class="ai-list">
+                        <div class="ai-item">
+                            <span class="ai-item-number">1</span>
+                            <div class="ai-item-content">
+                                <p class="ai-item-text">建议增加迈巴赫S级内容，该车型搜索热度上升35%</p>
+                            </div>
+                            <div class="ai-item-action">
+                                <button class="btn-execute">执行</button>
+                            </div>
+                        </div>
+                        <div class="ai-item">
+                            <span class="ai-item-number">2</span>
+                            <div class="ai-item-content">
+                                <p class="ai-item-text">周三下午14-16点发布效果最佳，建议定时发布</p>
+                            </div>
+                            <div class="ai-item-action">
+                                <button class="btn-execute">执行</button>
+                            </div>
+                        </div>
+                        <div class="ai-item">
+                            <span class="ai-item-number">3</span>
+                            <div class="ai-item-content">
+                                <p class="ai-item-text">大湾区房产关键词联动可提升曝光20%</p>
+                            </div>
+                            <div class="ai-item-action">
+                                <button class="btn-execute">执行</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</div>
+<script>lucide.createIcons();</script>
+</body>
+</html>

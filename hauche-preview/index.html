@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>豪车之家 — 产品原型预览</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  background: #09090f;
+  color: #e8e4dc;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* Header */
+.header { text-align: center; margin-bottom: 48px; }
+.header h1 {
+  font-size: 2rem; font-weight: 700; letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #C8A45C 0%, #E2CC8E 50%, #C8A45C 100%);
+  background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.header p { color: #6a665e; font-size: 0.875rem; margin-top: 8px; }
+
+/* Section */
+.section-title {
+  font-size: 1.125rem; font-weight: 600; color: #C8A45C;
+  margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+}
+.section-title svg { width: 20px; height: 20px; }
+.section + .section { margin-top: 56px; }
+
+/* Cards Grid */
+.cards-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.card {
+  background: #13131c; border: 1px solid rgba(255,255,255,0.06);
+  border-top: 2px solid #C8A45C; border-radius: 10px;
+  padding: 20px; cursor: pointer; transition: all 0.2s;
+  text-decoration: none; color: inherit; display: block;
+}
+.card:hover { background: #1a1a26; transform: translateY(-2px); }
+.card-icon {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: rgba(200,164,92,0.12); color: #C8A45C;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.card-icon svg { width: 20px; height: 20px; }
+.card h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; }
+.card p { font-size: 0.75rem; color: #6a665e; line-height: 1.5; }
+
+/* Desktop grid uses 5 cols on wider screens */
+.desktop-grid { grid-template-columns: repeat(5, 1fr); }
+
+/* Phone Frame */
+.phone-frame-wrap {
+  display: flex; justify-content: center; margin-top: 32px;
+}
+.phone-frame {
+  width: 375px; height: 812px; border-radius: 40px;
+  background: #0a0a12; border: 3px solid #2a2a35;
+  position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.phone-notch {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 150px; height: 28px; background: #0a0a12;
+  border-radius: 0 0 18px 18px; z-index: 10;
+}
+.phone-notch::after {
+  content: ''; position: absolute; top: 10px; left: 50%;
+  transform: translateX(-50%); width: 60px; height: 6px;
+  background: #2a2a35; border-radius: 3px;
+}
+.phone-frame iframe {
+  width: 100%; height: 100%; border: none; border-radius: 37px;
+}
+
+/* Phone placeholder */
+.phone-placeholder {
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px; color: #3a3832;
+}
+.phone-placeholder svg { width: 48px; height: 48px; opacity: 0.3; }
+.phone-placeholder span { font-size: 0.8125rem; }
+
+/* Active card highlight */
+.card.active { border-color: #C8A45C; box-shadow: 0 0 0 1px rgba(200,164,92,0.2); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cards-grid, .desktop-grid { grid-template-columns: repeat(2, 1fr); }
+  .phone-frame { width: 320px; height: 693px; border-radius: 34px; }
+  .phone-frame iframe { border-radius: 31px; }
+  .container { padding: 24px 16px 60px; }
+}
+@media (max-width: 420px) {
+  .cards-grid, .desktop-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>豪车之家 — 产品原型预览</h1>
+    <p>HaoChe Home — Interactive Prototype Showcase</p>
+  </div>
+
+  <!-- Mobile Section -->
+  <div class="section" id="mobile-section">
+    <div class="section-title">
+      <i data-lucide="smartphone"></i>
+      <span>移动端原型</span>
+    </div>
+    <div class="cards-grid">
+      <a class="card" data-page="pages/crm-home.html" onclick="loadPage(this, event)">
+        <div class="card-icon"><i data-lucide="home"></i></div>
+        <h3>CRM首页</h3>
+        <p>工作台仪表盘、数据总览与快捷操作</p>
+      </a>
+      <a class="card" data-page="pages/crm-members.html" onclick="loadPage(this, event)">
+        <div class="card-icon"><i data-lucide="users"></i></div>
+        <h3>会员管理</h3>
+        <p>会员列表、等级标签与跟进记录</p>
+      </a>
+      <a class="card" data-page="pages/crm-inventory.html" onclick="loadPage(this, event)">
+        <div class="card-icon"><i data-lucide="package"></i></div>
+        <h3>库存台账</h3>
+        <p>车辆库存、在售状态与库龄预警</p>
+      </a>
+      <a class="card" data-page="pages/ai-chat.html" onclick="loadPage(this, event)">
+        <div class="card-icon"><i data-lucide="message-circle"></i></div>
+        <h3>AI客服对话</h3>
+        <p>智能问答、车型推荐与预约服务</p>
+      </a>
+      <a class="card" data-page="pages/showroom.html" onclick="loadPage(this, event)">
+        <div class="card-icon"><i data-lucide="car"></i></div>
+        <h3>豪车展厅</h3>
+        <p>在线展厅、AI推荐与车辆筛选</p>
+      </a>
+      <a class="card" data-page="pages/car-detail.html" onclick="loadPage(this, event)">
+        <div class="card-icon"><i data-lucide="file-text"></i></div>
+        <h3>车辆详情</h3>
+        <p>车辆参数、价格分析与看车预约</p>
+      </a>
+    </div>
+    <div class="phone-frame-wrap">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-placeholder" id="mobile-placeholder">
+          <i data-lucide="smartphone"></i>
+          <span>点击上方卡片预览</span>
+        </div>
+        <iframe id="mobile-iframe" style="display:none;" title="Mobile Preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop Section -->
+  <div class="section" id="desktop-section">
+    <div class="section-title">
+      <i data-lucide="monitor"></i>
+      <span>桌面端原型</span>
+    </div>
+    <div class="cards-grid desktop-grid">
+      <a class="card" href="desktop/content-workspace.html" target="_blank">
+        <div class="card-icon"><i data-lucide="edit-3"></i></div>
+        <h3>内容工作台</h3>
+        <p>AI辅助内容创作与发布</p>
+      </a>
+      <a class="card" href="desktop/digital-human.html" target="_blank">
+        <div class="card-icon"><i data-lucide="user-circle"></i></div>
+        <h3>数字人客服</h3>
+        <p>数字人配置与对话管理</p>
+      </a>
+      <a class="card" href="desktop/payment-dashboard.html" target="_blank">
+        <div class="card-icon"><i data-lucide="credit-card"></i></div>
+        <h3>支付看板</h3>
+        <p>交易数据与财务概览</p>
+      </a>
+      <a class="card" href="desktop/data-analytics.html" target="_blank">
+        <div class="card-icon"><i data-lucide="bar-chart-2"></i></div>
+        <h3>数据分析</h3>
+        <p>经营指标与可视化报表</p>
+      </a>
+      <a class="card" href="desktop/showroom-manage.html" target="_blank">
+        <div class="card-icon"><i data-lucide="layout-grid"></i></div>
+        <h3>展厅管理</h3>
+        <p>车辆上架与展厅运营</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+lucide.createIcons();
+const iframe = document.getElementById('mobile-iframe');
+const placeholder = document.getElementById('mobile-placeholder');
+
+function loadPage(el, e) {
+  e.preventDefault();
+  // Highlight active card
+  document.querySelectorAll('#mobile-section .card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  // Load in iframe
+  iframe.src = el.dataset.page;
+  iframe.style.display = 'block';
+  placeholder.style.display = 'none';
+  // Scroll phone into view
+  document.querySelector('.phone-frame-wrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
+</body>
+</html>

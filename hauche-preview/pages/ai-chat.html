@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI客服</title>
+    <style id="theme-vars">
+:root {
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: rgba(200, 164, 92, 0.1);
+  --color-primary-dark: #A6893F;
+
+  --color-background: #0C0C14;
+  --color-background-secondary: #111119;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1C1C28;
+  --color-surface-hover: #222232;
+
+  --color-text-primary: #F0ECE4;
+  --color-text-secondary: #8A867E;
+  --color-text-tertiary: #5A5750;
+
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  --state-success: #34D399;
+  --state-success-bg: rgba(52, 211, 153, 0.1);
+  --state-warning: #FBBF24;
+  --state-warning-bg: rgba(251, 191, 36, 0.1);
+  --state-error: #F87171;
+  --state-error-bg: rgba(248, 113, 113, 0.1);
+  --state-info: #60A5FA;
+  --state-info-bg: rgba(96, 165, 250, 0.1);
+
+  --font-display: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.75rem;
+  --text-base: 0.8125rem;
+  --text-lg: 0.875rem;
+  --text-xl: 1rem;
+  --text-2xl: 1.125rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased flex items-center justify-center">
+    <!-- Mobile Frame -->
+    <div class="mobile-frame" style="border-radius: 0;">
+
+        <!-- ====== CHAT HEADER ====== -->
+        <div style="background: var(--color-surface); border-bottom: 1px solid var(--color-primary); padding: 10px 14px 8px; flex-shrink: 0;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <!-- Back arrow -->
+                <div style="width: 32px; display: flex; align-items: center; cursor: pointer;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </div>
+                <!-- Center: avatar + title -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); display: flex; align-items: center; justify-content: center;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                    </div>
+                    <div>
+                        <div style="font-size: var(--text-lg); font-weight: 600; color: var(--color-text-primary); line-height: 1.2;">豪车之家AI助手</div>
+                        <div style="font-size: var(--text-xs); color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px; line-height: 1.3;">
+                            <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--state-success); display: inline-block;"></span>
+                            在线
+                        </div>
+                    </div>
+                </div>
+                <!-- More options -->
+                <div style="width: 32px; display: flex; align-items: center; cursor: pointer;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== CHAT MESSAGES (scrollable) ====== -->
+        <div class="no-scrollbar" style="flex: 1; overflow-y: auto; padding: 14px 12px 10px; display: flex; flex-direction: column; gap: 14px;">
+
+            <!-- Message 1 — Customer -->
+            <div class="chat-msg" style="display: flex; justify-content: flex-end; align-items: flex-start; gap: 8px;">
+                <div style="max-width: 72%;">
+                    <div class="bubble-right" style="position: relative; background: var(--color-primary-lightest); border: 1px solid rgba(200, 164, 92, 0.15); border-radius: var(--radius-lg); border-top-right-radius: 2px; padding: 10px 14px; font-size: var(--text-base); color: var(--color-text-primary); line-height: 1.5;">
+                        你好，我想了解一下迈巴赫S480的价格
+                    </div>
+                    <div style="text-align: right; font-size: var(--text-xs); color: var(--color-text-tertiary); margin-top: 2px; padding-right: 4px;">10:23</div>
+                </div>
+                <!-- Customer avatar -->
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-surface-elevated); border: 1px solid var(--color-divider); display: flex; align-items: center; justify-content: center; font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); flex-shrink: 0;">李</div>
+            </div>
+
+            <!-- Message 2 — AI Bot (product card) -->
+            <div class="chat-msg" style="display: flex; justify-content: flex-start; align-items: flex-start; gap: 8px;">
+                <!-- Bot avatar -->
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                </div>
+                <div style="max-width: 78%;">
+                    <div class="bubble-left" style="position: relative; background: var(--color-surface-elevated); border-radius: var(--radius-lg); border-top-left-radius: 2px; padding: 10px 14px; font-size: var(--text-base); color: var(--color-text-primary); line-height: 1.5;">
+                        您好李先生！迈巴赫S480目前有现车在售，以下是详细信息：
+                    </div>
+                    <!-- Product card -->
+                    <div style="margin-top: 8px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden;">
+                        <!-- Car image placeholder -->
+                        <div style="height: 100px; background: linear-gradient(135deg, var(--color-surface-hover), var(--color-surface)); display: flex; align-items: center; justify-content: center; position: relative;">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.4;"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+                        </div>
+                        <div style="padding: 12px;">
+                            <div style="font-size: var(--text-lg); font-weight: 600; color: var(--color-text-primary);">迈巴赫 S480 2024款</div>
+                            <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 6px;">
+                                <span style="font-size: var(--text-2xl); font-weight: 700; color: var(--color-primary);">¥168万</span>
+                            </div>
+                            <div style="display: flex; gap: 12px; margin-top: 8px;">
+                                <span style="font-size: var(--text-xs); color: var(--color-text-secondary);">里程: 0.8万公里</span>
+                                <span style="font-size: var(--text-xs); color: var(--color-text-secondary);">2024款</span>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                                <span style="font-size: var(--text-xs); padding: 3px 8px; border-radius: var(--radius-full); background: var(--state-success-bg); color: var(--state-success); font-weight: 500;">现车在售</span>
+                                <button style="font-size: var(--text-sm); padding: 6px 16px; border-radius: var(--radius-full); background: var(--color-primary); color: #0C0C14; font-weight: 600; border: none; cursor: pointer;">预约看车</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message 3 — Customer -->
+            <div class="chat-msg" style="display: flex; justify-content: flex-end; align-items: flex-start; gap: 8px;">
+                <div style="max-width: 72%;">
+                    <div class="bubble-right" style="position: relative; background: var(--color-primary-lightest); border: 1px solid rgba(200, 164, 92, 0.15); border-radius: var(--radius-lg); border-top-right-radius: 2px; padding: 10px 14px; font-size: var(--text-base); color: var(--color-text-primary); line-height: 1.5;">
+                        有分期方案吗？
+                    </div>
+                    <div style="text-align: right; font-size: var(--text-xs); color: var(--color-text-tertiary); margin-top: 2px; padding-right: 4px;">10:24</div>
+                </div>
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-surface-elevated); border: 1px solid var(--color-divider); display: flex; align-items: center; justify-content: center; font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); flex-shrink: 0;">李</div>
+            </div>
+
+            <!-- Message 4 — AI Bot (finance card) -->
+            <div class="chat-msg" style="display: flex; justify-content: flex-start; align-items: flex-start; gap: 8px;">
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                </div>
+                <div style="max-width: 78%;">
+                    <div class="bubble-left" style="position: relative; background: var(--color-surface-elevated); border-radius: var(--radius-lg); border-top-left-radius: 2px; padding: 10px 14px; font-size: var(--text-base); color: var(--color-text-primary); line-height: 1.5;">
+                        当然！我们提供多种金融方案：
+                    </div>
+                    <!-- Finance card -->
+                    <div style="margin-top: 8px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px;">
+                        <!-- Option 1 -->
+                        <div style="padding: 10px 12px; background: var(--color-surface-hover); border-radius: var(--radius-md); margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                                <span style="font-size: var(--text-xs); padding: 2px 6px; border-radius: var(--radius-sm); background: var(--color-primary-lightest); color: var(--color-primary); font-weight: 600;">方案一</span>
+                                <span style="font-size: var(--text-xs); color: var(--color-text-secondary);">低首付</span>
+                            </div>
+                            <div style="font-size: var(--text-base); color: var(--color-text-primary); font-weight: 500;">30%首付 <span style="color: var(--color-primary);">¥50.4万</span></div>
+                            <div style="font-size: var(--text-xs); color: var(--color-text-secondary); margin-top: 2px;">36期月供 ¥32,800</div>
+                        </div>
+                        <!-- Option 2 -->
+                        <div style="padding: 10px 12px; background: var(--color-surface-hover); border-radius: var(--radius-md); margin-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                                <span style="font-size: var(--text-xs); padding: 2px 6px; border-radius: var(--radius-sm); background: var(--color-primary-lightest); color: var(--color-primary); font-weight: 600;">方案二</span>
+                                <span style="font-size: var(--text-xs); color: var(--color-text-secondary);">低月供</span>
+                            </div>
+                            <div style="font-size: var(--text-base); color: var(--color-text-primary); font-weight: 500;">50%首付 <span style="color: var(--color-primary);">¥84万</span></div>
+                            <div style="font-size: var(--text-xs); color: var(--color-text-secondary); margin-top: 2px;">24期月供 ¥38,500</div>
+                        </div>
+                        <button style="width: 100%; font-size: var(--text-sm); padding: 8px; border-radius: var(--radius-full); background: transparent; color: var(--color-primary); font-weight: 500; border: 1px solid rgba(200, 164, 92, 0.3); cursor: pointer;">了解更多</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message 5 — AI system tag (centered) -->
+            <div class="chat-msg" style="display: flex; justify-content: center; align-items: center; padding: 4px 0;">
+                <div style="font-size: var(--text-xs); color: var(--color-text-tertiary); background: var(--color-surface); padding: 5px 14px; border-radius: var(--radius-full); border: 1px solid var(--color-border); display: flex; align-items: center; gap: 6px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                    AI已自动打标签: 购车意向客户 | 高净值 | 迈巴赫
+                </div>
+            </div>
+
+            <!-- Message 6 — Customer -->
+            <div class="chat-msg" style="display: flex; justify-content: flex-end; align-items: flex-start; gap: 8px;">
+                <div style="max-width: 72%;">
+                    <div class="bubble-right" style="position: relative; background: var(--color-primary-lightest); border: 1px solid rgba(200, 164, 92, 0.15); border-radius: var(--radius-lg); border-top-right-radius: 2px; padding: 10px 14px; font-size: var(--text-base); color: var(--color-text-primary); line-height: 1.5;">
+                        好的，我想周末去看车
+                    </div>
+                    <div style="text-align: right; font-size: var(--text-xs); color: var(--color-text-tertiary); margin-top: 2px; padding-right: 4px;">10:25</div>
+                </div>
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-surface-elevated); border: 1px solid var(--color-divider); display: flex; align-items: center; justify-content: center; font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); flex-shrink: 0;">李</div>
+            </div>
+
+            <!-- Message 7 — AI Bot (appointment card) -->
+            <div class="chat-msg" style="display: flex; justify-content: flex-start; align-items: flex-start; gap: 8px;">
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                </div>
+                <div style="max-width: 78%;">
+                    <div class="bubble-left" style="position: relative; background: var(--color-surface-elevated); border-radius: var(--radius-lg); border-top-left-radius: 2px; padding: 10px 14px; font-size: var(--text-base); color: var(--color-text-primary); line-height: 1.5;">
+                        已为您预约！
+                    </div>
+                    <!-- Appointment card -->
+                    <div style="margin-top: 8px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 14px;">
+                        <div style="display: flex; align-items: flex-start; gap: 10px;">
+                            <!-- Calendar icon -->
+                            <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--state-info-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--state-info)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: var(--text-base); font-weight: 600; color: var(--color-text-primary);">深圳豪车之家展厅</div>
+                                <div style="font-size: var(--text-sm); color: var(--color-primary); font-weight: 500; margin-top: 4px;">7月13日 周六 10:00</div>
+                                <div style="font-size: var(--text-xs); color: var(--color-text-secondary); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-state-success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--state-success);"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                    已通知专属顾问 豪哥
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; gap: 16px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--color-border);">
+                            <button style="font-size: var(--text-xs); color: var(--color-text-secondary); background: none; border: none; cursor: pointer; padding: 4px 0;">修改时间</button>
+                            <button style="font-size: var(--text-xs); color: var(--state-error); background: none; border: none; cursor: pointer; padding: 4px 0;">取消预约</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ====== QUICK REPLY SUGGESTIONS ====== -->
+        <div style="padding: 8px 12px 4px; flex-shrink: 0;">
+            <div class="quick-replies" style="display: flex; gap: 8px; overflow-x: auto;">
+                <button style="font-size: var(--text-xs); white-space: nowrap; padding: 6px 14px; border-radius: var(--radius-full); background: var(--color-surface-elevated); border: 1px solid var(--color-border); color: var(--color-primary); cursor: pointer; flex-shrink: 0;">车型报价</button>
+                <button style="font-size: var(--text-xs); white-space: nowrap; padding: 6px 14px; border-radius: var(--radius-full); background: var(--color-surface-elevated); border: 1px solid var(--color-border); color: var(--color-primary); cursor: pointer; flex-shrink: 0;">会员权益</button>
+                <button style="font-size: var(--text-xs); white-space: nowrap; padding: 6px 14px; border-radius: var(--radius-full); background: var(--color-surface-elevated); border: 1px solid var(--color-border); color: var(--color-primary); cursor: pointer; flex-shrink: 0;">分期方案</button>
+                <button style="font-size: var(--text-xs); white-space: nowrap; padding: 6px 14px; border-radius: var(--radius-full); background: var(--color-surface-elevated); border: 1px solid var(--color-border); color: var(--color-primary); cursor: pointer; flex-shrink: 0;">线下活动</button>
+            </div>
+        </div>
+
+        <!-- ====== INPUT BAR ====== -->
+        <div style="padding: 8px 12px; display: flex; align-items: center; gap: 8px; flex-shrink: 0; background: var(--color-background-secondary); border-top: 1px solid var(--color-border);">
+            <!-- Attachment button -->
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--color-surface-elevated); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+            </div>
+            <!-- Text input -->
+            <div style="flex: 1; background: var(--color-surface-elevated); border-radius: var(--radius-full); padding: 8px 14px; font-size: var(--text-sm); color: var(--color-text-tertiary); border: 1px solid var(--color-border);">
+                输入消息...
+            </div>
+            <!-- Send button (active state) -->
+            <button style="font-size: var(--text-sm); padding: 8px 18px; border-radius: var(--radius-full); background: var(--color-primary); color: #0C0C14; font-weight: 600; border: none; cursor: pointer; flex-shrink: 0;">发送</button>
+        </div>
+
+        <!-- ====== BOTTOM TAB BAR ====== -->
+        <div style="display: flex; align-items: center; justify-content: space-around; padding: 6px 0 20px; flex-shrink: 0; background: var(--color-surface); border-top: 1px solid var(--color-border);">
+            <!-- Tab 1: 消息 (active) -->
+            <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;" class="tab-active">
+                <div style="position: relative;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    <!-- Notification badge -->
+                    <span style="position: absolute; top: -4px; right: -6px; min-width: 14px; height: 14px; background: #EF4444; border-radius: 7px; font-size: 9px; color: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center; padding: 0 3px;">3</span>
+                </div>
+                <span style="font-size: 10px; color: var(--color-primary); font-weight: 500;">消息</span>
+            </div>
+            <!-- Tab 2: 客户 -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span style="font-size: 10px; color: var(--color-text-tertiary);">客户</span>
+            </div>
+            <!-- Tab 3: 车源 -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+                <span style="font-size: 10px; color: var(--color-text-tertiary);">车源</span>
+            </div>
+            <!-- Tab 4: 订单 -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15h6"/></svg>
+                <span style="font-size: 10px; color: var(--color-text-tertiary);">订单</span>
+            </div>
+            <!-- Tab 5: 我的 -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-tertiary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="1.5"/><path d="M7 14h.01"/><path d="M17 14h.01"/><path d="M12 20c-2 0-4-1.5-4-3.5 0-1 .5-1.5 1.5-2h5c1 .5 1.5 1 1.5 2 0 2-2 3.5-4 3.5"/></svg>
+                <span style="font-size: 10px; color: var(--color-text-tertiary);">我的</span>
+            </div>
+        </div>
+
+    </div>
+    <script>lucide.createIcons();</script>
+
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+
+      /* Mobile frame */
+      .mobile-frame {
+        width: 375px;
+        height: 812px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: var(--color-background);
+      }
+
+      /* Chat bubbles with tails */
+      .bubble-left::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 12px;
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-right: 6px solid var(--color-surface-elevated);
+      }
+      .bubble-right::before {
+        content: '';
+        position: absolute;
+        right: -6px;
+        top: 12px;
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 6px solid var(--color-primary-lightest);
+      }
+
+      /* Smooth animations */
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .chat-msg { animation: fadeInUp 0.3s ease-out both; }
+      .chat-msg:nth-child(1) { animation-delay: 0s; }
+      .chat-msg:nth-child(2) { animation-delay: 0.05s; }
+      .chat-msg:nth-child(3) { animation-delay: 0.1s; }
+      .chat-msg:nth-child(4) { animation-delay: 0.15s; }
+      .chat-msg:nth-child(5) { animation-delay: 0.2s; }
+      .chat-msg:nth-child(6) { animation-delay: 0.25s; }
+      .chat-msg:nth-child(7) { animation-delay: 0.3s; }
+
+      /* Tab bar active indicator */
+      .tab-active::after {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background: var(--color-primary);
+        border-radius: 1px;
+      }
+
+      /* Quick reply scroll */
+      .quick-replies::-webkit-scrollbar { display: none; }
+      .quick-replies { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</body>
+</html>
