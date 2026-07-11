@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI解决方案 — 豪车之家</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors ── */
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: #F0E4C0;
+  --color-primary-dark: #A6893F;
+  --color-primary-darker: #8B7133;
+
+  --color-background: #0A0A0F;
+  --color-background-secondary: #12121A;
+  --color-background-tertiary: #1A1A26;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1E1E2A;
+
+  --color-text-primary: #F5F0E8;
+  --color-text-secondary: #A09B90;
+  --color-text-tertiary: #6B665C;
+  --color-text-inverse: #0A0A0F;
+
+  --color-border: rgba(200, 164, 92, 0.15);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  /* ── State Colors ── */
+  --state-success: #34D399;
+  --state-warning: #FBBF24;
+  --state-error: #F87171;
+  --state-info: #60A5FA;
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-display: 4.5rem;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (static surfaces: border-first; floating layers: subtle shadow) ── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --shadow-floating: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Typography Classes ── */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+.font-mono { font-family: var(--font-mono); }
+
+.text-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-subheading {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-wide);
+  font-weight: 300;
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+.text-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+
+.text-overline {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── Surface Classes ── */
+.surface-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.surface-elevated {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Gold accent line ── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+.gold-line-left {
+  height: 2px;
+  width: 48px;
+  background: var(--color-primary);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+
+      /* ── Project Shell: Global Layout ── */
+      html, body {
+        background: var(--color-background);
+        min-height: 100vh;
+      }
+
+      /* ── Project Shell: Navbar ── */
+      .shell-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(10, 10, 15, 0.9);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(200, 164, 92, 0.2);
+        transition: background 0.3s ease;
+      }
+
+      .shell-navbar__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: 64px;
+      }
+
+      .shell-navbar__logo {
+        font-family: var(--font-display);
+        font-size: 1.375rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        text-decoration: none;
+        letter-spacing: var(--tracking-wide);
+        white-space: nowrap;
+      }
+
+      .shell-navbar__logo:hover {
+        color: var(--color-primary-light);
+      }
+
+      .shell-navbar__nav {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        overflow-x: auto;
+      }
+
+      .shell-navbar__link {
+        font-family: var(--font-body);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        letter-spacing: var(--tracking-wider);
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        padding: 0.25rem 0;
+        position: relative;
+        white-space: nowrap;
+        transition: color 0.25s ease;
+      }
+
+      .shell-navbar__link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--color-primary);
+        transition: width 0.3s ease;
+      }
+
+      .shell-navbar__link:hover {
+        color: var(--color-text-primary);
+      }
+
+      .shell-navbar__link:hover::after {
+        width: 100%;
+      }
+
+      /* Active nav item */
+      .shell-navbar__link[data-active="true"] {
+        color: var(--color-primary);
+      }
+
+      .shell-navbar__link[data-active="true"]::after {
+        width: 100%;
+        background: var(--color-primary);
+      }
+
+      /* ── Project Shell: Mobile Nav ── */
+      @media (max-width: 768px) {
+        .shell-navbar__inner {
+          padding: 0 1rem;
+          gap: 1rem;
+        }
+
+        .shell-navbar__nav {
+          gap: 1.25rem;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .shell-navbar__nav::-webkit-scrollbar {
+          display: none;
+        }
+
+        .shell-navbar__link {
+          font-size: 0.6875rem;
+        }
+
+        .shell-navbar__logo {
+          font-size: 1.125rem;
+        }
+      }
+
+      /* ── Project Shell: Main Content Area ── */
+      .shell-main {
+        padding-top: 64px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .shell-content {
+        flex: 1;
+      }
+
+      /* ── Project Shell: Footer ── */
+      .shell-footer {
+        border-top: 1px solid var(--color-border);
+        padding: 2rem 1.5rem;
+        text-align: center;
+      }
+
+      .shell-footer__text {
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        color: var(--color-text-tertiary);
+        letter-spacing: var(--tracking-wide);
+      }
+
+      .shell-footer__gold-divider {
+        width: 48px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+        margin: 0 auto 1rem;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+
+    <!-- ═══════════════════════════════════════════════════
+         HEADER / NAVBAR (fixed top)
+         ═══════════════════════════════════════════════════ -->
+    <header class="shell-navbar">
+        <div class="shell-navbar__inner">
+            <a href="index.html" class="shell-navbar__logo">豪车之家</a>
+            <nav class="shell-navbar__nav no-scrollbar">
+                <a href="index.html"
+                   class="shell-navbar__link"
+                   data-nav-key="index"
+                   data-dom-id="nav-index">首页</a>
+                <a href="market-pain.html"
+                   class="shell-navbar__link"
+                   data-nav-key="market-pain"
+                   data-dom-id="nav-market-pain">市场痛点</a>
+                <a href="ai-solutions.html"
+                   class="shell-navbar__link"
+                   data-nav-key="ai-solutions"
+                   data-active="true"
+                   data-dom-id="nav-ai-solutions">AI解决方案</a>
+                <a href="business-model.html"
+                   class="shell-navbar__link"
+                   data-nav-key="business-model"
+                   data-dom-id="nav-business-model">商业模式</a>
+                <a href="tech-team.html"
+                   class="shell-navbar__link"
+                   data-nav-key="tech-team"
+                   data-dom-id="nav-tech-team">技术实力</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════
+         MAIN CONTENT WRAPPER
+         ═══════════════════════════════════════════════════ -->
+    <div class="shell-main">
+        <div class="shell-content">
+
+            <!-- ═══════════════════════════════════════════════════
+                 Section 1 — Page Header
+                 ═══════════════════════════════════════════════════ -->
+            <section class="py-16 md:py-24 px-6 md:px-8 max-w-4xl mx-auto text-center">
+                <p class="text-overline mb-4">核心产品</p>
+                <h1 class="font-display text-4xl md:text-5xl lg:text-[3.5rem] leading-tight tracking-tight mb-6" style="color: var(--color-text-primary); text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">
+                    6套TRAE自研AI工具
+                </h1>
+                <p class="text-body max-w-[600px] mx-auto" style="color: var(--color-text-secondary);">
+                    从流量获客到数据分析，全链路数字化改造豪车行业
+                </p>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════
+                 Section 2 — Tool Cards Grid
+                 ═══════════════════════════════════════════════════ -->
+            <section class="px-6 md:px-8 pb-16 md:pb-24 max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Tool Card 01 -->
+                    <div class="surface-card relative p-6 pt-8 hover:-translate-y-1 transition-transform duration-300" style="border-top: 2px solid var(--color-primary);">
+                        <span class="absolute top-4 right-5 inline-flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold font-body" style="background: var(--color-primary); color: var(--color-text-inverse);">01</span>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-full" style="border: 1.5px solid var(--color-primary); color: var(--color-primary);">
+                                <i data-lucide="radio" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-body text-lg font-semibold truncate min-w-0" style="color: var(--color-text-primary);">AI全域内容自动发布智能体</h3>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed line-clamp-3 mb-4" style="color: var(--color-text-secondary);">
+                            基于TRAE Work搭建多平台自动化脚本，批量产出豪车短视频、公众号推文，自动同步抖音/视频号/小红书
+                        </p>
+                        <span class="inline-flex items-center whitespace-nowrap rounded-lg px-3 py-1 text-xs font-medium font-body" style="background: rgba(200, 164, 92, 0.12); color: var(--color-primary);">
+                            砍掉80%文案剪辑人力
+                        </span>
+                    </div>
+
+                    <!-- Tool Card 02 -->
+                    <div class="surface-card relative p-6 pt-8 hover:-translate-y-1 transition-transform duration-300" style="border-top: 2px solid var(--color-primary);">
+                        <span class="absolute top-4 right-5 inline-flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold font-body" style="background: var(--color-primary); color: var(--color-text-inverse);">02</span>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-full" style="border: 1.5px solid var(--color-primary); color: var(--color-primary);">
+                                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-body text-lg font-semibold truncate min-w-0" style="color: var(--color-text-primary);">车友CRM微信小程序</h3>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed line-clamp-3 mb-4" style="color: var(--color-text-secondary);">
+                            TRAE SOLO全栈生成，库存台账、分层会员体系、活动报名、佣金自动核算、可视化后台报表
+                        </p>
+                        <span class="inline-flex items-center whitespace-nowrap rounded-lg px-3 py-1 text-xs font-medium font-body" style="background: rgba(200, 164, 92, 0.12); color: var(--color-primary);">
+                            把烧钱俱乐部转为盈利板块
+                        </span>
+                    </div>
+
+                    <!-- Tool Card 03 -->
+                    <div class="surface-card relative p-6 pt-8 hover:-translate-y-1 transition-transform duration-300" style="border-top: 2px solid var(--color-primary);">
+                        <span class="absolute top-4 right-5 inline-flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold font-body" style="background: var(--color-primary); color: var(--color-text-inverse);">03</span>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-full" style="border: 1.5px solid var(--color-primary); color: var(--color-primary);">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-body text-lg font-semibold truncate min-w-0" style="color: var(--color-text-primary);">私域AI销售接待机器人</h3>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed line-clamp-3 mb-4" style="color: var(--color-text-secondary);">
+                            企业微信智能体训练豪车行业知识库，自动回复报价、分层打标签、定时跟进沉睡线索
+                        </p>
+                        <span class="inline-flex items-center whitespace-nowrap rounded-lg px-3 py-1 text-xs font-medium font-body" style="background: rgba(200, 164, 92, 0.12); color: var(--color-primary);">
+                            7x24承接高净值客源
+                        </span>
+                    </div>
+
+                    <!-- Tool Card 04 -->
+                    <div class="surface-card relative p-6 pt-8 hover:-translate-y-1 transition-transform duration-300" style="border-top: 2px solid var(--color-primary);">
+                        <span class="absolute top-4 right-5 inline-flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold font-body" style="background: var(--color-primary); color: var(--color-text-inverse);">04</span>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-full" style="border: 1.5px solid var(--color-primary); color: var(--color-primary);">
+                                <i data-lucide="video" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-body text-lg font-semibold truncate min-w-0" style="color: var(--color-text-primary);">会长专属数字人短视频工具</h3>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed line-clamp-3 mb-4" style="color: var(--color-text-secondary);">
+                            输入文字自动生成豪哥口播竖屏短视频，内置虚拟展厅、高尔夫晚宴高端背景模板
+                        </p>
+                        <span class="inline-flex items-center whitespace-nowrap rounded-lg px-3 py-1 text-xs font-medium font-body" style="background: rgba(200, 164, 92, 0.12); color: var(--color-primary);">
+                            无需每日出镜稳定更新
+                        </span>
+                    </div>
+
+                    <!-- Tool Card 05 -->
+                    <div class="surface-card relative p-6 pt-8 hover:-translate-y-1 transition-transform duration-300" style="border-top: 2px solid var(--color-primary);">
+                        <span class="absolute top-4 right-5 inline-flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold font-body" style="background: var(--color-primary); color: var(--color-text-inverse);">05</span>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-full" style="border: 1.5px solid var(--color-primary); color: var(--color-primary);">
+                                <i data-lucide="credit-card" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-body text-lg font-semibold truncate min-w-0" style="color: var(--color-text-primary);">付费社群&课程结算系统</h3>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed line-clamp-3 mb-4" style="color: var(--color-text-secondary);">
+                            对接微信支付，会员年费、沙龙签到、课程预约，自动利润拆分，AI生成课程讲义
+                        </p>
+                        <span class="inline-flex items-center whitespace-nowrap rounded-lg px-3 py-1 text-xs font-medium font-body" style="background: rgba(200, 164, 92, 0.12); color: var(--color-primary);">
+                            预收会员费补齐现金流
+                        </span>
+                    </div>
+
+                    <!-- Tool Card 06 -->
+                    <div class="surface-card relative p-6 pt-8 hover:-translate-y-1 transition-transform duration-300" style="border-top: 2px solid var(--color-primary);">
+                        <span class="absolute top-4 right-5 inline-flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold font-body" style="background: var(--color-primary); color: var(--color-text-inverse);">06</span>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-full" style="border: 1.5px solid var(--color-primary); color: var(--color-primary);">
+                                <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-body text-lg font-semibold truncate min-w-0" style="color: var(--color-text-primary);">大湾区流量AI数据分析引擎</h3>
+                        </div>
+                        <p class="text-body text-sm leading-relaxed line-clamp-3 mb-4" style="color: var(--color-text-secondary);">
+                            TRAE爬虫抓取高端豪车搜索关键词，流量转化看板、高净值客户画像、AI优化内容方向
+                        </p>
+                        <span class="inline-flex items-center whitespace-nowrap rounded-lg px-3 py-1 text-xs font-medium font-body" style="background: rgba(200, 164, 92, 0.12); color: var(--color-primary);">
+                            拓展豪宅居间第二曲线
+                        </span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════
+                 Section 3 — Summary CTA
+                 ═══════════════════════════════════════════════════ -->
+            <section class="px-6 md:px-8 pb-20 md:pb-28 max-w-3xl mx-auto text-center">
+                <div class="gold-line mb-8"></div>
+                <p class="font-body text-lg mb-8" style="color: var(--color-primary);">
+                    全部基于字节TRAE独立开发，零外包成本
+                </p>
+                <a href="#"
+                   data-dom-id="cta-business-model"
+                   class="inline-flex items-center justify-center whitespace-nowrap rounded-lg px-8 py-3 text-sm font-semibold font-body transition-colors duration-200"
+                   style="background: var(--color-primary); color: var(--color-text-inverse);">
+                    了解商业模式
+                </a>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════
+             FOOTER
+             ═══════════════════════════════════════════════════ -->
+        <footer class="shell-footer">
+            <div class="shell-footer__gold-divider"></div>
+            <p class="shell-footer__text">豪车之家 — 字节TRAE AI创造力大赛参赛作品</p>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

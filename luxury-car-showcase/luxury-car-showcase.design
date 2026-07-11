@@ -1,0 +1,225 @@
+{
+  "data": [
+    {
+      "id": "page-index",
+      "title": "首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/index.html",
+        "interactions": [
+          {
+            "domId": "cta-market-pain",
+            "targetPageId": "page-market-pain"
+          },
+          {
+            "domId": "nav-market-pain",
+            "targetPageId": "page-market-pain",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-ai-solutions",
+            "targetPageId": "page-ai-solutions",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-business-model",
+            "targetPageId": "page-business-model",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-tech-team",
+            "targetPageId": "page-tech-team",
+            "hideEdge": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-market-pain",
+      "title": "市场痛点",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 620,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/market-pain.html",
+        "interactions": [
+          {
+            "domId": "cta-ai-solutions",
+            "targetPageId": "page-ai-solutions"
+          },
+          {
+            "domId": "nav-index",
+            "targetPageId": "page-index",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-ai-solutions",
+            "targetPageId": "page-ai-solutions",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-business-model",
+            "targetPageId": "page-business-model",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-tech-team",
+            "targetPageId": "page-tech-team",
+            "hideEdge": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-ai-solutions",
+      "title": "TRAE AI解决方案",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1240,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/ai-solutions.html",
+        "interactions": [
+          {
+            "domId": "cta-business-model",
+            "targetPageId": "page-business-model"
+          },
+          {
+            "domId": "nav-index",
+            "targetPageId": "page-index",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-market-pain",
+            "targetPageId": "page-market-pain",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-business-model",
+            "targetPageId": "page-business-model",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-tech-team",
+            "targetPageId": "page-tech-team",
+            "hideEdge": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-business-model",
+      "title": "商业模式与融资",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1860,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/business-model.html",
+        "interactions": [
+          {
+            "domId": "cta-tech-team",
+            "targetPageId": "page-tech-team"
+          },
+          {
+            "domId": "nav-index",
+            "targetPageId": "page-index",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-market-pain",
+            "targetPageId": "page-market-pain",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-ai-solutions",
+            "targetPageId": "page-ai-solutions",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-tech-team",
+            "targetPageId": "page-tech-team",
+            "hideEdge": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-tech-team",
+      "title": "技术实力与团队",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 2480,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/tech-team.html",
+        "interactions": [
+          {
+            "domId": "nav-index",
+            "targetPageId": "page-index",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-market-pain",
+            "targetPageId": "page-market-pain",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-ai-solutions",
+            "targetPageId": "page-ai-solutions",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-business-model",
+            "targetPageId": "page-business-model",
+            "hideEdge": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "主视觉",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 0,
+        "y": 583
+      },
+      "devMetadata": {
+        "imageSrc": "assets/hero-main.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "豪车之家参赛方案",
+    "designLibrary": null
+  }
+}

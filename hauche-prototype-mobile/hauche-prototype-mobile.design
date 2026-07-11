@@ -1,0 +1,190 @@
+{
+  "data": [
+    {
+      "id": "page-crm-home",
+      "title": "CRM首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/crm-home.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-crm-members",
+      "title": "会员管理",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 420,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/crm-members.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-crm-inventory",
+      "title": "库存台账",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 840,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/crm-inventory.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-ai-chat",
+      "title": "AI客服对话",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1260,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/ai-chat.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-showroom",
+      "title": "豪车展厅",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1680,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/showroom.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-car-detail",
+      "title": "车辆详情",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 2100,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/car-detail.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "展厅主视觉",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 0,
+        "y": 1565
+      },
+      "devMetadata": {
+        "imageSrc": "assets/showroom-hero_1.jpg"
+      }
+    },
+    {
+      "id": "image-002",
+      "title": "迈巴赫S480",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 420,
+        "y": 1565
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-maybach_1.jpg"
+      }
+    },
+    {
+      "id": "image-003",
+      "title": "展厅主视觉2",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 840,
+        "y": 1565
+      },
+      "devMetadata": {
+        "imageSrc": "assets/showroom-hero.jpg"
+      }
+    },
+    {
+      "id": "image-004",
+      "title": "迈巴赫S480-2",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1260,
+        "y": 1565
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-maybach.jpg"
+      }
+    },
+    {
+      "id": "image-005",
+      "title": "奔驰G63",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1680,
+        "y": 1565
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-g63.jpg"
+      }
+    },
+    {
+      "id": "image-006",
+      "title": "保时捷911",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 2100,
+        "y": 1565
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-porsche.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "mobile",
+    "projectName": "豪车之家-移动端原型",
+    "designLibrary": null
+  }
+}

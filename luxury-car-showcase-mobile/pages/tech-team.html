@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>团队实力 — 豪车之家</title>
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors ── */
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: #F0E4C0;
+  --color-primary-dark: #A6893F;
+  --color-primary-darker: #8B7133;
+
+  --color-background: #0A0A0F;
+  --color-background-secondary: #12121A;
+  --color-background-tertiary: #1A1A26;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1E1E2A;
+
+  --color-text-primary: #F5F0E8;
+  --color-text-secondary: #A09B90;
+  --color-text-tertiary: #6B665C;
+  --color-text-inverse: #0A0A0F;
+
+  --color-border: rgba(200, 164, 92, 0.15);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  /* ── State Colors ── */
+  --state-success: #34D399;
+  --state-warning: #FBBF24;
+  --state-error: #F87171;
+  --state-info: #60A5FA;
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-display: 4.5rem;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (static surfaces: border-first; floating layers: subtle shadow) ── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --shadow-floating: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Typography Classes ── */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+.font-mono { font-family: var(--font-mono); }
+
+.text-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-subheading {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-wide);
+  font-weight: 300;
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+.text-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+
+.text-overline {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── Surface Classes ── */
+.surface-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.surface-elevated {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Gold accent line ── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+.gold-line-left {
+  height: 2px;
+  width: 48px;
+  background: var(--color-primary);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased" style="font-family: var(--font-body);">
+    <main class="pb-20 px-5 pt-8">
+
+        <!-- Header -->
+        <header class="mb-8">
+            <p class="text-overline mb-2">团队实力</p>
+            <h1 class="font-display text-3xl tracking-tight" style="color: var(--color-text-primary); line-height: 1.2; text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">技术驱动 AI赋能</h1>
+        </header>
+
+        <!-- COO Card -->
+        <div class="surface-card px-5 py-4 mb-8" style="border-left: 2px solid var(--color-primary);">
+            <p class="text-overline mb-2">COO / 数字化负责人</p>
+            <h2 class="font-display text-xl font-bold mb-3" style="color: var(--color-text-primary); line-height: 1.3;">独立技术能力是核心竞争力</h2>
+            <p class="text-sm" style="color: var(--color-text-secondary); line-height: 1.7;">前前端程序员出身，具备全栈开发经验。所有系统均使用 TRAE AI 独立完成搭建，从私域运营到车辆管理系统，实现全链路数字化闭环。不依赖外部技术团队，自主掌控产品迭代节奏与数据安全。</p>
+        </div>
+
+        <!-- Gold Divider -->
+        <div class="gold-line my-8"></div>
+
+        <!-- Competition Highlights -->
+        <section class="mb-8">
+            <h2 class="font-display text-xl mb-6" style="color: var(--color-text-primary);">大赛加分亮点</h2>
+
+            <div class="flex flex-col gap-4">
+                <!-- Card 1 -->
+                <div class="surface-card px-5 py-4" style="border-top: 2px solid var(--color-primary);">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="trophy" class="shrink-0 mt-0.5" style="width: 20px; height: 20px; color: var(--color-primary);"></i>
+                        <div>
+                            <h3 class="font-body font-semibold text-sm mb-1" style="color: var(--color-text-primary);">零AI开发背景</h3>
+                            <p class="text-sm" style="color: var(--color-text-secondary); line-height: 1.6;">TRAE低代码独立完成整套商业级系统</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="surface-card px-5 py-4" style="border-top: 2px solid var(--color-primary);">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="building-2" class="shrink-0 mt-0.5" style="width: 20px; height: 20px; color: var(--color-primary);"></i>
+                        <div>
+                            <h3 class="font-body font-semibold text-sm mb-1" style="color: var(--color-text-primary);">真实商业落地</h3>
+                            <p class="text-sm" style="color: var(--color-text-secondary); line-height: 1.6;">二手豪车+高端私域，完整营收闭环</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="surface-card px-5 py-4" style="border-top: 2px solid var(--color-primary);">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="sparkles" class="shrink-0 mt-0.5" style="width: 20px; height: 20px; color: var(--color-primary);"></i>
+                        <div>
+                            <h3 class="font-body font-semibold text-sm mb-1" style="color: var(--color-text-primary);">双重价值</h3>
+                            <p class="text-sm" style="color: var(--color-text-secondary); line-height: 1.6;">商业价值+AI创新，评委打分优势</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gold Divider -->
+        <div class="gold-line my-8"></div>
+
+        <!-- Closing -->
+        <section class="text-center pb-4">
+            <h2 class="font-display text-xl mb-3" style="color: var(--color-primary);">豪车之家 — 大湾区规模第一</h2>
+            <p class="text-xs" style="color: var(--color-text-tertiary); letter-spacing: 0.05em;">字节TRAE AI创造力大赛 | 估值 6600万</p>
+        </section>
+
+    </main>
+
+    <!-- Bottom Tab Bar -->
+    <nav class="fixed bottom-0 inset-x-0 z-50 flex items-center justify-around" style="height: 56px; background: var(--color-surface); border-top: 1px solid var(--color-border-subtle);">
+        <a href="index.html" class="flex flex-col items-center justify-center gap-0.5 flex-1" style="color: var(--color-text-tertiary);" data-tab-key="index" data-dom-id="tab-index">
+            <i data-lucide="home" style="width: 20px; height: 20px;"></i>
+            <span class="text-xs" style="font-size: 10px;">首页</span>
+        </a>
+        <a href="market-pain.html" class="flex flex-col items-center justify-center gap-0.5 flex-1" style="color: var(--color-text-tertiary);" data-tab-key="market-pain" data-dom-id="tab-market-pain">
+            <i data-lucide="alert-circle" style="width: 20px; height: 20px;"></i>
+            <span class="text-xs" style="font-size: 10px;">痛点</span>
+        </a>
+        <a href="ai-solutions.html" class="flex flex-col items-center justify-center gap-0.5 flex-1" style="color: var(--color-text-tertiary);" data-tab-key="ai-solutions" data-dom-id="tab-ai-solutions">
+            <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
+            <span class="text-xs" style="font-size: 10px;">AI方案</span>
+        </a>
+        <a href="business-model.html" class="flex flex-col items-center justify-center gap-0.5 flex-1" style="color: var(--color-text-tertiary);" data-tab-key="business-model" data-dom-id="tab-business-model">
+            <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
+            <span class="text-xs" style="font-size: 10px;">模型</span>
+        </a>
+        <a href="tech-team.html" class="flex flex-col items-center justify-center gap-0.5 flex-1 tab-active" style="color: var(--color-primary);" data-tab-key="tech-team" data-dom-id="tab-tech-team">
+            <i data-lucide="award" style="width: 20px; height: 20px;"></i>
+            <span class="text-xs" style="font-size: 10px;">团队</span>
+        </a>
+    </nav>
+
+    <style>
+        .tab-active {
+            color: var(--color-primary) !important;
+        }
+        nav a {
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+    </style>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

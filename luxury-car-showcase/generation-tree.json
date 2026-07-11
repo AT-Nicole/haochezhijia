@@ -1,0 +1,69 @@
+{
+  "root": {
+    "nodeId": "gen-project-shell",
+    "kind": "project-shell",
+    "pageIds": ["page-index", "page-market-pain", "page-ai-solutions", "page-business-model", "page-tech-team"],
+    "output": "partials/project-shell.html",
+    "sharedRegions": ["header", "footer", "global-background"],
+    "privateRegions": [],
+    "mutableSlots": ["activeNavItem", "pageTitle"],
+    "status": "generated",
+    "children": [
+      {
+        "nodeId": "gen-page-index",
+        "kind": "page-leaf",
+        "pageIds": ["page-index"],
+        "output": "pages/index.html",
+        "sharedRegions": [],
+        "privateRegions": ["hero section", "highlights grid", "key metrics"],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-market-pain",
+        "kind": "page-leaf",
+        "pageIds": ["page-market-pain"],
+        "output": "pages/market-pain.html",
+        "sharedRegions": [],
+        "privateRegions": ["pain points grid", "market opportunity data"],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-ai-solutions",
+        "kind": "page-leaf",
+        "pageIds": ["page-ai-solutions"],
+        "output": "pages/ai-solutions.html",
+        "sharedRegions": [],
+        "privateRegions": ["6 AI tools showcase", "tool detail cards"],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-business-model",
+        "kind": "page-leaf",
+        "pageIds": ["page-business-model"],
+        "output": "pages/business-model.html",
+        "sharedRegions": [],
+        "privateRegions": ["revenue streams", "funding highlights", "growth roadmap"],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "planned",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-tech-team",
+        "kind": "page-leaf",
+        "pageIds": ["page-tech-team"],
+        "output": "pages/tech-team.html",
+        "sharedRegions": [],
+        "privateRegions": ["tech credentials", "competition highlights", "TRAE tool screenshots"],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "planned",
+        "children": []
+      }
+    ]
+  }
+}

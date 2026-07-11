@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商业模式与融资 — 豪车之家</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors ── */
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: #F0E4C0;
+  --color-primary-dark: #A6893F;
+  --color-primary-darker: #8B7133;
+
+  --color-background: #0A0A0F;
+  --color-background-secondary: #12121A;
+  --color-background-tertiary: #1A1A26;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1E1E2A;
+
+  --color-text-primary: #F5F0E8;
+  --color-text-secondary: #A09B90;
+  --color-text-tertiary: #6B665C;
+  --color-text-inverse: #0A0A0F;
+
+  --color-border: rgba(200, 164, 92, 0.15);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  /* ── State Colors ── */
+  --state-success: #34D399;
+  --state-warning: #FBBF24;
+  --state-error: #F87171;
+  --state-info: #60A5FA;
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-display: 4.5rem;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (static surfaces: border-first; floating layers: subtle shadow) ── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --shadow-floating: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Typography Classes ── */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+.font-mono { font-family: var(--font-mono); }
+
+.text-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.text-subheading {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-wide);
+  font-weight: 300;
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+.text-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+
+.text-overline {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── Surface Classes ── */
+.surface-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.surface-elevated {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Gold accent line ── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+.gold-line-left {
+  height: 2px;
+  width: 48px;
+  background: var(--color-primary);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+
+    <style>
+      .tab-bar { position:fixed; bottom:0; left:0; right:0; z-index:1000; background:rgba(10,10,15,0.95); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-top:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-around; height:56px; padding-bottom:env(safe-area-inset-bottom,0px); }
+      .tab-bar__item { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; flex:1; height:100%; text-decoration:none; transition:color 0.2s ease; color:var(--color-text-tertiary); }
+      .tab-bar__item:active { opacity:0.7; }
+      .tab-bar__item[data-active="true"] { color:var(--color-primary); }
+      .tab-bar__label { font-family:var(--font-body); font-size:10px; letter-spacing:0.02em; font-weight:500; }
+      .tab-bar__icon { width:20px; height:20px; }
+      .gold-dot { width:8px; height:8px; border-radius:50%; background:var(--color-primary); flex-shrink:0; }
+      .diff-card { transition:border-color 0.3s ease; }
+      .diff-card:active { border-color:var(--color-primary); }
+      .cta-gold { display:flex; align-items:center; justify-content:center; width:100%; padding:0.75rem 1.5rem; background:var(--color-primary); color:var(--color-text-inverse); font-family:var(--font-body); font-size:var(--text-sm); font-weight:600; letter-spacing:var(--tracking-wide); text-decoration:none; border-radius:var(--radius-lg); transition:background 0.25s ease, transform 0.15s ease; }
+      .cta-gold:active { background:var(--color-primary-dark); transform:scale(0.98); }
+      @media (prefers-reduced-motion:reduce) { .tab-bar__item, .diff-card, .cta-gold { transition:none; } }
+    </style>
+
+    <!-- ═══════════════════════════════════════════════════
+         MAIN SCROLLABLE CONTENT
+         ═══════════════════════════════════════════════════ -->
+    <main class="pb-20">
+
+        <!-- Header -->
+        <section class="px-5 pt-8 pb-6">
+            <p class="text-overline mb-3">商业价值</p>
+            <h1 class="font-display text-3xl mb-2" style="color:var(--color-text-primary); text-wrap:balance; word-break:keep-all; overflow-wrap:break-word; line-height:var(--leading-tight); letter-spacing:var(--tracking-tight);">
+                商业模式与融资
+            </h1>
+        </section>
+
+        <!-- Valuation Highlight Card -->
+        <section class="px-5 mb-6">
+            <div class="surface-card text-center py-6 px-4">
+                <p class="font-display text-5xl mb-2" style="color:var(--color-primary); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight);">6,600万</p>
+                <p class="text-body" style="color:var(--color-text-secondary);">当前项目估值</p>
+            </div>
+            <p class="text-center mt-3" style="font-size:var(--text-xs); color:var(--color-text-tertiary);">对标汽车之家 A股估值300亿</p>
+        </section>
+
+        <!-- Divider -->
+        <div class="mx-5"><div class="gold-line"></div></div>
+
+        <!-- Revenue Section -->
+        <section class="px-5 pt-6 pb-4">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="gold-line-left"></div>
+                <h2 class="font-display text-xl" style="color:var(--color-text-primary);">主营收入</h2>
+            </div>
+            <ul class="space-y-4">
+                <li class="flex items-start gap-3">
+                    <div class="gold-dot mt-2"></div>
+                    <div class="min-w-0">
+                        <h3 class="font-semibold mb-0.5 truncate" style="color:var(--color-text-primary); font-size:var(--text-base);">二手豪车交易佣金</h3>
+                        <p class="text-caption" style="color:var(--color-text-secondary);">单笔佣金5-20万</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="gold-dot mt-2"></div>
+                    <div class="min-w-0">
+                        <h3 class="font-semibold mb-0.5 truncate" style="color:var(--color-text-primary); font-size:var(--text-base);">会员年费体系</h3>
+                        <p class="text-caption" style="color:var(--color-text-secondary);">9800/19800预收制</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="gold-dot mt-2"></div>
+                    <div class="min-w-0">
+                        <h3 class="font-semibold mb-0.5 truncate" style="color:var(--color-text-primary); font-size:var(--text-base);">AI老板培训课程</h3>
+                        <p class="text-caption" style="color:var(--color-text-secondary);">8:2利润分成</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="gold-dot mt-2"></div>
+                    <div class="min-w-0">
+                        <h3 class="font-semibold mb-0.5 truncate" style="color:var(--color-text-primary); font-size:var(--text-base);">豪宅商务居间</h3>
+                        <p class="text-caption" style="color:var(--color-text-secondary);">豪车+房产双向佣金</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Divider -->
+        <div class="mx-5"><div class="gold-line"></div></div>
+
+        <!-- Differentiation Cards -->
+        <section class="px-5 pt-6 pb-6">
+            <h2 class="font-display text-xl mb-5" style="color:var(--color-text-primary);">差异化优势</h2>
+            <div class="space-y-3">
+
+                <div class="surface-card diff-card p-4 flex items-start gap-3">
+                    <div class="flex-shrink-0 mt-0.5" style="color:var(--color-primary);">
+                        <i data-lucide="shield-check" style="width:22px; height:22px;"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h3 class="font-semibold mb-1 truncate" style="color:var(--color-text-primary); font-size:var(--text-base);">AI技术壁垒</h3>
+                        <p class="text-caption line-clamp-2" style="color:var(--color-text-secondary);">唯一AI全链路赋能垂直豪车平台</p>
+                    </div>
+                </div>
+
+                <div class="surface-card diff-card p-4 flex items-start gap-3">
+                    <div class="flex-shrink-0 mt-0.5" style="color:var(--color-primary);">
+                        <i data-lucide="zap" style="width:22px; height:22px;"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h3 class="font-semibold mb-1 truncate" style="color:var(--color-text-primary); font-size:var(--text-base);">轻资产扩张</h3>
+                        <p class="text-caption line-clamp-2" style="color:var(--color-text-secondary);">TRAE低成本标准化复制</p>
+                    </div>
+                </div>
+
+                <div class="surface-card diff-card p-4 flex items-start gap-3">
+                    <div class="flex-shrink-0 mt-0.5" style="color:var(--color-primary);">
+                        <i data-lucide="target" style="width:22px; height:22px;"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h3 class="font-semibold mb-1 truncate" style="color:var(--color-text-primary); font-size:var(--text-base);">清晰上市路径</h3>
+                        <p class="text-caption line-clamp-2" style="color:var(--color-text-secondary);">大湾区→全国→细分赛道上市</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="px-5 pb-8">
+            <a href="#" class="cta-gold" data-dom-id="cta-tech-team">了解技术实力</a>
+        </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════
+         BOTTOM TAB BAR (5 tabs, Model = active gold)
+         ═══════════════════════════════════════════════════ -->
+    <nav class="tab-bar" data-dom-id="tab-bar">
+        <a href="index.html"
+           class="tab-bar__item"
+           data-tab-key="index"
+           data-dom-id="tab-index">
+            <i data-lucide="home" class="tab-bar__icon"></i>
+            <span class="tab-bar__label">首页</span>
+        </a>
+        <a href="market-pain.html"
+           class="tab-bar__item"
+           data-tab-key="market-pain"
+           data-dom-id="tab-market-pain">
+            <i data-lucide="alert-circle" class="tab-bar__icon"></i>
+            <span class="tab-bar__label">痛点</span>
+        </a>
+        <a href="ai-solutions.html"
+           class="tab-bar__item"
+           data-tab-key="ai-solutions"
+           data-dom-id="tab-ai-solutions">
+            <i data-lucide="cpu" class="tab-bar__icon"></i>
+            <span class="tab-bar__label">AI</span>
+        </a>
+        <a href="business-model.html"
+           class="tab-bar__item"
+           data-active="true"
+           data-tab-key="business-model"
+           data-dom-id="tab-business-model">
+            <i data-lucide="trending-up" class="tab-bar__icon"></i>
+            <span class="tab-bar__label">模型</span>
+        </a>
+        <a href="tech-team.html"
+           class="tab-bar__item"
+           data-tab-key="tech-team"
+           data-dom-id="tab-tech-team">
+            <i data-lucide="award" class="tab-bar__icon"></i>
+            <span class="tab-bar__label">团队</span>
+        </a>
+    </nav>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

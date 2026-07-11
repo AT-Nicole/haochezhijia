@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>迈巴赫 S480 4MATIC - 豪车详情</title>
+    <style id="theme-vars">
+:root {
+  --color-primary: #C8A45C;
+  --color-primary-light: #D4B76E;
+  --color-primary-lighter: #E2CC8E;
+  --color-primary-lightest: rgba(200, 164, 92, 0.1);
+  --color-primary-dark: #A6893F;
+
+  --color-background: #0C0C14;
+  --color-background-secondary: #111119;
+  --color-surface: #16161F;
+  --color-surface-elevated: #1C1C28;
+  --color-surface-hover: #222232;
+
+  --color-text-primary: #F0ECE4;
+  --color-text-secondary: #8A867E;
+  --color-text-tertiary: #5A5750;
+
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-divider: rgba(255, 255, 255, 0.08);
+
+  --state-success: #34D399;
+  --state-success-bg: rgba(52, 211, 153, 0.1);
+  --state-warning: #FBBF24;
+  --state-warning-bg: rgba(251, 191, 36, 0.1);
+  --state-error: #F87171;
+  --state-error-bg: rgba(248, 113, 113, 0.1);
+  --state-info: #60A5FA;
+  --state-info-bg: rgba(96, 165, 250, 0.1);
+
+  --font-display: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.75rem;
+  --text-base: 0.8125rem;
+  --text-lg: 0.875rem;
+  --text-xl: 1rem;
+  --text-2xl: 1.125rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+
+      <!-- ===== IMAGE GALLERY HEADER ===== -->
+      <div style="position:relative; width:100%; height:65vh; min-height:480px; overflow:hidden; background:linear-gradient(180deg, #0C0C14 0%, #111119 40%, #1a1a2e 100%);">
+        <!-- Ambient lighting radial glow -->
+        <div style="position:absolute; top:20%; left:50%; transform:translate(-50%,-30%); width:320px; height:280px; background:radial-gradient(ellipse at center, rgba(200,164,92,0.12) 0%, rgba(200,164,92,0.04) 40%, transparent 70%); pointer-events:none;"></div>
+        <div style="position:absolute; bottom:10%; left:50%; transform:translateX(-50%); width:300px; height:120px; background:radial-gradient(ellipse at center, rgba(200,164,92,0.08) 0%, transparent 60%); pointer-events:none;"></div>
+
+        <!-- Car silhouette SVG centered -->
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-55%); width:280px; height:160px;">
+          <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; opacity:0.18;">
+            <path d="M40 130 C40 130 50 90 80 75 L120 65 C130 62 145 50 170 48 L240 48 C265 50 280 62 290 65 L330 75 C360 90 370 130 370 130 L370 140 C370 145 367 148 362 148 L340 148 C335 148 332 145 332 140 L332 135 L78 135 L78 140 C78 145 75 148 70 148 L48 148 C43 148 40 145 40 140 Z" fill="rgba(200,164,92,0.6)"/>
+            <ellipse cx="110" cy="148" rx="32" ry="22" stroke="rgba(200,164,92,0.5)" stroke-width="2.5" fill="none"/>
+            <ellipse cx="110" cy="148" rx="18" ry="12" stroke="rgba(200,164,92,0.3)" stroke-width="1.5" fill="none"/>
+            <ellipse cx="300" cy="148" rx="32" ry="22" stroke="rgba(200,164,92,0.5)" stroke-width="2.5" fill="none"/>
+            <ellipse cx="300" cy="148" rx="18" ry="12" stroke="rgba(200,164,92,0.3)" stroke-width="1.5" fill="none"/>
+            <path d="M100 80 L130 55 L160 55 L155 65 Z" fill="rgba(200,164,92,0.2)" stroke="rgba(200,164,92,0.3)" stroke-width="1"/>
+            <line x1="78" y1="135" x2="332" y2="135" stroke="rgba(200,164,92,0.15)" stroke-width="1"/>
+            <rect x="155" y="62" width="90" height="18" rx="4" fill="rgba(200,164,92,0.08)" stroke="rgba(200,164,92,0.15)" stroke-width="0.8"/>
+            <circle cx="100" cy="70" r="6" fill="rgba(200,164,92,0.25)"/>
+            <circle cx="100" cy="70" r="3" fill="rgba(200,164,92,0.4)"/>
+            <circle cx="305" cy="70" r="5" fill="rgba(251,191,36,0.15)"/>
+            <circle cx="305" cy="70" r="2.5" fill="rgba(251,191,36,0.3)"/>
+          </svg>
+        </div>
+
+        <!-- Subtle ground reflection -->
+        <div style="position:absolute; bottom:0; left:0; right:0; height:60px; background:linear-gradient(0deg, rgba(200,164,92,0.04) 0%, transparent 100%);"></div>
+
+        <!-- Back arrow overlay -->
+        <div style="position:absolute; top:48px; left:16px; width:40px; height:40px; background:rgba(12,12,20,0.6); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid rgba(255,255,255,0.08);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F0ECE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+
+        <!-- Share icon overlay -->
+        <div style="position:absolute; top:48px; right:16px; width:40px; height:40px; background:rgba(12,12,20,0.6); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid rgba(255,255,255,0.08);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F0ECE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+
+        <!-- Gallery dots indicator -->
+        <div style="position:absolute; bottom:100px; left:50%; transform:translateX(-50%); display:flex; gap:8px; align-items:center;">
+          <div style="width:24px; height:4px; border-radius:2px; background:var(--color-primary);"></div>
+          <div style="width:4px; height:4px; border-radius:2px; background:rgba(255,255,255,0.25);"></div>
+          <div style="width:4px; height:4px; border-radius:2px; background:rgba(255,255,255,0.25);"></div>
+          <div style="width:4px; height:4px; border-radius:2px; background:rgba(255,255,255,0.25);"></div>
+          <div style="width:4px; height:4px; border-radius:2px; background:rgba(255,255,255,0.25);"></div>
+        </div>
+
+        <!-- Bottom gradient overlay with text -->
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:0 20px 16px; background:linear-gradient(0deg, rgba(12,12,20,0.95) 0%, rgba(12,12,20,0.7) 60%, transparent 100%); padding-top:40px;">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+            <div>
+              <div style="font-size:18px; font-weight:600; color:var(--color-text-primary); letter-spacing:0.5px; font-family:var(--font-display);">迈巴赫 S480 4MATIC</div>
+            </div>
+            <div style="font-size:24px; font-weight:700; color:var(--color-primary); font-family:var(--font-display); white-space:nowrap;">¥168万</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCROLLABLE CONTENT ===== -->
+      <div style="padding:16px 16px 120px; max-width:375px; margin:0 auto;">
+
+        <!-- Section 1 — Quick Specs Bar -->
+        <div style="display:flex; gap:8px; overflow-x:auto; margin-bottom:16px;" class="no-scrollbar">
+          <div style="flex-shrink:0; padding:8px 14px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body); white-space:nowrap;">2024款</div>
+          <div style="flex-shrink:0; padding:8px 14px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body); white-space:nowrap;">0.8万公里</div>
+          <div style="flex-shrink:0; padding:8px 14px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body); white-space:nowrap;">4.0T V8</div>
+          <div style="flex-shrink:0; padding:8px 14px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-full); font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body); white-space:nowrap;">自动</div>
+        </div>
+
+        <!-- Section 2 — AI Pricing Insight -->
+        <div style="background:var(--color-surface); border-radius:var(--radius-lg); padding:20px; margin-bottom:16px; border:1px solid var(--color-border); border-left:3px solid var(--color-primary);">
+          <!-- Heading -->
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="var(--color-primary)" stroke="var(--color-primary)" stroke-width="1"/>
+            </svg>
+            <span style="font-size:var(--text-lg); font-weight:600; color:var(--color-text-primary); font-family:var(--font-display);">AI智能评估</span>
+          </div>
+
+          <!-- Score -->
+          <div style="margin-bottom:16px;">
+            <span style="font-size:14px; color:var(--color-text-secondary); font-family:var(--font-body);">综合评分</span>
+            <span style="font-size:28px; font-weight:700; color:var(--color-primary); font-family:var(--font-display); margin-left:8px;">9.2</span>
+            <span style="font-size:14px; color:var(--color-text-secondary); font-family:var(--font-body);">/10</span>
+          </div>
+
+          <!-- Score breakdown bars -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;">
+            <!-- 车况 -->
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:var(--text-xs); color:var(--color-text-secondary); font-family:var(--font-body);">车况</span>
+                <span style="font-size:var(--text-xs); color:var(--color-primary); font-family:var(--font-body); font-weight:500;">9.5</span>
+              </div>
+              <div style="height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden;">
+                <div style="width:95%; height:100%; background:linear-gradient(90deg, var(--color-primary-dark), var(--color-primary)); border-radius:2px;"></div>
+              </div>
+            </div>
+            <!-- 价格 -->
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:var(--text-xs); color:var(--color-text-secondary); font-family:var(--font-body);">价格</span>
+                <span style="font-size:var(--text-xs); color:var(--color-primary); font-family:var(--font-body); font-weight:500;">8.8</span>
+              </div>
+              <div style="height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden;">
+                <div style="width:88%; height:100%; background:linear-gradient(90deg, var(--color-primary-dark), var(--color-primary)); border-radius:2px;"></div>
+              </div>
+            </div>
+            <!-- 稀缺度 -->
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:var(--text-xs); color:var(--color-text-secondary); font-family:var(--font-body);">稀缺度</span>
+                <span style="font-size:var(--text-xs); color:var(--color-primary); font-family:var(--font-body); font-weight:500;">9.8</span>
+              </div>
+              <div style="height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden;">
+                <div style="width:98%; height:100%; background:linear-gradient(90deg, var(--color-primary-dark), var(--color-primary)); border-radius:2px;"></div>
+              </div>
+            </div>
+            <!-- 保值率 -->
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:var(--text-xs); color:var(--color-text-secondary); font-family:var(--font-body);">保值率</span>
+                <span style="font-size:var(--text-xs); color:var(--color-primary); font-family:var(--font-body); font-weight:500;">8.5</span>
+              </div>
+              <div style="height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden;">
+                <div style="width:85%; height:100%; background:linear-gradient(90deg, var(--color-primary-dark), var(--color-primary)); border-radius:2px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insight text -->
+          <div style="font-size:var(--text-sm); color:var(--color-text-secondary); line-height:1.6; margin-bottom:12px; font-family:var(--font-body); padding:10px 12px; background:var(--color-primary-lightest); border-radius:var(--radius-sm);">
+            该车型大湾区在售仅3台，当前价格低于市场均价8%，性价比极高
+          </div>
+
+          <!-- Link -->
+          <div style="font-size:var(--text-sm); color:var(--color-primary); font-weight:500; cursor:pointer; font-family:var(--font-body); display:flex; align-items:center; gap:4px;">
+            查看AI完整报告
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <!-- Section 3 — Vehicle Details -->
+        <div style="background:var(--color-surface); border-radius:var(--radius-lg); padding:20px; margin-bottom:16px; border:1px solid var(--color-border);">
+          <div style="font-size:var(--text-lg); font-weight:600; color:var(--color-text-primary); margin-bottom:16px; font-family:var(--font-display);">车辆信息</div>
+
+          <!-- Info grid -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0;">
+            <!-- Row items -->
+            <div style="padding:10px 0; border-bottom:1px solid var(--color-divider);">
+              <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:4px; font-family:var(--font-body);">品牌型号</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body);">迈巴赫 S480 4MATIC</div>
+            </div>
+            <div style="padding:10px 0 10px 16px; border-bottom:1px solid var(--color-divider); border-left:1px solid var(--color-divider);">
+              <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:4px; font-family:var(--font-body);">上牌时间</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body);">2024年3月</div>
+            </div>
+            <div style="padding:10px 0; border-bottom:1px solid var(--color-divider);">
+              <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:4px; font-family:var(--font-body);">表显里程</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body);">0.8万公里</div>
+            </div>
+            <div style="padding:10px 0 10px 16px; border-bottom:1px solid var(--color-divider); border-left:1px solid var(--color-divider);">
+              <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:4px; font-family:var(--font-body);">排量</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body);">4.0T V8 双涡轮</div>
+            </div>
+            <div style="padding:10px 0; border-bottom:1px solid var(--color-divider);">
+              <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:4px; font-family:var(--font-body);">变速箱</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body);">9AT</div>
+            </div>
+            <div style="padding:10px 0 10px 16px; border-bottom:1px solid var(--color-divider); border-left:1px solid var(--color-divider);">
+              <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:4px; font-family:var(--font-body);">驱动</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body);">四驱</div>
+            </div>
+            <div style="padding:10px 0;">
+              <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:4px; font-family:var(--font-body);">外观</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body);">曜岩黑</div>
+            </div>
+            <div style="padding:10px 0 10px 16px; border-left:1px solid var(--color-divider);">
+              <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:4px; font-family:var(--font-body);">内饰</div>
+              <div style="font-size:var(--text-sm); color:var(--color-text-primary); font-family:var(--font-body);">岩石灰/玛瑙红</div>
+            </div>
+          </div>
+
+          <!-- Config highlights full width -->
+          <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--color-divider);">
+            <div style="font-size:var(--text-xs); color:var(--color-text-tertiary); margin-bottom:6px; font-family:var(--font-body);">配置亮点</div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              <span style="padding:4px 10px; background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-full); font-size:var(--text-xs); color:var(--color-text-secondary); font-family:var(--font-body);">柏林之声</span>
+              <span style="padding:4px 10px; background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-full); font-size:var(--text-xs); color:var(--color-text-secondary); font-family:var(--font-body);">后排娱乐</span>
+              <span style="padding:4px 10px; background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-full); font-size:var(--text-xs); color:var(--color-text-secondary); font-family:var(--font-body);">魔毯悬挂</span>
+              <span style="padding:4px 10px; background:var(--color-surface-elevated); border:1px solid var(--color-border); border-radius:var(--radius-full); font-size:var(--text-xs); color:var(--color-text-secondary); font-family:var(--font-body);">64色氛围灯</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4 — AI Recommended Similar Cars -->
+        <div style="margin-bottom:16px;">
+          <div style="font-size:var(--text-lg); font-weight:600; color:var(--color-text-primary); margin-bottom:12px; font-family:var(--font-display);">AI为您推荐</div>
+
+          <div style="display:flex; gap:12px; overflow-x:auto; padding-bottom:4px;" class="no-scrollbar">
+            <!-- Card 1: Porsche -->
+            <div style="flex-shrink:0; width:200px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); overflow:hidden; cursor:pointer;">
+              <!-- Car image placeholder -->
+              <div style="height:120px; background:linear-gradient(135deg, var(--color-surface-elevated) 0%, var(--color-surface) 100%); display:flex; align-items:center; justify-content:center; position:relative;">
+                <svg width="100" height="50" viewBox="0 0 200 100" fill="none" style="opacity:0.25;">
+                  <path d="M20 70 C20 70 30 40 55 30 L85 24 C92 22 105 15 125 14 L175 14 C195 15 205 22 212 24 L240 30 C265 40 275 70 275 70 L275 78 C275 82 273 84 270 84 L255 84 C252 84 250 82 250 78 L250 74 L45 74 L45 78 C45 82 43 84 40 84 L25 84 C22 84 20 82 20 78 Z" fill="rgba(200,164,92,0.5)"/>
+                  <ellipse cx="75" cy="84" rx="24" ry="16" stroke="rgba(200,164,92,0.4)" stroke-width="2" fill="none"/>
+                  <ellipse cx="220" cy="84" rx="24" ry="16" stroke="rgba(200,164,92,0.4)" stroke-width="2" fill="none"/>
+                </svg>
+                <!-- Match badge -->
+                <div style="position:absolute; top:8px; right:8px; padding:3px 8px; background:rgba(200,164,92,0.15); border:1px solid rgba(200,164,92,0.3); border-radius:var(--radius-full); font-size:var(--text-xs); color:var(--color-primary); font-weight:500; font-family:var(--font-body);">匹配92%</div>
+              </div>
+              <div style="padding:12px;">
+                <div style="font-size:var(--text-sm); font-weight:500; color:var(--color-text-primary); margin-bottom:4px; font-family:var(--font-body);">保时捷 Panamera</div>
+                <div style="font-size:var(--text-lg); font-weight:600; color:var(--color-primary); font-family:var(--font-display);">¥148万</div>
+              </div>
+            </div>
+
+            <!-- Card 2: Mercedes -->
+            <div style="flex-shrink:0; width:200px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); overflow:hidden; cursor:pointer;">
+              <div style="height:120px; background:linear-gradient(135deg, var(--color-surface-elevated) 0%, var(--color-surface) 100%); display:flex; align-items:center; justify-content:center; position:relative;">
+                <svg width="100" height="50" viewBox="0 0 200 100" fill="none" style="opacity:0.25;">
+                  <path d="M20 70 C20 70 30 40 55 30 L85 24 C92 22 105 15 125 14 L175 14 C195 15 205 22 212 24 L240 30 C265 40 275 70 275 70 L275 78 C275 82 273 84 270 84 L255 84 C252 84 250 82 250 78 L250 74 L45 74 L45 78 C45 82 43 84 40 84 L25 84 C22 84 20 82 20 78 Z" fill="rgba(200,164,92,0.5)"/>
+                  <ellipse cx="75" cy="84" rx="24" ry="16" stroke="rgba(200,164,92,0.4)" stroke-width="2" fill="none"/>
+                  <ellipse cx="220" cy="84" rx="24" ry="16" stroke="rgba(200,164,92,0.4)" stroke-width="2" fill="none"/>
+                </svg>
+                <div style="position:absolute; top:8px; right:8px; padding:3px 8px; background:rgba(200,164,92,0.15); border:1px solid rgba(200,164,92,0.3); border-radius:var(--radius-full); font-size:var(--text-xs); color:var(--color-primary); font-weight:500; font-family:var(--font-body);">匹配85%</div>
+              </div>
+              <div style="padding:12px;">
+                <div style="font-size:var(--text-sm); font-weight:500; color:var(--color-text-primary); margin-bottom:4px; font-family:var(--font-body);">奔驰 S500L</div>
+                <div style="font-size:var(--text-lg); font-weight:600; color:var(--color-primary); font-family:var(--font-display);">¥128万</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end scrollable content -->
+
+      <!-- ===== STICKY BOTTOM BAR ===== -->
+      <div style="position:fixed; bottom:0; left:0; right:0; z-index:100; background:rgba(12,12,20,0.92); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-top:1px solid var(--color-divider); padding:12px 16px; padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));">
+        <div style="max-width:375px; margin:0 auto; display:flex; gap:10px;">
+          <!-- Favorite button -->
+          <button style="width:40%; padding:14px 0; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); color:var(--color-text-primary); font-size:var(--text-base); font-weight:500; cursor:pointer; font-family:var(--font-body); display:flex; align-items:center; justify-content:center; gap:6px; transition:all 0.2s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            收藏
+          </button>
+          <!-- Consult button -->
+          <button style="width:60%; padding:14px 0; background:linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); border:none; border-radius:var(--radius-lg); color:#0C0C14; font-size:var(--text-base); font-weight:600; cursor:pointer; font-family:var(--font-display); letter-spacing:0.5px; transition:all 0.2s;">
+            立即咨询
+          </button>
+        </div>
+      </div>
+
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{
+  "data": [
+    {
+      "id": "page-content-workspace",
+      "title": "AI内容发布工作台",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/content-workspace.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-digital-human",
+      "title": "数字人视频工具",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 620,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/digital-human.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-payment-dashboard",
+      "title": "付费结算后台",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1240,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/payment-dashboard.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-data-analytics",
+      "title": "数据分析仪表盘",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1860,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/data-analytics.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-showroom-manage",
+      "title": "展厅管理",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 2480,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/showroom-manage.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "保时捷911",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 0,
+        "y": 587
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-porsche.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "豪车之家-桌面端原型",
+    "designLibrary": null
+  }
+}

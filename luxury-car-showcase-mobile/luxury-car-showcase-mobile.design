@@ -1,0 +1,110 @@
+{
+  "data": [
+    {
+      "id": "page-index",
+      "title": "首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "devMetadata": {
+        "htmlSrc": "pages/index.html",
+        "interactions": [
+          { "domId": "cta-market-pain", "targetPageId": "page-market-pain" },
+          { "domId": "tab-market-pain", "targetPageId": "page-market-pain", "hideEdge": true },
+          { "domId": "tab-ai-solutions", "targetPageId": "page-ai-solutions", "hideEdge": true },
+          { "domId": "tab-business-model", "targetPageId": "page-business-model", "hideEdge": true },
+          { "domId": "tab-tech-team", "targetPageId": "page-tech-team", "hideEdge": true }
+        ]
+      },
+      "canvasData": { "x": 0, "y": 0, "group": 0 }
+    },
+    {
+      "id": "page-market-pain",
+      "title": "市场痛点",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "devMetadata": {
+        "htmlSrc": "pages/market-pain.html",
+        "interactions": [
+          { "domId": "cta-ai-solutions", "targetPageId": "page-ai-solutions" },
+          { "domId": "tab-index", "targetPageId": "page-index", "hideEdge": true },
+          { "domId": "tab-ai-solutions", "targetPageId": "page-ai-solutions", "hideEdge": true },
+          { "domId": "tab-business-model", "targetPageId": "page-business-model", "hideEdge": true },
+          { "domId": "tab-tech-team", "targetPageId": "page-tech-team", "hideEdge": true }
+        ]
+      },
+      "canvasData": { "x": 620, "y": 0, "group": 0 }
+    },
+    {
+      "id": "page-ai-solutions",
+      "title": "AI解决方案",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "devMetadata": {
+        "htmlSrc": "pages/ai-solutions.html",
+        "interactions": [
+          { "domId": "cta-business-model", "targetPageId": "page-business-model" },
+          { "domId": "tab-index", "targetPageId": "page-index", "hideEdge": true },
+          { "domId": "tab-market-pain", "targetPageId": "page-market-pain", "hideEdge": true },
+          { "domId": "tab-business-model", "targetPageId": "page-business-model", "hideEdge": true },
+          { "domId": "tab-tech-team", "targetPageId": "page-tech-team", "hideEdge": true }
+        ]
+      },
+      "canvasData": { "x": 1240, "y": 0, "group": 0 }
+    },
+    {
+      "id": "page-business-model",
+      "title": "商业模式",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "devMetadata": {
+        "htmlSrc": "pages/business-model.html",
+        "interactions": [
+          { "domId": "cta-tech-team", "targetPageId": "page-tech-team" },
+          { "domId": "tab-index", "targetPageId": "page-index", "hideEdge": true },
+          { "domId": "tab-market-pain", "targetPageId": "page-market-pain", "hideEdge": true },
+          { "domId": "tab-ai-solutions", "targetPageId": "page-ai-solutions", "hideEdge": true },
+          { "domId": "tab-tech-team", "targetPageId": "page-tech-team", "hideEdge": true }
+        ]
+      },
+      "canvasData": { "x": 1860, "y": 0, "group": 0 }
+    },
+    {
+      "id": "page-tech-team",
+      "title": "技术实力",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "devMetadata": {
+        "htmlSrc": "pages/tech-team.html",
+        "interactions": [
+          { "domId": "tab-index", "targetPageId": "page-index", "hideEdge": true },
+          { "domId": "tab-market-pain", "targetPageId": "page-market-pain", "hideEdge": true },
+          { "domId": "tab-ai-solutions", "targetPageId": "page-ai-solutions", "hideEdge": true },
+          { "domId": "tab-business-model", "targetPageId": "page-business-model", "hideEdge": true }
+        ]
+      },
+      "canvasData": { "x": 2480, "y": 0, "group": 0 }
+    },
+    {
+      "id": "image-001",
+      "title": "主视觉",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "devMetadata": {
+        "imageSrc": "assets/hero-main.jpg"
+      },
+      "canvasData": { "x": 0, "y": 566 }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "mobile",
+    "projectName": "豪车之家参赛方案-手机版",
+    "designLibrary": null
+  }
+}
