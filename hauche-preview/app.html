@@ -18,100 +18,143 @@
 }
 html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text1);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 #app{height:100%;width:100%;max-width:430px;margin:0 auto;position:relative;overflow:hidden}
-.page{position:absolute;top:0;left:0;right:0;bottom:60px;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;transition:opacity .25s ease;-webkit-overflow-scrolling:touch;padding-bottom:20px}
-.page.active{opacity:1;pointer-events:auto}
+/* Scrollbar */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(200,164,92,0.3);border-radius:3px}
+/* Glass system */
+.glass{background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:16px}
+.glass-strong{background:rgba(22,22,31,0.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid rgba(200,164,92,0.15)}
+/* Page transitions */
+.page{position:absolute;top:0;left:0;right:0;bottom:60px;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;transform:translateX(20px);-webkit-overflow-scrolling:touch;padding-bottom:20px}
+.page.active{opacity:1;pointer-events:auto;transform:translateX(0)}
 .page.tab-hidden{bottom:0}
 #app.tab-hidden .tab-bar{transform:translateY(100%)}
-.tab-bar{position:absolute;bottom:0;left:0;right:0;height:60px;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100;transition:transform .3s ease}
-.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--text3);font-size:10px;cursor:pointer;transition:color .2s}
+/* Tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:60px;background:rgba(17,17,25,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(200,164,92,0.1);display:flex;z-index:100;transition:transform .3s ease}
+.tab-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);opacity:0.4}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--text3);font-size:10px;cursor:pointer;transition:all .3s;position:relative}
 .tab-item.active{color:var(--primary)}
-.tab-item svg{width:22px;height:22px;stroke-width:1.8}
-.header{position:sticky;top:0;z-index:50;background:var(--bg);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.header h1{font-size:18px;font-weight:700;color:var(--primary)}
+.tab-item.active::before{content:'';position:absolute;top:-1px;width:20px;height:2px;background:var(--primary);border-radius:1px;box-shadow:0 0 8px rgba(200,164,92,0.5)}
+.tab-item.active::after{content:'';position:absolute;bottom:6px;width:4px;height:4px;border-radius:50%;background:var(--primary);box-shadow:0 0 6px rgba(200,164,92,0.6)}
+.tab-item svg{width:22px;height:22px;stroke-width:1.8;transition:all .3s}
+.tab-item.active svg{filter:drop-shadow(0 0 4px rgba(200,164,92,0.4))}
+/* Header */
+.header{position:sticky;top:0;z-index:50;padding:14px 16px;display:flex;align-items:center;justify-content:center;background:rgba(12,12,20,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);opacity:0.3}
+.header h1{font-size:18px;font-weight:700;color:var(--primary);letter-spacing:0.5px}
 .section-title{font-size:14px;font-weight:600;padding:16px 16px 10px;color:var(--text1)}
-.card{background:var(--surface);border-radius:12px;margin:0 16px 10px;padding:14px;border:1px solid var(--border)}
+/* Premium card */
+.card{background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:16px;margin:0 16px 10px;padding:18px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.3),0 0 0 1px rgba(200,164,92,0.05);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:-50%;left:-50%;width:100%;height:100%;background:radial-gradient(ellipse at top left,rgba(200,164,92,0.06),transparent 60%);pointer-events:none}
 .card:active{transform:scale(0.98);transition:transform .1s}
+/* Toast */
 .toast-container{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:9999;width:100%;max-width:430px;display:flex;flex-direction:column;align-items:center;pointer-events:none;padding-top:10px}
-.toast{background:var(--surface2);border:1px solid var(--primary);border-radius:10px;padding:10px 20px;margin-bottom:6px;font-size:13px;color:var(--text1);opacity:0;transform:translateY(-20px);animation:toastIn .3s forwards;pointer-events:auto;box-shadow:0 4px 20px rgba(200,164,92,0.15)}
+.toast{background:rgba(22,22,31,0.9);backdrop-filter:blur(20px);border:1px solid var(--primary);border-left:4px solid var(--primary);border-radius:10px;padding:10px 20px;margin-bottom:6px;font-size:13px;color:var(--text1);opacity:0;transform:translateY(-20px);animation:toastIn .3s forwards;pointer-events:auto;box-shadow:0 4px 20px rgba(200,164,92,0.15)}
 .toast.out{animation:toastOut .3s forwards}
 @keyframes toastIn{to{opacity:1;transform:translateY(0)}}
 @keyframes toastOut{to{opacity:0;transform:translateY(-20px)}}
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+/* Modal */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-overlay.show{opacity:1;pointer-events:auto}
-.modal-bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:var(--surface);border-radius:16px 16px 0 0;z-index:201;transition:transform .3s ease;padding:20px 16px 30px;max-height:80vh;overflow-y:auto}
+.modal-bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:430px;background:rgba(22,22,31,0.9);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:20px 20px 0 0;border:1px solid rgba(200,164,92,0.12);border-bottom:none;z-index:201;transition:transform .35s cubic-bezier(.32,.72,0,1);padding:20px 16px 30px;max-height:80vh;overflow-y:auto}
 .modal-bottom.show{transform:translateX(-50%) translateY(0)}
-.modal-handle{width:36px;height:4px;background:var(--text3);border-radius:2px;margin:0 auto 16px}
+.modal-handle{width:36px;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-dark));border-radius:2px;margin:0 auto 16px;opacity:0.8}
+/* Search */
 .search-bar{margin:10px 16px;position:relative}
-.search-bar input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 12px 10px 36px;color:var(--text1);font-size:13px;outline:none;font-family:inherit}
-.search-bar input:focus{border-color:var(--primary)}
+.search-bar input{width:100%;background:rgba(22,22,31,0.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px 10px 36px;color:var(--text1);font-size:13px;outline:none;font-family:inherit;transition:all .2s}
+.search-bar input:focus{border-color:rgba(200,164,92,0.4);box-shadow:0 0 0 2px rgba(200,164,92,0.3)}
+.search-bar input::placeholder{color:var(--text3);transition:all .3s}
 .search-bar svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text3)}
+/* Filter pills */
 .filter-pills{display:flex;gap:8px;padding:0 16px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .filter-pills::-webkit-scrollbar{display:none}
-.pill{padding:6px 14px;border-radius:20px;font-size:12px;white-space:nowrap;cursor:pointer;background:var(--surface);color:var(--text2);border:1px solid var(--border);transition:all .2s}
-.pill.active{background:var(--primary);color:#000;border-color:var(--primary);font-weight:600}
+.pill{padding:6px 14px;border-radius:20px;font-size:12px;white-space:nowrap;cursor:pointer;background:rgba(22,22,31,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--text2);border:1px solid rgba(255,255,255,0.08);transition:all .3s}
+.pill.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#000;border-color:transparent;font-weight:600;box-shadow:0 2px 10px rgba(200,164,92,0.3)}
+/* Badge */
 .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
 .badge-gold{background:rgba(200,164,92,0.15);color:var(--primary)}
 .badge-gray{background:rgba(255,255,255,0.06);color:var(--text3)}
 .badge-success{background:rgba(52,211,153,0.15);color:var(--success)}
 .badge-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+/* Progress */
 .progress-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:var(--primary);border-radius:2px;transition:width .8s ease}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary-dark),var(--primary));border-radius:2px;transition:width .8s ease;box-shadow:0 0 8px rgba(200,164,92,0.2)}
+/* Buttons */
 .btn{padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
 .btn:active{transform:scale(0.96)}
-.btn-primary{background:var(--primary);color:#000}
-.btn-outline{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));box-shadow:0 2px 12px rgba(200,164,92,0.3);border:none;color:var(--bg);font-weight:700}
+.btn-primary:active{transform:scale(0.97);box-shadow:0 1px 6px rgba(200,164,92,0.2)}
+.btn-outline{background:transparent;border:1px solid rgba(200,164,92,0.4);color:var(--primary);font-weight:600}
 .btn-block{width:100%;text-align:center}
+/* Stat cards */
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px;margin-bottom:14px}
-.stat-card{background:var(--surface);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)}
-.stat-card .val{font-size:20px;font-weight:700;color:var(--primary)}
+.stat-card{background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:14px;padding:14px;text-align:center;border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 16px rgba(0,0,0,0.2);position:relative;overflow:hidden;cursor:pointer}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:radial-gradient(ellipse at top center,rgba(200,164,92,0.06),transparent 70%);pointer-events:none}
+.stat-card .val{font-size:24px;font-weight:800;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .stat-card .lbl{font-size:11px;color:var(--text2);margin-top:2px}
+/* Quick grid */
 .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;margin-bottom:14px}
-.quick-item{background:var(--surface);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border);cursor:pointer;transition:all .2s}
-.quick-item:active{transform:scale(0.96)}
-.quick-item svg{width:24px;height:24px;color:var(--primary);margin-bottom:6px}
+.quick-item{background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:16px;padding:16px;text-align:center;border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,0.15);position:relative;overflow:hidden}
+.quick-item::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:radial-gradient(ellipse at top center,rgba(200,164,92,0.04),transparent 70%);pointer-events:none}
+.quick-item:active{transform:scale(0.96);box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.quick-item .action-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.action-icon.gold{background:linear-gradient(135deg,rgba(200,164,92,0.2),rgba(200,164,92,0.05))}
+.action-icon.blue{background:linear-gradient(135deg,rgba(96,165,250,0.2),rgba(96,165,250,0.05))}
+.action-icon.green{background:linear-gradient(135deg,rgba(52,211,153,0.2),rgba(52,211,153,0.05))}
+.action-icon.orange{background:linear-gradient(135deg,rgba(251,191,36,0.2),rgba(251,191,36,0.05))}
 .quick-item span{display:block;font-size:12px;color:var(--text1)}
+/* Notification */
 .notification-bell{position:relative;cursor:pointer}
 .notif-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;background:var(--error);border-radius:50%;border:2px solid var(--bg)}
 .notif-badge{position:absolute;top:-6px;right:-8px;background:var(--error);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.task-item{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
+/* Tasks */
+.task-item{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .task-item:last-child{border-bottom:none}
 .task-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .task-text{flex:1;font-size:13px}
 .task-done .task-text{text-decoration:line-through;color:var(--text3)}
 .task-check{cursor:pointer;color:var(--text3)}
-.car-card{background:var(--surface);border-radius:12px;margin:0 16px 12px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:transform .1s}
+/* Car card */
+.car-card{background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:16px;margin:0 16px 12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:transform .1s,box-shadow .3s;box-shadow:0 4px 24px rgba(0,0,0,0.3),0 0 0 1px rgba(200,164,92,0.05);position:relative}
 .car-card:active{transform:scale(0.98)}
-.car-card-img{height:160px;background:var(--surface2);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.car-card-img .brand-watermark{font-size:32px;font-weight:800;color:rgba(255,255,255,0.04);position:absolute;letter-spacing:4px}
+.car-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:60%;background:radial-gradient(ellipse at top left,rgba(200,164,92,0.06),transparent 60%);pointer-events:none;z-index:0}
+.car-card-img{height:160px;border-radius:0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.car-card-img .brand-watermark{font-size:32px;font-weight:800;color:rgba(200,164,92,0.06);position:absolute;letter-spacing:4px}
 .car-card-img .car-icon{z-index:1}
-.car-card-body{padding:12px}
-.car-card-price{font-size:18px;font-weight:700;color:var(--primary)}
+.car-card-body{padding:14px 16px;position:relative;z-index:1}
+.car-card-price{font-size:18px;font-weight:700;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .car-card-price span{font-size:12px;font-weight:400}
 .car-card-name{font-size:14px;font-weight:600;margin:4px 0}
 .car-card-meta{font-size:11px;color:var(--text2)}
 .car-card-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.car-card-tags .tag{padding:2px 8px;border-radius:6px;font-size:10px;background:var(--surface2);color:var(--text2)}
-.car-card-actions{display:flex;gap:8px;padding:0 12px 12px}
+.car-card-tags .tag{padding:2px 8px;border-radius:6px;font-size:10px;background:rgba(28,28,40,0.8);color:var(--text2);border:1px solid rgba(255,255,255,0.06)}
+.car-card-actions{display:flex;gap:8px;padding:0 16px 16px;position:relative;z-index:1}
 .car-card-actions .btn{flex:1;text-align:center;padding:8px;font-size:12px}
+/* Recommend */
 .recommend-scroll{display:flex;gap:10px;padding:0 16px;overflow-x:auto;margin-bottom:14px;-webkit-overflow-scrolling:touch}
 .recommend-scroll::-webkit-scrollbar{display:none}
-.recommend-card{min-width:200px;background:var(--surface);border-radius:12px;padding:14px;border:1px solid var(--border);cursor:pointer;flex-shrink:0}
+.recommend-card{min-width:200px;background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.08);cursor:pointer;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,0.2);position:relative;overflow:hidden}
+.recommend-card::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:radial-gradient(ellipse at top left,rgba(200,164,92,0.05),transparent 60%);pointer-events:none}
 .recommend-card:active{transform:scale(0.97)}
-.recommend-match{font-size:24px;font-weight:800;color:var(--success)}
+.recommend-match{font-size:24px;font-weight:800;background:linear-gradient(135deg,#34D399,#6EE7B7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .recommend-match span{font-size:12px;font-weight:400}
 .recommend-name{font-size:13px;font-weight:600;margin:4px 0}
 .recommend-insight{font-size:11px;color:var(--primary)}
-.member-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer}
-.member-card:active{background:var(--surface)}
-.member-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#000;flex-shrink:0}
+/* Members */
+.member-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background .2s}
+.member-card:active{background:rgba(22,22,31,0.5)}
+.member-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#000;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,0.3)}
 .member-info{flex:1;min-width:0}
 .member-name{font-size:14px;font-weight:600}
 .member-phone{font-size:12px;color:var(--text2)}
-.member-level{font-size:10px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:2px}
-.member-level.vip{background:rgba(200,164,92,0.15);color:var(--primary)}
-.member-level.normal{background:var(--surface2);color:var(--text2)}
-.fab{position:absolute;bottom:80px;right:20px;width:52px;height:52px;border-radius:50%;background:var(--primary);color:#000;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:50;box-shadow:0 4px 16px rgba(200,164,92,0.3);transition:transform .2s}
+.member-level{font-size:10px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:2px;background:rgba(22,22,31,0.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.member-level.vip{background:rgba(200,164,92,0.15);color:var(--primary);border:1px solid rgba(200,164,92,0.2)}
+.member-level.normal{background:rgba(28,28,40,0.8);color:var(--text2);border:1px solid rgba(255,255,255,0.06)}
+/* FAB */
+.fab{position:absolute;bottom:80px;right:20px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#000;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:50;box-shadow:0 4px 20px rgba(200,164,92,0.4);transition:transform .2s}
 .fab:active{transform:scale(0.9)}
+/* Chat */
 .chat-container{display:flex;flex-direction:column;height:100%}
 .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
 .chat-msg{max-width:85%;animation:msgIn .3s ease}
@@ -119,115 +162,149 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
 .chat-msg.bot{align-self:flex-start}
 .chat-msg.user{align-self:flex-end}
 .chat-bubble{padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5}
-.chat-msg.bot .chat-bubble{background:var(--surface);border:1px solid var(--border);border-bottom-left-radius:4px}
-.chat-msg.user .chat-bubble{background:var(--primary-dark);color:#fff;border-bottom-right-radius:4px}
-.chat-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px;margin-top:8px}
+.chat-msg.bot .chat-bubble{background:rgba(22,22,31,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);border-left:2px solid rgba(200,164,92,0.3);border-bottom-left-radius:4px}
+.chat-msg.user .chat-bubble{background:rgba(200,164,92,0.15);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(200,164,92,0.2);color:var(--text1);border-bottom-right-radius:4px}
+.chat-card{background:rgba(28,28,40,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(200,164,92,0.15);border-radius:10px;padding:10px;margin-top:8px}
 .chat-card-title{font-size:12px;font-weight:600;color:var(--primary);margin-bottom:6px}
 .chat-card-row{font-size:11px;color:var(--text2);display:flex;justify-content:space-between;padding:3px 0}
-.chat-input-area{display:flex;gap:8px;padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);align-items:flex-end}
-.chat-input-area textarea{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px;color:var(--text1);font-size:13px;resize:none;font-family:inherit;max-height:80px;outline:none}
-.chat-input-area textarea:focus{border-color:var(--primary)}
-.chat-send{width:36px;height:36px;border-radius:50%;background:var(--primary);border:none;color:#000;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.chat-input-area{display:flex;gap:8px;padding:10px 16px;background:rgba(17,17,25,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(200,164,92,0.1);align-items:flex-end}
+.chat-input-area textarea{flex:1;background:rgba(22,22,31,0.7);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px;color:var(--text1);font-size:13px;resize:none;font-family:inherit;max-height:80px;outline:none;transition:all .2s}
+.chat-input-area textarea:focus{border-color:rgba(200,164,92,0.4);box-shadow:0 0 0 2px rgba(200,164,92,0.15)}
+.chat-send{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border:none;color:#000;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:0 2px 10px rgba(200,164,92,0.3)}
 .chat-send:active{transform:scale(0.9)}
 .quick-replies{display:flex;gap:6px;padding:0 16px 10px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .quick-replies::-webkit-scrollbar{display:none}
-.quick-reply{padding:6px 12px;border-radius:16px;font-size:11px;background:var(--surface);color:var(--primary);border:1px solid var(--primary);white-space:nowrap;cursor:pointer}
-.quick-reply:active{background:var(--primary);color:#000}
+.quick-reply{padding:6px 12px;border-radius:16px;font-size:11px;background:rgba(22,22,31,0.7);color:var(--primary);border:1px solid rgba(200,164,92,0.3);white-space:nowrap;cursor:pointer;transition:all .2s}
+.quick-reply:active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#000;border-color:transparent}
 .typing-indicator{display:flex;gap:4px;padding:10px 14px;align-items:center}
-.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);animation:typingBounce .6s infinite alternate}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);opacity:0.6;animation:typingBounce .6s infinite alternate;box-shadow:0 0 4px rgba(200,164,92,0.3)}
 .typing-dot:nth-child(2){animation-delay:.2s}
 .typing-dot:nth-child(3){animation-delay:.4s}
-@keyframes typingBounce{to{opacity:.3;transform:translateY(-4px)}}
+@keyframes typingBounce{to{opacity:.2;transform:translateY(-4px)}}
+/* Profile */
 .profile-header{display:flex;flex-direction:column;align-items:center;padding:30px 16px 20px}
-.profile-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#000;margin-bottom:10px}
+.profile-avatar{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#000;margin-bottom:10px;box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--primary),0 4px 16px rgba(200,164,92,0.3)}
 .profile-name{font-size:18px;font-weight:700}
 .profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px;margin-bottom:20px}
-.profile-stat{text-align:center;padding:12px;background:var(--surface);border-radius:10px;border:1px solid var(--border)}
+.profile-stat{text-align:center;padding:12px;background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:14px;border:1px solid rgba(255,255,255,0.08)}
 .profile-stat .val{font-size:16px;font-weight:700;color:var(--text1)}
 .profile-stat .lbl{font-size:11px;color:var(--text2);margin-top:2px}
-.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer}
-.menu-item:active{background:var(--surface)}
+/* Menu */
+.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background .2s}
+.menu-item:active{background:rgba(200,164,92,0.05)}
 .menu-item svg{width:20px;height:20px;color:var(--text2)}
 .menu-item span{flex:1;font-size:14px}
 .menu-item .arrow{color:var(--text3)}
+/* Form */
 .form-group{margin-bottom:14px}
 .form-group label{display:block;font-size:12px;color:var(--text2);margin-bottom:6px}
-.form-group input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text1);font-size:13px;outline:none;font-family:inherit}
-.form-group input:focus{border-color:var(--primary)}
+.form-group input{width:100%;background:rgba(28,28,40,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px;color:var(--text1);font-size:13px;outline:none;font-family:inherit;transition:all .2s}
+.form-group input:focus{border-color:rgba(200,164,92,0.4);box-shadow:0 0 0 2px rgba(200,164,92,0.15)}
+/* Revenue bar */
 .revenue-bar{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .revenue-bar-label{font-size:11px;color:var(--text2);width:50px;flex-shrink:0}
 .revenue-bar-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
-.revenue-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.revenue-bar-fill{height:100%;border-radius:3px;transition:width 1s ease;box-shadow:0 0 6px rgba(200,164,92,0.2)}
 .revenue-bar-val{font-size:11px;color:var(--text2);width:50px;text-align:right;flex-shrink:0}
-.detail-gallery{height:240px;background:var(--surface2);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.detail-gallery .gallery-watermark{font-size:48px;font-weight:800;color:rgba(255,255,255,0.04);position:absolute;letter-spacing:8px}
+/* Detail gallery */
+.detail-gallery{height:240px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.detail-gallery .gallery-watermark{font-size:48px;font-weight:800;color:rgba(200,164,92,0.06);position:absolute;letter-spacing:8px}
 .detail-gallery .gallery-icon{z-index:1}
 .gallery-dots{display:flex;gap:6px;justify-content:center;position:absolute;bottom:12px;z-index:2}
 .gallery-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);cursor:pointer;transition:all .2s}
-.gallery-dot.active{background:var(--primary);width:18px;border-radius:3px}
+.gallery-dot.active{background:var(--primary);width:18px;border-radius:3px;box-shadow:0 0 6px rgba(200,164,92,0.4)}
 .detail-name{padding:14px 16px 6px;font-size:18px;font-weight:700}
-.detail-price{padding:0 16px;font-size:22px;font-weight:800;color:var(--primary)}
-.detail-price .orig{font-size:13px;color:var(--text3);text-decoration:line-through;margin-left:8px;font-weight:400}
+.detail-price{padding:0 16px;font-size:22px;font-weight:800;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.detail-price .orig{font-size:13px;color:var(--text3);text-decoration:line-through;margin-left:8px;font-weight:400;-webkit-text-fill-color:var(--text3)}
 .detail-tags{display:flex;gap:6px;padding:8px 16px 0;flex-wrap:wrap}
-.ai-card{margin:14px 16px;background:linear-gradient(135deg,rgba(200,164,92,0.08),rgba(200,164,92,0.02));border:1px solid rgba(200,164,92,0.2);border-radius:12px;padding:14px}
+/* AI Card */
+.ai-card{margin:14px 16px;background:rgba(22,22,31,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(200,164,92,0.2);border-radius:16px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,0.2);position:relative;overflow:hidden}
+.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:radial-gradient(ellipse at top left,rgba(200,164,92,0.06),transparent 60%);pointer-events:none}
 .ai-card-title{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:8px}
 .ai-score-bar{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .ai-score-bar .label{font-size:11px;color:var(--text2);width:40px}
 .ai-score-bar .bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
-.ai-score-bar .fill{height:100%;background:var(--primary);border-radius:3px;width:0;transition:width 1s ease}
-.ai-score-bar .score{font-size:11px;color:var(--text1);font-weight:600;width:24px;text-align:right}
+.ai-score-bar .fill{height:100%;background:linear-gradient(90deg,var(--primary-dark),var(--primary));border-radius:3px;width:0;transition:width 1s ease;box-shadow:0 0 8px rgba(200,164,92,0.3)}
+.ai-score-bar .score{font-size:11px;font-weight:600;width:24px;text-align:right;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* Info grid */
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;padding:0 16px;margin-bottom:14px}
-.info-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.info-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px}
 .info-item .lbl{color:var(--text2)}
+/* Similar */
 .similar-scroll{display:flex;gap:10px;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .similar-scroll::-webkit-scrollbar{display:none}
-.similar-card{min-width:150px;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border);cursor:pointer;flex-shrink:0}
+.similar-card{min-width:150px;background:rgba(22,22,31,0.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);cursor:pointer;flex-shrink:0;transition:transform .2s}
 .similar-card:active{transform:scale(0.97)}
-.similar-card-img{height:80px;background:var(--surface2);display:flex;align-items:center;justify-content:center}
+.similar-card-img{height:80px;display:flex;align-items:center;justify-content:center}
 .similar-card-info{padding:8px}
 .similar-card-name{font-size:12px;font-weight:600}
-.similar-card-price{font-size:13px;font-weight:700;color:var(--primary);margin-top:2px}
-.detail-bottom{position:absolute;bottom:0;left:0;right:0;display:flex;gap:10px;padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);z-index:50}
+.similar-card-price{font-size:13px;font-weight:700;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:2px}
+/* Detail bottom */
+.detail-bottom{position:absolute;bottom:0;left:0;right:0;display:flex;gap:10px;padding:10px 16px;background:rgba(17,17,25,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(200,164,92,0.1);z-index:50}
 .detail-bottom .btn{flex:1;text-align:center}
-.heart-btn{width:44px;height:44px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s}
-.heart-btn.liked{background:rgba(248,113,113,0.15);border-color:var(--error)}
+/* Heart */
+.heart-btn{width:44px;height:44px;border-radius:12px;background:rgba(22,22,31,0.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s}
+.heart-btn.liked{background:rgba(248,113,113,0.15);border-color:var(--error);box-shadow:0 0 12px rgba(248,113,113,0.2)}
 .heart-btn.liked svg{color:var(--error);fill:var(--error)}
 .pull-loader{text-align:center;padding:10px;color:var(--text3);font-size:12px}
 .spin{animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.order-card{margin:0 16px 10px;background:var(--surface);border-radius:12px;padding:14px;border:1px solid var(--border)}
+/* Orders */
+.order-card{margin:0 16px 10px;background:rgba(22,22,31,0.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.08)}
 .order-header{display:flex;justify-content:space-between;margin-bottom:8px}
 .order-status{font-size:11px;font-weight:600}
 .order-car{font-size:14px;font-weight:600;margin-bottom:4px}
 .order-info{font-size:12px;color:var(--text2)}
+/* Inventory */
 .inventory-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px}
-.inv-stat{background:var(--surface);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)}
+.inv-stat{background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:14px;padding:12px;text-align:center;border:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 16px rgba(0,0,0,0.2);position:relative;overflow:hidden}
+.inv-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:radial-gradient(ellipse at top center,rgba(200,164,92,0.05),transparent 70%);pointer-events:none}
 .inv-stat .val{font-size:18px;font-weight:700}
-.inv-stat .val.gold{color:var(--primary)}
+.inv-stat .val.gold{background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .inv-stat .val.green{color:var(--success)}
 .inv-stat .lbl{font-size:10px;color:var(--text2);margin-top:2px}
 .fin-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;color:var(--text2)}
 .fin-row .positive{color:var(--success)}
 .fin-row .negative{color:var(--error)}
+/* Role screen */
+.role-logo{width:80px;height:80px;border-radius:50%;border:3px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(135deg,var(--primary),var(--primary-dark),var(--primary)) border-box;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;animation:logoGlow 3s ease-in-out infinite;position:relative}
+.role-logo::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(200,164,92,0.2);animation:logoRing 3s ease-in-out infinite}
+@keyframes logoGlow{0%,100%{box-shadow:0 0 20px rgba(200,164,92,0.15)}50%{box-shadow:0 0 35px rgba(200,164,92,0.3)}}
+@keyframes logoRing{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.05);opacity:0.8}}
+.role-title{font-size:32px;font-weight:800;font-family:'Inter',sans-serif;letter-spacing:-0.5px;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.role-card{width:100%;padding:18px;border-radius:16px;background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);color:var(--text1);font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,0.2)}
+.role-card.admin{border-color:rgba(200,164,92,0.3);box-shadow:0 4px 24px rgba(200,164,92,0.15);animation:adminGlow 2s ease-in-out infinite}
+@keyframes adminGlow{0%,100%{box-shadow:0 4px 24px rgba(200,164,92,0.15)}50%{box-shadow:0 4px 32px rgba(200,164,92,0.25)}}
+.role-card:hover{border-color:rgba(200,164,92,0.2);box-shadow:0 4px 24px rgba(200,164,92,0.1)}
+/* Stagger animation */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.stagger>*{animation:fadeInUp .4s ease both}
+.stagger>*:nth-child(1){animation-delay:.05s}
+.stagger>*:nth-child(2){animation-delay:.1s}
+.stagger>*:nth-child(3){animation-delay:.15s}
+.stagger>*:nth-child(4){animation-delay:.2s}
+.stagger>*:nth-child(5){animation-delay:.25s}
 </style>
 </head>
 <body>
 <div id="roleScreen" style="position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px">
   <div style="text-align:center;margin-bottom:40px">
-    <div style="font-size:48px;color:var(--primary);margin-bottom:12px">HC</div>
-    <div style="font-size:28px;font-weight:800;font-family:'Inter',sans-serif;letter-spacing:-0.5px">豪车之家</div>
+    <div class="role-logo">
+      <span style="font-size:28px;font-weight:800;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">HC</span>
+    </div>
+    <div class="role-title">豪车之家</div>
     <div style="font-size:13px;color:var(--text2);margin-top:6px">大湾区高端豪车车主平台</div>
   </div>
   <div style="width:100%;max-width:300px;display:flex;flex-direction:column;gap:14px">
-    <button onclick="selectRole('admin')" style="width:100%;padding:18px;border-radius:14px;background:var(--surface);border:2px solid var(--primary);color:var(--primary);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.background='rgba(200,164,92,0.1)'" onmouseout="this.style.background='var(--surface)'">
+    <button onclick="selectRole('admin')" class="role-card admin" style="color:var(--primary);font-weight:700">
       <div>👑 管理员</div>
       <div style="font-size:11px;font-weight:400;opacity:0.7;margin-top:2px">豪哥 · COO</div>
     </button>
-    <button onclick="selectRole('client')" style="width:100%;padding:18px;border-radius:14px;background:var(--surface);border:1px solid var(--border);color:var(--text1);font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+    <button onclick="selectRole('client')" class="role-card" style="border:1px solid rgba(255,255,255,0.08)">
       <div>🚗 车友会员</div>
       <div style="font-size:11px;font-weight:400;opacity:0.5;margin-top:2px">张先生 · 高端私董</div>
     </button>
-    <button onclick="selectRole('guest')" style="width:100%;padding:16px;border-radius:14px;background:transparent;border:1px solid var(--border);color:var(--text2);font-size:14px;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.borderColor='var(--text3)'" onmouseout="this.style.borderColor='var(--border)'">
+    <button onclick="selectRole('guest')" class="role-card" style="background:transparent;font-size:14px;color:var(--text2)">
       游客浏览
     </button>
   </div>
@@ -244,35 +321,35 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
     <div id="adminHome">
       <div class="header">
         <h1>豪车之家</h1>
-        <div class="notification-bell" onclick="showToast('您有3条未读通知')">
+        <div class="notification-bell" onclick="showToast('您有3条未读通知')" style="position:absolute;right:16px">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-          <span class="notif-badge">3</span>
+          <span class="notif-badge" style="box-shadow:0 0 6px rgba(248,113,113,0.4)">3</span>
         </div>
       </div>
       <div style="padding:16px 16px 8px">
         <div style="font-size:13px;color:var(--text2)" id="welcomeText">豪哥，下午好</div>
         <div style="font-size:15px;font-weight:600;margin-top:2px">欢迎回来，今天有新动态</div>
       </div>
-      <div class="stat-row" id="homeStats">
+      <div class="stat-row stagger" id="homeStats">
         <div class="stat-card" onclick="navigateTo('members')"><div class="val">128</div><div class="lbl">会员总数</div></div>
         <div class="stat-card" onclick="navigateTo('inventory')"><div class="val">23</div><div class="lbl">在售车辆</div></div>
         <div class="stat-card"><div class="val">¥86万</div><div class="lbl">本月成交</div></div>
       </div>
-      <div class="quick-grid">
+      <div class="quick-grid stagger">
         <div class="quick-item" onclick="navigateTo('members')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <div class="action-icon gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <span>会员管理</span>
         </div>
         <div class="quick-item" onclick="navigateTo('inventory')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M2 8h20"/><path d="M6 12h.01"/></svg>
+          <div class="action-icon blue"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--info)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M2 8h20"/><path d="M6 12h.01"/></svg></div>
           <span>库存台账</span>
         </div>
         <div class="quick-item" onclick="showToast('活动报名功能开发中')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          <div class="action-icon orange"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div>
           <span>活动报名</span>
         </div>
         <div class="quick-item" onclick="showToast('佣金核算功能开发中')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <div class="action-icon green"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
           <span>佣金核算</span>
         </div>
       </div>
@@ -282,11 +359,11 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
       <div class="card" id="tasks" style="padding:0"></div>
       <div class="section-title">本月业绩</div>
       <div class="card">
-        <div style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:2px">¥186,800</div>
+        <div style="font-size:22px;font-weight:800;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:2px">¥186,800</div>
         <div style="font-size:11px;color:var(--text2);margin-bottom:12px">本月累计佣金收入</div>
-        <div class="revenue-bar"><div class="revenue-bar-label">新车销售</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:75%;background:var(--primary)"></div></div><div class="revenue-bar-val">¥128,000</div></div>
-        <div class="revenue-bar"><div class="revenue-bar-label">会员费</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:40%;background:var(--success)"></div></div><div class="revenue-bar-val">¥38,800</div></div>
-        <div class="revenue-bar"><div class="revenue-bar-label">活动收入</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:20%;background:var(--info)"></div></div><div class="revenue-bar-val">¥20,000</div></div>
+        <div class="revenue-bar"><div class="revenue-bar-label">新车销售</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:75%;background:linear-gradient(90deg,var(--primary-dark),var(--primary))"></div></div><div class="revenue-bar-val">¥128,000</div></div>
+        <div class="revenue-bar"><div class="revenue-bar-label">会员费</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:40%;background:linear-gradient(90deg,#059669,#34D399)"></div></div><div class="revenue-bar-val">¥38,800</div></div>
+        <div class="revenue-bar"><div class="revenue-bar-label">活动收入</div><div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:20%;background:linear-gradient(90deg,#2563EB,#60A5FA)"></div></div><div class="revenue-bar-val">¥20,000</div></div>
       </div>
     </div>
     <div id="clientHome" style="display:none"></div>
@@ -296,7 +373,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
   <div class="page" id="page-showroom">
     <div class="header">
       <h1>豪车展厅</h1>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor:pointer" onclick="showToast('筛选功能')"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor:pointer;position:absolute;right:16px" onclick="showToast('筛选功能')"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
     </div>
     <div class="search-bar">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
@@ -341,7 +418,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
   <!-- INVENTORY PAGE -->
   <div class="page" id="page-inventory">
     <div class="header"><h1>库存管理</h1></div>
-    <div class="inventory-summary">
+    <div class="inventory-summary stagger">
       <div class="inv-stat"><div class="val gold">23</div><div class="lbl">在售车辆</div></div>
       <div class="inv-stat"><div class="val green">5</div><div class="lbl">已售车辆</div></div>
       <div class="inv-stat"><div class="val gold">¥820万</div><div class="lbl">库存总值</div></div>
@@ -363,7 +440,7 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
   <div class="page" id="page-chat" style="padding-bottom:0">
     <div class="header">
       <h1>豪车之家AI助手</h1>
-      <div style="display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:var(--success);display:inline-block"></span><span style="font-size:11px;color:var(--success)">在线</span></div>
+      <div style="display:flex;align-items:center;gap:4px;position:absolute;right:16px"><span style="width:6px;height:6px;border-radius:50%;background:var(--success);display:inline-block;box-shadow:0 0 6px rgba(52,211,153,0.5)"></span><span style="font-size:11px;color:var(--success)">在线</span></div>
     </div>
     <div class="chat-container">
       <div class="chat-messages" id="chatMessages"></div>
@@ -384,18 +461,18 @@ html,body{height:100%;overflow:hidden;font-family:'Inter',system-ui,-apple-syste
 
   <!-- PROFILE PAGE -->
   <div class="page" id="page-profile">
-    <button onclick="switchRole()" style="width:calc(100% - 32px);margin:0 16px 16px;padding:12px;border-radius:10px;background:var(--surface);border:1px solid var(--border);color:var(--primary);font-size:13px;cursor:pointer;font-family:inherit">切换角色 (当前: <span id="profileRole">管理员</span>)</button>
+    <button onclick="switchRole()" style="width:calc(100% - 32px);margin:0 16px 16px;padding:12px;border-radius:10px;background:rgba(22,22,31,0.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(200,164,92,0.2);color:var(--primary);font-size:13px;cursor:pointer;font-family:inherit">切换角色 (当前: <span id="profileRole">管理员</span>)</button>
     <div class="profile-header">
       <div class="profile-avatar" id="profileAvatar">豪</div>
       <div class="profile-name" id="profileName">豪哥</div>
-      <span class="badge badge-gold" id="profileTitle" style="margin-top:6px">COO · 管理员</span>
+      <span class="badge badge-gold" id="profileTitle" style="margin-top:6px;border:1px solid rgba(200,164,92,0.2)">COO · 管理员</span>
     </div>
-    <div class="profile-stats">
+    <div class="profile-stats stagger">
       <div class="profile-stat"><div class="val">5</div><div class="lbl">我的收藏</div></div>
       <div class="profile-stat"><div class="val">3</div><div class="lbl">我的订单</div></div>
       <div class="profile-stat"><div class="val">2027-03</div><div class="lbl">会员到期</div></div>
     </div>
-    <div style="margin:0 16px 10px;background:var(--surface);border-radius:12px;border:1px solid var(--border);overflow:hidden">
+    <div style="margin:0 16px 10px;background:rgba(22,22,31,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:16px;border:1px solid rgba(255,255,255,0.08);overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.2)">
       <div class="menu-item" onclick="showToast('暂无车辆')">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
         <span>我的车辆</span>
@@ -693,7 +770,7 @@ function initHome() {
           <div style="font-size:14px;font-weight:600">${a.name}</div>
           <div style="font-size:11px;color:var(--text2);margin-top:2px">${a.date} · ${a.enrolled}/${a.total}人</div>
         </div>
-        ${a.status === '报名中' ? '<span class="badge badge-gold">报名中</span>' : '<span class="badge badge-gray">已结束</span>'}
+        ${a.status === '报名中' ? '<span class="badge badge-gold" style="border:1px solid rgba(200,164,92,0.2)">报名中</span>' : '<span class="badge badge-gray">已结束</span>'}
       </div>
       <div class="progress-bar" style="margin-top:8px"><div class="progress-fill" style="width:${a.progress}%"></div></div>
       ${a.status === '报名中' ? `<div style="margin-top:8px;text-align:right"><button class="btn btn-outline" style="padding:4px 14px;font-size:11px" onclick="showToast('报名成功！')">立即报名</button></div>` : ''}
@@ -728,15 +805,15 @@ function renderClientHome() {
   const el = document.getElementById('clientHome');
   if (!el) return;
   el.innerHTML = `
-    <div class="header"><h1>豪车之家</h1><div style="position:relative;cursor:pointer" onclick="navigateTo('chat')"><i data-lucide="bell" style="width:22px;height:22px;color:var(--text2)"></i><span style="position:absolute;top:-4px;right:-4px;width:8px;height:8px;background:var(--error);border-radius:50%"></span></div></div>
+    <div class="header"><h1>豪车之家</h1><div style="position:relative;cursor:pointer" onclick="navigateTo('chat')"><i data-lucide="bell" style="width:22px;height:22px;color:var(--text2)"></i><span style="position:absolute;top:-4px;right:-4px;width:8px;height:8px;background:var(--error);border-radius:50%;box-shadow:0 0 6px rgba(248,113,113,0.5)"></span></div></div>
     
     <div style="padding:16px">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--bg)">${currentUser.name[0]}</div>
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--bg);box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--primary),0 4px 16px rgba(200,164,92,0.3)">${currentUser.name[0]}</div>
         <div>
           <div style="font-size:16px;font-weight:700">${currentUser.name}</div>
           <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
-            <span class="badge badge-gold" style="font-size:10px">高端私董</span>
+            <span class="badge badge-gold" style="font-size:10px;border:1px solid rgba(200,164,92,0.2)">高端私董</span>
             <span style="font-size:11px;color:var(--text3)">有效期至 2027-03</span>
           </div>
         </div>
@@ -747,11 +824,9 @@ function renderClientHome() {
     <div style="padding:0 16px;display:flex;gap:10px;overflow-x:auto;padding-bottom:6px">
       ${cars.slice(0, 3).map(c => `
         <div class="card" style="min-width:200px;padding:12px;cursor:pointer" onclick="navigateTo('car-detail','id=${c.id}')">
-          <div style="height:100px;border-radius:8px;background:linear-gradient(135deg,#1a1a26,#222);display:flex;align-items:center;justify-content:center;margin-bottom:8px">
-            <span style="font-size:28px;color:var(--primary);opacity:0.5">🚗</span>
-          </div>
+          <div class="car-visual" style="height:100px;border-radius:8px;background:linear-gradient(180deg,rgba(200,164,92,0.08) 0%,transparent 60%),linear-gradient(135deg,#1a1a26,#0f0f18);position:relative;overflow:hidden;margin-bottom:8px"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1">${(carIcons[c.image]||carIcons.maybach).replace('width="48"','width="32"').replace('height="48"','height="32"')}</span></div>
           <div style="font-size:13px;font-weight:600">${c.name.split(' ').slice(0,2).join(' ')}</div>
-          <div style="font-size:15px;font-weight:800;color:var(--primary);margin-top:2px">¥${(c.price/10000).toFixed(0)}万</div>
+          <div style="font-size:15px;font-weight:800;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:2px">¥${(c.price/10000).toFixed(0)}万</div>
           <div style="font-size:10px;color:var(--text3);margin-top:2px">AI匹配度 ${c.match}%</div>
         </div>
       `).join('')}
@@ -766,7 +841,7 @@ function renderClientHome() {
               <div style="font-size:14px;font-weight:600">${a.name}</div>
               <div style="font-size:11px;color:var(--text2);margin-top:2px">${a.date} · ${a.location || '深圳'}</div>
             </div>
-            <span class="badge badge-gold">${a.status}</span>
+            <span class="badge badge-gold" style="border:1px solid rgba(200,164,92,0.2)">${a.status}</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
             <span style="font-size:11px;color:var(--text3)">${a.enrolled}/${a.total}人</span>
@@ -780,10 +855,10 @@ function renderClientHome() {
     <div style="padding:0 16px">
       ${cars.slice(0, 2).map(c => `
         <div class="card" style="display:flex;gap:12px;cursor:pointer" onclick="navigateTo('car-detail','id=${c.id}')">
-          <div style="width:80px;height:60px;border-radius:8px;background:linear-gradient(135deg,#1a1a26,#222);flex-shrink:0;display:flex;align-items:center;justify-content:center"><span style="font-size:20px;color:var(--primary);opacity:0.5">🚗</span></div>
+          <div class="car-visual" style="width:80px;height:60px;border-radius:8px;background:linear-gradient(180deg,rgba(200,164,92,0.08) 0%,transparent 60%),linear-gradient(135deg,#1a1a26,#0f0f18);position:relative;overflow:hidden;flex-shrink:0"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1">${(carIcons[c.image]||carIcons.maybach).replace('width="48"','width="24"').replace('height="48"','height="24"')}</span></div>
           <div style="flex:1;min-width:0">
             <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</div>
-            <div style="font-size:13px;font-weight:800;color:var(--primary);margin-top:2px">¥${(c.price/10000).toFixed(0)}万</div>
+            <div style="font-size:13px;font-weight:800;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:2px">¥${(c.price/10000).toFixed(0)}万</div>
           </div>
           <i data-lucide="chevron-right" style="width:18px;height:18px;color:var(--text3);flex-shrink:0"></i>
         </div>
@@ -801,7 +876,7 @@ function renderShowroom() {
     <div class="recommend-card" onclick="navigateTo('car-detail','id=${c.id}')">
       <div class="recommend-match">${c.match}<span>%匹配</span></div>
       <div class="recommend-name">${c.name}</div>
-      <div style="font-size:13px;font-weight:700;color:var(--primary);margin:2px 0">${formatPriceFull(c.price)}</div>
+      <div style="font-size:13px;font-weight:700;background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:2px 0">${formatPriceFull(c.price)}</div>
       <div class="recommend-insight">${c.aiInsight}</div>
     </div>
   `).join('');
@@ -829,7 +904,7 @@ function filterShowroomCat(el, cat) {
 function renderCarList(list) {
   document.getElementById('carList').innerHTML = list.map(c => `
     <div class="car-card" onclick="navigateTo('car-detail','id=${c.id}')">
-      <div class="car-card-img">
+      <div class="car-card-img" style="background:linear-gradient(180deg,rgba(200,164,92,0.08) 0%,transparent 60%),linear-gradient(135deg,#1a1a26,#0f0f18)">
         <span class="brand-watermark">${c.brand.toUpperCase()}</span>
         <span class="car-icon">${carIcons[c.image] || carIcons.maybach}</span>
       </div>
@@ -861,7 +936,7 @@ function renderCarDetail(paramStr) {
   const liked = favorites.has(car.id);
 
   document.getElementById('carDetailContent').innerHTML = `
-    <div class="detail-gallery" id="detailGallery">
+    <div class="detail-gallery" id="detailGallery" style="background:linear-gradient(180deg,rgba(200,164,92,0.08) 0%,transparent 60%),linear-gradient(135deg,#1a1a26,#0f0f18)">
       <span class="gallery-watermark">${car.brand.toUpperCase()}</span>
       <span class="gallery-icon">${(carIcons[car.image] || carIcons.maybach).replace('width="48"','width="64"').replace('height="48"','height="64"')}</span>
       <div class="gallery-dots">
@@ -874,7 +949,7 @@ function renderCarDetail(paramStr) {
     <div class="detail-name">${car.name}</div>
     <div class="detail-price">${formatPriceFull(car.price)} <span class="orig">${formatPriceFull(car.originalPrice)}</span></div>
     <div class="detail-tags">
-      ${car.tags.map(t => `<span class="tag" style="padding:4px 10px;border-radius:8px;font-size:11px;background:var(--surface);color:var(--text2);border:1px solid var(--border)">${t}</span>`).join('')}
+      ${car.tags.map(t => `<span class="tag" style="padding:4px 10px;border-radius:8px;font-size:11px;background:rgba(22,22,31,0.7);color:var(--text2);border:1px solid rgba(255,255,255,0.06)">${t}</span>`).join('')}
     </div>
 
     <div class="ai-card" id="aiCard">
@@ -908,7 +983,7 @@ function renderCarDetail(paramStr) {
     <div class="similar-scroll">
       ${cars.filter(c => c.id !== car.id).map(c => `
         <div class="similar-card" onclick="navigateTo('car-detail','id=${c.id}')">
-          <div class="similar-card-img"><span class="gallery-icon">${(carIcons[c.image] || carIcons.maybach).replace('width="48"','width="32"').replace('height="48"','height="32"')}</span></div>
+          <div class="similar-card-img" style="background:linear-gradient(180deg,rgba(200,164,92,0.08) 0%,transparent 60%),linear-gradient(135deg,#1a1a26,#0f0f18)"><span class="gallery-icon">${(carIcons[c.image] || carIcons.maybach).replace('width="48"','width="32"').replace('height="48"','height="32"')}</span></div>
           <div class="similar-card-info">
             <div class="similar-card-name">${c.name}</div>
             <div class="similar-card-price">${formatPriceFull(c.price)}</div>
@@ -927,10 +1002,10 @@ function renderCarDetail(paramStr) {
     </div>
   `;
 
-  // Animate AI score bars
+  // Animate AI score bars with stagger
   setTimeout(() => {
-    document.querySelectorAll('.ai-score-bar .fill').forEach(bar => {
-      bar.style.width = bar.dataset.width + '%';
+    document.querySelectorAll('.ai-score-bar .fill').forEach((bar, i) => {
+      setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, i * 150);
     });
   }, 200);
 }
@@ -963,15 +1038,15 @@ function showAIReport(carName) {
   openModal(`
     <div style="font-size:16px;font-weight:700;margin-bottom:16px">AI 综合评估报告</div>
     <div style="font-size:13px;color:var(--text2);margin-bottom:12px">车型：${carName}</div>
-    <div style="background:var(--surface2);border-radius:10px;padding:12px;margin-bottom:12px">
+    <div style="background:rgba(28,28,40,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:12px;margin-bottom:12px">
       <div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--primary)">市场分析</div>
       <div style="font-size:12px;color:var(--text2);line-height:1.6">该车型当前市场均价为¥${(Math.random()*500000+1500000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',')}，建议售价区间在原价的75%-85%之间。近期同级别车型成交量上升12%，市场需求旺盛。</div>
     </div>
-    <div style="background:var(--surface2);border-radius:10px;padding:12px;margin-bottom:12px">
+    <div style="background:rgba(28,28,40,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:12px;margin-bottom:12px">
       <div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--success)">投资建议</div>
       <div style="font-size:12px;color:var(--text2);line-height:1.6">综合评分9.2分，属于优质车源。建议重点关注高净值客户群体，匹配度最高的是全款购房客户和企业家群体。预计在15天内可成交。</div>
     </div>
-    <div style="background:var(--surface2);border-radius:10px;padding:12px;margin-bottom:16px">
+    <div style="background:rgba(28,28,40,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:12px;margin-bottom:16px">
       <div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--info)">风险提示</div>
       <div style="font-size:12px;color:var(--text2);line-height:1.6">注意：在库时间较长可能导致贬值加速，建议适当调整定价策略。关注竞品动态，及时跟进意向客户。</div>
     </div>
@@ -997,7 +1072,7 @@ function filterMembers() {
       <div class="member-info">
         <div class="member-name">${m.name}</div>
         <div class="member-phone">${m.phone}</div>
-        <span class="member-level ${m.level === '高端私董' ? 'vip' : m.level === '入门' ? '' : 'normal'}" style="background:${m.level === '高端私董' ? 'rgba(200,164,92,0.15)' : m.level === '入门' ? 'rgba(96,165,250,0.15)' : 'var(--surface2)'};color:${m.level === '高端私董' ? 'var(--primary)' : m.level === '入门' ? 'var(--info)' : 'var(--text2)'}">${m.level}</span>
+        <span class="member-level ${m.level === '高端私董' ? 'vip' : m.level === '入门' ? '' : 'normal'}" style="background:${m.level === '高端私董' ? 'rgba(200,164,92,0.15)' : m.level === '入门' ? 'rgba(96,165,250,0.15)' : 'var(--surface2)'};color:${m.level === '高端私董' ? 'var(--primary)' : m.level === '入门' ? 'var(--info)' : 'var(--text2)'};border:1px solid ${m.level === '高端私董' ? 'rgba(200,164,92,0.2)' : m.level === '入门' ? 'rgba(96,165,250,0.2)' : 'rgba(255,255,255,0.06)'}">${m.level}</span>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </div>
@@ -1015,24 +1090,24 @@ function showMemberActions(id) {
   const m = members.find(x => x.id === id);
   openModal(`
     <div style="text-align:center;margin-bottom:16px">
-      <div class="member-avatar" style="background:${m.color};width:56px;height:56px;font-size:22px;margin:0 auto 8px">${m.avatar}</div>
+      <div class="member-avatar" style="background:${m.color};width:56px;height:56px;font-size:22px;margin:0 auto 8px;box-shadow:0 2px 12px rgba(0,0,0,0.3)">${m.avatar}</div>
       <div style="font-size:16px;font-weight:700">${m.name}</div>
       <div style="font-size:12px;color:var(--text2)">${m.phone}</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <div style="background:var(--surface2);border-radius:10px;padding:14px;text-align:center;cursor:pointer" onclick="closeModal();showToast('查看会员详情：${m.name}')">
+      <div style="background:rgba(28,28,40,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px;text-align:center;cursor:pointer" onclick="closeModal();showToast('查看会员详情：${m.name}')">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="margin-bottom:4px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         <div style="font-size:11px;color:var(--text1)">查看详情</div>
       </div>
-      <div style="background:var(--surface2);border-radius:10px;padding:14px;text-align:center;cursor:pointer" onclick="closeModal();showToast('编辑会员：${m.name}')">
+      <div style="background:rgba(28,28,40,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px;text-align:center;cursor:pointer" onclick="closeModal();showToast('编辑会员：${m.name}')">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--info)" stroke-width="2" style="margin-bottom:4px"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
         <div style="font-size:11px;color:var(--text1)">编辑会员</div>
       </div>
-      <div style="background:var(--surface2);border-radius:10px;padding:14px;text-align:center;cursor:pointer" onclick="closeModal();showToast('正在拨打 ${m.phone}...')">
+      <div style="background:rgba(28,28,40,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px;text-align:center;cursor:pointer" onclick="closeModal();showToast('正在拨打 ${m.phone}...')">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="margin-bottom:4px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <div style="font-size:11px;color:var(--text1)">拨打电话</div>
       </div>
-      <div style="background:var(--surface2);border-radius:10px;padding:14px;text-align:center;cursor:pointer" onclick="closeModal();openChatForCar('${m.name}')">
+      <div style="background:rgba(28,28,40,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px;text-align:center;cursor:pointer" onclick="closeModal();openChatForCar('${m.name}')">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" style="margin-bottom:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <div style="font-size:11px;color:var(--text1)">发送消息</div>
       </div>
@@ -1091,11 +1166,11 @@ function filterInventory() {
           <div style="font-size:14px;font-weight:600">${c.name}</div>
           <div style="font-size:11px;color:var(--text2);margin-top:2px">${c.year}年 · ${c.mileage} · ${c.status}</div>
         </div>
-        <span class="badge ${c.status === '在售' ? 'badge-success' : c.status === '已预定' ? 'badge-gold' : 'badge-gray'}">${c.status}</span>
+        <span class="badge ${c.status === '在售' ? 'badge-success' : c.status === '已预定' ? 'badge-gold' : 'badge-gray'}" style="${c.status === '在售' ? 'border:1px solid rgba(52,211,153,0.2)' : c.status === '已预定' ? 'border:1px solid rgba(200,164,92,0.2)' : ''}">${c.status}</span>
       </div>
       <div style="margin-top:10px">
         <div class="fin-row"><span>成本价</span><span>${formatPriceFull(c.cost)}</span></div>
-        <div class="fin-row"><span>售价</span><span style="color:var(--primary)">${formatPriceFull(c.price)}</span></div>
+        <div class="fin-row"><span>售价</span><span style="background:linear-gradient(135deg,#C8A45C,#E2CC8E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${formatPriceFull(c.price)}</span></div>
         <div class="fin-row"><span>利润</span><span class="positive">+${formatPriceFull(c.price - c.cost)}</span></div>
         <div class="fin-row"><span>在库天数</span><span>${c.daysInStock}天</span></div>
         <div class="fin-row"><span>累计贬值</span><span class="negative">-${formatPriceFull(c.depreciation)}</span></div>
