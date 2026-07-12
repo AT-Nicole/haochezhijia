@@ -119,8 +119,8 @@
       "version": 1,
       "createdAt": 1752220800000,
       "canvasData": {
-        "x": 2940,
-        "y": 0,
+        "x": 2064,
+        "y": 192,
         "group": 0
       },
       "devMetadata": {
@@ -327,8 +327,8 @@
       "version": 1,
       "createdAt": 1752220800000,
       "canvasData": {
-        "x": 8400,
-        "y": 0,
+        "x": 7428,
+        "y": -192,
         "group": 0
       },
       "devMetadata": {
@@ -365,6 +365,22 @@
       },
       "devMetadata": {
         "htmlSrc": "pages/luxury-ranking.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-home-landing",
+      "title": "豪车之家旗舰首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 9660,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/home-landing.html",
         "interactions": []
       }
     },
@@ -454,7 +470,7 @@
     }
   ],
   "config": {
-    "autoLayout": true,
+    "autoLayout": false,
     "deviceType": "mobile",
     "projectName": "豪车之家-移动端-白色主题",
     "designLibrary": null
