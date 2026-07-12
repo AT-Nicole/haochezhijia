@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>豪车之家 — 大湾区高端汽车服务生态</title>
+<meta name="description" content="豪车之家，大湾区高端汽车服务平台。豪车展厅、私董服务、终身管家、车友社区。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#C41E3A;--accent:#D4A843;--bg:#FAFBFC;--surface:#FFFFFF;--text:#1F2022;--text2:#6E747A;--text3:#A0A6AE;--border:rgba(0,0,0,0.05)}
+html{background:var(--bg);color:var(--text);font-family:'SF Pro Display','PingFang SC','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body{max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg)}
+
+/* Header */
+.header{position:sticky;top:0;z-index:100;background:rgba(250,251,252,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.02em}
+.header .badge{font-size:11px;background:var(--primary);color:#fff;padding:2px 8px;border-radius:20px;font-weight:500}
+
+/* Category tabs */
+.tabs{display:flex;gap:8px;padding:16px 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:500;background:var(--surface);color:var(--text2);border:1px solid var(--border);text-decoration:none;transition:all .2s;cursor:pointer}
+.tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.tab:hover:not(.active){background:#F5F6F8}
+
+/* Page grid */
+.grid{padding:4px 20px 100px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:var(--surface);border-radius:16px;padding:20px 16px;text-decoration:none;border:1px solid var(--border);transition:all .2s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;gap:8px}
+.card:active{transform:scale(0.97);opacity:0.9}
+.card-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.card-icon.red{background:rgba(196,30,58,0.08);color:var(--primary)}
+.card-icon.gold{background:rgba(212,168,67,0.12);color:var(--accent)}
+.card-icon.blue{background:rgba(59,139,235,0.08);color:#3B8BEB}
+.card-icon.green{background:rgba(43,188,142,0.08);color:#2BBC8E}
+.card-icon.gray{background:rgba(0,0,0,0.04);color:var(--text2)}
+.card h3{font-size:15px;font-weight:600;color:var(--text)}
+.card p{font-size:12px;color:var(--text3);line-height:1.4}
+.card .new-tag{position:absolute;top:8px;right:8px;font-size:10px;background:var(--primary);color:#fff;padding:1px 6px;border-radius:8px;font-weight:500}
+.card{position:relative}
+
+/* Footer */
+.footer{text-align:center;padding:32px 20px 48px;color:var(--text3);font-size:12px;line-height:1.8}
+.footer .brand{color:var(--text2);font-weight:500}
+
+/* Scroll indicator */
+.scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--surface);box-shadow:0 2px 12px rgba(0,0,0,0.1);display:none;align-items:center;justify-content:center;font-size:18px;color:var(--text2);cursor:pointer;z-index:99;border:1px solid var(--border)}
+
+/* Animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:fadeUp .4s ease both}
+.card:nth-child(1){animation-delay:.02s}.card:nth-child(2){animation-delay:.04s}
+.card:nth-child(3){animation-delay:.06s}.card:nth-child(4){animation-delay:.08s}
+.card:nth-child(5){animation-delay:.1s}.card:nth-child(6){animation-delay:.12s}
+.card:nth-child(7){animation-delay:.14s}.card:nth-child(8){animation-delay:.16s}
+.card:nth-child(9){animation-delay:.18s}.card:nth-child(10){animation-delay:.2s}
+.card:nth-child(11){animation-delay:.22s}.card:nth-child(12){animation-delay:.24s}
+.card:nth-child(13){animation-delay:.26s}.card:nth-child(14){animation-delay:.28s}
+.card:nth-child(15){animation-delay:.3s}.card:nth-child(16){animation-delay:.32s}
+.card:nth-child(17){animation-delay:.34s}.card:nth-child(18){animation-delay:.36s}
+.card:nth-child(19){animation-delay:.38s}.card:nth-child(20){animation-delay:.4s}
+.card:nth-child(21){animation-delay:.42s}.card:nth-child(22){animation-delay:.44s}
+.card:nth-child(23){animation-delay:.46s}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>豪车之家</h1>
+  <span class="badge">23 页</span>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-cat="all">全部</div>
+  <div class="tab" data-cat="core">核心功能</div>
+  <div class="tab" data-cat="service">高端服务</div>
+  <div class="tab" data-cat="content">内容生态</div>
+  <div class="tab" data-cat="ops">运营管理</div>
+</div>
+
+<div class="grid" id="grid">
+  <!-- 角色系统 -->
+  <a class="card" data-cat="core" href="pages/role-select.html"><div class="card-icon red">👤</div><h3>角色选择</h3><p>管理员/私董/经销商</p></a>
+  <a class="card" data-cat="core" href="pages/home-admin.html"><div class="card-icon gray">📊</div><h3>管理员首页</h3><p>平台数据总览</p></a>
+  <a class="card" data-cat="core" href="pages/home-vip.html"><div class="card-icon gold">👑</div><h3>私董会员首页</h3><p>VIP服务全景</p><span class="new-tag">NEW</span></a>
+  <a class="card" data-cat="core" href="pages/home-dealer.html"><div class="card-icon blue">🏪</div><h3>经销商首页</h3><p>运营数据看板</p><span class="new-tag">NEW</span></a>
+
+  <!-- 核心页面 -->
+  <a class="card" data-cat="core" href="pages/showroom.html"><div class="card-icon red">🚗</div><h3>豪车展厅</h3><p>在库车型一览</p></a>
+  <a class="card" data-cat="core" href="pages/car-detail.html"><div class="card-icon red">📋</div><h3>车辆详情</h3><p>参数/配置/评分</p></a>
+  <a class="card" data-cat="core" href="pages/crm-home.html"><div class="card-icon gray">🏠</div><h3>CRM首页</h3><p>客户管理概览</p></a>
+  <a class="card" data-cat="core" href="pages/crm-members.html"><div class="card-icon blue">👥</div><h3>会员管理</h3><p>会员列表分级</p></a>
+  <a class="card" data-cat="core" href="pages/crm-inventory.html"><div class="card-icon gray">📦</div><h3>库存台账</h3><p>车辆库存管理</p></a>
+  <a class="card" data-cat="core" href="pages/ai-chat.html"><div class="card-icon blue">🤖</div><h3>AI智能客服</h3><p>对话式购车助手</p></a>
+
+  <!-- 高端服务 -->
+  <a class="card" data-cat="service" href="pages/concierge-service.html"><div class="card-icon gold">🛎</div><h3>私董服务</h3><p>尊享定制服务</p></a>
+  <a class="card" data-cat="service" href="pages/personal-advisor.html"><div class="card-icon gold">🤵</div><h3>专属顾问</h3><p>一对一顾问</p></a>
+  <a class="card" data-cat="service" href="pages/lifetime-butler.html"><div class="card-icon gold">🔑</div><h3>终身管家</h3><p>26项终身服务</p></a>
+  <a class="card" data-cat="service" href="pages/service-tracking.html"><div class="card-icon red">📍</div><h3>服务追踪</h3><p>8步流程追踪</p></a>
+  <a class="card" data-cat="service" href="pages/business-partner.html"><div class="card-icon green">🤝</div><h3>事业合伙人</h3><p>推荐赚取佣金</p></a>
+  <a class="card" data-cat="service" href="pages/finance-center.html"><div class="card-icon blue">💳</div><h3>金融服务</h3><p>贷款/保险/置换</p><span class="new-tag">NEW</span></a>
+
+  <!-- 内容生态 -->
+  <a class="card" data-cat="content" href="pages/luxury-news.html"><div class="card-icon red">📰</div><h3>豪车资讯</h3><p>行业新闻动态</p><span class="new-tag">NEW</span></a>
+  <a class="card" data-cat="content" href="pages/owner-reviews.html"><div class="card-icon gold">⭐</div><h3>车主口碑</h3><p>真实车主评价</p><span class="new-tag">NEW</span></a>
+  <a class="card" data-cat="content" href="pages/car-community.html"><div class="card-icon green">💬</div><h3>车友圈</h3><p>车主社区互动</p><span class="new-tag">NEW</span></a>
+  <a class="card" data-cat="content" href="pages/luxury-ranking.html"><div class="card-icon red">🏆</div><h3>豪车排行</h3><p>销量/保值率/热度</p><span class="new-tag">NEW</span></a>
+  <a class="card" data-cat="content" href="pages/event-center.html"><div class="card-icon blue">🎯</div><h3>活动中心</h3><p>线下活动报名</p></a>
+
+  <!-- 运营管理 -->
+  <a class="card" data-cat="ops" href="pages/store-operations.html"><div class="card-icon gray">🏪</div><h3>门店运营</h3><p>日常运营管理</p></a>
+  <a class="card" data-cat="ops" href="pages/content-marketing.html"><div class="card-icon green">📱</div><h3>内容营销</h3><p>朋友圈素材管理</p></a>
+</div>
+
+<div class="footer">
+  <p>豪车之家 · <span class="brand">TRAE AI 创意大赛</span></p>
+  <p>大湾区高端汽车服务生态平台</p>
+</div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Tab filtering
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const cat = tab.dataset.cat;
+    document.querySelectorAll('.card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Scroll to top button
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').style.display = window.scrollY > 400 ? 'flex' : 'none';
+});
+</script>
+</body>
+</html>

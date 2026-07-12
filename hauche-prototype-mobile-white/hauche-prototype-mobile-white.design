@@ -1,0 +1,462 @@
+{
+  "data": [
+    {
+      "id": "page-crm-home",
+      "title": "CRM首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/crm-home.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-showroom",
+      "title": "豪车展厅",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 420,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/showroom.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-crm-members",
+      "title": "会员管理",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 840,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/crm-members.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-crm-inventory",
+      "title": "库存台账",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1260,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/crm-inventory.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-ai-chat",
+      "title": "AI客服对话",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1680,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/ai-chat.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-car-detail",
+      "title": "车辆详情",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 2100,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/car-detail.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-concierge-service",
+      "title": "私董服务",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 2520,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/concierge-service.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-personal-advisor",
+      "title": "专属顾问",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 2940,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/personal-advisor.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-lifetime-butler",
+      "title": "终身管家",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 3360,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/lifetime-butler.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-service-tracking",
+      "title": "服务追踪",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 3780,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/service-tracking.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-business-partner",
+      "title": "事业合伙人",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 4200,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/business-partner.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-event-center",
+      "title": "活动中心",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 4620,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/event-center.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-store-operations",
+      "title": "门店运营",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 5040,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/store-operations.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-content-marketing",
+      "title": "内容营销",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 5460,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/content-marketing.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-role-select",
+      "title": "角色选择",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 5880,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/role-select.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-home-admin",
+      "title": "管理员首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 6300,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/home-admin.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-home-vip",
+      "title": "私董会员首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 6720,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/home-vip.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-home-dealer",
+      "title": "经销商首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 7140,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/home-dealer.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-luxury-news",
+      "title": "豪车资讯",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 7560,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/luxury-news.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-owner-reviews",
+      "title": "车主口碑",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 7980,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/owner-reviews.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-car-community",
+      "title": "车友圈",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 8400,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/car-community.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-finance-center",
+      "title": "金融服务",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 8820,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/finance-center.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-luxury-ranking",
+      "title": "豪车排行",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 9240,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/luxury-ranking.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "展厅主视觉",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 0,
+        "y": 1272
+      },
+      "devMetadata": {
+        "imageSrc": "assets/showroom-hero_1.jpg"
+      }
+    },
+    {
+      "id": "image-002",
+      "title": "迈巴赫S480",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 420,
+        "y": 1272
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-maybach_1.jpg"
+      }
+    },
+    {
+      "id": "image-003",
+      "title": "展厅主视觉2",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 840,
+        "y": 1272
+      },
+      "devMetadata": {
+        "imageSrc": "assets/showroom-hero.jpg"
+      }
+    },
+    {
+      "id": "image-004",
+      "title": "迈巴赫S480-2",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1260,
+        "y": 1272
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-maybach.jpg"
+      }
+    },
+    {
+      "id": "image-005",
+      "title": "奔驰G63",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 1680,
+        "y": 1272
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-g63.jpg"
+      }
+    },
+    {
+      "id": "image-006",
+      "title": "保时捷911",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 2100,
+        "y": 1272
+      },
+      "devMetadata": {
+        "imageSrc": "assets/car-porsche.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "mobile",
+    "projectName": "豪车之家-移动端-白色主题",
+    "designLibrary": null
+  }
+}

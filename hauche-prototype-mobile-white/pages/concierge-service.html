@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私董服务</title>
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors: White Premium — NIO-Inspired Refined Red + Gold VIP ── */
+  /* 蔚来风格要点：克制用色、精确对比、75%浅色+25%深色比例 */
+  --color-primary: #C41E3A;
+  --color-primary-light: #D6344F;
+  --color-primary-lighter: rgba(196, 30, 58, 0.06);
+  --color-primary-lightest: rgba(196, 30, 58, 0.03);
+  --color-primary-dark: #9A1830;
+  --color-primary-text: #FFFFFF;
+
+  --color-accent: #D4A843;
+  --color-accent-light: #E8C06A;
+  --color-accent-lighter: rgba(212, 168, 67, 0.10);
+  --color-accent-lightest: rgba(212, 168, 67, 0.05);
+
+  /* ── Backgrounds: NIO-inspired "有温度的白" — 层次分明的暖灰梯度 ── */
+  --color-background: #FAFBFC;
+  --color-background-secondary: #F5F6F8;
+  --color-background-tertiary: #EEEEF0;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-hover: #F7F8FA;
+
+  /* ── Text: NIO风格 — 5级字重、精确对比度（9.9:1） ── */
+  --color-text-primary: #1F2022;
+  --color-text-secondary: #6E747A;
+  --color-text-tertiary: #A0A6AE;
+  --color-text-inverse: #FFFFFF;
+  --color-text-quaternary: #C8CDD3;
+
+  /* ── Borders & Dividers: NIO克制分割线 ── */
+  --color-border: rgba(0, 0, 0, 0.05);
+  --color-border-subtle: rgba(0, 0, 0, 0.03);
+  --color-divider: rgba(0, 0, 0, 0.06);
+
+  /* ── State Colors: 柔和功能性色彩 ── */
+  --state-success: #2BBC8E;
+  --state-success-bg: rgba(43, 188, 142, 0.06);
+  --state-warning: #E8A838;
+  --state-warning-bg: rgba(232, 168, 56, 0.06);
+  --state-error: #E94A47;
+  --state-error-bg: rgba(233, 74, 71, 0.06);
+  --state-info: #3B8BEB;
+  --state-info-bg: rgba(59, 139, 235, 0.06);
+
+  /* ── Typography: NIO Blue Sky Sans 灵感 — 更大字号、更舒适行高 ── */
+  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* 蔚来APP字号层级（移动端适配） */
+  --text-xs: 0.6875rem;     /* 11px - 注释/标签 */
+  --text-sm: 0.8125rem;     /* 13px - 辅助文字 */
+  --text-base: 0.875rem;    /* 14px - 正文（蔚来标准正文） */
+  --text-lg: 0.9375rem;     /* 15px - 次要标题 */
+  --text-xl: 1.0625rem;     /* 17px - 卡片标题（蔚来标准） */
+  --text-2xl: 1.25rem;      /* 20px - 页面标题 */
+  --text-3xl: 1.5rem;       /* 24px - 大标题 */
+  --text-display: 1.75rem;  /* 28px - 核心数据展示 */
+
+  /* ── Spacing: NIO"松弛有度"留白策略 ── */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── Radius: NIO大圆角 — 柔和亲切 ── */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Shadows: NIO精致阴影 — "高级精致的品质" ── */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.12);
+
+  /* ── NIO-inspired gradients ── */
+  --gradient-primary: linear-gradient(135deg, #C41E3A 0%, #9A1830 100%);
+  --gradient-accent: linear-gradient(135deg, #D4A843 0%, #B8922E 100%);
+  --gradient-sky: linear-gradient(180deg, #EDF2FF 0%, #FAFBFC 100%);
+  --gradient-warm: linear-gradient(180deg, #FFF8F0 0%, #FAFBFC 100%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-accent: var(--color-accent);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+      <!-- Top Bar -->
+      <header class="sticky top-0 z-30 bg-[var(--color-surface)]/95 backdrop-blur-sm" style="border-bottom: 1px solid var(--color-border);">
+        <div class="flex h-14 items-center px-5">
+          <button class="inline-flex h-9 w-9 items-center justify-center rounded-xl" style="color: var(--color-text-primary);" aria-label="返回">
+            <i data-lucide="arrow-left" class="h-5 w-5"></i>
+          </button>
+          <h1 class="ml-3 text-[17px] font-semibold tracking-tight" style="color: var(--color-text-primary);">私董服务</h1>
+        </div>
+      </header>
+
+      <!-- Hero Banner -->
+      <section class="mx-5 mt-5 rounded-2xl overflow-hidden" style="background: linear-gradient(135deg, #C41E3A 0%, #8B1528 60%, #D4A843 100%);">
+        <div class="px-5 py-8">
+          <p class="text-[13px] font-medium tracking-wide" style="color: rgba(255,255,255,0.7);">CHAUCHE PRIVATE OFFICE</p>
+          <h2 class="mt-3 text-[24px] font-semibold leading-tight text-wrap-balance" style="color: #FFFFFF; word-break: keep-all; text-wrap: balance;">尊享私董级定制服务</h2>
+          <p class="mt-2 text-[13px] leading-relaxed line-clamp-2" style="color: rgba(255,255,255,0.8);">为您量身打造全球顶奢用车全生命周期管家方案</p>
+        </div>
+      </section>
+
+      <!-- Service Grid -->
+      <section class="px-5 mt-6">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Card 1: 全球寻车 -->
+          <div class="bg-[var(--color-surface)] rounded-2xl p-5 transition-transform duration-200 active:scale-[0.98]" style="box-shadow: var(--shadow-card);">
+            <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl" style="background: var(--color-primary-lighter);">
+              <i data-lucide="globe" class="h-5 w-5" style="color: var(--color-primary);"></i>
+            </div>
+            <h3 class="mt-4 text-[17px] font-semibold" style="color: var(--color-text-primary);">全球寻车</h3>
+            <p class="mt-1.5 text-[13px] leading-relaxed" style="color: var(--color-text-secondary);">覆盖全球顶级车源，精准匹配您的品味</p>
+          </div>
+
+          <!-- Card 2: 极致交车仪式 -->
+          <div class="bg-[var(--color-surface)] rounded-2xl p-5 transition-transform duration-200 active:scale-[0.98]" style="box-shadow: var(--shadow-card);">
+            <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl" style="background: var(--color-accent-lightest);">
+              <i data-lucide="sparkles" class="h-5 w-5" style="color: var(--color-accent);"></i>
+            </div>
+            <h3 class="mt-4 text-[17px] font-semibold" style="color: var(--color-text-primary);">极致交车仪式</h3>
+            <p class="mt-1.5 text-[13px] leading-relaxed" style="color: var(--color-text-secondary);">专属定制交车体验，尊享非凡时刻</p>
+          </div>
+
+          <!-- Card 3: 金融定制 -->
+          <div class="bg-[var(--color-surface)] rounded-2xl p-5 transition-transform duration-200 active:scale-[0.98]" style="box-shadow: var(--shadow-card);">
+            <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl" style="background: var(--state-info-bg);">
+              <i data-lucide="landmark" class="h-5 w-5" style="color: var(--state-info);"></i>
+            </div>
+            <h3 class="mt-4 text-[17px] font-semibold" style="color: var(--color-text-primary);">金融定制</h3>
+            <p class="mt-1.5 text-[13px] leading-relaxed" style="color: var(--color-text-secondary);">灵活金融方案，优化资产配置结构</p>
+          </div>
+
+          <!-- Card 4: 税务筹划 -->
+          <div class="bg-[var(--color-surface)] rounded-2xl p-5 transition-transform duration-200 active:scale-[0.98]" style="box-shadow: var(--shadow-card);">
+            <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl" style="background: var(--state-success-bg);">
+              <i data-lucide="file-check" class="h-5 w-5" style="color: var(--state-success);"></i>
+            </div>
+            <h3 class="mt-4 text-[17px] font-semibold" style="color: var(--color-text-primary);">税务筹划</h3>
+            <p class="mt-1.5 text-[13px] leading-relaxed" style="color: var(--color-text-secondary);">专业税务咨询，合法合规降低用车成本</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom CTA -->
+      <section class="px-5 mt-8 pb-8">
+        <button class="w-full h-12 rounded-xl text-[16px] font-semibold transition-transform duration-150 active:scale-[0.98]" style="background: var(--color-primary); color: var(--color-primary-text);">
+          预约专属服务
+        </button>
+      </section>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

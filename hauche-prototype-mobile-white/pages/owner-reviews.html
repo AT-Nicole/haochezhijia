@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>车主口碑</title>
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors: White Premium — NIO-Inspired Refined Red + Gold VIP ── */
+  /* 蔚来风格要点：克制用色、精确对比、75%浅色+25%深色比例 */
+  --color-primary: #C41E3A;
+  --color-primary-light: #D6344F;
+  --color-primary-lighter: rgba(196, 30, 58, 0.06);
+  --color-primary-lightest: rgba(196, 30, 58, 0.03);
+  --color-primary-dark: #9A1830;
+  --color-primary-text: #FFFFFF;
+
+  --color-accent: #D4A843;
+  --color-accent-light: #E8C06A;
+  --color-accent-lighter: rgba(212, 168, 67, 0.10);
+  --color-accent-lightest: rgba(212, 168, 67, 0.05);
+
+  /* ── Backgrounds: NIO-inspired "有温度的白" — 层次分明的暖灰梯度 ── */
+  --color-background: #FAFBFC;
+  --color-background-secondary: #F5F6F8;
+  --color-background-tertiary: #EEEEF0;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-hover: #F7F8FA;
+
+  /* ── Text: NIO风格 — 5级字重、精确对比度（9.9:1） ── */
+  --color-text-primary: #1F2022;
+  --color-text-secondary: #6E747A;
+  --color-text-tertiary: #A0A6AE;
+  --color-text-inverse: #FFFFFF;
+  --color-text-quaternary: #C8CDD3;
+
+  /* ── Borders & Dividers: NIO克制分割线 ── */
+  --color-border: rgba(0, 0, 0, 0.05);
+  --color-border-subtle: rgba(0, 0, 0, 0.03);
+  --color-divider: rgba(0, 0, 0, 0.06);
+
+  /* ── State Colors: 柔和功能性色彩 ── */
+  --state-success: #2BBC8E;
+  --state-success-bg: rgba(43, 188, 142, 0.06);
+  --state-warning: #E8A838;
+  --state-warning-bg: rgba(232, 168, 56, 0.06);
+  --state-error: #E94A47;
+  --state-error-bg: rgba(233, 74, 71, 0.06);
+  --state-info: #3B8BEB;
+  --state-info-bg: rgba(59, 139, 235, 0.06);
+
+  /* ── Typography: NIO Blue Sky Sans 灵感 — 更大字号、更舒适行高 ── */
+  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* 蔚来APP字号层级（移动端适配） */
+  --text-xs: 0.6875rem;     /* 11px - 注释/标签 */
+  --text-sm: 0.8125rem;     /* 13px - 辅助文字 */
+  --text-base: 0.875rem;    /* 14px - 正文（蔚来标准正文） */
+  --text-lg: 0.9375rem;     /* 15px - 次要标题 */
+  --text-xl: 1.0625rem;     /* 17px - 卡片标题（蔚来标准） */
+  --text-2xl: 1.25rem;      /* 20px - 页面标题 */
+  --text-3xl: 1.5rem;       /* 24px - 大标题 */
+  --text-display: 1.75rem;  /* 28px - 核心数据展示 */
+
+  /* ── Spacing: NIO"松弛有度"留白策略 ── */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── Radius: NIO大圆角 — 柔和亲切 ── */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Shadows: NIO精致阴影 — "高级精致的品质" ── */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.12);
+
+  /* ── NIO-inspired gradients ── */
+  --gradient-primary: linear-gradient(135deg, #C41E3A 0%, #9A1830 100%);
+  --gradient-accent: linear-gradient(135deg, #D4A843 0%, #B8922E 100%);
+  --gradient-sky: linear-gradient(180deg, #EDF2FF 0%, #FAFBFC 100%);
+  --gradient-warm: linear-gradient(180deg, #FFF8F0 0%, #FAFBFC 100%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-accent: var(--color-accent);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="pb-24">
+
+        <!-- 顶部导航栏 -->
+        <header class="sticky top-0 z-30 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur">
+            <div class="flex h-14 items-center px-4">
+                <button class="inline-flex h-9 w-9 items-center justify-center rounded-lg" aria-label="返回">
+                    <i data-lucide="chevron-left" class="h-5 w-5" style="color: var(--color-text-primary)"></i>
+                </button>
+                <h1 class="flex-1 text-center text-lg font-semibold tracking-[-0.02em]" style="color: var(--color-text-primary); font-family: var(--font-display);">车主口碑</h1>
+                <div class="w-9"></div>
+            </div>
+        </header>
+
+        <!-- 搜索栏 -->
+        <div class="px-4 pt-4 pb-2">
+            <div class="flex items-center gap-2 rounded-lg px-3 py-2.5" style="background: var(--color-background-secondary);">
+                <i data-lucide="search" class="h-4 w-4 shrink-0" style="color: var(--color-text-tertiary)"></i>
+                <span class="text-sm" style="color: var(--color-text-tertiary);">搜索车型口碑</span>
+            </div>
+        </div>
+
+        <!-- 筛选Pills -->
+        <div class="px-4 pb-3">
+            <div class="flex gap-2 overflow-x-auto no-scrollbar">
+                <button class="shrink-0 inline-flex h-8 items-center justify-center rounded-lg px-4 text-sm font-medium whitespace-nowrap" style="background: var(--color-primary); color: var(--color-primary-text);">全部</button>
+                <button class="shrink-0 inline-flex h-8 items-center justify-center rounded-lg px-4 text-sm font-medium whitespace-nowrap" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">轿车</button>
+                <button class="shrink-0 inline-flex h-8 items-center justify-center rounded-lg px-4 text-sm font-medium whitespace-nowrap" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">SUV</button>
+                <button class="shrink-0 inline-flex h-8 items-center justify-center rounded-lg px-4 text-sm font-medium whitespace-nowrap" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">跑车</button>
+                <button class="shrink-0 inline-flex h-8 items-center justify-center rounded-lg px-4 text-sm font-medium whitespace-nowrap" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">新能源</button>
+            </div>
+        </div>
+
+        <!-- 口碑卡片列表 -->
+        <div class="flex flex-col gap-4 px-4">
+
+            <!-- 口碑1 — 迈巴赫S680 -->
+            <article class="rounded-xl p-4" style="background: var(--color-surface); box-shadow: var(--shadow-card);">
+                <!-- 用户信息行 -->
+                <div class="flex items-center gap-3">
+                    <div class="inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold shrink-0" style="background: var(--color-primary); color: var(--color-primary-text);">陈</div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-semibold truncate" style="color: var(--color-text-primary);">陈先生</span>
+                            <span class="inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap" style="background: linear-gradient(135deg, #D4A843 0%, #B8922E 100%); color: #FFFFFF;">黑金会员</span>
+                        </div>
+                        <span class="text-xs" style="color: var(--color-text-tertiary);">2024年12月购入</span>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <span class="text-xl font-semibold" style="color: var(--color-accent); font-family: var(--font-display);">4.8</span>
+                        <span class="text-xs" style="color: var(--color-text-tertiary);">/5.0</span>
+                    </div>
+                </div>
+
+                <!-- 星级评分 -->
+                <div class="flex items-center gap-0.5 mt-2">
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent); opacity: 0.7;"></i>
+                </div>
+
+                <!-- 8维评分条 -->
+                <div class="mt-3 space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">外观</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 98%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.9</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">内饰</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 100%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">5.0</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">空间</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 96%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.8</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">动力</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 94%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.7</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">操控</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 92%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.6</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">舒适</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 100%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">5.0</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">油耗</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 76%; background: var(--color-text-tertiary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">3.8</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">性价比</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 90%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.5</span></div>
+                </div>
+
+                <!-- 最满意 / 最不满意 -->
+                <div class="mt-4 space-y-2">
+                    <div class="flex gap-2">
+                        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-medium shrink-0" style="background: var(--state-success-bg); color: var(--state-success);">
+                            <i data-lucide="thumbs-up" class="h-3 w-3"></i>
+                        </span>
+                        <div>
+                            <span class="text-xs font-medium" style="color: var(--color-text-secondary);">最满意</span>
+                            <p class="text-sm mt-0.5" style="color: var(--color-text-primary);">后排乘坐体验无可挑剔，隔音效果顶级</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-medium shrink-0" style="background: var(--state-warning-bg); color: var(--state-warning);">
+                            <i data-lucide="thumbs-down" class="h-3 w-3"></i>
+                        </span>
+                        <div>
+                            <span class="text-xs font-medium" style="color: var(--color-text-secondary);">最不满意</span>
+                            <p class="text-sm mt-0.5" style="color: var(--color-text-primary);">城市油耗偏高</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 用车体验 -->
+                <div class="mt-3 pt-3" style="border-top: 1px solid var(--color-border-subtle);">
+                    <p class="text-sm leading-relaxed" style="color: var(--color-text-secondary);">提车半年，行驶12000公里。整体质感超越预期，高速巡航时车内几乎无噪音，后排座椅的通风按摩功能让长途出行变得轻松惬意。迈巴赫的气场在商务接待中无可替代。</p>
+                </div>
+
+                <!-- 底部操作 -->
+                <div class="flex items-center gap-4 mt-3 pt-3" style="border-top: 1px solid var(--color-border-subtle);">
+                    <button class="flex items-center gap-1 text-xs" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="message-circle" class="h-3.5 w-3.5"></i> 12
+                    </button>
+                    <button class="flex items-center gap-1 text-xs" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="heart" class="h-3.5 w-3.5"></i> 86
+                    </button>
+                    <button class="flex items-center gap-1 text-xs ml-auto" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="share-2" class="h-3.5 w-3.5"></i> 分享
+                    </button>
+                </div>
+            </article>
+
+            <!-- 口碑2 — 保时捷911 Turbo -->
+            <article class="rounded-xl p-4" style="background: var(--color-surface); box-shadow: var(--shadow-card);">
+                <!-- 用户信息行 -->
+                <div class="flex items-center gap-3">
+                    <div class="inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold shrink-0" style="background: linear-gradient(135deg, #A0A6AE 0%, #6E747A 100%); color: #FFFFFF;">林</div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-semibold truncate" style="color: var(--color-text-primary);">林女士</span>
+                            <span class="inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap" style="background: linear-gradient(135deg, #8B8B93 0%, #6E6E78 100%); color: #FFFFFF;">铂金会员</span>
+                        </div>
+                        <span class="text-xs" style="color: var(--color-text-tertiary);">2025年3月购入</span>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <span class="text-xl font-semibold" style="color: var(--color-accent); font-family: var(--font-display);">4.9</span>
+                        <span class="text-xs" style="color: var(--color-text-tertiary);">/5.0</span>
+                    </div>
+                </div>
+
+                <!-- 星级评分 -->
+                <div class="flex items-center gap-0.5 mt-2">
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent); opacity: 0.9;"></i>
+                </div>
+
+                <!-- 8维评分条 -->
+                <div class="mt-3 space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">外观</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 100%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">5.0</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">内饰</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 96%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.8</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">空间</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 70%; background: var(--color-text-tertiary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">3.5</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">动力</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 100%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">5.0</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">操控</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 100%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">5.0</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">舒适</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 90%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.5</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">油耗</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 70%; background: var(--color-text-tertiary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">3.5</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">性价比</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 84%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.2</span></div>
+                </div>
+
+                <!-- 最满意 / 最不满意 -->
+                <div class="mt-4 space-y-2">
+                    <div class="flex gap-2">
+                        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-medium shrink-0" style="background: var(--state-success-bg); color: var(--state-success);">
+                            <i data-lucide="thumbs-up" class="h-3 w-3"></i>
+                        </span>
+                        <div>
+                            <span class="text-xs font-medium" style="color: var(--color-text-secondary);">最满意</span>
+                            <p class="text-sm mt-0.5" style="color: var(--color-text-primary);">纯粹的驾驶乐趣，弯道表现惊人</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-medium shrink-0" style="background: var(--state-warning-bg); color: var(--state-warning);">
+                            <i data-lucide="thumbs-down" class="h-3 w-3"></i>
+                        </span>
+                        <div>
+                            <span class="text-xs font-medium" style="color: var(--color-text-secondary);">最不满意</span>
+                            <p class="text-sm mt-0.5" style="color: var(--color-text-primary);">后排几乎无法使用</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 用车体验 -->
+                <div class="mt-3 pt-3" style="border-top: 1px solid var(--color-border-subtle);">
+                    <p class="text-sm leading-relaxed" style="color: var(--color-text-secondary);">作为保时捷忠实粉丝，终于圆了911的梦想。3.7秒的百公里加速让人肾上腺素飙升，水平对置发动机的声浪纯粹而迷人。日常通勤也完全够用，悬挂在舒适模式下的滤震表现超出预期。</p>
+                </div>
+
+                <!-- 底部操作 -->
+                <div class="flex items-center gap-4 mt-3 pt-3" style="border-top: 1px solid var(--color-border-subtle);">
+                    <button class="flex items-center gap-1 text-xs" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="message-circle" class="h-3.5 w-3.5"></i> 28
+                    </button>
+                    <button class="flex items-center gap-1 text-xs" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="heart" class="h-3.5 w-3.5"></i> 153
+                    </button>
+                    <button class="flex items-center gap-1 text-xs ml-auto" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="share-2" class="h-3.5 w-3.5"></i> 分享
+                    </button>
+                </div>
+            </article>
+
+            <!-- 口碑3 — 奔驰G63 AMG -->
+            <article class="rounded-xl p-4" style="background: var(--color-surface); box-shadow: var(--shadow-card);">
+                <!-- 用户信息行 -->
+                <div class="flex items-center gap-3">
+                    <div class="inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold shrink-0" style="background: var(--color-primary); color: var(--color-primary-text);">王</div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-semibold truncate" style="color: var(--color-text-primary);">王总</span>
+                            <span class="inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap" style="background: linear-gradient(135deg, #D4A843 0%, #B8922E 100%); color: #FFFFFF;">黑金会员</span>
+                        </div>
+                        <span class="text-xs" style="color: var(--color-text-tertiary);">2025年1月购入</span>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <span class="text-xl font-semibold" style="color: var(--color-accent); font-family: var(--font-display);">4.7</span>
+                        <span class="text-xs" style="color: var(--color-text-tertiary);">/5.0</span>
+                    </div>
+                </div>
+
+                <!-- 星级评分 -->
+                <div class="flex items-center gap-0.5 mt-2">
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent);"></i>
+                    <i data-lucide="star" class="h-3.5 w-3.5" style="color: var(--color-accent); fill: var(--color-accent); opacity: 0.6;"></i>
+                </div>
+
+                <!-- 8维评分条 -->
+                <div class="mt-3 space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">外观</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 98%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.9</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">内饰</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 94%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.7</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">空间</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 88%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.4</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">动力</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 96%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.8</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">操控</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 90%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.5</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">舒适</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 84%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.2</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">油耗</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 62%; background: var(--color-text-tertiary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">3.1</span></div>
+                    <div class="flex items-center gap-2"><span class="w-8 text-xs shrink-0" style="color: var(--color-text-secondary);">性价比</span><div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: var(--color-background-secondary);"><div class="h-full rounded-full" style="width: 88%; background: var(--color-primary);"></div></div><span class="w-6 text-xs text-right shrink-0" style="color: var(--color-text-tertiary);">4.4</span></div>
+                </div>
+
+                <!-- 最满意 / 最不满意 -->
+                <div class="mt-4 space-y-2">
+                    <div class="flex gap-2">
+                        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-medium shrink-0" style="background: var(--state-success-bg); color: var(--state-success);">
+                            <i data-lucide="thumbs-up" class="h-3 w-3"></i>
+                        </span>
+                        <div>
+                            <span class="text-xs font-medium" style="color: var(--color-text-secondary);">最满意</span>
+                            <p class="text-sm mt-0.5" style="color: var(--color-text-primary);">气场强大，回头率极高</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-medium shrink-0" style="background: var(--state-warning-bg); color: var(--state-warning);">
+                            <i data-lucide="thumbs-down" class="h-3 w-3"></i>
+                        </span>
+                        <div>
+                            <span class="text-xs font-medium" style="color: var(--color-text-secondary);">最不满意</span>
+                            <p class="text-sm mt-0.5" style="color: var(--color-text-primary);">油耗确实不低，市区百公里15L+</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 用车体验 -->
+                <div class="mt-3 pt-3" style="border-top: 1px solid var(--color-border-subtle);">
+                    <p class="text-sm leading-relaxed" style="color: var(--color-text-secondary);">G63就是那种开在路上自带BGM的车。V8双涡轮的声浪浑厚有力，AMG运动排气在隧道里的回响让人沉醉。方盒子的经典造型经久不衰，越野能力远超日常需求，但就是让人安心。</p>
+                </div>
+
+                <!-- 底部操作 -->
+                <div class="flex items-center gap-4 mt-3 pt-3" style="border-top: 1px solid var(--color-border-subtle);">
+                    <button class="flex items-center gap-1 text-xs" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="message-circle" class="h-3.5 w-3.5"></i> 34
+                    </button>
+                    <button class="flex items-center gap-1 text-xs" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="heart" class="h-3.5 w-3.5"></i> 201
+                    </button>
+                    <button class="flex items-center gap-1 text-xs ml-auto" style="color: var(--color-text-tertiary);">
+                        <i data-lucide="share-2" class="h-3.5 w-3.5"></i> 分享
+                    </button>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- 底部固定CTA -->
+        <div class="fixed bottom-0 inset-x-0 z-40 px-4 pb-6 pt-3" style="background: linear-gradient(to top, var(--color-background) 60%, transparent);">
+            <button class="flex w-full items-center justify-center rounded-lg h-12 text-sm font-semibold whitespace-nowrap" style="background: var(--color-primary); color: var(--color-primary-text); box-shadow: 0 4px 16px rgba(196, 30, 58, 0.25); transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);" data-dom-id="cta-write-review">
+                <i data-lucide="pen-line" class="h-4 w-4 mr-2"></i>写我的口碑
+            </button>
+        </div>
+
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
