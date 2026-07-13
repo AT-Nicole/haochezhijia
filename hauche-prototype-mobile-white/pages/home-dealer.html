@@ -6,66 +6,66 @@
     <title>经销商首页</title>
     <style id="theme-vars">
 :root {
-  /* ── Brand Colors: White Premium — NIO-Inspired Refined Red + Gold VIP ── */
-  /* 蔚来风格要点：克制用色、精确对比、75%浅色+25%深色比例 */
-  --color-primary: #C41E3A;
-  --color-primary-light: #D6344F;
-  --color-primary-lighter: rgba(196, 30, 58, 0.06);
-  --color-primary-lightest: rgba(196, 30, 58, 0.03);
-  --color-primary-dark: #9A1830;
+  /* ── Brand Colors: Ferrari Rosso Corsa ── */
+  --color-primary: #DA291C;
+  --color-primary-light: #E8403A;
+  --color-primary-lighter: rgba(218, 41, 28, 0.06);
+  --color-primary-lightest: rgba(218, 41, 28, 0.03);
+  --color-primary-dark: #B01E0A;
+  --color-primary-active: #9D2211;
   --color-primary-text: #FFFFFF;
 
-  --color-accent: #D4A843;
-  --color-accent-light: #E8C06A;
-  --color-accent-lighter: rgba(212, 168, 67, 0.10);
-  --color-accent-lightest: rgba(212, 168, 67, 0.05);
+  /* ── Accent: Giallo Modena ── */
+  --color-accent: #E8B800;
+  --color-accent-light: #F0CC44;
+  --color-accent-lighter: rgba(232, 184, 0, 0.10);
+  --color-accent-lightest: rgba(232, 184, 0, 0.05);
 
-  /* ── Backgrounds: NIO-inspired "有温度的白" — 层次分明的暖灰梯度 ── */
-  --color-background: #FAFBFC;
-  --color-background-secondary: #F5F6F8;
-  --color-background-tertiary: #EEEEF0;
+  /* ── Backgrounds ── */
+  --color-background: #FAFAFA;
+  --color-background-secondary: #F3F3F3;
+  --color-background-tertiary: #E8E8E8;
   --color-surface: #FFFFFF;
   --color-surface-elevated: #FFFFFF;
-  --color-surface-hover: #F7F8FA;
+  --color-surface-hover: #F5F5F5;
 
-  /* ── Text: NIO风格 — 5级字重、精确对比度（9.9:1） ── */
-  --color-text-primary: #1F2022;
-  --color-text-secondary: #6E747A;
-  --color-text-tertiary: #A0A6AE;
+  /* ── Text ── */
+  --color-text-primary: #181818;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #8F8F8F;
   --color-text-inverse: #FFFFFF;
-  --color-text-quaternary: #C8CDD3;
+  --color-text-quaternary: #B0B0B0;
 
-  /* ── Borders & Dividers: NIO克制分割线 ── */
-  --color-border: rgba(0, 0, 0, 0.05);
-  --color-border-subtle: rgba(0, 0, 0, 0.03);
-  --color-divider: rgba(0, 0, 0, 0.06);
+  /* ── Borders ── */
+  --color-border: #CCCCCC;
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-divider: rgba(0, 0, 0, 0.08);
 
-  /* ── State Colors: 柔和功能性色彩 ── */
-  --state-success: #2BBC8E;
-  --state-success-bg: rgba(43, 188, 142, 0.06);
+  /* ── State Colors ── */
+  --state-success: #03904A;
+  --state-success-bg: rgba(3, 144, 74, 0.06);
   --state-warning: #E8A838;
   --state-warning-bg: rgba(232, 168, 56, 0.06);
-  --state-error: #E94A47;
-  --state-error-bg: rgba(233, 74, 71, 0.06);
-  --state-info: #3B8BEB;
-  --state-info-bg: rgba(59, 139, 235, 0.06);
+  --state-error: #F13A2C;
+  --state-error-bg: rgba(241, 58, 44, 0.06);
+  --state-info: #4C98B9;
+  --state-info-bg: rgba(76, 152, 185, 0.06);
 
-  /* ── Typography: NIO Blue Sky Sans 灵感 — 更大字号、更舒适行高 ── */
-  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* ── Typography ── */
+  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
 
-  /* 蔚来APP字号层级（移动端适配） */
-  --text-xs: 0.6875rem;     /* 11px - 注释/标签 */
-  --text-sm: 0.8125rem;     /* 13px - 辅助文字 */
-  --text-base: 0.875rem;    /* 14px - 正文（蔚来标准正文） */
-  --text-lg: 0.9375rem;     /* 15px - 次要标题 */
-  --text-xl: 1.0625rem;     /* 17px - 卡片标题（蔚来标准） */
-  --text-2xl: 1.25rem;      /* 20px - 页面标题 */
-  --text-3xl: 1.5rem;       /* 24px - 大标题 */
-  --text-display: 1.75rem;  /* 28px - 核心数据展示 */
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+  --text-display: 1.75rem;
 
-  /* ── Spacing: NIO"松弛有度"留白策略 ── */
+  /* ── Spacing ── */
   --space-0-5: 2px;
   --space-1: 4px;
   --space-2: 8px;
@@ -77,31 +77,29 @@
   --space-10: 40px;
   --space-12: 48px;
 
-  /* ── Radius: NIO大圆角 — 柔和亲切 ── */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  /* ── Radius ── */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-full: 9999px;
 
-  /* ── Shadows: NIO精致阴影 — "高级精致的品质" ── */
+  /* ── Shadows ── */
   --shadow-none: none;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
-  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.10);
-  --shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-card: none;
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.12);
 
-  /* ── NIO-inspired gradients ── */
-  --gradient-primary: linear-gradient(135deg, #C41E3A 0%, #9A1830 100%);
-  --gradient-accent: linear-gradient(135deg, #D4A843 0%, #B8922E 100%);
-  --gradient-sky: linear-gradient(180deg, #EDF2FF 0%, #FAFBFC 100%);
-  --gradient-warm: linear-gradient(180deg, #FFF8F0 0%, #FAFBFC 100%);
+  --gradient-primary: linear-gradient(135deg, #DA291C 0%, #B01E0A 100%);
+  --gradient-accent: linear-gradient(135deg, #E8B800 0%, #C49E00 100%);
+  --gradient-dark: linear-gradient(180deg, #000000 0%, #181818 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
 }
-
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
@@ -136,202 +134,188 @@
     </style>
 </head>
 <body class="min-h-screen font-sans antialiased">
-    <main class="pb-[84px]">
-        <!-- Header -->
-        <header class="sticky top-0 z-20" style="background: var(--color-background);">
-            <div class="flex items-center justify-between px-4 pt-4 pb-3">
-                <div>
-                    <h1 class="text-[20px] font-semibold leading-tight" style="color: var(--color-text-primary); text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">今日概览</h1>
-                    <p class="text-[13px] mt-1" style="color: var(--color-text-tertiary);">2026年7月12日 周日</p>
-                </div>
-                <button class="inline-flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-150" style="background: var(--color-surface); box-shadow: var(--shadow-card);" aria-label="设置">
-                    <i data-lucide="settings" class="w-[18px] h-[18px]" style="color: var(--color-text-secondary);"></i>
-                </button>
-            </div>
-        </header>
-
-        <div class="px-4 space-y-4">
-
-            <!-- Today Stats -->
-            <section class="grid grid-cols-3 gap-3" aria-label="今日数据">
-                <!-- 到店客流 -->
-                <div class="rounded-[16px] p-3 text-center" style="background: var(--color-surface); box-shadow: var(--shadow-card);">
-                    <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg mb-2" style="background: var(--color-primary-lighter);">
-                        <i data-lucide="users" class="w-4 h-4" style="color: var(--color-primary);"></i>
-                    </div>
-                    <p class="text-[24px] font-semibold leading-none" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">28</p>
-                    <p class="text-[11px] mt-1.5 leading-tight" style="color: var(--color-text-secondary);">到店客流</p>
-                </div>
-                <!-- 试驾预约 -->
-                <div class="rounded-[16px] p-3 text-center" style="background: var(--color-surface); box-shadow: var(--shadow-card);">
-                    <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg mb-2" style="background: rgba(59, 139, 235, 0.08);">
-                        <i data-lucide="car" class="w-4 h-4" style="color: var(--state-info);"></i>
-                    </div>
-                    <p class="text-[24px] font-semibold leading-none" style="color: var(--color-text-primary);">5</p>
-                    <p class="text-[11px] mt-1.5 leading-tight" style="color: var(--color-text-secondary);">试驾预约</p>
-                </div>
-                <!-- 成交 -->
-                <div class="rounded-[16px] p-3 text-center" style="background: var(--color-surface); box-shadow: var(--shadow-card);">
-                    <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg mb-2" style="background: var(--color-accent-lightest);">
-                        <i data-lucide="trophy" class="w-4 h-4" style="color: var(--color-accent);"></i>
-                    </div>
-                    <p class="text-[24px] font-semibold leading-none" style="color: var(--color-text-primary);">2</p>
-                    <p class="text-[11px] mt-1.5 leading-tight" style="color: var(--color-text-secondary);">成交</p>
-                </div>
-            </section>
-
-            <!-- Task List -->
-            <section class="rounded-[16px] p-4" style="background: var(--color-surface); box-shadow: var(--shadow-card);" aria-label="待办事项">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">待办事项</h2>
-                    <span class="text-[12px]" style="color: var(--color-text-tertiary);">3项待处理</span>
-                </div>
-                <ul class="space-y-0">
-                    <!-- Task 1 -->
-                    <li class="flex items-start gap-3 py-3 border-b" style="border-color: var(--color-border-subtle);">
-                        <div class="mt-0.5 shrink-0">
-                            <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-150 cursor-pointer" style="border-color: var(--color-primary);" data-dom-id="task-check-1"></div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-[14px] leading-snug" style="color: var(--color-text-primary);">联系王先生确认试驾时间</p>
-                            <p class="text-[12px] mt-1" style="color: var(--color-text-tertiary);">今天 14:00</p>
-                        </div>
-                        <span class="shrink-0 text-[11px] px-2 py-0.5 rounded-md whitespace-nowrap" style="background: var(--color-primary-lighter); color: var(--color-primary);">紧急</span>
-                    </li>
-                    <!-- Task 2 -->
-                    <li class="flex items-start gap-3 py-3 border-b" style="border-color: var(--color-border-subtle);">
-                        <div class="mt-0.5 shrink-0">
-                            <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-150 cursor-pointer" style="border-color: var(--color-text-quaternary);" data-dom-id="task-check-2"></div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-[14px] leading-snug" style="color: var(--color-text-primary);">提交本周销售报表</p>
-                            <p class="text-[12px] mt-1" style="color: var(--color-text-tertiary);">今天 18:00</p>
-                        </div>
-                    </li>
-                    <!-- Task 3 -->
-                    <li class="flex items-start gap-3 py-3">
-                        <div class="mt-0.5 shrink-0">
-                            <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-150 cursor-pointer" style="border-color: var(--color-text-quaternary);" data-dom-id="task-check-3"></div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-[14px] leading-snug" style="color: var(--color-text-primary);">更新展厅车辆陈列方案</p>
-                            <p class="text-[12px] mt-1" style="color: var(--color-text-tertiary);">明天 10:00</p>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <!-- Inventory Summary -->
-            <section class="rounded-[16px] p-4" style="background: var(--color-surface); box-shadow: var(--shadow-card);" aria-label="库存概览">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">库存概览</h2>
-                    <button class="text-[12px] flex items-center gap-0.5 transition-colors duration-150 whitespace-nowrap" style="color: var(--color-primary);" data-dom-id="view-inventory">
-                        查看详情
-                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-                    </button>
-                </div>
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="text-center">
-                        <p class="text-[22px] font-semibold leading-none" style="color: var(--color-text-primary);">12</p>
-                        <p class="text-[11px] mt-1.5" style="color: var(--color-text-secondary);">在库</p>
-                    </div>
-                    <div class="text-center border-x" style="border-color: var(--color-border-subtle);">
-                        <p class="text-[22px] font-semibold leading-none" style="color: var(--color-accent);">3</p>
-                        <p class="text-[11px] mt-1.5" style="color: var(--color-text-secondary);">预订</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-[22px] font-semibold leading-none" style="color: var(--color-text-primary);">2</p>
-                        <p class="text-[11px] mt-1.5" style="color: var(--color-text-secondary);">在途</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Content Marketing -->
-            <section class="rounded-[16px] p-4" style="background: var(--color-surface); box-shadow: var(--shadow-card);" aria-label="营销素材">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">营销素材</h2>
-                    <span class="text-[11px] px-2 py-0.5 rounded-md whitespace-nowrap" style="background: var(--state-warning-bg); color: var(--state-warning);">待发 5条</span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <div class="flex-1 min-w-0">
-                        <p class="text-[14px] leading-snug" style="color: var(--color-text-primary);">朋友圈素材</p>
-                        <p class="text-[12px] mt-1" style="color: var(--color-text-tertiary);">本月累计浏览 1.2k</p>
-                    </div>
-                    <button class="inline-flex items-center justify-center px-4 h-9 rounded-lg text-[13px] font-medium whitespace-nowrap transition-all duration-150" style="background: var(--color-primary); color: var(--color-primary-text);" data-dom-id="publish-material">
-                        去发布
-                    </button>
-                </div>
-            </section>
-
+    <main class="pb-[72px]">
+      <!-- Header -->
+      <header class="sticky top-0 z-20" style="background: var(--color-background);">
+        <div class="flex items-center justify-between px-4 pt-4 pb-3">
+          <div>
+            <h1 class="text-[16px] font-medium leading-tight" style="color: #181818; font-family: var(--font-display); text-wrap: balance; word-break: keep-all;">今日概览</h1>
+            <p class="text-[13px] mt-1 font-normal" style="color: #8F8F8F;">2026年7月12日 周日</p>
+          </div>
+          <button class="inline-flex items-center justify-center w-9 h-9 transition-colors duration-150" style="color: #666666;" aria-label="设置" data-dom-id="settings-btn">
+            <i data-lucide="settings" class="w-[18px] h-[18px]"></i>
+          </button>
         </div>
+      </header>
 
-        <!-- Tab Bar -->
-        <nav class="fixed bottom-0 inset-x-0 z-30 border-t" style="background: var(--color-surface); border-color: var(--color-border); padding-bottom: env(safe-area-inset-bottom, 0px);" aria-label="底部导航">
-            <div class="flex items-center justify-around h-[52px]">
-                <button class="flex flex-col items-center justify-center gap-0.5 w-16 h-full" style="color: var(--color-primary);" data-dom-id="tab-home" aria-label="首页" aria-current="page">
-                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-                    <span class="text-[10px] font-medium">首页</span>
-                </button>
-                <button class="flex flex-col items-center justify-center gap-0.5 w-16 h-full transition-colors duration-150" style="color: var(--color-text-tertiary);" data-dom-id="tab-showroom" aria-label="展厅">
-                    <i data-lucide="store" class="w-5 h-5"></i>
-                    <span class="text-[10px]">展厅</span>
-                </button>
-                <button class="flex flex-col items-center justify-center gap-0.5 w-16 h-full transition-colors duration-150" style="color: var(--color-text-tertiary);" data-dom-id="tab-inventory" aria-label="库存">
-                    <i data-lucide="package" class="w-5 h-5"></i>
-                    <span class="text-[10px]">库存</span>
-                </button>
-                <button class="flex flex-col items-center justify-center gap-0.5 w-16 h-full transition-colors duration-150" style="color: var(--color-text-tertiary);" data-dom-id="tab-events" aria-label="活动">
-                    <i data-lucide="calendar" class="w-5 h-5"></i>
-                    <span class="text-[10px]">活动</span>
-                </button>
-                <button class="flex flex-col items-center justify-center gap-0.5 w-16 h-full transition-colors duration-150" style="color: var(--color-text-tertiary);" data-dom-id="tab-marketing" aria-label="营销">
-                    <i data-lucide="megaphone" class="w-5 h-5"></i>
-                    <span class="text-[10px]">营销</span>
-                </button>
-                <button class="flex flex-col items-center justify-center gap-0.5 w-16 h-full transition-colors duration-150" style="color: var(--color-text-tertiary);" data-dom-id="tab-profile" aria-label="我的">
-                    <i data-lucide="user" class="w-5 h-5"></i>
-                    <span class="text-[10px]">我的</span>
-                </button>
+      <div class="px-4 space-y-4">
+
+        <!-- Today Stats (3 cards) -->
+        <section class="grid grid-cols-3 gap-3" aria-label="今日数据">
+          <!-- 到店客流 -->
+          <div class="p-3 text-center transition-transform duration-150 active:scale-[0.97]" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);">
+            <div class="inline-flex items-center justify-center w-8 h-8 mb-2" style="background: var(--color-primary-lighter); border-radius: var(--radius-sm);">
+              <i data-lucide="users" class="w-4 h-4" style="color: var(--color-primary);"></i>
             </div>
-        </nav>
+            <p class="text-[20px] font-bold leading-none" style="color: #181818; font-variant-numeric: tabular-nums; font-family: var(--font-display);">28</p>
+            <p class="text-[11px] mt-1.5 font-normal" style="color: #666666;">到店客流</p>
+          </div>
+          <!-- 试驾预约 -->
+          <div class="p-3 text-center transition-transform duration-150 active:scale-[0.97]" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);">
+            <div class="inline-flex items-center justify-center w-8 h-8 mb-2" style="background: var(--state-info-bg); border-radius: var(--radius-sm);">
+              <i data-lucide="car" class="w-4 h-4" style="color: var(--state-info);"></i>
+            </div>
+            <p class="text-[20px] font-bold leading-none" style="color: #181818; font-variant-numeric: tabular-nums; font-family: var(--font-display);">5</p>
+            <p class="text-[11px] mt-1.5 font-normal" style="color: #666666;">试驾预约</p>
+          </div>
+          <!-- 成交 -->
+          <div class="p-3 text-center transition-transform duration-150 active:scale-[0.97]" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);">
+            <div class="inline-flex items-center justify-center w-8 h-8 mb-2" style="background: var(--color-accent-lightest); border-radius: var(--radius-sm);">
+              <i data-lucide="trophy" class="w-4 h-4" style="color: var(--color-accent);"></i>
+            </div>
+            <p class="text-[20px] font-bold leading-none" style="color: #181818; font-variant-numeric: tabular-nums; font-family: var(--font-display);">2</p>
+            <p class="text-[11px] mt-1.5 font-normal" style="color: #666666;">成交</p>
+          </div>
+        </section>
+
+        <!-- Task List -->
+        <section class="p-4" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);" aria-label="待办事项">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-[14px] font-medium" style="color: #181818; font-family: var(--font-display);">待办事项</h2>
+            <span class="text-[12px] font-normal" style="color: #8F8F8F;">3项待处理</span>
+          </div>
+          <ul class="space-y-0">
+            <!-- Task 1 -->
+            <li class="flex items-start gap-3 py-3" style="border-bottom: 1px solid var(--color-border-subtle);">
+              <div class="mt-0.5 shrink-0">
+                <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-150 cursor-pointer" style="border-color: var(--color-primary);" data-dom-id="task-check-1"></div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] leading-snug font-normal" style="color: #181818;">联系王先生确认试驾时间</p>
+                <p class="text-[12px] mt-1 font-normal" style="color: #8F8F8F;">今天 14:00</p>
+              </div>
+              <span class="shrink-0 text-[11px] px-2 py-0.5 font-medium uppercase whitespace-nowrap" style="background: var(--color-primary-lighter); color: var(--color-primary); letter-spacing: 1px; border-radius: var(--radius-sm);">紧急</span>
+            </li>
+            <!-- Task 2 -->
+            <li class="flex items-start gap-3 py-3" style="border-bottom: 1px solid var(--color-border-subtle);">
+              <div class="mt-0.5 shrink-0">
+                <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-150 cursor-pointer" style="border-color: #B0B0B0;" data-dom-id="task-check-2"></div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] leading-snug font-normal" style="color: #181818;">提交本周销售报表</p>
+                <p class="text-[12px] mt-1 font-normal" style="color: #8F8F8F;">今天 18:00</p>
+              </div>
+            </li>
+            <!-- Task 3 -->
+            <li class="flex items-start gap-3 py-3">
+              <div class="mt-0.5 shrink-0">
+                <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-150 cursor-pointer" style="border-color: #B0B0B0;" data-dom-id="task-check-3"></div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] leading-snug font-normal" style="color: #181818;">更新展厅车辆陈列方案</p>
+                <p class="text-[12px] mt-1 font-normal" style="color: #8F8F8F;">明天 10:00</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Inventory Summary -->
+        <section class="p-4" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);" aria-label="库存概览">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-[14px] font-medium" style="color: #181818; font-family: var(--font-display);">库存概览</h2>
+            <button class="text-[12px] flex items-center gap-0.5 transition-colors duration-150 whitespace-nowrap font-normal" style="color: var(--color-primary);" data-dom-id="view-inventory">
+              查看详情
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="text-center">
+              <p class="text-[20px] font-bold leading-none" style="color: #181818; font-variant-numeric: tabular-nums; font-family: var(--font-display);">12</p>
+              <p class="text-[11px] mt-1.5 font-normal" style="color: #666666;">在库</p>
+            </div>
+            <div class="text-center" style="border-left: 1px solid var(--color-border-subtle); border-right: 1px solid var(--color-border-subtle);">
+              <p class="text-[20px] font-bold leading-none" style="color: var(--color-accent); font-variant-numeric: tabular-nums; font-family: var(--font-display);">3</p>
+              <p class="text-[11px] mt-1.5 font-normal" style="color: #666666;">预订</p>
+            </div>
+            <div class="text-center">
+              <p class="text-[20px] font-bold leading-none" style="color: #181818; font-variant-numeric: tabular-nums; font-family: var(--font-display);">2</p>
+              <p class="text-[11px] mt-1.5 font-normal" style="color: #666666;">在途</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Marketing Stats -->
+        <section class="p-4" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);" aria-label="营销素材">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-[14px] font-medium" style="color: #181818; font-family: var(--font-display);">营销素材</h2>
+            <span class="text-[11px] px-2 py-0.5 font-medium whitespace-nowrap" style="background: var(--state-warning-bg); color: var(--state-warning); border-radius: var(--radius-sm);">待发 5条</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex-1 min-w-0">
+              <p class="text-[14px] font-normal leading-snug" style="color: #181818;">朋友圈素材</p>
+              <p class="text-[12px] mt-1 font-normal" style="color: #8F8F8F;">本月累计浏览 1.2k</p>
+            </div>
+            <button class="inline-flex items-center justify-center px-4 h-9 text-[13px] font-medium whitespace-nowrap transition-all duration-150 active:scale-[0.97]" style="background: var(--color-primary); color: var(--color-primary-text); border-radius: var(--radius-sm);" data-dom-id="publish-material">
+              去发布
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Tab Bar (6 tabs) -->
+      <nav class="fixed bottom-0 inset-x-0 z-30" style="background: var(--color-surface); border-top: 1px solid var(--color-border); padding-bottom: env(safe-area-inset-bottom, 0px);" aria-label="底部导航">
+        <div class="flex items-center justify-around h-[52px]">
+          <button class="flex flex-col items-center justify-center gap-0.5 w-14 h-full" style="color: var(--color-primary);" data-dom-id="tab-home" aria-label="首页" aria-current="page">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">首页</span>
+          </button>
+          <button class="flex flex-col items-center justify-center gap-0.5 w-14 h-full transition-colors duration-150" style="color: #8F8F8F;" data-dom-id="tab-showroom" aria-label="展厅">
+            <i data-lucide="store" class="w-5 h-5"></i>
+            <span class="text-[10px]">展厅</span>
+          </button>
+          <button class="flex flex-col items-center justify-center gap-0.5 w-14 h-full transition-colors duration-150" style="color: #8F8F8F;" data-dom-id="tab-inventory" aria-label="库存">
+            <i data-lucide="package" class="w-5 h-5"></i>
+            <span class="text-[10px]">库存</span>
+          </button>
+          <button class="flex flex-col items-center justify-center gap-0.5 w-14 h-full transition-colors duration-150" style="color: #8F8F8F;" data-dom-id="tab-events" aria-label="活动">
+            <i data-lucide="calendar" class="w-5 h-5"></i>
+            <span class="text-[10px]">活动</span>
+          </button>
+          <button class="flex flex-col items-center justify-center gap-0.5 w-14 h-full transition-colors duration-150" style="color: #8F8F8F;" data-dom-id="tab-marketing" aria-label="营销">
+            <i data-lucide="megaphone" class="w-5 h-5"></i>
+            <span class="text-[10px]">营销</span>
+          </button>
+          <button class="flex flex-col items-center justify-center gap-0.5 w-14 h-full transition-colors duration-150" style="color: #8F8F8F;" data-dom-id="tab-profile" aria-label="我的">
+            <i data-lucide="user" class="w-5 h-5"></i>
+            <span class="text-[10px]">我的</span>
+          </button>
+        </div>
+      </nav>
     </main>
     <style>
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
-        }
-        .tabular-nums { font-variant-numeric: tabular-nums; }
-        /* Settings button hover */
-        header button:hover { background: var(--color-surface-hover) !important; }
-        header button:active { transform: scale(0.96); }
-        /* Stats card press feedback */
-        section[aria-label="今日数据"] > div:active { transform: scale(0.97); transition: transform 120ms cubic-bezier(.2,.8,.2,1); }
-        /* Primary CTA button */
-        button[data-dom-id="publish-material"]:hover { filter: brightness(1.08); }
-        button[data-dom-id="publish-material"]:active { transform: scale(0.97); }
-        /* Tab bar items */
-        nav button:hover { opacity: 0.7; }
-        nav button:active { transform: scale(0.92); }
-        /* Task checkbox interaction */
-        .task-check { cursor: pointer; transition: all 160ms cubic-bezier(.2,.8,.2,1); }
-        .task-check:active { transform: scale(0.85); }
-        .task-check.checked { background: var(--color-primary); border-color: var(--color-primary); }
-        /* Inventory detail link */
-        button[data-dom-id="view-inventory"]:hover { opacity: 0.7; }
-        button[data-dom-id="view-inventory"]:active { transform: scale(0.97); }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      }
+      button:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
     </style>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
-        // Task checkbox toggle interaction
-        document.querySelectorAll('.task-check, [data-dom-id^="task-check"]').forEach(function(el) {
+        document.querySelectorAll('[data-dom-id^="task-check"]').forEach(function(el) {
             el.addEventListener('click', function() {
-                this.classList.toggle('checked');
-                var icon = this.querySelector('svg');
-                if (this.classList.contains('checked')) {
-                    this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-                } else {
+                var isChecked = this.style.backgroundColor === 'var(--color-primary)';
+                if (isChecked) {
+                    this.style.backgroundColor = 'transparent';
                     this.innerHTML = '';
-                    this.style.borderColor = 'var(--color-text-quaternary)';
+                    this.style.borderColor = '#B0B0B0';
+                } else {
+                    this.style.backgroundColor = 'var(--color-primary)';
+                    this.style.borderColor = 'var(--color-primary)';
+                    this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
                 }
             });
         });

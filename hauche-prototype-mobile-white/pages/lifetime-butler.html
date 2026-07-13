@@ -6,66 +6,69 @@
     <title>终身管家</title>
     <style id="theme-vars">
 :root {
-  /* ── Brand Colors: White Premium — NIO-Inspired Refined Red + Gold VIP ── */
-  /* 蔚来风格要点：克制用色、精确对比、75%浅色+25%深色比例 */
-  --color-primary: #C41E3A;
-  --color-primary-light: #D6344F;
-  --color-primary-lighter: rgba(196, 30, 58, 0.06);
-  --color-primary-lightest: rgba(196, 30, 58, 0.03);
-  --color-primary-dark: #9A1830;
+  /* ── Brand Colors: Ferrari Rosso Corsa — 赛道传承红 ── */
+  /* 法拉利数字设计: 克制的红色使用，仅用于CTA和品牌关键时刻 */
+  --color-primary: #DA291C;
+  --color-primary-light: #E8403A;
+  --color-primary-lighter: rgba(218, 41, 28, 0.06);
+  --color-primary-lightest: rgba(218, 41, 28, 0.03);
+  --color-primary-dark: #B01E0A;
+  --color-primary-active: #9D2211;
   --color-primary-text: #FFFFFF;
 
-  --color-accent: #D4A843;
-  --color-accent-light: #E8C06A;
-  --color-accent-lighter: rgba(212, 168, 67, 0.10);
-  --color-accent-lightest: rgba(212, 168, 67, 0.05);
+  /* ── Accent: 赛道黄 Giallo Modena — 法拉利盾牌传承色 ── */
+  --color-accent: #E8B800;
+  --color-accent-light: #F0CC44;
+  --color-accent-lighter: rgba(232, 184, 0, 0.10);
+  --color-accent-lightest: rgba(232, 184, 0, 0.05);
 
-  /* ── Backgrounds: NIO-inspired "有温度的白" — 层次分明的暖灰梯度 ── */
-  --color-background: #FAFBFC;
-  --color-background-secondary: #F5F6F8;
-  --color-background-tertiary: #EEEEF0;
+  /* ── Backgrounds: Ferrari Chiaroscuro — 明暗交替展厅感 ── */
+  /* 法拉利核心理念：纯白编辑面板 + 深黑沉浸区域，硬切割过渡 */
+  --color-background: #FAFAFA;
+  --color-background-secondary: #F3F3F3;
+  --color-background-tertiary: #E8E8E8;
   --color-surface: #FFFFFF;
   --color-surface-elevated: #FFFFFF;
-  --color-surface-hover: #F7F8FA;
+  --color-surface-hover: #F5F5F5;
 
-  /* ── Text: NIO风格 — 5级字重、精确对比度（9.9:1） ── */
-  --color-text-primary: #1F2022;
-  --color-text-secondary: #6E747A;
-  --color-text-tertiary: #A0A6AE;
+  /* ── Text: Ferrari双字体编辑层级 — FerrariSans灵感 ── */
+  --color-text-primary: #181818;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #8F8F8F;
   --color-text-inverse: #FFFFFF;
-  --color-text-quaternary: #C8CDD3;
+  --color-text-quaternary: #B0B0B0;
 
-  /* ── Borders & Dividers: NIO克制分割线 ── */
-  --color-border: rgba(0, 0, 0, 0.05);
-  --color-border-subtle: rgba(0, 0, 0, 0.03);
-  --color-divider: rgba(0, 0, 0, 0.06);
+  /* ── Borders & Dividers: 法拉利精准线条 ── */
+  --color-border: #CCCCCC;
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-divider: rgba(0, 0, 0, 0.08);
 
-  /* ── State Colors: 柔和功能性色彩 ── */
-  --state-success: #2BBC8E;
-  --state-success-bg: rgba(43, 188, 142, 0.06);
+  /* ── State Colors ── */
+  --state-success: #03904A;
+  --state-success-bg: rgba(3, 144, 74, 0.06);
   --state-warning: #E8A838;
   --state-warning-bg: rgba(232, 168, 56, 0.06);
-  --state-error: #E94A47;
-  --state-error-bg: rgba(233, 74, 71, 0.06);
-  --state-info: #3B8BEB;
-  --state-info-bg: rgba(59, 139, 235, 0.06);
+  --state-error: #F13A2C;
+  --state-error-bg: rgba(241, 58, 44, 0.06);
+  --state-info: #4C98B9;
+  --state-info-bg: rgba(76, 152, 185, 0.06);
 
-  /* ── Typography: NIO Blue Sky Sans 灵感 — 更大字号、更舒适行高 ── */
-  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* ── Typography: FerrariSans灵感 — 紧凑有力 ── */
+  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
 
-  /* 蔚来APP字号层级（移动端适配） */
-  --text-xs: 0.6875rem;     /* 11px - 注释/标签 */
-  --text-sm: 0.8125rem;     /* 13px - 辅助文字 */
-  --text-base: 0.875rem;    /* 14px - 正文（蔚来标准正文） */
-  --text-lg: 0.9375rem;     /* 15px - 次要标题 */
-  --text-xl: 1.0625rem;     /* 17px - 卡片标题（蔚来标准） */
-  --text-2xl: 1.25rem;      /* 20px - 页面标题 */
+  /* 法拉利字号层级 — 标题紧凑、正文舒适 */
+  --text-xs: 0.6875rem;     /* 11px - 大写标签（text-transform:uppercase + letter-spacing:1px）*/
+  --text-sm: 0.8125rem;     /* 13px - 说明文字 */
+  --text-base: 0.875rem;    /* 14px - 正文 */
+  --text-lg: 1rem;          /* 16px - 卡片标题/UI标题 */
+  --text-xl: 1.125rem;      /* 18px - 副标题 */
+  --text-2xl: 1.25rem;      /* 20px - 章节标题 */
   --text-3xl: 1.5rem;       /* 24px - 大标题 */
-  --text-display: 1.75rem;  /* 28px - 核心数据展示 */
+  --text-display: 1.75rem;   /* 28px - 核心数据/英雄标题 */
 
-  /* ── Spacing: NIO"松弛有度"留白策略 ── */
+  /* ── Spacing: 法拉利8px基础网格 ── */
   --space-0-5: 2px;
   --space-1: 4px;
   --space-2: 8px;
@@ -77,29 +80,29 @@
   --space-10: 40px;
   --space-12: 48px;
 
-  /* ── Radius: NIO大圆角 — 柔和亲切 ── */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  /* ── Radius: 法拉利剃刀级精度 — 2px标志性圆角 ── */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-full: 9999px;
 
-  /* ── Shadows: NIO精致阴影 — "高级精致的品质" ── */
+  /* ── Shadows: 法拉利扁平层次 — 近乎零阴影 ── */
   --shadow-none: none;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
-  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.10);
-  --shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-card: none;
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.12);
 
-  /* ── NIO-inspired gradients ── */
-  --gradient-primary: linear-gradient(135deg, #C41E3A 0%, #9A1830 100%);
-  --gradient-accent: linear-gradient(135deg, #D4A843 0%, #B8922E 100%);
-  --gradient-sky: linear-gradient(180deg, #EDF2FF 0%, #FAFBFC 100%);
-  --gradient-warm: linear-gradient(180deg, #FFF8F0 0%, #FAFBFC 100%);
+  /* ── Gradients: 极少使用 — 法拉利用纯色对比，不用渐变 ── */
+  --gradient-primary: linear-gradient(135deg, #DA291C 0%, #B01E0A 100%);
+  --gradient-accent: linear-gradient(135deg, #E8B800 0%, #C49E00 100%);
+  --gradient-dark: linear-gradient(180deg, #000000 0%, #181818 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
 }
 
     </style>
@@ -136,114 +139,119 @@
     </style>
 </head>
 <body class="min-h-screen font-sans antialiased">
-    <main>
+    <main data-dom-id="page-lifetime-butler">
       <!-- Top Bar -->
-      <header class="sticky top-0 z-30 bg-[var(--color-surface)]/95 backdrop-blur-sm" style="border-bottom: 1px solid var(--color-border);">
+      <header class="sticky top-0 z-30" style="background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
         <div class="flex h-14 items-center px-5">
-          <button class="inline-flex h-9 w-9 items-center justify-center rounded-xl" style="color: var(--color-text-primary);" aria-label="返回">
+          <button class="inline-flex h-9 w-9 items-center justify-center transition-colors duration-150 hover:bg-[var(--color-surface-hover)]" style="border-radius: var(--radius-sm); color: var(--color-text-primary);" aria-label="返回">
             <i data-lucide="arrow-left" class="h-5 w-5"></i>
           </button>
-          <h1 class="ml-3 text-[17px] font-semibold tracking-tight" style="color: var(--color-text-primary);">终身管家</h1>
+          <h1 class="ml-3 text-sm font-semibold tracking-wide" style="color: var(--color-text-primary); text-transform: uppercase; letter-spacing: 1px;">BUTLER</h1>
         </div>
       </header>
 
-      <!-- VIP Card Header -->
-      <section class="mx-5 mt-5 rounded-2xl overflow-hidden" style="background: linear-gradient(135deg, #D4A843 0%, #B8922E 50%, #9A7B24 100%);">
+      <!-- VIP Header - accent yellow -->
+      <section class="mx-4 mt-4 overflow-hidden" style="border-radius: var(--radius-lg); background: var(--color-accent);">
         <div class="px-5 py-6">
           <div class="flex items-center gap-2">
-            <i data-lucide="crown" class="h-5 w-5" style="color: rgba(255,255,255,0.9);"></i>
-            <span class="text-[13px] font-medium tracking-wide" style="color: rgba(255,255,255,0.8);">SVIP 尊享权益</span>
+            <i data-lucide="crown" class="h-5 w-5" style="color: rgba(0,0,0,0.7);"></i>
+            <span class="text-xs font-medium tracking-wide" style="color: rgba(0,0,0,0.65); text-transform: uppercase; letter-spacing: 1px;">SVIP 尊享权益</span>
           </div>
-          <h2 class="mt-2 text-[22px] font-semibold" style="color: #FFFFFF; word-break: keep-all; text-wrap: balance;">26项终身管家服务</h2>
-          <p class="mt-1.5 text-[13px]" style="color: rgba(255,255,255,0.75);">覆盖用车全场景，全方位守护您的出行品质</p>
+          <h2 class="mt-2 text-xl font-semibold" style="color: var(--color-text-primary); word-break: keep-all; text-wrap: balance;">26项终身管家服务</h2>
+          <p class="mt-1.5 text-xs" style="color: rgba(0,0,0,0.55);">覆盖用车全场景，全方位守护您的出行品质</p>
         </div>
       </section>
 
       <!-- Category Tabs -->
-      <nav class="px-5 mt-5 flex gap-2 overflow-x-auto no-scrollbar" aria-label="服务分类">
-        <button class="shrink-0 px-4 py-2 rounded-xl text-[13px] font-semibold transition-colors duration-150" style="background: var(--color-primary); color: var(--color-primary-text);">全部</button>
-        <button class="shrink-0 px-4 py-2 rounded-xl text-[13px] font-medium transition-colors duration-150" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">养护</button>
-        <button class="shrink-0 px-4 py-2 rounded-xl text-[13px] font-medium transition-colors duration-150" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">年审</button>
-        <button class="shrink-0 px-4 py-2 rounded-xl text-[13px] font-medium transition-colors duration-150" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">保险</button>
-        <button class="shrink-0 px-4 py-2 rounded-xl text-[13px] font-medium transition-colors duration-150" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">救援</button>
-        <button class="shrink-0 px-4 py-2 rounded-xl text-[13px] font-medium transition-colors duration-150" style="background: var(--color-background-secondary); color: var(--color-text-secondary);">生活</button>
+      <nav class="px-4 mt-5 flex gap-2 overflow-x-auto no-scrollbar" aria-label="服务分类">
+        <button class="shrink-0 px-4 py-2 text-xs font-semibold transition-colors duration-150" style="border-radius: var(--radius-sm); background: var(--color-primary); color: var(--color-primary-text); text-transform: uppercase; letter-spacing: 1px;">全部</button>
+        <button class="shrink-0 px-4 py-2 text-xs font-medium transition-colors duration-150" style="border-radius: var(--radius-sm); background: var(--color-background-secondary); color: var(--color-text-secondary);">养护</button>
+        <button class="shrink-0 px-4 py-2 text-xs font-medium transition-colors duration-150" style="border-radius: var(--radius-sm); background: var(--color-background-secondary); color: var(--color-text-secondary);">年审</button>
+        <button class="shrink-0 px-4 py-2 text-xs font-medium transition-colors duration-150" style="border-radius: var(--radius-sm); background: var(--color-background-secondary); color: var(--color-text-secondary);">保险</button>
+        <button class="shrink-0 px-4 py-2 text-xs font-medium transition-colors duration-150" style="border-radius: var(--radius-sm); background: var(--color-background-secondary); color: var(--color-text-secondary);">救援</button>
+        <button class="shrink-0 px-4 py-2 text-xs font-medium transition-colors duration-150" style="border-radius: var(--radius-sm); background: var(--color-background-secondary); color: var(--color-text-secondary);">生活</button>
       </nav>
 
       <!-- Service List -->
-      <section class="px-5 mt-4 pb-8 flex flex-col gap-3">
+      <section class="px-4 mt-4 pb-8 flex flex-col gap-3">
         <!-- Service 1 -->
-        <div class="flex items-center gap-4 bg-[var(--color-surface)] rounded-2xl p-4" style="box-shadow: var(--shadow-card);">
-          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background: var(--color-accent-lightest);">
+        <div class="flex items-center gap-3 p-4" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-accent-lightest);">
             <i data-lucide="droplets" class="h-5 w-5" style="color: var(--color-accent);"></i>
           </div>
           <div class="min-w-0 flex-1">
-            <h3 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">SVIP精洗</h3>
-            <p class="mt-0.5 text-[13px] truncate" style="color: var(--color-text-secondary);">专人精洗，内外全方位护理</p>
+            <h3 class="text-sm font-semibold" style="color: var(--color-text-primary);">SVIP精洗</h3>
+            <p class="mt-0.5 text-xs truncate" style="color: var(--color-text-secondary);">专人精洗，内外全方位护理</p>
           </div>
-          <button class="shrink-0 h-8 px-4 rounded-lg text-[13px] font-medium transition-transform duration-150 active:scale-[0.96]" style="background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
+          <button class="shrink-0 h-8 px-4 text-xs font-medium transition-all duration-150 active:scale-[0.96]" style="border-radius: var(--radius-sm); background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
         </div>
 
         <!-- Service 2 -->
-        <div class="flex items-center gap-4 bg-[var(--color-surface)] rounded-2xl p-4" style="box-shadow: var(--shadow-card);">
-          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background: var(--state-info-bg);">
-            <i data-lucide="clipboard-check" class="h-5 w-5" style="color: var(--state-info);"></i>
+        <div class="flex items-center gap-3 p-4" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-background-secondary);">
+            <i data-lucide="clipboard-check" class="h-5 w-5" style="color: var(--color-text-secondary);"></i>
           </div>
           <div class="min-w-0 flex-1">
-            <h3 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">年检代办</h3>
-            <p class="mt-0.5 text-[13px] truncate" style="color: var(--color-text-secondary);">全程代办年检，到站即走</p>
+            <h3 class="text-sm font-semibold" style="color: var(--color-text-primary);">年检代办</h3>
+            <p class="mt-0.5 text-xs truncate" style="color: var(--color-text-secondary);">全程代办年检，到站即走</p>
           </div>
-          <button class="shrink-0 h-8 px-4 rounded-lg text-[13px] font-medium transition-transform duration-150 active:scale-[0.96]" style="background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
+          <button class="shrink-0 h-8 px-4 text-xs font-medium transition-all duration-150 active:scale-[0.96]" style="border-radius: var(--radius-sm); background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
         </div>
 
         <!-- Service 3 -->
-        <div class="flex items-center gap-4 bg-[var(--color-surface)] rounded-2xl p-4" style="box-shadow: var(--shadow-card);">
-          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background: var(--state-success-bg);">
-            <i data-lucide="refresh-cw" class="h-5 w-5" style="color: var(--state-success);"></i>
+        <div class="flex items-center gap-3 p-4" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-background-secondary);">
+            <i data-lucide="refresh-cw" class="h-5 w-5" style="color: var(--color-text-secondary);"></i>
           </div>
           <div class="min-w-0 flex-1">
-            <h3 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">保险续保</h3>
-            <p class="mt-0.5 text-[13px] truncate" style="color: var(--color-text-secondary);">到期自动提醒，一键续保无忧</p>
+            <h3 class="text-sm font-semibold" style="color: var(--color-text-primary);">保险续保</h3>
+            <p class="mt-0.5 text-xs truncate" style="color: var(--color-text-secondary);">到期自动提醒，一键续保无忧</p>
           </div>
-          <button class="shrink-0 h-8 px-4 rounded-lg text-[13px] font-medium transition-transform duration-150 active:scale-[0.96]" style="background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
+          <button class="shrink-0 h-8 px-4 text-xs font-medium transition-all duration-150 active:scale-[0.96]" style="border-radius: var(--radius-sm); background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
         </div>
 
         <!-- Service 4 -->
-        <div class="flex items-center gap-4 bg-[var(--color-surface)] rounded-2xl p-4" style="box-shadow: var(--shadow-card);">
-          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background: var(--color-primary-lighter);">
+        <div class="flex items-center gap-3 p-4" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-primary-lighter);">
             <i data-lucide="siren" class="h-5 w-5" style="color: var(--color-primary);"></i>
           </div>
           <div class="min-w-0 flex-1">
-            <h3 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">24h救援</h3>
-            <p class="mt-0.5 text-[13px] truncate" style="color: var(--color-text-secondary);">全天候道路救援，30分钟极速响应</p>
+            <h3 class="text-sm font-semibold" style="color: var(--color-text-primary);">24h救援</h3>
+            <p class="mt-0.5 text-xs truncate" style="color: var(--color-text-secondary);">全天候道路救援，30分钟极速响应</p>
           </div>
-          <button class="shrink-0 h-8 px-4 rounded-lg text-[13px] font-medium transition-transform duration-150 active:scale-[0.96]" style="background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
+          <button class="shrink-0 h-8 px-4 text-xs font-medium transition-all duration-150 active:scale-[0.96]" style="border-radius: var(--radius-sm); background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
         </div>
 
         <!-- Service 5 -->
-        <div class="flex items-center gap-4 bg-[var(--color-surface)] rounded-2xl p-4" style="box-shadow: var(--shadow-card);">
-          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background: var(--state-warning-bg);">
-            <i data-lucide="user-check" class="h-5 w-5" style="color: var(--state-warning);"></i>
+        <div class="flex items-center gap-3 p-4" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-background-secondary);">
+            <i data-lucide="user-check" class="h-5 w-5" style="color: var(--color-text-secondary);"></i>
           </div>
           <div class="min-w-0 flex-1">
-            <h3 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">代驾服务</h3>
-            <p class="mt-0.5 text-[13px] truncate" style="color: var(--color-text-secondary);">专业司机代驾，安全可靠放心</p>
+            <h3 class="text-sm font-semibold" style="color: var(--color-text-primary);">代驾服务</h3>
+            <p class="mt-0.5 text-xs truncate" style="color: var(--color-text-secondary);">专业司机代驾，安全可靠放心</p>
           </div>
-          <button class="shrink-0 h-8 px-4 rounded-lg text-[13px] font-medium transition-transform duration-150 active:scale-[0.96]" style="background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
+          <button class="shrink-0 h-8 px-4 text-xs font-medium transition-all duration-150 active:scale-[0.96]" style="border-radius: var(--radius-sm); background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
         </div>
 
         <!-- Service 6 -->
-        <div class="flex items-center gap-4 bg-[var(--color-surface)] rounded-2xl p-4" style="box-shadow: var(--shadow-card);">
-          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background: var(--color-accent-lightest);">
+        <div class="flex items-center gap-3 p-4" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+          <div class="inline-flex h-10 w-10 shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-accent-lightest);">
             <i data-lucide="gift" class="h-5 w-5" style="color: var(--color-accent);"></i>
           </div>
           <div class="min-w-0 flex-1">
-            <h3 class="text-[15px] font-semibold" style="color: var(--color-text-primary);">增值服务</h3>
-            <p class="mt-0.5 text-[13px] truncate" style="color: var(--color-text-secondary);">专属增值权益，更多尊享等你开启</p>
+            <h3 class="text-sm font-semibold" style="color: var(--color-text-primary);">增值服务</h3>
+            <p class="mt-0.5 text-xs truncate" style="color: var(--color-text-secondary);">专属增值权益，更多尊享等你开启</p>
           </div>
-          <button class="shrink-0 h-8 px-4 rounded-lg text-[13px] font-medium transition-transform duration-150 active:scale-[0.96]" style="background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
+          <button class="shrink-0 h-8 px-4 text-xs font-medium transition-all duration-150 active:scale-[0.96]" style="border-radius: var(--radius-sm); background: var(--color-primary-lighter); color: var(--color-primary);">立即使用</button>
         </div>
       </section>
     </main>
+    <style>
+      @media (prefers-reduced-motion: reduce) {
+        * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      }
+    </style>
     <script>lucide.createIcons();</script>
 </body>
 </html>

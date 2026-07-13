@@ -6,66 +6,69 @@
     <title>豪车资讯</title>
     <style id="theme-vars">
 :root {
-  /* ── Brand Colors: White Premium — NIO-Inspired Refined Red + Gold VIP ── */
-  /* 蔚来风格要点：克制用色、精确对比、75%浅色+25%深色比例 */
-  --color-primary: #C41E3A;
-  --color-primary-light: #D6344F;
-  --color-primary-lighter: rgba(196, 30, 58, 0.06);
-  --color-primary-lightest: rgba(196, 30, 58, 0.03);
-  --color-primary-dark: #9A1830;
+  /* ── Brand Colors: Ferrari Rosso Corsa — 赛道传承红 ── */
+  /* 法拉利数字设计: 克制的红色使用，仅用于CTA和品牌关键时刻 */
+  --color-primary: #DA291C;
+  --color-primary-light: #E8403A;
+  --color-primary-lighter: rgba(218, 41, 28, 0.06);
+  --color-primary-lightest: rgba(218, 41, 28, 0.03);
+  --color-primary-dark: #B01E0A;
+  --color-primary-active: #9D2211;
   --color-primary-text: #FFFFFF;
 
-  --color-accent: #D4A843;
-  --color-accent-light: #E8C06A;
-  --color-accent-lighter: rgba(212, 168, 67, 0.10);
-  --color-accent-lightest: rgba(212, 168, 67, 0.05);
+  /* ── Accent: 赛道黄 Giallo Modena — 法拉利盾牌传承色 ── */
+  --color-accent: #E8B800;
+  --color-accent-light: #F0CC44;
+  --color-accent-lighter: rgba(232, 184, 0, 0.10);
+  --color-accent-lightest: rgba(232, 184, 0, 0.05);
 
-  /* ── Backgrounds: NIO-inspired "有温度的白" — 层次分明的暖灰梯度 ── */
-  --color-background: #FAFBFC;
-  --color-background-secondary: #F5F6F8;
-  --color-background-tertiary: #EEEEF0;
+  /* ── Backgrounds: Ferrari Chiaroscuro — 明暗交替展厅感 ── */
+  /* 法拉利核心理念：纯白编辑面板 + 深黑沉浸区域，硬切割过渡 */
+  --color-background: #FAFAFA;
+  --color-background-secondary: #F3F3F3;
+  --color-background-tertiary: #E8E8E8;
   --color-surface: #FFFFFF;
   --color-surface-elevated: #FFFFFF;
-  --color-surface-hover: #F7F8FA;
+  --color-surface-hover: #F5F5F5;
 
-  /* ── Text: NIO风格 — 5级字重、精确对比度（9.9:1） ── */
-  --color-text-primary: #1F2022;
-  --color-text-secondary: #6E747A;
-  --color-text-tertiary: #A0A6AE;
+  /* ── Text: Ferrari双字体编辑层级 — FerrariSans灵感 ── */
+  --color-text-primary: #181818;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #8F8F8F;
   --color-text-inverse: #FFFFFF;
-  --color-text-quaternary: #C8CDD3;
+  --color-text-quaternary: #B0B0B0;
 
-  /* ── Borders & Dividers: NIO克制分割线 ── */
-  --color-border: rgba(0, 0, 0, 0.05);
-  --color-border-subtle: rgba(0, 0, 0, 0.03);
-  --color-divider: rgba(0, 0, 0, 0.06);
+  /* ── Borders & Dividers: 法拉利精准线条 ── */
+  --color-border: #CCCCCC;
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-divider: rgba(0, 0, 0, 0.08);
 
-  /* ── State Colors: 柔和功能性色彩 ── */
-  --state-success: #2BBC8E;
-  --state-success-bg: rgba(43, 188, 142, 0.06);
+  /* ── State Colors ── */
+  --state-success: #03904A;
+  --state-success-bg: rgba(3, 144, 74, 0.06);
   --state-warning: #E8A838;
   --state-warning-bg: rgba(232, 168, 56, 0.06);
-  --state-error: #E94A47;
-  --state-error-bg: rgba(233, 74, 71, 0.06);
-  --state-info: #3B8BEB;
-  --state-info-bg: rgba(59, 139, 235, 0.06);
+  --state-error: #F13A2C;
+  --state-error-bg: rgba(241, 58, 44, 0.06);
+  --state-info: #4C98B9;
+  --state-info-bg: rgba(76, 152, 185, 0.06);
 
-  /* ── Typography: NIO Blue Sky Sans 灵感 — 更大字号、更舒适行高 ── */
-  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* ── Typography: FerrariSans灵感 — 紧凑有力 ── */
+  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
 
-  /* 蔚来APP字号层级（移动端适配） */
-  --text-xs: 0.6875rem;     /* 11px - 注释/标签 */
-  --text-sm: 0.8125rem;     /* 13px - 辅助文字 */
-  --text-base: 0.875rem;    /* 14px - 正文（蔚来标准正文） */
-  --text-lg: 0.9375rem;     /* 15px - 次要标题 */
-  --text-xl: 1.0625rem;     /* 17px - 卡片标题（蔚来标准） */
-  --text-2xl: 1.25rem;      /* 20px - 页面标题 */
+  /* 法拉利字号层级 — 标题紧凑、正文舒适 */
+  --text-xs: 0.6875rem;     /* 11px - 大写标签（text-transform:uppercase + letter-spacing:1px）*/
+  --text-sm: 0.8125rem;     /* 13px - 说明文字 */
+  --text-base: 0.875rem;    /* 14px - 正文 */
+  --text-lg: 1rem;          /* 16px - 卡片标题/UI标题 */
+  --text-xl: 1.125rem;      /* 18px - 副标题 */
+  --text-2xl: 1.25rem;      /* 20px - 章节标题 */
   --text-3xl: 1.5rem;       /* 24px - 大标题 */
-  --text-display: 1.75rem;  /* 28px - 核心数据展示 */
+  --text-display: 1.75rem;   /* 28px - 核心数据/英雄标题 */
 
-  /* ── Spacing: NIO"松弛有度"留白策略 ── */
+  /* ── Spacing: 法拉利8px基础网格 ── */
   --space-0-5: 2px;
   --space-1: 4px;
   --space-2: 8px;
@@ -77,29 +80,29 @@
   --space-10: 40px;
   --space-12: 48px;
 
-  /* ── Radius: NIO大圆角 — 柔和亲切 ── */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  /* ── Radius: 法拉利剃刀级精度 — 2px标志性圆角 ── */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-full: 9999px;
 
-  /* ── Shadows: NIO精致阴影 — "高级精致的品质" ── */
+  /* ── Shadows: 法拉利扁平层次 — 近乎零阴影 ── */
   --shadow-none: none;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
-  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.10);
-  --shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-card: none;
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.12);
 
-  /* ── NIO-inspired gradients ── */
-  --gradient-primary: linear-gradient(135deg, #C41E3A 0%, #9A1830 100%);
-  --gradient-accent: linear-gradient(135deg, #D4A843 0%, #B8922E 100%);
-  --gradient-sky: linear-gradient(180deg, #EDF2FF 0%, #FAFBFC 100%);
-  --gradient-warm: linear-gradient(180deg, #FFF8F0 0%, #FAFBFC 100%);
+  /* ── Gradients: 极少使用 — 法拉利用纯色对比，不用渐变 ── */
+  --gradient-primary: linear-gradient(135deg, #DA291C 0%, #B01E0A 100%);
+  --gradient-accent: linear-gradient(135deg, #E8B800 0%, #C49E00 100%);
+  --gradient-dark: linear-gradient(180deg, #000000 0%, #181818 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
 }
 
     </style>
@@ -137,147 +140,139 @@
 </head>
 <body class="min-h-screen font-sans antialiased">
     <main>
-      <!-- 返回导航栏 -->
-      <header class="sticky top-0 z-30 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur-sm" style="font-family: var(--font-display);">
-        <div class="flex h-12 items-center px-4">
-          <button class="inline-flex h-8 w-8 items-center justify-center rounded-lg" aria-label="返回" data-dom-id="btn-back">
-            <i data-lucide="chevron-left" class="h-5 w-5" style="color: var(--color-text-primary);"></i>
-          </button>
-          <h1 class="flex-1 text-center text-[17px] font-semibold tracking-[-0.01em]" style="color: var(--color-text-primary); text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">豪车资讯</h1>
-          <button class="inline-flex h-8 w-8 items-center justify-center rounded-lg" aria-label="搜索" data-dom-id="btn-search">
-            <i data-lucide="search" class="h-[18px] w-[18px]" style="color: var(--color-text-secondary);"></i>
-          </button>
+        <!-- Back Nav -->
+        <header class="sticky top-0 z-30 border-b border-[var(--color-border)]" style="background:var(--color-surface)">
+            <div class="flex h-12 items-center px-4">
+                <button class="flex h-8 w-8 items-center justify-center" aria-label="返回" data-dom-id="nav-back">
+                    <i data-lucide="chevron-left" class="h-5 w-5" style="color:var(--color-text-primary)"></i>
+                </button>
+                <div class="min-w-0 flex-1 text-center font-semibold text-[var(--color-text-primary)]" style="font-size:var(--text-lg)">豪车资讯</div>
+                <div class="w-8"></div>
+            </div>
+        </header>
+
+        <!-- Tabs -->
+        <nav class="sticky top-12 z-20 border-b border-[var(--color-border)] no-scrollbar" style="background:var(--color-surface)" data-dom-id="news-tabs">
+            <div class="flex gap-0 overflow-x-auto px-4" style="scrollbar-width:none">
+                <button class="shrink-0 whitespace-nowrap px-3 py-3 text-[var(--color-text-primary)]" style="font-size:var(--text-sm);font-weight:600;border-bottom:2px solid var(--color-primary)">热点</button>
+                <button class="shrink-0 whitespace-nowrap px-3 py-3 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">新车</button>
+                <button class="shrink-0 whitespace-nowrap px-3 py-3 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">评测</button>
+                <button class="shrink-0 whitespace-nowrap px-3 py-3 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">行业</button>
+                <button class="shrink-0 whitespace-nowrap px-3 py-3 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">视频</button>
+                <button class="shrink-0 whitespace-nowrap px-3 py-3 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">新能源</button>
+            </div>
+        </nav>
+
+        <div class="px-4 pb-8 pt-4">
+            <!-- Hero Article -->
+            <article class="overflow-hidden border border-[var(--color-border)]" style="border-radius:var(--radius-lg)" data-dom-id="hero-article">
+                <div class="relative">
+                    <img src="../assets/showroom-hero.jpg" alt="法拉利 SF90 XX Stradale 发布" class="aspect-[16/9] w-full object-cover">
+                    <div class="absolute inset-x-0 bottom-0 p-3" style="background:linear-gradient(to top,rgba(0,0,0,0.7),transparent)">
+                        <span class="inline-block px-2 py-0.5 font-medium" style="font-size:var(--text-xs);color:var(--color-primary-text);background:var(--color-primary);border-radius:var(--radius-sm);text-transform:uppercase;letter-spacing:1px">热点</span>
+                    </div>
+                </div>
+                <div class="p-4" style="background:var(--color-surface)">
+                    <h3 class="font-semibold text-[var(--color-text-primary)]" style="font-size:var(--text-lg);line-height:1.4">法拉利 SF90 XX Stradale 限量版正式发布</h3>
+                    <p class="mt-2 line-clamp-2 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">全新限量超跑搭载V8双涡轮增压混动系统，全球限量999台，中国配额仅30台</p>
+                    <div class="mt-3 flex items-center gap-2 text-[var(--color-text-tertiary)]" style="font-size:var(--text-xs)">
+                        <span>汽车头条</span>
+                        <span>&middot;</span>
+                        <span>2小时前</span>
+                        <span>&middot;</span>
+                        <span>1.2万阅读</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- News List -->
+            <div class="mt-4 flex flex-col gap-0">
+                <!-- Item 1 -->
+                <article class="flex gap-3 border-b border-[var(--color-divider)] py-4" data-dom-id="news-1">
+                    <img src="../assets/car-maybach.jpg" alt="迈巴赫 S680" class="h-20 w-28 shrink-0 rounded object-cover" style="border-radius:var(--radius-md)">
+                    <div class="flex min-w-0 flex-1 flex-col justify-between">
+                        <div>
+                            <h4 class="line-clamp-2 font-medium text-[var(--color-text-primary)]" style="font-size:var(--text-base)">2026款迈巴赫 S680 首次亮相上海车展</h4>
+                            <p class="mt-1 line-clamp-1 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">全新双色调车身设计语言，售价预估288万起</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--color-text-tertiary)]" style="font-size:var(--text-xs)">
+                            <span>豪车界</span><span>&middot;</span><span>5小时前</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Item 2 -->
+                <article class="flex gap-3 border-b border-[var(--color-divider)] py-4" data-dom-id="news-2">
+                    <img src="../assets/car-porsche.jpg" alt="保时捷 911 GT3 RS" class="h-20 w-28 shrink-0 rounded object-cover" style="border-radius:var(--radius-md)">
+                    <div class="flex min-w-0 flex-1 flex-col justify-between">
+                        <div>
+                            <h4 class="line-clamp-2 font-medium text-[var(--color-text-primary)]" style="font-size:var(--text-base)">保时捷 911 GT3 RS 赛道实测成绩公布</h4>
+                            <p class="mt-1 line-clamp-1 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">纽北圈速6:49.328，刷新量产车纪录</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--color-text-tertiary)]" style="font-size:var(--text-xs)">
+                            <span>懂车帝</span><span>&middot;</span><span>8小时前</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Item 3 -->
+                <article class="flex gap-3 border-b border-[var(--color-divider)] py-4" data-dom-id="news-3">
+                    <img src="../assets/car-g63.jpg" alt="奔驰 G63 AMG" class="h-20 w-28 shrink-0 rounded object-cover" style="border-radius:var(--radius-md)">
+                    <div class="flex min-w-0 flex-1 flex-col justify-between">
+                        <div>
+                            <h4 class="line-clamp-2 font-medium text-[var(--color-text-primary)]" style="font-size:var(--text-base)">奔驰 G63 AMG 暗夜特别版谍照曝光</h4>
+                            <p class="mt-1 line-clamp-1 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">全黑外观套件搭配碳纤维内饰，预计下半年上市</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--color-text-tertiary)]" style="font-size:var(--text-xs)">
+                            <span>汽车之家</span><span>&middot;</span><span>12小时前</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Item 4 -->
+                <article class="flex gap-3 border-b border-[var(--color-divider)] py-4" data-dom-id="news-4">
+                    <img src="../assets/car-maybach_1.jpg" alt="劳斯莱斯幻影" class="h-20 w-28 shrink-0 rounded object-cover" style="border-radius:var(--radius-md)">
+                    <div class="flex min-w-0 flex-1 flex-col justify-between">
+                        <div>
+                            <h4 class="line-clamp-2 font-medium text-[var(--color-text-primary)]" style="font-size:var(--text-base)">劳斯莱斯幻影长轴距版配置表曝光</h4>
+                            <p class="mt-1 line-clamp-1 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">定制星空顶棚成为标配，后排娱乐系统全面升级</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--color-text-tertiary)]" style="font-size:var(--text-xs)">
+                            <span>豪车志</span><span>&middot;</span><span>昨天</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Item 5 -->
+                <article class="flex gap-3 border-b border-[var(--color-divider)] py-4" data-dom-id="news-5">
+                    <img src="../assets/car-porsche.jpg" alt="宾利欧陆 GT" class="h-20 w-28 shrink-0 rounded object-cover" style="border-radius:var(--radius-md)">
+                    <div class="flex min-w-0 flex-1 flex-col justify-between">
+                        <div>
+                            <h4 class="line-clamp-2 font-medium text-[var(--color-text-primary)]" style="font-size:var(--text-base)">宾利欧陆 GT Speed 创下英国品牌速度纪录</h4>
+                            <p class="mt-1 line-clamp-1 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">W12发动机最终版本，限量发行333台</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--color-text-tertiary)]" style="font-size:var(--text-xs)">
+                            <span>名车志</span><span>&middot;</span><span>昨天</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Item 6 -->
+                <article class="flex gap-3 py-4" data-dom-id="news-6">
+                    <img src="../assets/car-g63.jpg" alt="兰博基尼" class="h-20 w-28 shrink-0 rounded object-cover" style="border-radius:var(--radius-md)">
+                    <div class="flex min-w-0 flex-1 flex-col justify-between">
+                        <div>
+                            <h4 class="line-clamp-2 font-medium text-[var(--color-text-primary)]" style="font-size:var(--text-base)">兰博基尼 Revuelto 中国区交付量突破200台</h4>
+                            <p class="mt-1 line-clamp-1 text-[var(--color-text-secondary)]" style="font-size:var(--text-sm)">V12混动超跑需求持续增长，等车周期缩短至6个月</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-[var(--color-text-tertiary)]" style="font-size:var(--text-xs)">
+                            <span>超级跑车</span><span>&middot;</span><span>2天前</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </div>
-      </header>
-
-      <!-- Tab 分类横向滚动 -->
-      <nav class="sticky top-12 z-20 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur-sm">
-        <div class="flex items-center gap-1 overflow-x-auto px-4 py-2.5 no-scrollbar">
-          <button class="shrink-0 inline-flex items-center justify-center whitespace-nowrap rounded-lg px-4 py-[6px] text-[13px] font-semibold" style="background: var(--color-primary-lighter); color: var(--color-primary);" data-dom-id="tab-hot" data-active="true">热点</button>
-          <button class="shrink-0 inline-flex items-center justify-center whitespace-nowrap rounded-lg px-4 py-[6px] text-[13px] font-medium transition-colors duration-150" style="color: var(--color-text-secondary);" data-dom-id="tab-new">新车</button>
-          <button class="shrink-0 inline-flex items-center justify-center whitespace-nowrap rounded-lg px-4 py-[6px] text-[13px] font-medium transition-colors duration-150" style="color: var(--color-text-secondary);" data-dom-id="tab-review">评测</button>
-          <button class="shrink-0 inline-flex items-center justify-center whitespace-nowrap rounded-lg px-4 py-[6px] text-[13px] font-medium transition-colors duration-150" style="color: var(--color-text-secondary);" data-dom-id="tab-industry">行业</button>
-          <button class="shrink-0 inline-flex items-center justify-center whitespace-nowrap rounded-lg px-4 py-[6px] text-[13px] font-medium transition-colors duration-150" style="color: var(--color-text-secondary);" data-dom-id="tab-video">视频</button>
-          <button class="shrink-0 inline-flex items-center justify-center whitespace-nowrap rounded-lg px-4 py-[6px] text-[13px] font-medium transition-colors duration-150" style="color: var(--color-text-secondary);" data-dom-id="tab-ev">新能源</button>
-        </div>
-      </nav>
-
-      <!-- 资讯信息流 -->
-      <div class="flex flex-col gap-3 px-4 pt-4 pb-6" style="font-family: var(--font-body);">
-
-        <!-- 头条卡片：大图+标题叠加 -->
-        <article class="relative overflow-hidden rounded-2xl" style="box-shadow: var(--shadow-card);" data-dom-id="article-hero">
-          <img src="../assets/showroom-hero.jpg" alt="2026粤港澳大湾区超跑嘉年华开幕" class="aspect-[16/9] w-full object-cover">
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent px-4 pb-4 pt-12">
-            <h2 class="text-[17px] font-semibold leading-snug text-white" style="text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">2026粤港澳大湾区超跑嘉年华开幕</h2>
-            <div class="mt-2 flex items-center gap-2">
-              <span class="text-[11px] text-white/80">豪车之家原创</span>
-              <span class="text-[11px] text-white/50">2小时前</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 列表项1 -->
-        <article class="flex gap-3 rounded-xl p-3" style="background: var(--color-surface); box-shadow: var(--shadow-card);" data-dom-id="article-1">
-          <img src="../assets/car-maybach.jpg" alt="迈巴赫全新S级谍照" class="h-20 w-28 shrink-0 rounded-lg object-cover">
-          <div class="flex min-w-0 flex-1 flex-col justify-between py-0.5">
-            <h3 class="line-clamp-2 text-[15px] font-medium leading-snug" style="color: var(--color-text-primary);">迈巴赫全新S级谍照曝光，内饰升级双屏联动</h3>
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] font-medium" style="color: var(--color-primary);">新车</span>
-              <span class="text-[11px]" style="color: var(--color-text-tertiary);">3小时前</span>
-              <span class="flex items-center gap-0.5 text-[11px]" style="color: var(--color-text-tertiary);">
-                <i data-lucide="eye" class="h-3 w-3"></i>2.1k
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 列表项2 -->
-        <article class="flex gap-3 rounded-xl p-3" style="background: var(--color-surface); box-shadow: var(--shadow-card);" data-dom-id="article-2">
-          <img src="../assets/car-porsche.jpg" alt="保时捷911 Dakar特别版" class="h-20 w-28 shrink-0 rounded-lg object-cover">
-          <div class="flex min-w-0 flex-1 flex-col justify-between py-0.5">
-            <h3 class="line-clamp-2 text-[15px] font-medium leading-snug" style="color: var(--color-text-primary);">保时捷911 Dakar特别版到店实拍</h3>
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] font-medium" style="color: var(--color-primary);">评测</span>
-              <span class="text-[11px]" style="color: var(--color-text-tertiary);">5小时前</span>
-              <span class="flex items-center gap-0.5 text-[11px]" style="color: var(--color-text-tertiary);">
-                <i data-lucide="image" class="h-3 w-3"></i>图文
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 列表项3 -->
-        <article class="flex gap-3 rounded-xl p-3" style="background: var(--color-surface); box-shadow: var(--shadow-card);" data-dom-id="article-3">
-          <div class="flex h-20 w-28 shrink-0 items-center justify-center rounded-lg" style="background: var(--color-primary-lightest);">
-            <i data-lucide="bar-chart-3" class="h-8 w-8" style="color: var(--color-primary); opacity: 0.4;"></i>
-          </div>
-          <div class="flex min-w-0 flex-1 flex-col justify-between py-0.5">
-            <h3 class="line-clamp-2 text-[15px] font-medium leading-snug" style="color: var(--color-text-primary);">大湾区豪车销量半年报：奔驰领跑，迈巴赫增长38%</h3>
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] font-medium" style="color: var(--color-primary);">行业</span>
-              <span class="text-[11px]" style="color: var(--color-text-tertiary);">昨天</span>
-              <span class="flex items-center gap-0.5 text-[11px]" style="color: var(--color-text-tertiary);">
-                <i data-lucide="trending-up" class="h-3 w-3"></i>数据
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 列表项4 -->
-        <article class="flex gap-3 rounded-xl p-3" style="background: var(--color-surface); box-shadow: var(--shadow-card);" data-dom-id="article-4">
-          <img src="../assets/car-maybach_1.jpg" alt="劳斯莱斯闪灵电动轿车" class="h-20 w-28 shrink-0 rounded-lg object-cover">
-          <div class="flex min-w-0 flex-1 flex-col justify-between py-0.5">
-            <h3 class="line-clamp-2 text-[15px] font-medium leading-snug" style="color: var(--color-text-primary);">劳斯莱斯闪灵电动轿车中国首交付</h3>
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] font-medium" style="color: var(--color-primary);">新车</span>
-              <span class="text-[11px]" style="color: var(--color-text-tertiary);">昨天</span>
-              <span class="flex items-center gap-0.5 text-[11px]" style="color: var(--color-text-tertiary);">
-                <i data-lucide="eye" class="h-3 w-3"></i>5.8k
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 列表项5 -->
-        <article class="flex gap-3 rounded-xl p-3" style="background: var(--color-surface); box-shadow: var(--shadow-card);" data-dom-id="article-5">
-          <div class="flex h-20 w-28 shrink-0 items-center justify-center rounded-lg" style="background: var(--color-accent-lightest);">
-            <i data-lucide="git-compare-arrows" class="h-7 w-7" style="color: var(--color-accent); opacity: 0.5;"></i>
-          </div>
-          <div class="flex min-w-0 flex-1 flex-col justify-between py-0.5">
-            <h3 class="line-clamp-2 text-[15px] font-medium leading-snug" style="color: var(--color-text-primary);">宾利添越V8对比奔驰AMG GLE 63</h3>
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] font-medium" style="color: var(--color-primary);">评测</span>
-              <span class="text-[11px]" style="color: var(--color-text-tertiary);">2天前</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 列表项6 -->
-        <article class="flex gap-3 rounded-xl p-3" style="background: var(--color-surface); box-shadow: var(--shadow-card);" data-dom-id="article-6">
-          <img src="../assets/car-g63.jpg" alt="保值率豪华车排行" class="h-20 w-28 shrink-0 rounded-lg object-cover">
-          <div class="flex min-w-0 flex-1 flex-col justify-between py-0.5">
-            <h3 class="line-clamp-2 text-[15px] font-medium leading-snug" style="color: var(--color-text-primary);">2026年保值率最高的10款豪华车</h3>
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] font-medium" style="color: var(--color-primary);">行业</span>
-              <span class="text-[11px]" style="color: var(--color-text-tertiary);">2天前</span>
-            </div>
-          </div>
-        </article>
-
-      </div>
     </main>
-    <style>
-        @media (prefers-reduced-motion: reduce) {
-          *, *::before, *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
-        }
-        article { transition: transform 120ms cubic-bezier(.2,.8,.2,1), opacity 120ms cubic-bezier(.2,.8,.2,1); }
-        article:active { transform: scale(0.985); }
-      </style>
-      <script>lucide.createIcons();</script>
-    </body>
+    <script>lucide.createIcons();</script>
+</body>
 </html>
