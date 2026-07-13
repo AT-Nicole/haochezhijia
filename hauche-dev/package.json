@@ -1,0 +1,30 @@
+{
+  "name": "hauche-miniapp",
+  "version": "1.0.0",
+  "description": "豪车之家跨端小程序 - 大湾区高端豪车平台",
+  "templateInfo": {
+    "name": "default",
+    "typescript": false,
+    "css": "sass"
+  },
+  "scripts": {
+    "dev:weapp": "taro build --type weapp --watch",
+    "dev:h5": "taro build --type h5 --watch",
+    "build:weapp": "taro build --type weapp",
+    "build:h5": "taro build --type h5"
+  },
+  "browserslist": ["last 3 versions", "Android >= 4.1", "ios >= 8"],
+  "dependencies": {
+    "@tarojs/components": "4.0.9",
+    "@tarojs/helper": "4.0.9",
+    "@tarojs/plugin-platform-weapp": "4.0.9",
+    "@tarojs/plugin-platform-h5": "4.0.9",
+    "@tarojs/runtime": "4.0.9",
+    "@tarojs/shared": "4.0.9",
+    "@tarojs/taro": "4.0.9",
+    "taro-ui": "^3.1.1",
+    "axios": "^1.6.0",
+    "dayjs": "^1.11.10",
+    "sass": "^1.69.0"
+  }
+}
