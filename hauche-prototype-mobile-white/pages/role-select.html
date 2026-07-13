@@ -137,80 +137,122 @@
     <main class="min-h-screen flex flex-col" style="background-color: var(--color-background);">
 
       <!-- Brand Header -->
-      <div class="flex flex-col items-center px-5 pt-16 pb-10">
-        <h1 class="text-[20px] font-medium tracking-tight" style="color: #181818; font-family: var(--font-display); text-wrap: balance; word-break: keep-all;">豪车之家</h1>
-        <div class="mt-3 h-[3px] w-[60px]" style="background-color: var(--color-primary);"></div>
-        <p class="mt-3 text-[13px] font-normal" style="color: #8F8F8F; font-family: var(--font-body);">大湾区高端汽车服务生态</p>
+      <div class="flex flex-col items-center px-5 pt-16 pb-8">
+        <h1 class="text-[20px] font-medium" style="color: var(--color-text-primary); font-family: var(--font-display); text-wrap: balance; word-break: keep-all;">豪车之家</h1>
+        <div class="mt-3 h-[2px] w-[60px]" style="background-color: var(--color-primary);"></div>
+        <p class="mt-3 text-[13px]" style="color: var(--color-text-tertiary); font-family: var(--font-body);">大湾区高端汽车服务平台</p>
+        <p class="mt-2 text-[11px] font-normal uppercase" style="color: var(--color-text-tertiary); letter-spacing: 1px;">全平台 · 撮合模式 · 车行入驻</p>
       </div>
 
       <!-- Role Selection Cards -->
-      <div class="flex-1 flex flex-col gap-4 px-5 pb-10">
+      <div class="flex-1 flex flex-col gap-4 px-5 pb-6">
 
-        <!-- Card 1: Platform Admin -->
+        <!-- Card 1: 买家 -->
         <button
-          class="flex items-center gap-4 cursor-pointer transition-transform duration-200 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2"
-          style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 20px; min-height: 110px; --tw-outline-color: var(--color-primary);"
-          aria-label="进入平台管理员"
-          data-dom-id="role-admin"
+          class="flex items-center gap-3 cursor-pointer transition-transform duration-200 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2"
+          style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; min-height: 90px; --tw-outline-color: var(--color-primary);"
+          aria-label="我是买家"
+          data-dom-id="role-buyer"
         >
-          <div class="flex h-12 w-12 shrink-0 items-center justify-center">
-            <i data-lucide="shield-check" class="h-6 w-6" style="color: #181818;"></i>
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style="background-color: rgba(218, 41, 28, 0.08);">
+            <i data-lucide="car" class="h-5 w-5" style="color: var(--color-primary);"></i>
           </div>
           <div class="min-w-0 flex-1 text-left">
             <div class="flex items-center gap-2">
-              <p class="text-[16px] font-medium truncate" style="color: #181818; font-family: var(--font-display);">管理员</p>
-              <span class="shrink-0 text-[11px] font-medium uppercase whitespace-nowrap" style="letter-spacing: 1px; color: var(--color-text-tertiary);">全权限</span>
+              <p class="text-[15px] font-medium truncate" style="color: var(--color-text-primary); font-family: var(--font-display);">买家</p>
+              <span class="inline-flex items-center justify-center shrink-0 text-[10px] font-semibold uppercase whitespace-nowrap rounded-full px-2 py-0.5" style="letter-spacing: 0.5px; color: var(--color-primary); background-color: rgba(218, 41, 28, 0.08);">Recommended</span>
             </div>
-            <p class="mt-1 text-[13px] line-clamp-1" style="color: #666666; font-family: var(--font-body);">全功能管理后台，数据总览与运营监控</p>
+            <p class="mt-1 text-[13px] line-clamp-1" style="color: var(--color-text-secondary); font-family: var(--font-body);">选车、资讯、社区、金融服务</p>
           </div>
-          <i data-lucide="chevron-right" class="h-5 w-5 shrink-0" style="color: #8F8F8F;"></i>
+          <i data-lucide="chevron-right" class="h-4 w-4 shrink-0" style="color: var(--color-text-tertiary);"></i>
         </button>
 
-        <!-- Card 2: VIP Member -->
+        <!-- Card 2: 车行 -->
         <button
-          class="flex items-center gap-4 cursor-pointer transition-transform duration-200 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2"
-          style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 20px; min-height: 110px; --tw-outline-color: var(--color-primary);"
-          aria-label="进入私董会员"
-          data-dom-id="role-vip"
-        >
-          <div class="flex h-12 w-12 shrink-0 items-center justify-center">
-            <i data-lucide="crown" class="h-6 w-6" style="color: var(--color-accent);"></i>
-          </div>
-          <div class="min-w-0 flex-1 text-left">
-            <div class="flex items-center gap-2">
-              <p class="text-[16px] font-medium truncate" style="color: #181818; font-family: var(--font-display);">私董会员</p>
-              <span class="shrink-0 text-[11px] font-semibold uppercase whitespace-nowrap" style="letter-spacing: 1px; color: var(--color-accent);">SVIP</span>
-            </div>
-            <p class="mt-1 text-[13px] line-clamp-1" style="color: #666666; font-family: var(--font-body);">尊享服务、专属顾问与终身管家</p>
-          </div>
-          <i data-lucide="chevron-right" class="h-5 w-5 shrink-0" style="color: #8F8F8F;"></i>
-        </button>
-
-        <!-- Card 3: Dealer Partner -->
-        <button
-          class="flex items-center gap-4 cursor-pointer transition-transform duration-200 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2"
-          style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 20px; min-height: 110px; --tw-outline-color: var(--color-primary);"
-          aria-label="进入经销商伙伴"
+          class="flex items-center gap-3 cursor-pointer transition-transform duration-200 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2"
+          style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; min-height: 90px; --tw-outline-color: var(--color-primary);"
+          aria-label="我是车行"
           data-dom-id="role-dealer"
         >
-          <div class="flex h-12 w-12 shrink-0 items-center justify-center">
-            <i data-lucide="building-2" class="h-6 w-6" style="color: #181818;"></i>
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style="background-color: rgba(76, 152, 185, 0.08);">
+            <i data-lucide="building-2" class="h-5 w-5" style="color: var(--state-info);"></i>
           </div>
           <div class="min-w-0 flex-1 text-left">
             <div class="flex items-center gap-2">
-              <p class="text-[16px] font-medium truncate" style="color: #181818; font-family: var(--font-display);">经销商伙伴</p>
-              <span class="shrink-0 text-[11px] font-medium uppercase whitespace-nowrap" style="letter-spacing: 1px; color: var(--color-text-tertiary);">商家端</span>
+              <p class="text-[15px] font-medium truncate" style="color: var(--color-text-primary); font-family: var(--font-display);">车行</p>
+              <span class="inline-flex items-center justify-center shrink-0 text-[10px] font-semibold uppercase whitespace-nowrap rounded-full px-2 py-0.5" style="letter-spacing: 0.5px; color: var(--state-info); background-color: rgba(76, 152, 185, 0.08);">豪车毒模式</span>
             </div>
-            <p class="mt-1 text-[13px] line-clamp-1" style="color: #666666; font-family: var(--font-body);">展厅运营、库存管理与营销推广</p>
+            <p class="mt-1 text-[13px] line-clamp-1" style="color: var(--color-text-secondary); font-family: var(--font-body);">发车、交付追踪、线索管理、素材</p>
           </div>
-          <i data-lucide="chevron-right" class="h-5 w-5 shrink-0" style="color: #8F8F8F;"></i>
+          <i data-lucide="chevron-right" class="h-4 w-4 shrink-0" style="color: var(--color-text-tertiary);"></i>
+        </button>
+
+        <!-- Card 3: 创作者 -->
+        <button
+          class="flex items-center gap-3 cursor-pointer transition-transform duration-200 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2"
+          style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; min-height: 90px; --tw-outline-color: var(--color-primary);"
+          aria-label="我是创作者"
+          data-dom-id="role-creator"
+        >
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style="background-color: rgba(3, 144, 74, 0.08);">
+            <i data-lucide="video" class="h-5 w-5" style="color: var(--state-success);"></i>
+          </div>
+          <div class="min-w-0 flex-1 text-left">
+            <div class="flex items-center gap-2">
+              <p class="text-[15px] font-medium truncate" style="color: var(--color-text-primary); font-family: var(--font-display);">创作者</p>
+              <span class="inline-flex items-center justify-center shrink-0 text-[10px] font-semibold uppercase whitespace-nowrap rounded-full px-2 py-0.5" style="letter-spacing: 0.5px; color: var(--state-success); background-color: rgba(3, 144, 74, 0.08);">自媒体</span>
+            </div>
+            <p class="mt-1 text-[13px] line-clamp-1" style="color: var(--color-text-secondary); font-family: var(--font-body);">图文、短视频、发圈素材、数据</p>
+          </div>
+          <i data-lucide="chevron-right" class="h-4 w-4 shrink-0" style="color: var(--color-text-tertiary);"></i>
+        </button>
+
+        <!-- Card 4: 合伙人 -->
+        <button
+          class="flex items-center gap-3 cursor-pointer transition-transform duration-200 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2"
+          style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; min-height: 90px; --tw-outline-color: var(--color-primary);"
+          aria-label="我是合伙人"
+          data-dom-id="role-partner"
+        >
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style="background-color: rgba(232, 184, 0, 0.10);">
+            <i data-lucide="users" class="h-5 w-5" style="color: var(--color-accent);"></i>
+          </div>
+          <div class="min-w-0 flex-1 text-left">
+            <div class="flex items-center gap-2">
+              <p class="text-[15px] font-medium truncate" style="color: var(--color-text-primary); font-family: var(--font-display);">合伙人</p>
+              <span class="inline-flex items-center justify-center shrink-0 text-[10px] font-semibold uppercase whitespace-nowrap rounded-full px-2 py-0.5" style="letter-spacing: 0.5px; color: var(--color-accent); background-color: rgba(232, 184, 0, 0.10);">分销</span>
+            </div>
+            <p class="mt-1 text-[13px] line-clamp-1" style="color: var(--color-text-secondary); font-family: var(--font-body);">推荐成交、赚取佣金、推广分享</p>
+          </div>
+          <i data-lucide="chevron-right" class="h-4 w-4 shrink-0" style="color: var(--color-text-tertiary);"></i>
+        </button>
+
+        <!-- Card 5: 管理员 -->
+        <button
+          class="flex items-center gap-3 cursor-pointer transition-transform duration-200 ease-[cubic-bezier(.2,.8,.2,1)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2"
+          style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; min-height: 90px; --tw-outline-color: var(--color-primary);"
+          aria-label="我是管理员"
+          data-dom-id="role-admin"
+        >
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style="background-color: rgba(0, 0, 0, 0.05);">
+            <i data-lucide="shield" class="h-5 w-5" style="color: var(--color-text-tertiary);"></i>
+          </div>
+          <div class="min-w-0 flex-1 text-left">
+            <div class="flex items-center gap-2">
+              <p class="text-[15px] font-medium truncate" style="color: var(--color-text-primary); font-family: var(--font-display);">管理员</p>
+              <span class="inline-flex items-center justify-center shrink-0 text-[10px] font-semibold uppercase whitespace-nowrap rounded-full px-2 py-0.5" style="letter-spacing: 0.5px; color: var(--color-text-tertiary); background-color: rgba(0, 0, 0, 0.05);">后台</span>
+            </div>
+            <p class="mt-1 text-[13px] line-clamp-1" style="color: var(--color-text-secondary); font-family: var(--font-body);">车行审核、内容管理、数据总览</p>
+          </div>
+          <i data-lucide="chevron-right" class="h-4 w-4 shrink-0" style="color: var(--color-text-tertiary);"></i>
         </button>
 
       </div>
 
       <!-- Footer -->
-      <footer class="pb-8 pt-4 text-center">
-        <p class="text-[11px] uppercase font-normal" style="color: #8F8F8F; letter-spacing: 1px;">TRAE AI 创意大赛</p>
+      <footer class="flex flex-col items-center gap-1 pb-8 pt-4">
+        <p class="text-[12px]" style="color: var(--color-text-tertiary);">所有车辆均来自入驻车行 · 平台不持有车辆</p>
+        <p class="text-[11px] font-normal uppercase" style="color: var(--color-text-tertiary); letter-spacing: 1px;">TRAE AI 创意大赛</p>
       </footer>
 
     </main>
