@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全国车源比价</title>
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors: Ferrari Rosso Corsa — 赛道传承红 ── */
+  --color-primary: #DA291C;
+  --color-primary-light: #E8403A;
+  --color-primary-lighter: rgba(218, 41, 28, 0.06);
+  --color-primary-lightest: rgba(218, 41, 28, 0.03);
+  --color-primary-dark: #B01E0A;
+  --color-primary-active: #9D2211;
+  --color-primary-text: #FFFFFF;
+
+  /* ── Accent: 赛道黄 Giallo Modena ── */
+  --color-accent: #E8B800;
+  --color-accent-light: #F0CC44;
+  --color-accent-lighter: rgba(232, 184, 0, 0.10);
+  --color-accent-lightest: rgba(232, 184, 0, 0.05);
+
+  /* ── Backgrounds: Ferrari Chiaroscuro ── */
+  --color-background: #FAFAFA;
+  --color-background-secondary: #F3F3F3;
+  --color-background-tertiary: #E8E8E8;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-hover: #F5F5F5;
+
+  /* ── Text: Ferrari双字体编辑层级 ── */
+  --color-text-primary: #181818;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #8F8F8F;
+  --color-text-inverse: #FFFFFF;
+  --color-text-quaternary: #B0B0B0;
+
+  /* ── Borders & Dividers ── */
+  --color-border: #CCCCCC;
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-divider: rgba(0, 0, 0, 0.08);
+
+  /* ── State Colors ── */
+  --state-success: #03904A;
+  --state-success-bg: rgba(3, 144, 74, 0.06);
+  --state-warning: #E8A838;
+  --state-warning-bg: rgba(232, 168, 56, 0.06);
+  --state-error: #F13A2C;
+  --state-error-bg: rgba(241, 58, 44, 0.06);
+  --state-info: #4C98B9;
+  --state-info-bg: rgba(76, 152, 185, 0.06);
+
+  /* ── Typography ── */
+  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+  --text-display: 1.75rem;
+
+  /* ── Spacing ── */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── Radius ── */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-card: none;
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+  /* ── Gradients ── */
+  --gradient-primary: linear-gradient(135deg, #DA291C 0%, #B01E0A 100%);
+  --gradient-accent: linear-gradient(135deg, #E8B800 0%, #C49E00 100%);
+  --gradient-dark: linear-gradient(180deg, #000000 0%, #181818 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-accent: var(--color-accent);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+      .price-row-recommended {
+        background: var(--color-primary-lightest);
+      }
+      .price-row-lowest {
+        background: var(--color-accent-lightest);
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="pb-20" data-dom-id="page-national-pricing" style="font-family: var(--font-body);">
+
+      <!-- Status Bar Spacer -->
+      <div class="h-11"></div>
+
+      <!-- Header -->
+      <div class="px-4 pt-3 pb-2">
+        <h1 class="text-[var(--text-3xl)] font-semibold" style="color: var(--color-text-primary); text-wrap: balance; word-break: keep-all;">全国车源比价</h1>
+        <p class="text-[var(--text-sm)] mt-1" style="color: var(--color-text-tertiary);">一键调取全国报价·无库存代购模式</p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="px-4 mt-3">
+        <div class="flex items-center gap-2 rounded-[var(--radius-lg)] px-3 h-11 border" style="background: var(--color-surface); border-color: var(--color-border);">
+          <i data-lucide="search" class="w-[18px] h-[18px] shrink-0" style="color: var(--color-text-tertiary);"></i>
+          <span class="flex-1 text-[var(--text-base)]" style="color: var(--color-text-quaternary);">搜索车型、品牌、车架号</span>
+          <i data-lucide="scan-line" class="w-[18px] h-[18px] shrink-0" style="color: var(--color-text-secondary);"></i>
+        </div>
+      </div>
+
+      <!-- Hot Search Tags -->
+      <div class="mt-3 overflow-x-auto no-scrollbar">
+        <div class="flex gap-2 px-4" style="width: max-content;">
+          <button class="shrink-0 text-[var(--text-xs)] px-3 py-[6px] rounded-[var(--radius-full)] border whitespace-nowrap font-medium transition-colors duration-150" style="background: var(--color-primary-lighter); border-color: transparent; color: var(--color-primary);">迈巴赫S级</button>
+          <button class="shrink-0 text-[var(--text-xs)] px-3 py-[6px] rounded-[var(--radius-full)] border whitespace-nowrap font-medium transition-colors duration-150" style="background: var(--color-surface); border-color: var(--color-border); color: var(--color-text-secondary);">奔驰G级</button>
+          <button class="shrink-0 text-[var(--text-xs)] px-3 py-[6px] rounded-[var(--radius-full)] border whitespace-nowrap font-medium transition-colors duration-150" style="background: var(--color-surface); border-color: var(--color-border); color: var(--color-text-secondary);">保时捷911</button>
+          <button class="shrink-0 text-[var(--text-xs)] px-3 py-[6px] rounded-[var(--radius-full)] border whitespace-nowrap font-medium transition-colors duration-150" style="background: var(--color-surface); border-color: var(--color-border); color: var(--color-text-secondary);">路虎揽胜</button>
+          <button class="shrink-0 text-[var(--text-xs)] px-3 py-[6px] rounded-[var(--radius-full)] border whitespace-nowrap font-medium transition-colors duration-150" style="background: var(--color-surface); border-color: var(--color-border); color: var(--color-text-secondary);">宾利飞驰</button>
+          <button class="shrink-0 text-[var(--text-xs)] px-3 py-[6px] rounded-[var(--radius-full)] border whitespace-nowrap font-medium transition-colors duration-150" style="background: var(--color-surface); border-color: var(--color-border); color: var(--color-text-secondary);">劳斯莱斯幻影</button>
+        </div>
+      </div>
+
+      <!-- Price Comparison Card -->
+      <div class="px-4 mt-6">
+        <div class="rounded-[var(--radius-lg)] border overflow-hidden" style="background: var(--color-surface); border-color: var(--color-border);">
+          <!-- Card Header -->
+          <div class="px-4 pt-4 pb-3 flex items-start justify-between">
+            <div>
+              <p class="text-[var(--text-base)] font-semibold" style="color: var(--color-text-primary);">2024款迈巴赫S480 4.0T</p>
+              <p class="text-[var(--text-xs)] mt-0.5" style="color: var(--color-text-tertiary);">全国在库 5 家 / 预订 1 家</p>
+            </div>
+            <span class="flex items-center gap-1 text-[var(--text-xs)] px-2 py-[3px] rounded-[var(--radius-md)] shrink-0 ml-2 font-medium" style="background: var(--color-primary-lighter); color: var(--color-primary);">
+              <i data-lucide="sparkles" class="w-3 h-3"></i>
+              AI已比价 126 家
+            </span>
+          </div>
+
+          <!-- Divider -->
+          <div style="border-top: 1px solid var(--color-border);"></div>
+
+          <!-- Price List -->
+          <div class="px-4 py-2">
+            <!-- Recommended row -->
+            <div class="price-row-recommended flex items-center justify-between py-3 rounded-[var(--radius-md)] px-2 mt-1" style="border: 1px solid var(--color-primary); border-color: rgba(218, 41, 28, 0.2);">
+              <div class="flex items-center gap-2 min-w-0">
+                <div class="w-7 h-7 rounded-[var(--radius-full)] flex items-center justify-center shrink-0 text-[var(--text-xs)] font-semibold" style="background: var(--color-primary); color: var(--color-primary-text);">尊</div>
+                <div class="min-w-0">
+                  <p class="text-[var(--text-sm)] font-medium truncate" style="color: var(--color-text-primary);">深圳·尊享名车</p>
+                  <div class="flex items-center gap-1 mt-0.5">
+                    <span class="text-[var(--text-xs)] px-1.5 py-[1px] rounded-[var(--radius-sm)] font-medium" style="background: var(--state-success-bg); color: var(--state-success);">在库</span>
+                    <span class="text-[var(--text-xs)] font-medium" style="color: var(--color-primary);">推荐</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-[var(--text-base)] font-semibold shrink-0 ml-2" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥288万</p>
+            </div>
+
+            <!-- 广州 row -->
+            <div class="flex items-center justify-between py-3 px-2 mt-1">
+              <div class="flex items-center gap-2 min-w-0">
+                <div class="w-7 h-7 rounded-[var(--radius-full)] flex items-center justify-center shrink-0 text-[var(--text-xs)] font-semibold" style="background: var(--color-background-tertiary); color: var(--color-text-secondary);">粤</div>
+                <div class="min-w-0">
+                  <p class="text-[var(--text-sm)] font-medium truncate" style="color: var(--color-text-primary);">广州·粤淘名车</p>
+                  <span class="text-[var(--text-xs)] px-1.5 py-[1px] rounded-[var(--radius-sm)] font-medium mt-0.5 inline-block" style="background: var(--state-success-bg); color: var(--state-success);">在库</span>
+                </div>
+              </div>
+              <p class="text-[var(--text-base)] font-semibold shrink-0 ml-2" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥292万</p>
+            </div>
+
+            <!-- 北京 row -->
+            <div class="flex items-center justify-between py-3 px-2">
+              <div class="flex items-center gap-2 min-w-0">
+                <div class="w-7 h-7 rounded-[var(--radius-full)] flex items-center justify-center shrink-0 text-[var(--text-xs)] font-semibold" style="background: var(--color-background-tertiary); color: var(--color-text-secondary);">百</div>
+                <div class="min-w-0">
+                  <p class="text-[var(--text-sm)] font-medium truncate" style="color: var(--color-text-primary);">北京·百得利</p>
+                  <span class="text-[var(--text-xs)] px-1.5 py-[1px] rounded-[var(--radius-sm)] font-medium mt-0.5 inline-block" style="background: var(--state-success-bg); color: var(--state-success);">在库</span>
+                </div>
+              </div>
+              <p class="text-[var(--text-base)] font-semibold shrink-0 ml-2" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥295万</p>
+            </div>
+
+            <!-- 上海 row -->
+            <div class="flex items-center justify-between py-3 px-2">
+              <div class="flex items-center gap-2 min-w-0">
+                <div class="w-7 h-7 rounded-[var(--radius-full)] flex items-center justify-center shrink-0 text-[var(--text-xs)] font-semibold" style="background: var(--color-background-tertiary); color: var(--color-text-secondary);">利</div>
+                <div class="min-w-0">
+                  <p class="text-[var(--text-sm)] font-medium truncate" style="color: var(--color-text-primary);">上海·利星行</p>
+                  <span class="text-[var(--text-xs)] px-1.5 py-[1px] rounded-[var(--radius-sm)] font-medium mt-0.5 inline-block" style="background: var(--state-success-bg); color: var(--state-success);">在库</span>
+                </div>
+              </div>
+              <p class="text-[var(--text-base)] font-semibold shrink-0 ml-2" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥290万</p>
+            </div>
+
+            <!-- 成都 row - lowest price -->
+            <div class="price-row-lowest flex items-center justify-between py-3 rounded-[var(--radius-md)] px-2 mt-1" style="border: 1px solid var(--color-accent); border-color: rgba(232, 184, 0, 0.3);">
+              <div class="flex items-center gap-2 min-w-0">
+                <div class="w-7 h-7 rounded-[var(--radius-full)] flex items-center justify-center shrink-0 text-[var(--text-xs)] font-semibold" style="background: var(--color-accent); color: #FFFFFF;">锦</div>
+                <div class="min-w-0">
+                  <p class="text-[var(--text-sm)] font-medium truncate" style="color: var(--color-text-primary);">成都·锦晟名车</p>
+                  <div class="flex items-center gap-1 mt-0.5">
+                    <span class="text-[var(--text-xs)] px-1.5 py-[1px] rounded-[var(--radius-sm)] font-medium" style="background: var(--state-success-bg); color: var(--state-success);">在库</span>
+                    <span class="text-[var(--text-xs)] font-medium" style="color: var(--color-accent);">最低价</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-[var(--text-base)] font-semibold shrink-0 ml-2" style="color: var(--color-accent); font-variant-numeric: tabular-nums;">¥285万</p>
+            </div>
+
+            <!-- 杭州 row - booked -->
+            <div class="flex items-center justify-between py-3 px-2">
+              <div class="flex items-center gap-2 min-w-0">
+                <div class="w-7 h-7 rounded-[var(--radius-full)] flex items-center justify-center shrink-0 text-[var(--text-xs)] font-semibold" style="background: var(--color-background-tertiary); color: var(--color-text-secondary);">之</div>
+                <div class="min-w-0">
+                  <p class="text-[var(--text-sm)] font-medium truncate" style="color: var(--color-text-primary);">杭州·之江名车</p>
+                  <span class="text-[var(--text-xs)] px-1.5 py-[1px] rounded-[var(--radius-sm)] font-medium mt-0.5 inline-block" style="background: var(--state-warning-bg); color: var(--state-warning);">预订</span>
+                </div>
+              </div>
+              <p class="text-[var(--text-base)] font-semibold shrink-0 ml-2" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥298万</p>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div style="border-top: 1px solid var(--color-border);"></div>
+
+          <!-- AI Analysis -->
+          <div class="px-4 py-3" style="background: var(--color-primary-lightest);">
+            <div class="flex items-center gap-1.5 mb-1.5">
+              <i data-lucide="brain" class="w-3.5 h-3.5" style="color: var(--color-primary);"></i>
+              <span class="text-[var(--text-xs)] font-semibold uppercase tracking-[0.05em]" style="color: var(--color-primary);">AI 分析</span>
+            </div>
+            <p class="text-[var(--text-sm)] leading-relaxed" style="color: var(--color-text-secondary);">全国均价 <span class="font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥291.3万</span>，深圳报价低于均价 <span class="font-semibold" style="color: var(--color-primary); font-variant-numeric: tabular-nums;">¥3.3万</span>，建议从<span class="font-medium" style="color: var(--color-text-primary);">深圳尊享名车</span>采购</p>
+          </div>
+
+          <!-- Bottom Actions -->
+          <div class="px-4 py-3 flex gap-2">
+            <button class="flex-1 flex items-center justify-center gap-1.5 h-10 rounded-[var(--radius-sm)] text-[var(--text-sm)] font-semibold transition-colors duration-150" style="background: var(--color-primary); color: var(--color-primary-text);">
+              <i data-lucide="zap" class="w-4 h-4"></i>
+              一键代购
+            </button>
+            <button class="flex-1 flex items-center justify-center gap-1.5 h-10 rounded-[var(--radius-sm)] text-[var(--text-sm)] font-medium border transition-colors duration-150" style="background: var(--color-surface); border-color: var(--color-border); color: var(--color-text-primary);">
+              <i data-lucide="git-compare" class="w-4 h-4"></i>
+              加入对比
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proxy Purchase Model Explanation -->
+      <div class="px-4 mt-5">
+        <div class="rounded-[var(--radius-lg)] border p-4" style="background: var(--color-surface); border-color: var(--color-border);">
+          <div class="flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-[var(--radius-md)] flex items-center justify-center shrink-0 mt-0.5" style="background: var(--color-accent-lighter);">
+              <i data-lucide="lightbulb" class="w-4 h-4" style="color: var(--color-accent);"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[var(--text-base)] font-semibold" style="color: var(--color-text-primary);">无库存代购模式</p>
+              <p class="text-[var(--text-sm)] mt-1 leading-relaxed" style="color: var(--color-text-secondary);">车行无需压库存，客户下单后平台一键调车，48小时到店</p>
+            </div>
+          </div>
+
+          <!-- 3-step flow -->
+          <div class="flex items-center mt-4 gap-0">
+            <!-- Step 1 -->
+            <div class="flex-1 text-center px-1">
+              <div class="w-10 h-10 rounded-[var(--radius-full)] flex items-center justify-center mx-auto" style="background: var(--color-surface-hover); border: 1px solid var(--color-border);">
+                <i data-lucide="mouse-pointer-click" class="w-4 h-4" style="color: var(--color-text-secondary);"></i>
+              </div>
+              <p class="text-[var(--text-xs)] font-medium mt-2" style="color: var(--color-text-primary);">客户下单</p>
+            </div>
+
+            <!-- Arrow -->
+            <div class="flex items-center shrink-0" style="color: var(--color-text-quaternary);">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex-1 text-center px-1">
+              <div class="w-10 h-10 rounded-[var(--radius-full)] flex items-center justify-center mx-auto" style="background: var(--color-surface-hover); border: 1px solid var(--color-border);">
+                <i data-lucide="cpu" class="w-4 h-4" style="color: var(--color-text-secondary);"></i>
+              </div>
+              <p class="text-[var(--text-xs)] font-medium mt-2" style="color: var(--color-text-primary);">AI匹配车源</p>
+            </div>
+
+            <!-- Arrow -->
+            <div class="flex items-center shrink-0" style="color: var(--color-text-quaternary);">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex-1 text-center px-1">
+              <div class="w-10 h-10 rounded-[var(--radius-full)] flex items-center justify-center mx-auto" style="background: var(--color-surface-hover); border: 1px solid var(--color-border);">
+                <i data-lucide="truck" class="w-4 h-4" style="color: var(--color-text-secondary);"></i>
+              </div>
+              <p class="text-[var(--text-xs)] font-medium mt-2" style="color: var(--color-text-primary);">48h到店</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Pricing Intelligence -->
+      <div class="px-4 mt-5">
+        <div class="flex items-center gap-1.5 mb-3">
+          <i data-lucide="bar-chart-3" class="w-4 h-4" style="color: var(--color-primary);"></i>
+          <span class="text-[var(--text-base)] font-semibold" style="color: var(--color-text-primary);">AI定价情报</span>
+        </div>
+
+        <div class="flex flex-col gap-2.5">
+          <!-- Alert: Oversell warning -->
+          <div class="rounded-[var(--radius-lg)] border p-3 flex items-start gap-2.5" style="background: var(--color-surface); border-color: var(--color-border);">
+            <div class="w-7 h-7 rounded-[var(--radius-md)] flex items-center justify-center shrink-0 mt-0.5" style="background: var(--state-warning-bg);">
+              <i data-lucide="alert-triangle" class="w-3.5 h-3.5" style="color: var(--state-warning);"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[var(--text-xs)] font-medium" style="color: var(--color-text-tertiary);">滞销预警</p>
+              <p class="text-[var(--text-sm)] mt-0.5" style="color: var(--color-text-primary);">奔驰S450 库存超90天，建议降价<span class="font-semibold" style="color: var(--state-warning);"> 5%</span></p>
+            </div>
+          </div>
+
+          <!-- Pricing suggestion -->
+          <div class="rounded-[var(--radius-lg)] border p-3 flex items-start gap-2.5" style="background: var(--color-surface); border-color: var(--color-border);">
+            <div class="w-7 h-7 rounded-[var(--radius-md)] flex items-center justify-center shrink-0 mt-0.5" style="background: var(--color-primary-lighter);">
+              <i data-lucide="target" class="w-3.5 h-3.5" style="color: var(--color-primary);"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[var(--text-xs)] font-medium" style="color: var(--color-text-tertiary);">定价建议</p>
+              <p class="text-[var(--text-sm)] mt-0.5" style="color: var(--color-text-primary);">迈巴赫S480 建议售价 <span class="font-semibold" style="font-variant-numeric: tabular-nums;">¥285-295万</span></p>
+            </div>
+          </div>
+
+          <!-- Market trend -->
+          <div class="rounded-[var(--radius-lg)] border p-3 flex items-start gap-2.5" style="background: var(--color-surface); border-color: var(--color-border);">
+            <div class="w-7 h-7 rounded-[var(--radius-md)] flex items-center justify-center shrink-0 mt-0.5" style="background: var(--state-success-bg);">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5" style="color: var(--state-success);"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[var(--text-xs)] font-medium" style="color: var(--color-text-tertiary);">市场趋势</p>
+              <p class="text-[var(--text-sm)] mt-0.5" style="color: var(--color-text-primary);">保时捷卡宴 本月价格上涨 <span class="font-semibold" style="color: var(--state-success);">2.3%</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Tab Bar -->
+    <nav class="fixed bottom-0 inset-x-0 z-30" style="background: var(--color-surface); border-top: 1px solid var(--color-border);" data-dom-id="tab-bar-pricing">
+      <div class="flex items-center justify-around h-14 px-2 pb-1">
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-home">
+          <i data-lucide="home" class="w-5 h-5" style="color: var(--color-text-quaternary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap" style="color: var(--color-text-quaternary);">首页</span>
+        </button>
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-showroom">
+          <i data-lucide="layout-grid" class="w-5 h-5" style="color: var(--color-text-quaternary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap" style="color: var(--color-text-quaternary);">展厅</span>
+        </button>
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-members">
+          <i data-lucide="crown" class="w-5 h-5" style="color: var(--color-text-quaternary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap" style="color: var(--color-text-quaternary);">会员</span>
+        </button>
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-pricing" data-active="true">
+          <i data-lucide="bar-chart-3" class="w-5 h-5" style="color: var(--color-primary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap font-semibold" style="color: var(--color-primary);">比价</span>
+        </button>
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-profile">
+          <i data-lucide="user" class="w-5 h-5" style="color: var(--color-text-quaternary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap" style="color: var(--color-text-quaternary);">我的</span>
+        </button>
+      </div>
+      <div class="h-[env(safe-area-inset-bottom,34px)]" style="background: var(--color-surface);"></div>
+    </nav>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

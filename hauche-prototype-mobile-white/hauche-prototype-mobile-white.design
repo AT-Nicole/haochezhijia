@@ -401,6 +401,134 @@
       }
     },
     {
+      "id": "page-ai-marketing",
+      "title": "AI营销中心",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 10500,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/ai-marketing.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-car-compare",
+      "title": "车辆对比",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 10920,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/car-compare.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-butler-workbench",
+      "title": "管家工作台",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 11340,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/butler-workbench.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-referral-system",
+      "title": "裂变分佣",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 11760,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/referral-system.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-national-pricing",
+      "title": "全国车源比价",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 12180,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/national-pricing.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-ai-finance",
+      "title": "AI财务报表",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 12600,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/ai-finance.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-business-network",
+      "title": "企业家资源圈",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 13020,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/business-network.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-ai-event-ops",
+      "title": "AI活动运营",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1752220800000,
+      "canvasData": {
+        "x": 13440,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/ai-event-ops.html",
+        "interactions": []
+      }
+    },
+    {
       "id": "image-001",
       "title": "展厅主视觉",
       "type": "image",
@@ -408,7 +536,7 @@
       "createdAt": 1752220800000,
       "canvasData": {
         "x": 0,
-        "y": 1000
+        "y": 1256
       },
       "devMetadata": {
         "imageSrc": "assets/showroom-hero_1.jpg"
@@ -422,7 +550,7 @@
       "createdAt": 1752220800000,
       "canvasData": {
         "x": 420,
-        "y": 1000
+        "y": 1256
       },
       "devMetadata": {
         "imageSrc": "assets/car-maybach_1.jpg"
@@ -436,7 +564,7 @@
       "createdAt": 1752220800000,
       "canvasData": {
         "x": 840,
-        "y": 1000
+        "y": 1256
       },
       "devMetadata": {
         "imageSrc": "assets/showroom-hero.jpg"
@@ -450,7 +578,7 @@
       "createdAt": 1752220800000,
       "canvasData": {
         "x": 1260,
-        "y": 1000
+        "y": 1256
       },
       "devMetadata": {
         "imageSrc": "assets/car-maybach.jpg"
@@ -464,7 +592,7 @@
       "createdAt": 1752220800000,
       "canvasData": {
         "x": 1680,
-        "y": 1000
+        "y": 1256
       },
       "devMetadata": {
         "imageSrc": "assets/car-g63.jpg"
@@ -478,7 +606,7 @@
       "createdAt": 1752220800000,
       "canvasData": {
         "x": 2100,
-        "y": 1000
+        "y": 1256
       },
       "devMetadata": {
         "imageSrc": "assets/car-porsche.jpg"
@@ -489,6 +617,7 @@
     "autoLayout": true,
     "deviceType": "mobile",
     "projectName": "豪车之家-移动端-白色主题",
-    "designLibrary": null
+    "designLibrary": null,
+    "showEdge": false
   }
 }

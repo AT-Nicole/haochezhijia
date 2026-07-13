@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>裂变分佣</title>
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors: Ferrari Rosso Corsa — 赛道传承红 ── */
+  --color-primary: #DA291C;
+  --color-primary-light: #E8403A;
+  --color-primary-lighter: rgba(218, 41, 28, 0.06);
+  --color-primary-lightest: rgba(218, 41, 28, 0.03);
+  --color-primary-dark: #B01E0A;
+  --color-primary-active: #9D2211;
+  --color-primary-text: #FFFFFF;
+
+  /* ── Accent: 赛道黄 Giallo Modena — 法拉利盾牌传承色 ── */
+  --color-accent: #E8B800;
+  --color-accent-light: #F0CC44;
+  --color-accent-lighter: rgba(232, 184, 0, 0.10);
+  --color-accent-lightest: rgba(232, 184, 0, 0.05);
+
+  /* ── Backgrounds: Ferrari Chiaroscuro — 明暗交替展厅感 ── */
+  --color-background: #FAFAFA;
+  --color-background-secondary: #F3F3F3;
+  --color-background-tertiary: #E8E8E8;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-hover: #F5F5F5;
+
+  /* ── Text: Ferrari双字体编辑层级 — FerrariSans灵感 ── */
+  --color-text-primary: #181818;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #8F8F8F;
+  --color-text-inverse: #FFFFFF;
+  --color-text-quaternary: #B0B0B0;
+
+  /* ── Borders & Dividers: 法拉利精准线条 ── */
+  --color-border: #CCCCCC;
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-divider: rgba(0, 0, 0, 0.08);
+
+  /* ── State Colors ── */
+  --state-success: #03904A;
+  --state-success-bg: rgba(3, 144, 74, 0.06);
+  --state-warning: #E8A838;
+  --state-warning-bg: rgba(232, 168, 56, 0.06);
+  --state-error: #F13A2C;
+  --state-error-bg: rgba(241, 58, 44, 0.06);
+  --state-info: #4C98B9;
+  --state-info-bg: rgba(76, 152, 185, 0.06);
+
+  /* ── Typography: FerrariSans灵感 — 紧凑有力 ── */
+  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* 法拉利字号层级 — 标题紧凑、正文舒适 */
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+  --text-display: 1.75rem;
+
+  /* ── Spacing: 法拉利8px基础网格 ── */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── Radius: 法拉利剃刀级精度 — 2px标志性圆角 ── */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows: 法拉利扁平层次 — 近乎零阴影 ── */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-card: none;
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+  /* ── Gradients: 极少使用 ── */
+  --gradient-primary: linear-gradient(135deg, #DA291C 0%, #B01E0A 100%);
+  --gradient-accent: linear-gradient(135deg, #E8B800 0%, #C49E00 100%);
+  --gradient-dark: linear-gradient(180deg, #000000 0%, #181818 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-accent: var(--color-accent);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main data-dom-id="page-referral-system">
+
+        <!-- Top Bar -->
+        <header class="sticky top-0 z-30" style="background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
+            <div class="flex h-14 items-center px-5">
+                <button class="inline-flex h-9 w-9 items-center justify-center transition-colors duration-150 hover:bg-[var(--color-surface-hover)]" style="border-radius: var(--radius-sm); color: var(--color-text-primary);" aria-label="返回">
+                    <i data-lucide="arrow-left" class="h-5 w-5"></i>
+                </button>
+                <div class="ml-3 flex flex-col">
+                    <h1 class="text-sm font-semibold tracking-wide leading-tight" style="color: var(--color-text-primary); text-transform: uppercase; letter-spacing: 1px;">REFERRAL</h1>
+                    <p class="text-xs mt-0.5" style="color: var(--color-text-tertiary);">老客推荐 · 佣金自动到账</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="px-4 pt-5 flex flex-col gap-6 pb-20">
+
+            <!-- Section 1: My Earnings Overview -->
+            <section>
+                <h2 class="text-xs font-semibold tracking-widest uppercase mb-3" style="color: var(--color-text-tertiary); letter-spacing: 1px;">我的收益</h2>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="p-4 flex flex-col items-center text-center" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <span class="text-2xl font-semibold tabular-nums leading-tight" style="color: var(--color-primary); font-variant-numeric: tabular-nums;">128,500</span>
+                        <span class="mt-1 text-xs" style="color: var(--color-text-tertiary);">累计佣金(元)</span>
+                    </div>
+                    <div class="p-4 flex flex-col items-center text-center" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <span class="text-2xl font-semibold tabular-nums leading-tight" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">23,600</span>
+                        <span class="mt-1 text-xs" style="color: var(--color-text-tertiary);">本月到账(元)</span>
+                    </div>
+                    <div class="p-4 flex flex-col items-center text-center" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <span class="text-2xl font-semibold tabular-nums leading-tight" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">18</span>
+                        <span class="mt-1 text-xs" style="color: var(--color-text-tertiary);">成功推荐(单)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Commission Rules -->
+            <section class="p-4 flex flex-col gap-3" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="scroll-text" class="h-4 w-4" style="color: var(--color-primary);"></i>
+                    <h2 class="text-sm font-semibold" style="color: var(--color-text-primary);">分佣规则</h2>
+                </div>
+                <div class="flex flex-col gap-0 divide-y" style="border-color: var(--color-divider);">
+                    <div class="flex items-start gap-3 py-3">
+                        <div class="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center mt-0.5" style="border-radius: var(--radius-full); background: var(--color-primary-lightest);">
+                            <i data-lucide="car" class="h-3.5 w-3.5" style="color: var(--color-primary);"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm" style="color: var(--color-text-primary);">推荐购车成交</p>
+                            <p class="mt-0.5 text-xs" style="color: var(--color-text-secondary);">佣金 1%，起步 ¥5,000</p>
+                        </div>
+                        <span class="text-sm font-semibold tabular-nums flex-shrink-0" style="color: var(--color-primary); font-variant-numeric: tabular-nums;">1%</span>
+                    </div>
+                    <div class="flex items-start gap-3 py-3" style="border-color: var(--color-divider);">
+                        <div class="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center mt-0.5" style="border-radius: var(--radius-full); background: var(--color-accent-lightest);">
+                            <i data-lucide="building-2" class="h-3.5 w-3.5" style="color: var(--color-accent);"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm" style="color: var(--color-text-primary);">推荐车行入驻</p>
+                            <p class="mt-0.5 text-xs" style="color: var(--color-text-secondary);">成功入驻奖励</p>
+                        </div>
+                        <span class="text-sm font-semibold tabular-nums flex-shrink-0" style="color: var(--color-accent); font-variant-numeric: tabular-nums;">¥10,000</span>
+                    </div>
+                    <div class="flex items-start gap-3 py-3" style="border-color: var(--color-divider);">
+                        <div class="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center mt-0.5" style="border-radius: var(--radius-full); background: var(--color-background-secondary);">
+                            <i data-lucide="users" class="h-3.5 w-3.5" style="color: var(--color-text-secondary);"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm" style="color: var(--color-text-primary);">二级推荐成交</p>
+                            <p class="mt-0.5 text-xs" style="color: var(--color-text-secondary);">间接推荐奖励</p>
+                        </div>
+                        <span class="text-sm font-semibold tabular-nums flex-shrink-0" style="color: var(--color-text-secondary); font-variant-numeric: tabular-nums;">0.3%</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 mt-1 p-3" style="background: var(--color-primary-lightest); border-radius: var(--radius-md);">
+                    <i data-lucide="clock" class="h-3.5 w-3.5 flex-shrink-0" style="color: var(--color-primary);"></i>
+                    <p class="text-xs" style="color: var(--color-primary);">佣金T+3自动到账，无需人工结算</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Generate Referral Poster -->
+            <section class="p-4 flex flex-col gap-4" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="image-plus" class="h-4 w-4" style="color: var(--color-primary);"></i>
+                    <h2 class="text-sm font-semibold" style="color: var(--color-text-primary);">一键生成转介绍海报</h2>
+                </div>
+                <!-- Poster Preview -->
+                <div class="relative overflow-hidden flex flex-col items-center justify-center" style="background: var(--color-background-secondary); border-radius: var(--radius-md); aspect-ratio: 3/4; max-height: 280px;">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
+                        <div class="w-12 h-12 flex items-center justify-center mb-4" style="border-radius: var(--radius-sm); background: var(--color-primary); color: var(--color-primary-text); font-size: 14px; font-weight: 700; letter-spacing: 2px;">HC</div>
+                        <p class="text-lg font-semibold text-center leading-tight" style="color: var(--color-text-primary); word-break: keep-all;">尊享名车</p>
+                        <p class="text-lg font-semibold text-center leading-tight mt-1" style="color: var(--color-text-primary); word-break: keep-all;">值得信赖</p>
+                        <div class="w-16 h-px my-4" style="background: var(--color-border);"></div>
+                        <p class="text-xs text-center" style="color: var(--color-text-secondary);">扫码了解详情</p>
+                        <!-- QR Code Placeholder -->
+                        <div class="mt-3 w-16 h-16 flex items-center justify-center" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: var(--color-surface);">
+                            <i data-lucide="qr-code" class="h-8 w-8" style="color: var(--color-text-quaternary);"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button class="flex-1 inline-flex h-10 items-center justify-center px-4 text-xs font-semibold whitespace-nowrap transition-all duration-200 hover:opacity-90 active:scale-[0.97]" style="border-radius: var(--radius-sm); background: var(--color-primary); color: var(--color-primary-text);" data-dom-id="btn-generate-poster">
+                        生成我的海报
+                    </button>
+                    <button class="flex-1 inline-flex h-10 items-center justify-center px-4 text-xs font-semibold whitespace-nowrap transition-all duration-200 hover:bg-[var(--color-surface-hover)] active:scale-[0.97]" style="border-radius: var(--radius-sm); background: transparent; border: 1px solid var(--color-border); color: var(--color-text-primary);" data-dom-id="btn-share-wechat">
+                        分享到微信
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section 4: My Referral Network -->
+            <section>
+                <h2 class="text-xs font-semibold tracking-widest uppercase mb-3" style="color: var(--color-text-tertiary); letter-spacing: 1px;">推荐网络</h2>
+
+                <!-- Direct Referrals -->
+                <div class="p-4 flex flex-col gap-3" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="user-check" class="h-4 w-4" style="color: var(--color-primary);"></i>
+                            <span class="text-sm font-semibold" style="color: var(--color-text-primary);">直接推荐</span>
+                        </div>
+                        <span class="text-xs tabular-nums" style="color: var(--color-text-tertiary); font-variant-numeric: tabular-nums;">12人</span>
+                    </div>
+                    <div class="flex flex-col gap-0 divide-y" style="border-color: var(--color-divider);">
+                        <div class="flex items-center gap-3 py-3">
+                            <div class="h-8 w-8 flex-shrink-0 flex items-center justify-center text-xs font-semibold" style="border-radius: var(--radius-full); background: var(--color-primary); color: var(--color-primary-text);">王</div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm" style="color: var(--color-text-primary);">王×</p>
+                            </div>
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium whitespace-nowrap" style="border-radius: var(--radius-sm); background: var(--state-success-bg); color: var(--state-success);">已成交 ¥5,000</span>
+                        </div>
+                        <div class="flex items-center gap-3 py-3" style="border-color: var(--color-divider);">
+                            <div class="h-8 w-8 flex-shrink-0 flex items-center justify-center text-xs font-semibold" style="border-radius: var(--radius-full); background: var(--color-background-secondary); color: var(--color-text-secondary);">李</div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm" style="color: var(--color-text-primary);">李×</p>
+                            </div>
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium whitespace-nowrap" style="border-radius: var(--radius-sm); background: var(--state-success-bg); color: var(--state-success);">已成交 ¥8,000</span>
+                        </div>
+                        <div class="flex items-center gap-3 py-3" style="border-color: var(--color-divider);">
+                            <div class="h-8 w-8 flex-shrink-0 flex items-center justify-center text-xs font-semibold" style="border-radius: var(--radius-full); background: var(--color-background-secondary); color: var(--color-text-secondary);">张</div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm" style="color: var(--color-text-primary);">张×</p>
+                            </div>
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium whitespace-nowrap" style="border-radius: var(--radius-sm); background: var(--state-success-bg); color: var(--state-success);">已成交 ¥5,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Referrals -->
+                <div class="mt-3 p-4 flex flex-col gap-3" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="git-branch" class="h-4 w-4" style="color: var(--color-text-secondary);"></i>
+                            <span class="text-sm font-semibold" style="color: var(--color-text-primary);">二级推荐</span>
+                        </div>
+                        <span class="text-xs tabular-nums" style="color: var(--color-text-tertiary); font-variant-numeric: tabular-nums;">8人</span>
+                    </div>
+                    <div class="flex flex-col gap-0 divide-y" style="border-color: var(--color-divider);">
+                        <div class="flex items-center gap-3 py-3">
+                            <div class="h-8 w-8 flex-shrink-0 flex items-center justify-center text-xs font-semibold" style="border-radius: var(--radius-full); background: var(--color-background-secondary); color: var(--color-text-secondary);">赵</div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs" style="color: var(--color-text-secondary);">赵× 推荐 陈×</p>
+                            </div>
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium whitespace-nowrap" style="border-radius: var(--radius-sm); background: var(--state-success-bg); color: var(--state-success);">¥1,500</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Referral Leaderboard -->
+            <section class="p-4 flex flex-col gap-3" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="trophy" class="h-4 w-4" style="color: var(--color-accent);"></i>
+                    <h2 class="text-sm font-semibold" style="color: var(--color-text-primary);">推荐排行榜</h2>
+                </div>
+                <div class="flex flex-col gap-0 divide-y" style="border-color: var(--color-divider);">
+                    <!-- #1 -->
+                    <div class="flex items-center gap-3 py-3">
+                        <span class="inline-flex h-6 w-6 items-center justify-center text-xs font-bold flex-shrink-0" style="border-radius: var(--radius-full); background: var(--color-accent); color: var(--color-text-primary);">1</span>
+                        <div class="h-8 w-8 flex-shrink-0 flex items-center justify-center text-xs font-semibold" style="border-radius: var(--radius-full); background: var(--color-accent); color: var(--color-text-primary);">王</div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold" style="color: var(--color-text-primary);">王**鸿</p>
+                            <p class="text-xs" style="color: var(--color-text-tertiary);">成交 6 单</p>
+                        </div>
+                        <span class="text-sm font-semibold tabular-nums" style="color: var(--color-primary); font-variant-numeric: tabular-nums;">¥45,200</span>
+                    </div>
+                    <!-- #2 -->
+                    <div class="flex items-center gap-3 py-3" style="border-color: var(--color-divider);">
+                        <span class="inline-flex h-6 w-6 items-center justify-center text-xs font-bold flex-shrink-0" style="border-radius: var(--radius-full); background: var(--color-background-secondary); color: var(--color-text-secondary);">2</span>
+                        <div class="h-8 w-8 flex-shrink-0 flex items-center justify-center text-xs font-semibold" style="border-radius: var(--radius-full); background: var(--color-background-secondary); color: var(--color-text-secondary);">李</div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold" style="color: var(--color-text-primary);">李**明</p>
+                            <p class="text-xs" style="color: var(--color-text-tertiary);">成交 4 单</p>
+                        </div>
+                        <span class="text-sm font-semibold tabular-nums" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥32,800</span>
+                    </div>
+                    <!-- #3 -->
+                    <div class="flex items-center gap-3 py-3" style="border-color: var(--color-divider);">
+                        <span class="inline-flex h-6 w-6 items-center justify-center text-xs font-bold flex-shrink-0" style="border-radius: var(--radius-full); background: var(--color-background-secondary); color: var(--color-text-secondary);">3</span>
+                        <div class="h-8 w-8 flex-shrink-0 flex items-center justify-center text-xs font-semibold" style="border-radius: var(--radius-full); background: var(--color-background-secondary); color: var(--color-text-secondary);">张</div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold" style="color: var(--color-text-primary);">张**伟</p>
+                            <p class="text-xs" style="color: var(--color-text-tertiary);">成交 3 单</p>
+                        </div>
+                        <span class="text-sm font-semibold tabular-nums" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥21,500</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: AI Auto-Referral Tools -->
+            <section>
+                <h2 class="text-xs font-semibold tracking-widest uppercase mb-3" style="color: var(--color-text-tertiary); letter-spacing: 1px;">AI裂变工具</h2>
+                <div class="flex flex-col gap-3">
+                    <div class="p-4 flex items-start gap-3 transition-all duration-200 cursor-pointer active:scale-[0.99]" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-primary-lighter);">
+                            <i data-lucide="scan-search" class="h-5 w-5" style="color: var(--color-primary);"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold" style="color: var(--color-text-primary);">自动识别高净值客户</p>
+                            <p class="mt-0.5 text-xs leading-relaxed" style="color: var(--color-text-secondary);">AI分析客户社交圈，精准锁定潜在买家</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="h-4 w-4 flex-shrink-0 mt-1" style="color: var(--color-text-quaternary);"></i>
+                    </div>
+                    <div class="p-4 flex items-start gap-3 transition-all duration-200 cursor-pointer active:scale-[0.99]" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-primary-lighter);">
+                            <i data-lucide="message-square-text" class="h-5 w-5" style="color: var(--color-primary);"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold" style="color: var(--color-text-primary);">自动生成个性化推荐语</p>
+                            <p class="mt-0.5 text-xs leading-relaxed" style="color: var(--color-text-secondary);">根据车型和客户画像定制专属话术</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="h-4 w-4 flex-shrink-0 mt-1" style="color: var(--color-text-quaternary);"></i>
+                    </div>
+                    <div class="p-4 flex items-start gap-3 transition-all duration-200 cursor-pointer active:scale-[0.99]" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                        <div class="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center" style="border-radius: var(--radius-md); background: var(--color-primary-lighter);">
+                            <i data-lucide="route" class="h-5 w-5" style="color: var(--color-primary);"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold" style="color: var(--color-text-primary);">自动追踪转化路径</p>
+                            <p class="mt-0.5 text-xs leading-relaxed" style="color: var(--color-text-secondary);">从推荐到成交全程追踪，数据透明可查</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="h-4 w-4 flex-shrink-0 mt-1" style="color: var(--color-text-quaternary);"></i>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

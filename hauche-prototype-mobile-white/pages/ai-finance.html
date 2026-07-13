@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI财务报表</title>
+    <style id="theme-vars">
+:root {
+  /* ── Brand Colors: Ferrari Rosso Corsa — 赛道传承红 ── */
+  /* 法拉利数字设计: 克制的红色使用，仅用于CTA和品牌关键时刻 */
+  --color-primary: #DA291C;
+  --color-primary-light: #E8403A;
+  --color-primary-lighter: rgba(218, 41, 28, 0.06);
+  --color-primary-lightest: rgba(218, 41, 28, 0.03);
+  --color-primary-dark: #B01E0A;
+  --color-primary-active: #9D2211;
+  --color-primary-text: #FFFFFF;
+
+  /* ── Accent: 赛道黄 Giallo Modena — 法拉利盾牌传承色 ── */
+  --color-accent: #E8B800;
+  --color-accent-light: #F0CC44;
+  --color-accent-lighter: rgba(232, 184, 0, 0.10);
+  --color-accent-lightest: rgba(232, 184, 0, 0.05);
+
+  /* ── Backgrounds: Ferrari Chiaroscuro — 明暗交替展厅感 ── */
+  /* 法拉利核心理念：纯白编辑面板 + 深黑沉浸区域，硬切割过渡 */
+  --color-background: #FAFAFA;
+  --color-background-secondary: #F3F3F3;
+  --color-background-tertiary: #E8E8E8;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-hover: #F5F5F5;
+
+  /* ── Text: Ferrari双字体编辑层级 — FerrariSans灵感 ── */
+  --color-text-primary: #181818;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #8F8F8F;
+  --color-text-inverse: #FFFFFF;
+  --color-text-quaternary: #B0B0B0;
+
+  /* ── Borders & Dividers: 法拉利精准线条 ── */
+  --color-border: #CCCCCC;
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-divider: rgba(0, 0, 0, 0.08);
+
+  /* ── State Colors ── */
+  --state-success: #03904A;
+  --state-success-bg: rgba(3, 144, 74, 0.06);
+  --state-warning: #E8A838;
+  --state-warning-bg: rgba(232, 168, 56, 0.06);
+  --state-error: #F13A2C;
+  --state-error-bg: rgba(241, 58, 44, 0.06);
+  --state-info: #4C98B9;
+  --state-info-bg: rgba(76, 152, 185, 0.06);
+
+  /* ── Typography: FerrariSans灵感 — 紧凑有力 ── */
+  --font-display: 'SF Pro Display', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'SF Pro Text', 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* 法拉利字号层级 — 标题紧凑、正文舒适 */
+  --text-xs: 0.6875rem;     /* 11px - 大写标签（text-transform:uppercase + letter-spacing:1px）*/
+  --text-sm: 0.8125rem;     /* 13px - 说明文字 */
+  --text-base: 0.875rem;    /* 14px - 正文 */
+  --text-lg: 1rem;          /* 16px - 卡片标题/UI标题 */
+  --text-xl: 1.125rem;      /* 18px - 副标题 */
+  --text-2xl: 1.25rem;      /* 20px - 章节标题 */
+  --text-3xl: 1.5rem;       /* 24px - 大标题 */
+  --text-display: 1.75rem;   /* 28px - 核心数据/英雄标题 */
+
+  /* ── Spacing: 法拉利8px基础网格 ── */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── Radius: 法拉利剃刀级精度 — 2px标志性圆角 ── */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows: 法拉利扁平层次 — 近乎零阴影 ── */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-card: none;
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+  /* ── Gradients: 极少使用 — 法拉利用纯色对比，不用渐变 ── */
+  --gradient-primary: linear-gradient(135deg, #DA291C 0%, #B01E0A 100%);
+  --gradient-accent: linear-gradient(135deg, #E8B800 0%, #C49E00 100%);
+  --gradient-dark: linear-gradient(180deg, #000000 0%, #181818 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--color-background);
+    --color-primary: var(--color-primary);
+    --color-accent: var(--color-accent);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+      .bar-fill {
+        transition: width 0.6s cubic-bezier(.3,0,0,1);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bar-fill { transition-duration: 0.01ms !important; }
+        *, *::before, *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="pb-20" data-dom-id="page-ai-finance" style="font-family: var(--font-body);">
+
+      <!-- Status Bar Spacer -->
+      <div class="h-11"></div>
+
+      <!-- Header -->
+      <div class="px-4 pt-3 pb-2">
+        <h1 class="text-[var(--text-2xl)] font-semibold" style="color: var(--color-text-primary); text-wrap: balance; word-break: keep-all;">AI财务报表</h1>
+        <p class="text-[var(--text-sm)] mt-1" style="color: var(--color-text-tertiary);">全自动记账 · 告别手工做账</p>
+      </div>
+
+      <!-- Monthly P&L Summary -->
+      <section class="px-4 mt-4">
+        <div class="rounded-[var(--radius-lg)] p-5 border" style="background: var(--color-surface); border-color: var(--color-border);">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="calendar" class="w-4 h-4" style="color: var(--color-text-tertiary);"></i>
+            <span class="text-[var(--text-xs)] uppercase tracking-[0.05em] font-medium" style="color: var(--color-text-tertiary);">本月损益总览</span>
+          </div>
+
+          <!-- Revenue -->
+          <div class="flex items-end justify-between mb-4 pb-4" style="border-bottom: 1px solid var(--color-divider);">
+            <div>
+              <p class="text-[var(--text-xs)] mb-1" style="color: var(--color-text-tertiary);">本月营收</p>
+              <p class="text-[28px] font-bold leading-none" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums; font-family: var(--font-display);">¥3,280,000</p>
+            </div>
+            <span class="inline-flex items-center gap-0.5 text-[var(--text-xs)] font-semibold px-2 py-[2px] rounded-[var(--radius-sm)]" style="background: var(--state-success-bg); color: var(--state-success);">
+              <i data-lucide="trending-up" class="w-3 h-3"></i>
+              +12%
+            </span>
+          </div>
+
+          <!-- Expense -->
+          <div class="flex items-end justify-between mb-4 pb-4" style="border-bottom: 1px solid var(--color-divider);">
+            <div>
+              <p class="text-[var(--text-xs)] mb-1" style="color: var(--color-text-tertiary);">本月支出</p>
+              <p class="text-[28px] font-bold leading-none" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums; font-family: var(--font-display);">¥2,860,000</p>
+            </div>
+          </div>
+
+          <!-- Net Profit -->
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-[var(--text-xs)] mb-1" style="color: var(--color-text-tertiary);">本月净利</p>
+              <p class="text-[28px] font-bold leading-none" style="color: var(--state-success); font-variant-numeric: tabular-nums; font-family: var(--font-display);">¥420,000</p>
+            </div>
+            <span class="text-[var(--text-sm)] font-medium" style="color: var(--state-success);">盈利</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Revenue Breakdown -->
+      <section class="px-4 mt-6">
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="bar-chart-3" class="w-4 h-4" style="color: var(--color-text-tertiary);"></i>
+          <span class="text-[var(--text-xs)] uppercase tracking-[0.05em] font-medium" style="color: var(--color-text-tertiary);">营收构成</span>
+        </div>
+
+        <div class="rounded-[var(--radius-lg)] p-4 border flex flex-col gap-4" style="background: var(--color-surface); border-color: var(--color-border);">
+          <!-- Vehicle Sales -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[var(--text-sm)] font-medium" style="color: var(--color-text-primary);">车辆销售</span>
+              <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥2,680,000</span>
+            </div>
+            <div class="w-full h-2 rounded-[var(--radius-xs)]" style="background: var(--color-background-tertiary);">
+              <div class="bar-fill h-full rounded-[var(--radius-xs)]" style="width: 82%; background: var(--color-primary);"></div>
+            </div>
+            <p class="text-[var(--text-xs)] mt-1" style="color: var(--color-text-tertiary);">82%</p>
+          </div>
+
+          <!-- Service Revenue -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[var(--text-sm)] font-medium" style="color: var(--color-text-primary);">服务收入</span>
+              <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥380,000</span>
+            </div>
+            <div class="w-full h-2 rounded-[var(--radius-xs)]" style="background: var(--color-background-tertiary);">
+              <div class="bar-fill h-full rounded-[var(--radius-xs)]" style="width: 12%; background: var(--color-text-secondary);"></div>
+            </div>
+            <p class="text-[var(--text-xs)] mt-1" style="color: var(--color-text-tertiary);">12%</p>
+          </div>
+
+          <!-- Commission -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[var(--text-sm)] font-medium" style="color: var(--color-text-primary);">佣金收入</span>
+              <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥220,000</span>
+            </div>
+            <div class="w-full h-2 rounded-[var(--radius-xs)]" style="background: var(--color-background-tertiary);">
+              <div class="bar-fill h-full rounded-[var(--radius-xs)]" style="width: 7%; background: var(--color-text-quaternary);"></div>
+            </div>
+            <p class="text-[var(--text-xs)] mt-1" style="color: var(--color-text-tertiary);">7%</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Expense Categories -->
+      <section class="px-4 mt-6">
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="receipt" class="w-4 h-4" style="color: var(--color-text-tertiary);"></i>
+          <span class="text-[var(--text-xs)] uppercase tracking-[0.05em] font-medium" style="color: var(--color-text-tertiary);">支出明细</span>
+        </div>
+
+        <div class="rounded-[var(--radius-lg)] border overflow-hidden" style="background: var(--color-surface); border-color: var(--color-border);">
+          <!-- Row 1 -->
+          <div class="flex items-center justify-between px-4 py-3" style="border-bottom: 1px solid var(--color-divider);">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2 h-2 rounded-full" style="background: var(--color-primary);"></div>
+              <span class="text-[var(--text-sm)]" style="color: var(--color-text-primary);">车辆采购</span>
+            </div>
+            <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥2,180,000</span>
+          </div>
+          <!-- Row 2 -->
+          <div class="flex items-center justify-between px-4 py-3" style="border-bottom: 1px solid var(--color-divider);">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2 h-2 rounded-full" style="background: var(--color-text-secondary);"></div>
+              <span class="text-[var(--text-sm)]" style="color: var(--color-text-primary);">门店运营</span>
+            </div>
+            <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥320,000</span>
+          </div>
+          <!-- Row 3 -->
+          <div class="flex items-center justify-between px-4 py-3" style="border-bottom: 1px solid var(--color-divider);">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2 h-2 rounded-full" style="background: var(--color-text-tertiary);"></div>
+              <span class="text-[var(--text-sm)]" style="color: var(--color-text-primary);">人员工资</span>
+            </div>
+            <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥240,000</span>
+          </div>
+          <!-- Row 4 -->
+          <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center gap-2.5">
+              <div class="w-2 h-2 rounded-full" style="background: var(--color-text-quaternary);"></div>
+              <span class="text-[var(--text-sm)]" style="color: var(--color-text-primary);">营销推广</span>
+            </div>
+            <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥120,000</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cost Intelligence -->
+      <section class="px-4 mt-6">
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="brain" class="w-4 h-4" style="color: var(--color-text-tertiary);"></i>
+          <span class="text-[var(--text-xs)] uppercase tracking-[0.05em] font-medium" style="color: var(--color-text-tertiary);">成本智能</span>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <!-- Cost per Customer -->
+          <div class="rounded-[var(--radius-lg)] p-4 border flex items-center justify-between" style="background: var(--color-surface); border-color: var(--color-border);">
+            <div>
+              <p class="text-[var(--text-sm)] font-medium" style="color: var(--color-text-primary);">获客成本</p>
+              <p class="text-[var(--text-xs)] mt-0.5" style="color: var(--color-text-tertiary);">上月 ¥3,200/人</p>
+            </div>
+            <div class="text-right">
+              <p class="text-[var(--text-lg)] font-bold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥2,800<span class="text-[var(--text-xs)] font-normal ml-0.5">/人</span></p>
+              <span class="text-[var(--text-xs)] font-semibold" style="color: var(--state-success);">-12.5%</span>
+            </div>
+          </div>
+
+          <!-- Commission Expense -->
+          <div class="rounded-[var(--radius-lg)] p-4 border flex items-center justify-between" style="background: var(--color-surface); border-color: var(--color-border);">
+            <div>
+              <p class="text-[var(--text-sm)] font-medium" style="color: var(--color-text-primary);">佣金支出</p>
+              <p class="text-[var(--text-xs)] mt-0.5" style="color: var(--color-text-tertiary);">3笔待结算</p>
+            </div>
+            <div class="text-right">
+              <p class="text-[var(--text-lg)] font-bold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥45,000</p>
+            </div>
+          </div>
+
+          <!-- Member Revenue -->
+          <div class="rounded-[var(--radius-lg)] p-4 border flex items-center justify-between" style="background: var(--color-surface); border-color: var(--color-border);">
+            <div>
+              <p class="text-[var(--text-sm)] font-medium" style="color: var(--color-text-primary);">会员费收入</p>
+              <p class="text-[var(--text-xs)] mt-0.5" style="color: var(--color-text-tertiary);">12位新会员</p>
+            </div>
+            <div class="text-right">
+              <p class="text-[var(--text-lg)] font-bold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">¥86,000</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inventory Financial Alerts -->
+      <section class="px-4 mt-6">
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="alert-triangle" class="w-4 h-4" style="color: var(--color-text-tertiary);"></i>
+          <span class="text-[var(--text-xs)] uppercase tracking-[0.05em] font-medium" style="color: var(--color-text-tertiary);">库存财务预警</span>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <!-- Alert 1 -->
+          <div class="rounded-[var(--radius-lg)] p-4 border" style="background: var(--state-warning-bg); border-color: rgba(232, 168, 56, 0.2);">
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--state-warning);"></i>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary);">滞销预警: 迈巴赫GLS600</span>
+                </div>
+                <p class="text-[var(--text-xs)] leading-relaxed" style="color: var(--color-text-secondary);">库存92天 · 建议降价8%加速周转</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alert 2 -->
+          <div class="rounded-[var(--radius-lg)] p-4 border" style="background: var(--state-warning-bg); border-color: rgba(232, 168, 56, 0.2);">
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--state-warning);"></i>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary);">滞销预警: 奔驰S450</span>
+                </div>
+                <p class="text-[var(--text-xs)] leading-relaxed" style="color: var(--color-text-secondary);">库存78天 · 建议参加置换活动</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hot Seller -->
+          <div class="rounded-[var(--radius-lg)] p-4 border" style="background: var(--state-success-bg); border-color: rgba(3, 144, 74, 0.15);">
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="check-circle" class="w-4 h-4 mt-0.5 shrink-0" style="color: var(--state-success);"></i>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary);">热销车型: 保时捷911</span>
+                </div>
+                <p class="text-[var(--text-xs)] leading-relaxed" style="color: var(--color-text-secondary);">库存3天 · 利润率28%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Auto-Settlement -->
+      <section class="px-4 mt-6">
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="settings" class="w-4 h-4" style="color: var(--color-text-tertiary);"></i>
+          <span class="text-[var(--text-xs)] uppercase tracking-[0.05em] font-medium" style="color: var(--color-text-tertiary);">自动结算</span>
+        </div>
+
+        <div class="rounded-[var(--radius-lg)] border overflow-hidden" style="background: var(--color-surface); border-color: var(--color-border);">
+          <!-- Commission Settlement -->
+          <div class="flex items-center justify-between px-4 py-3" style="border-bottom: 1px solid var(--color-divider);">
+            <div class="flex items-center gap-2.5">
+              <span class="text-[var(--text-sm)]" style="color: var(--color-text-primary);">佣金结算</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-text-primary); font-variant-numeric: tabular-nums;">3笔待处理</span>
+              <span class="text-[var(--text-sm)] font-semibold" style="color: var(--color-primary); font-variant-numeric: tabular-nums;">¥15,000</span>
+            </div>
+          </div>
+          <!-- Member Fee -->
+          <div class="flex items-center justify-between px-4 py-3" style="border-bottom: 1px solid var(--color-divider);">
+            <div class="flex items-center gap-2.5">
+              <span class="text-[var(--text-sm)]" style="color: var(--color-text-primary);">会员费</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5" style="color: var(--state-success);"></i>
+              <span class="text-[var(--text-sm)] font-medium" style="color: var(--state-success);">已自动入账</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Export Action -->
+      <section class="px-4 mt-6 mb-4">
+        <button class="w-full h-11 flex items-center justify-center gap-2 text-[var(--text-sm)] font-semibold transition-all duration-200 active:scale-[0.98]" style="border-radius: var(--radius-sm); background: var(--color-primary); color: var(--color-primary-text);">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>导出Excel报表</span>
+        </button>
+        <p class="text-center text-[var(--text-xs)] mt-3" style="color: var(--color-text-tertiary);">所有财务数据AI自动归档，支持导出Excel报表</p>
+      </section>
+
+    </main>
+
+    <!-- Tab Bar -->
+    <nav class="fixed bottom-0 inset-x-0 z-30" style="background: var(--color-surface); border-top: 1px solid var(--color-border);" data-dom-id="tab-bar-ai-finance">
+      <div class="flex items-center justify-around h-14 px-2 pb-1">
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-home">
+          <i data-lucide="home" class="w-5 h-5" style="color: var(--color-text-quaternary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap" style="color: var(--color-text-quaternary);">首页</span>
+        </button>
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-showroom">
+          <i data-lucide="layout-grid" class="w-5 h-5" style="color: var(--color-text-quaternary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap" style="color: var(--color-text-quaternary);">展厅</span>
+        </button>
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-members">
+          <i data-lucide="crown" class="w-5 h-5" style="color: var(--color-text-quaternary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap" style="color: var(--color-text-quaternary);">会员</span>
+        </button>
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-finance" data-active="true">
+          <i data-lucide="bar-chart-3" class="w-5 h-5" style="color: var(--color-primary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap font-semibold" style="color: var(--color-primary);">报表</span>
+        </button>
+        <button class="flex flex-col items-center gap-[2px] py-1 min-w-0" data-dom-id="tab-profile">
+          <i data-lucide="user" class="w-5 h-5" style="color: var(--color-text-quaternary);"></i>
+          <span class="text-[var(--text-xs)] whitespace-nowrap" style="color: var(--color-text-quaternary);">我的</span>
+        </button>
+      </div>
+      <div class="h-[env(safe-area-inset-bottom,34px)]" style="background: var(--color-surface);"></div>
+    </nav>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

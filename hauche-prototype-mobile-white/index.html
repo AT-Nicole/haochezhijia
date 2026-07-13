@@ -341,27 +341,34 @@
       'showroom': { title: '豪车展厅', tabs: 'buyer' },
       'car-community': { title: '车友圈', showTabBar: false, showBack: true },
       'finance-center': { title: '金融服务', showTabBar: false, showBack: true },
+      'car-compare': { title: '车辆对比', showTabBar: false, showBack: true },
       // ── VIP 角色 ──
       'home-vip': { title: '私董会员', role: 'vip', tabs: [
         { label: '首页', page: 'home-vip', icon: 'home' },
         { label: '展厅', page: 'showroom', icon: 'car' },
         { label: '服务', page: 'concierge-service', icon: 'wrench' },
-        { label: '管家', page: 'lifetime-butler', icon: 'key' },
+        { label: '管家', page: 'butler-workbench', icon: 'key' },
         { label: '我的', page: 'role-select', icon: 'user' }
       ]},
       'concierge-service': { title: '私董服务', showTabBar: false, showBack: true },
+      'butler-workbench': { title: '管家工作台', showTabBar: false, showBack: true },
       'lifetime-butler': { title: '终身管家', showTabBar: false, showBack: true },
+      'business-network': { title: '企业家资源圈', showTabBar: false, showBack: true },
       // ── 车行角色 ──
       'home-dealer': { title: '车行工作台', role: 'dealer', tabs: [
         { label: '首页', page: 'home-dealer', icon: 'home' },
-        { label: '车源', page: 'crm-inventory', icon: 'package' },
+        { label: '车源', page: 'national-pricing', icon: 'search' },
+        { label: '营销', page: 'ai-marketing', icon: 'zap' },
         { label: '线索', page: 'service-tracking', icon: 'map-pin' },
-        { label: '营销', page: 'content-marketing', icon: 'share-2' },
         { label: '我的', page: 'role-select', icon: 'user' }
       ]},
       'crm-inventory': { title: '库存台账', showTabBar: false, showBack: true },
       'service-tracking': { title: '服务追踪', showTabBar: false, showBack: true },
       'content-marketing': { title: '内容营销', showTabBar: false, showBack: true },
+      'national-pricing': { title: '全国车源比价', showTabBar: false, showBack: true },
+      'ai-marketing': { title: 'AI营销中心', showTabBar: false, showBack: true },
+      'ai-finance': { title: 'AI财务报表', showTabBar: false, showBack: true },
+      'referral-system': { title: '裂变分佣', showTabBar: false, showBack: true },
       // ── 创作者角色 ──
       'home-creator': { title: '创作者工作台', role: 'creator', tabs: [
         { label: '首页', page: 'home-creator', icon: 'home' },
@@ -370,12 +377,13 @@
         { label: '消息', page: 'ai-chat', icon: 'message-circle' },
         { label: '我的', page: 'role-select', icon: 'user' }
       ]},
+      'ai-event-ops': { title: 'AI活动运营', showTabBar: false, showBack: true },
       // ── 管理员角色 ──
       'home-admin': { title: '管理后台', role: 'admin', tabs: [
         { label: '首页', page: 'home-admin', icon: 'home' },
         { label: '展厅', page: 'showroom', icon: 'car' },
         { label: '会员', page: 'crm-members', icon: 'users' },
-        { label: '库存', page: 'crm-inventory', icon: 'package' },
+        { label: '财务', page: 'ai-finance', icon: 'bar-chart-3' },
         { label: '我的', page: 'role-select', icon: 'user' }
       ]},
       'crm-members': { title: '会员管理', showTabBar: false, showBack: true },
