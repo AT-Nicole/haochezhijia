@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.temp/
+.rn_temp/
+.DS_Store
+*.log
+project.private.config.json
+cloudfunctions/node_modules/
+.env
+.env.local

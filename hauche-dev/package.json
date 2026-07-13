@@ -9,9 +9,15 @@
   },
   "scripts": {
     "dev:weapp": "taro build --type weapp --watch",
-    "dev:h5": "taro build --type h5 --watch",
     "build:weapp": "taro build --type weapp",
-    "build:h5": "taro build --type h5"
+    "dev:h5": "taro build --type h5 --watch",
+    "build:h5": "taro build --type h5",
+    "dev:rn": "taro build --type rn --watch",
+    "build:rn": "taro build --type rn",
+    "deploy:functions": "node scripts/deploy-functions.js",
+    "create:env": "node scripts/create-cloud-env.js",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx,.vue",
+    "test": "jest"
   },
   "browserslist": ["last 3 versions", "Android >= 4.1", "ios >= 8"],
   "dependencies": {
@@ -26,5 +32,24 @@
     "axios": "^1.6.0",
     "dayjs": "^1.11.10",
     "sass": "^1.69.0"
+  },
+  "devDependencies": {
+    "@tarojs/cli": "4.0.9",
+    "@tarojs/components": "4.0.9",
+    "@tarojs/helper": "4.0.9",
+    "@tarojs/plugin-framework-vue3": "4.0.9",
+    "@tarojs/plugin-platform-weapp": "4.0.9",
+    "@tarojs/plugin-platform-h5": "4.0.9",
+    "@tarojs/router": "4.0.9",
+    "@tarojs/runtime": "4.0.9",
+    "@tarojs/shared": "4.0.9",
+    "@tarojs/taro": "4.0.9",
+    "@tarojs/plugin-html": "4.0.9",
+    "vue": "^3.3.4",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "sass": "^1.64.0",
+    "postcss": "^8.4.24",
+    "eslint": "^8.43.0",
+    "babel-preset-taro": "4.0.9"
   }
 }

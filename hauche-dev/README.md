@@ -1,92 +1,186 @@
-# 豪车之家小程序 — 开发指南
+# 豪车之家 — 大湾区豪车服务智能平台
 
-## 项目概述
-基于 Taro + Vue3 的跨端小程序，服务大湾区高端豪车车主圈层。
+> TRAE AI 创意大赛参赛项目
 
-## 技术栈
-- **框架**: Taro 4.0 + Vue 3 (Composition API)
-- **样式**: SCSS + 全局设计变量
-- **UI**: 自研暗色主题组件库
-- **状态管理**: Vue3 reactive (按需升级 Pinia)
-- **HTTP**: 封装 Taro.request
-- **多端**: 微信小程序 + H5
+## 项目简介
+
+豪车之家是面向粤港澳大湾区的高端汽车服务智能平台，通过 AI 驱动实现豪车行业全链路数字化：
+
+- **0库存代理模式** — 无需囤货，1%服务费即可开展豪车交易
+- **AI 全自动运营** — 10 项 AI 自动化，替代传统 6 人团队全部工作
+- **26 项管家服务** — 从购车到生活的一站式 VIP 体验
+- **裂变分佣体系** — 社交裂变驱动增长，推荐赚佣金
+
+## 技术架构
+
+```
+┌─────────────────────────────────────────┐
+│           微信小程序 (Taro 4 + Vue 3)     │
+│  35 页面 · 5 角色 · 自定义 TabBar       │
+├─────────────────────────────────────────┤
+│        服务层 (Services + Pinia Store)   │
+│  AI服务 · 云函数调用 · 支付 · 状态管理    │
+├─────────────────────────────────────────┤
+│      微信云开发 (Serverless 后端)         │
+│  13 云函数 · 10 集合 · 5 定时触发器      │
+├─────────────────────────────────────────┤
+│           外部服务                        │
+│  DeepSeek AI · 微信支付 · 订阅消息       │
+└─────────────────────────────────────────┘
+```
+
+## 五大角色
+
+| 角色 | 核心功能 | 页面数 |
+|------|---------|--------|
+| 买家 | 选车、比价、社区、金融 | 10 |
+| VIP会员 | 管家服务、礼宾、资源圈 | 5 |
+| 经销商 | 车源、CRM、营销、分佣 | 8 |
+| 创作者 | 内容创作、活动运营 | 2 |
+| 管理员 | 数据看板、用户审核、财务 | 3 |
+
+## AI 能力矩阵 (10项)
+
+| AI 功能 | 自动化内容 | 频率 |
+|---------|-----------|------|
+| 智能对话 | 车型咨询、购车建议 | 实时 |
+| 车型推荐 | 基于画像的个性化推荐 | 实时 |
+| 营销文案 | 自动生成营销内容 | 每日 |
+| 分层群发 | 客户分级差异化触达 | 每日 |
+| 活动方案 | 完整策划方案生成 | 按需 |
+| 比价分析 | 全国车源智能比价 | 实时 |
+| 财务报告 | 月度 P&L 自动生成 | 每月 |
+| 跟进建议 | 销售线索智能跟进 | 每日 |
+| 转介绍海报 | 海报文案自动生成 | 按需 |
+| 资源匹配 | 企业家资源智能匹配 | 实时 |
 
 ## 快速开始
+
+### 前置要求
+
+- Node.js >= 18
+- 微信开发者工具 >= 1.06
+- 微信小程序账号（已开通云开发）
+
+### 安装
+
 ```bash
-# 1. 安装依赖
+cd hauche-dev
 npm install
+```
 
-# 2. 微信小程序开发
+### 配置
+
+```bash
+node scripts/create-cloud-env.js
+# 编辑 .env 填入真实配置
+```
+
+### 开发
+
+```bash
+# 微信小程序开发模式
 npm run dev:weapp
-# 用微信开发者工具打开 dist/ 目录
 
-# 3. H5 开发
+# H5 预览（浏览器）
 npm run dev:h5
+```
 
-# 4. 生产构建
+### 部署
+
+```bash
+# 构建生产版本
 npm run build:weapp
-npm run build:h5
+
+# 验证云函数
+node scripts/deploy-functions.js
 ```
 
-## 目录结构
+然后在微信开发者工具中：
+1. 导入项目，选择 `dist/` 目录
+2. 开通云开发
+3. 上传全部 13 个云函数
+4. 配置环境变量
+
+## 项目结构
+
 ```
-src/
-├── app.config.js          # 应用配置（页面路由+TabBar）
-├── app.js                 # 应用入口
-├── app.scss               # 全局样式变量
-├── assets/tab/            # TabBar 图标
-├── components/            # 公共组件
-├── pages/
-│   ├── index/            # 首页 (CRM工作台)
-│   ├── showroom/         # 豪车展厅
-│   ├── car-detail/       # 车辆详情
-│   ├── crm-members/      # 会员管理
-│   ├── crm-inventory/    # 库存台账
-│   ├── ai-chat/          # AI客服对话
-│   └── profile/          # 个人中心
-├── services/              # API 服务层
-├── stores/                # 状态管理
-└── utils/                 # 工具函数
+hauche-dev/
+├── cloudfunctions/          # 云函数 (13个)
+│   ├── login/               # 微信登录
+│   ├── userService/         # 用户服务
+│   ├── dealerService/       # 经销商服务
+│   ├── vehicleService/      # 车辆服务
+│   ├── leadService/         # 线索服务
+│   ├── orderService/        # 订单服务
+│   ├── serviceService/      # 管家服务
+│   ├── aiService/           # AI服务 (10个action)
+│   ├── paymentService/      # 支付服务
+│   ├── dailyMarketing/      # 每日营销 (定时)
+│   ├── dailyFollowUp/       # 每日跟进 (定时)
+│   ├── dailyInventory/      # 每日库存 (定时)
+│   ├── monthlyFinance/      # 月度财务 (定时)
+│   └── weeklyReport/        # 周报 (定时)
+├── src/
+│   ├── pages/               # 页面 (35个)
+│   ├── components/          # 组件
+│   │   ├── custom-tabbar/   # 自定义 TabBar
+│   │   ├── skeleton/        # 骨架屏
+│   │   ├── empty-state/     # 空状态
+│   │   ├── error-boundary/  # 错误边界
+│   │   ├── pull-refresh/    # 下拉刷新
+│   │   ├── car-card/        # 车辆卡片
+│   │   └── ai-float-btn/    # AI悬浮按钮
+│   ├── services/            # 服务层
+│   │   ├── cloud.js         # 云开发封装
+│   │   ├── ai.js            # AI服务
+│   │   ├── vehicle.js       # 车辆业务
+│   │   ├── chat.js          # 对话管理
+│   │   ├── member.js        # 会员管理
+│   │   └── payment.js       # 支付服务
+│   ├── stores/              # Pinia 状态管理
+│   │   ├── user.js          # 用户状态
+│   │   ├── vehicle.js       # 车辆状态
+│   │   └── app.js           # 应用状态
+│   ├── utils/               # 工具函数
+│   │   ├── format.js        # 格式化
+│   │   ├── request.js       # HTTP请求
+│   │   ├── validate.js      # 表单验证
+│   │   ├── auth.js          # 权限控制
+│   │   └── navigation.js    # 导航工具
+│   ├── app.js               # 入口
+│   ├── app.config.js        # 路由配置
+│   └── app.scss             # 设计令牌
+├── docs/                    # 文档
+│   ├── database-design.md   # 数据库设计
+│   ├── technical-architecture.md  # 技术架构
+│   ├── api-database-design.md    # API设计
+│   └── competition-brief.md      # 参赛简介
+├── scripts/                 # 脚本
+│   ├── deploy-functions.js  # 部署验证
+│   └── create-cloud-env.js  # 环境配置
+└── config/                  # 构建配置
 ```
 
-## 页面说明
-| 页面 | 路径 | 功能 |
-|---|---|---|
-| 首页 | /pages/index | CRM工作台：数据概览、快捷操作、活动、待办、收入 |
-| 展厅 | /pages/showroom | 豪车浏览：AI推荐、筛选、车辆列表 |
-| 车辆详情 | /pages/car-detail | 沉浸式看车：AI评估、参数、推荐 |
-| 会员管理 | /pages/crm-members | 分层会员列表、搜索筛选、佣金管理 |
-| 库存台账 | /pages/crm-inventory | 车辆库存：财务数据、贬值预警 |
-| AI顾问 | /pages/ai-chat | AI客服：对话、产品卡、预约、自动标签 |
-| 个人中心 | /pages/profile | 个人设置（待开发） |
+## 设计系统
 
-## API 对接
-所有 API 接口定义见: docs/api-database-design.md
+**Ferrari Rosso Corsa**
+- 主色: `#DA291C` (法拉利红)
+- 强调色: `#E8B800` (金色)
+- 圆角: 2px / 4px / 8px 层级
+- 风格: 零阴影，纯边框，极致精准
 
-当前页面使用内联 mock 数据，接入后端时：
-1. 修改 src/services/*.js 中的 BASE_URL
-2. 将组件中的 mock 数据替换为 API 调用
-3. 参考 API 文档中的请求/响应格式
+## 成本估算
 
-## 设计规范
-- 主色: #C8A45C (金色)
-- 背景: #0C0C14 (深色)
-- 卡片: #16161F
-- 文字: #F0ECE4 / #8A867E / #5A5750
-- 字体: Inter + Noto Sans SC
-- 圆角: 6px / 8px / 12px
-- 最小触控: 44px (88rpx)
+| 项目 | 月费用 |
+|------|--------|
+| 微信云开发基础版 | ¥0 |
+| 云数据库 (2GB) | ¥7 |
+| 云存储 (5GB) | ¥5 |
+| 云函数调用 | ¥3 |
+| DeepSeek API | ¥30 |
+| **合计** | **~¥45/月** |
 
-## 后续开发计划
-- [ ] 接入真实 API
-- [ ] 个人中心页面
-- [ ] 内容发布工具（桌面端）
-- [ ] 数字人视频工具（桌面端）
-- [ ] 数据分析仪表盘（桌面端）
-- [ ] 微信支付集成
-- [ ] 用户权限系统
+## License
 
-## 参赛信息
-字节跳动 TRAE AI 创造力大赛参赛作品
-项目估值: 6600万
-对标: 汽车之家
+MIT

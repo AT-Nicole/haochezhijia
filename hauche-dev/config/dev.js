@@ -1,6 +1,12 @@
 const config = {
-  env: { NODE_ENV: '"development"' },
-  defineConstants: { API_BASE: '"http://localhost:3000/api"' },
+  env: {
+    NODE_ENV: '"development"',
+    USE_MOCK: '"true"',
+    CLOUD_ENV_ID: '"hauche-dev"',
+    DEEPSEEK_API_KEY: '""',
+    WX_APP_ID: '"wx0000000000000000"'
+  },
+  defineConstants: {},
   mini: {},
   h5: {}
 }
