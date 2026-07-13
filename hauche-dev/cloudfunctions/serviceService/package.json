@@ -1,0 +1,8 @@
+{
+  "name": "serviceService",
+  "version": "1.0.0",
+  "description": "豪车之家 - 管家服务云函数（服务预约、管家分配、时间线、评价）",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

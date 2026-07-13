@@ -1,9 +1,19 @@
-import { get, post, put } from '@/utils/request'
+/**
+ * 会员服务
+ * 通过云函数 userService 实现会员管理
+ */
+import { callCloudFunction } from './cloud'
 
-export const memberApi = {
-  getList: (params) => get('/members/list', params),
-  getDetail: (id) => get(`/members/${id}`),
-  create: (data) => post('/members', data),
-  update: (id, data) => put(`/members/${id}`, data),
-  checkMembership: () => get('/membership/check'),
+export function getMemberInfo(userId) {
+  return callCloudFunction('userService', {
+    action: 'getMemberInfo',
+    data: { userId }
+  })
+}
+
+export function upgradeMember(userId, tier) {
+  return callCloudFunction('userService', {
+    action: 'upgradeMember',
+    data: { userId, tier }
+  })
 }

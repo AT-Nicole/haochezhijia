@@ -1,0 +1,8 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "豪车之家 - 登录与用户角色管理云函数",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

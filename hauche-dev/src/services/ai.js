@@ -10,18 +10,34 @@
 
 const CLOUD_FUNCTION = 'aiService' // 云函数名称
 
+const USE_MOCK = process.env.NODE_ENV === 'development' || !Taro.cloud?.callFunction
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 /**
- * 通用AI调用（通过云函数中转）
+ * 通用AI调用（通过云函数中转，开发环境自动降级为Mock）
  * @param {string} action - AI功能标识
  * @param {object} params - 参数
  * @returns {Promise<object>}
  */
 async function callAI(action, params = {}) {
-  // 在真实环境中通过云函数调用
-  // wx.cloud.callFunction({ name: 'aiService', data: { action, params } })
-
-  // MVP阶段：返回模拟数据
-  return mockResponse(action, params)
+  if (USE_MOCK) {
+    await sleep(800) // 模拟网络延迟
+    return mockResponse(action, params)
+  }
+  try {
+    const res = await Taro.cloud.callFunction({
+      name: 'aiService',
+      data: { action, data: params }
+    })
+    return res.result?.data || res.result
+  } catch (err) {
+    console.error('AI service error:', err)
+    // 降级到Mock数据
+    return mockResponse(action, params)
+  }
 }
 
 /**

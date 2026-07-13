@@ -1,0 +1,25 @@
+{
+  "env": "your-env-id",
+  "functions": [
+    { "name": "login", "timeout": 10 },
+    { "name": "userService", "timeout": 15 },
+    { "name": "dealerService", "timeout": 15 },
+    { "name": "vehicleService", "timeout": 15 },
+    { "name": "leadService", "timeout": 15 },
+    { "name": "orderService", "timeout": 15 },
+    { "name": "serviceService", "timeout": 15 },
+    { "name": "aiService", "timeout": 60 },
+    { "name": "dailyMarketing", "timeout": 60 },
+    { "name": "dailyFollowUp", "timeout": 60 },
+    { "name": "dailyInventory", "timeout": 30 },
+    { "name": "monthlyFinance", "timeout": 120 },
+    { "name": "weeklyReport", "timeout": 60 }
+  ],
+  "triggers": [
+    { "name": "dailyMarketing", "type": "timer", "cron": "0 0 1 * * * *" },
+    { "name": "dailyFollowUp", "type": "timer", "cron": "0 0 2 * * * *" },
+    { "name": "dailyInventory", "type": "timer", "cron": "0 0 0 * * * *" },
+    { "name": "monthlyFinance", "type": "timer", "cron": "0 0 0 1 * * *" },
+    { "name": "weeklyReport", "type": "timer", "cron": "0 0 1 * * 1 *" }
+  ]
+}

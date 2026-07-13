@@ -1,0 +1,8 @@
+{
+  "name": "userService",
+  "version": "1.0.0",
+  "description": "豪车之家 - 用户服务云函数（个人中心、会员管理、订单/线索查询）",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

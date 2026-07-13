@@ -1,0 +1,8 @@
+{
+  "name": "leadService",
+  "version": "1.0.0",
+  "description": "豪车之家 - 线索服务云函数（线索管理、跟进、转化、漏斗统计）",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

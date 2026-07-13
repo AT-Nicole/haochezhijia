@@ -1,0 +1,8 @@
+{
+  "name": "vehicleService",
+  "version": "1.0.0",
+  "description": "豪车之家 - 车辆服务云函数（车辆CRUD、搜索、列表筛选）",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

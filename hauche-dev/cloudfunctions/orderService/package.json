@@ -1,0 +1,8 @@
+{
+  "name": "orderService",
+  "version": "1.0.0",
+  "description": "豪车之家 - 订单服务云函数（订单管理、状态流转、佣金计算、统计）",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "dealerService",
+  "version": "1.0.0",
+  "description": "豪车之家 - 经销商服务云函数（注册、审核、资料管理、数据统计）",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
