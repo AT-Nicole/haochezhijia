@@ -1,149 +1,813 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>豪车之家 — 大湾区高端汽车服务生态</title>
-<meta name="description" content="豪车之家，大湾区高端汽车服务平台。豪车展厅、私董服务、终身管家、车友社区。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--primary:#C41E3A;--accent:#D4A843;--bg:#FAFBFC;--surface:#FFFFFF;--text:#1F2022;--text2:#6E747A;--text3:#A0A6AE;--border:rgba(0,0,0,0.05)}
-html{background:var(--bg);color:var(--text);font-family:'SF Pro Display','PingFang SC','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
-body{max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg)}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>豪车之家</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+  <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+  <style type="text/tailwindcss">
+    @theme inline {
+      --color-background: var(--color-background);
+      --color-primary: var(--color-primary);
+      --color-accent: var(--color-accent);
+      --color-border: var(--color-border);
+    }
+    @layer base {
+      body { background: var(--color-background); color: var(--color-text-primary); }
+      td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+      th { @apply whitespace-nowrap; }
+    }
+  </style>
+  <style>
+    /* ── 基础重置 ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      background: var(--color-background);
+      color: var(--color-text-primary);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    body {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--color-background);
+      position: relative;
+    }
 
-/* Header */
-.header{position:sticky;top:0;z-index:100;background:rgba(250,251,252,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
-.header h1{font-size:20px;font-weight:600;color:var(--text);letter-spacing:-0.02em}
-.header .badge{font-size:11px;background:var(--primary);color:#fff;padding:2px 8px;border-radius:20px;font-weight:500}
+    /* ── SPA 容器 ── */
+    #app {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
 
-/* Category tabs */
-.tabs{display:flex;gap:8px;padding:16px 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:500;background:var(--surface);color:var(--text2);border:1px solid var(--border);text-decoration:none;transition:all .2s;cursor:pointer}
-.tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.tab:hover:not(.active){background:#F5F6F8}
+    /* ── 顶部导航栏 ── */
+    #nav-bar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      z-index: 50;
+      height: 48px;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+    }
+    #nav-bar .nav-back {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--color-text-primary);
+      border-radius: var(--radius-sm);
+      transition: background-color 0.15s;
+      flex-shrink: 0;
+    }
+    #nav-bar .nav-back:active {
+      background-color: var(--color-surface-hover);
+    }
+    #nav-bar .nav-title {
+      flex: 1;
+      text-align: center;
+      font-size: var(--text-lg);
+      font-weight: 500;
+      font-family: var(--font-display);
+      color: var(--color-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 8px;
+    }
+    #nav-bar .nav-spacer {
+      width: 32px;
+      flex-shrink: 0;
+    }
 
-/* Page grid */
-.grid{padding:4px 20px 100px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:var(--surface);border-radius:16px;padding:20px 16px;text-decoration:none;border:1px solid var(--border);transition:all .2s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;gap:8px}
-.card:active{transform:scale(0.97);opacity:0.9}
-.card-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px}
-.card-icon.red{background:rgba(196,30,58,0.08);color:var(--primary)}
-.card-icon.gold{background:rgba(212,168,67,0.12);color:var(--accent)}
-.card-icon.blue{background:rgba(59,139,235,0.08);color:#3B8BEB}
-.card-icon.green{background:rgba(43,188,142,0.08);color:#2BBC8E}
-.card-icon.gray{background:rgba(0,0,0,0.04);color:var(--text2)}
-.card h3{font-size:15px;font-weight:600;color:var(--text)}
-.card p{font-size:12px;color:var(--text3);line-height:1.4}
-.card .new-tag{position:absolute;top:8px;right:8px;font-size:10px;background:var(--primary);color:#fff;padding:1px 6px;border-radius:8px;font-weight:500}
-.card{position:relative}
+    /* ── 页面容器 ── */
+    #page-container {
+      flex: 1;
+      padding-top: 0; /* 动态调整 */
+      padding-bottom: 0; /* 动态调整 */
+    }
+    #page-container.has-nav {
+      padding-top: 48px;
+    }
+    #page-container.has-tab {
+      padding-bottom: 60px;
+    }
+    #page-container.has-tab.has-nav {
+      padding-top: 48px;
+      padding-bottom: 60px;
+    }
 
-/* Footer */
-.footer{text-align:center;padding:32px 20px 48px;color:var(--text3);font-size:12px;line-height:1.8}
-.footer .brand{color:var(--text2);font-weight:500}
+    /* ── 页面内容包裹 ── */
+    #page-content {
+      min-height: 100%;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    #page-content.loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-/* Scroll indicator */
-.scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--surface);box-shadow:0 2px 12px rgba(0,0,0,0.1);display:none;align-items:center;justify-content:center;font-size:18px;color:var(--text2);cursor:pointer;z-index:99;border:1px solid var(--border)}
+    /* ── 底部 Tab Bar ── */
+    #tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      z-index: 50;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding-bottom: max(env(safe-area-inset-bottom), 0px);
+    }
+    .tab-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 50px;
+    }
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      width: 64px;
+      height: 100%;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--color-text-tertiary);
+      font-size: 10px;
+      transition: color 0.15s;
+      position: relative;
+      border-radius: var(--radius-sm);
+    }
+    .tab-item:active {
+      background-color: var(--color-surface-hover);
+    }
+    .tab-item.active {
+      color: var(--color-primary);
+    }
+    .tab-item .tab-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tab-item .tab-label {
+      font-weight: 500;
+      line-height: 1;
+    }
+    .tab-item.active .tab-label {
+      font-weight: 600;
+    }
 
-/* Animation */
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.card{animation:fadeUp .4s ease both}
-.card:nth-child(1){animation-delay:.02s}.card:nth-child(2){animation-delay:.04s}
-.card:nth-child(3){animation-delay:.06s}.card:nth-child(4){animation-delay:.08s}
-.card:nth-child(5){animation-delay:.1s}.card:nth-child(6){animation-delay:.12s}
-.card:nth-child(7){animation-delay:.14s}.card:nth-child(8){animation-delay:.16s}
-.card:nth-child(9){animation-delay:.18s}.card:nth-child(10){animation-delay:.2s}
-.card:nth-child(11){animation-delay:.22s}.card:nth-child(12){animation-delay:.24s}
-.card:nth-child(13){animation-delay:.26s}.card:nth-child(14){animation-delay:.28s}
-.card:nth-child(15){animation-delay:.3s}.card:nth-child(16){animation-delay:.32s}
-.card:nth-child(17){animation-delay:.34s}.card:nth-child(18){animation-delay:.36s}
-.card:nth-child(19){animation-delay:.38s}.card:nth-child(20){animation-delay:.4s}
-.card:nth-child(21){animation-delay:.42s}.card:nth-child(22){animation-delay:.44s}
-.card:nth-child(23){animation-delay:.46s}
-</style>
+    /* ── Loading 指示器 ── */
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-background);
+      z-index: 40;
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-primary);
+      border-radius: var(--radius-full);
+      animation: spin 0.6s linear infinite;
+    }
+    .loading-text {
+      margin-top: 12px;
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
+    }
+
+    /* ── 错误状态 ── */
+    #error-view {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      padding: 24px;
+    }
+    .error-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 16px;
+    }
+    .error-msg {
+      font-size: var(--text-base);
+      color: var(--color-text-secondary);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .error-retry {
+      margin-top: 16px;
+      padding: 8px 24px;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-primary-text);
+      background: var(--color-primary);
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .error-retry:active {
+      opacity: 0.85;
+    }
+
+    /* ── 注入页面的辅助样式 ── */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    [data-icon] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      background-color: currentColor;
+    }
+
+    /* ── 注入的子页面中, 隐藏原有的 tab-bar 和导航 (由SPA统一管理) ── */
+    #page-content nav[data-dom-id="tab-bar"],
+    #page-content .fixed.bottom-0 {
+      display: none !important;
+    }
+
+    /* ── 动画 ── */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── reduced-motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      #page-content { transition-duration: 0.01ms !important; }
+      .spinner { animation-duration: 0.01ms !important; }
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+    /* ── focus-visible ── */
+    button:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  </style>
 </head>
 <body>
-<div class="header">
-  <h1>豪车之家</h1>
-  <span class="badge">24 页</span>
-</div>
+  <div id="app">
+    <!-- 顶部导航栏 -->
+    <div id="nav-bar" style="display:none">
+      <button class="nav-back" id="nav-back-btn" aria-label="返回">
+        <i data-lucide="chevron-left" style="width:20px;height:20px;"></i>
+      </button>
+      <div class="nav-title" id="nav-title"></div>
+      <div class="nav-spacer"></div>
+    </div>
 
-<div class="tabs">
-  <div class="tab active" data-cat="all">全部</div>
-  <div class="tab" data-cat="core">核心功能</div>
-  <div class="tab" data-cat="service">高端服务</div>
-  <div class="tab" data-cat="content">内容生态</div>
-  <div class="tab" data-cat="ops">运营管理</div>
-</div>
+    <!-- 页面内容区 -->
+    <div id="page-container">
+      <div id="page-content"></div>
+    </div>
 
-<div class="grid" id="grid">
-  <!-- 旗舰首页 -->
-  <a class="card" data-cat="core" href="pages/home-landing.html"><div class="card-icon red">🏠</div><h3>豪车之家首页</h3><p>旗舰首页·对标汽车之家</p><span class="new-tag">NEW</span></a>
+    <!-- 底部 Tab Bar -->
+    <div id="tab-bar" style="display:none">
+      <div class="tab-bar-inner" id="tab-bar-inner"></div>
+    </div>
 
-  <!-- 角色系统 -->
-  <a class="card" data-cat="core" href="pages/role-select.html"><div class="card-icon red">👤</div><h3>角色选择</h3><p>管理员/私董/经销商</p></a>
-  <a class="card" data-cat="core" href="pages/home-admin.html"><div class="card-icon gray">📊</div><h3>管理员首页</h3><p>平台数据总览</p></a>
-  <a class="card" data-cat="core" href="pages/home-vip.html"><div class="card-icon gold">👑</div><h3>私董会员首页</h3><p>VIP服务全景</p><span class="new-tag">NEW</span></a>
-  <a class="card" data-cat="core" href="pages/home-dealer.html"><div class="card-icon blue">🏪</div><h3>经销商首页</h3><p>运营数据看板</p><span class="new-tag">NEW</span></a>
+    <!-- Loading 指示器 -->
+    <div id="loading" style="display:none">
+      <div class="spinner"></div>
+      <div class="loading-text">加载中...</div>
+    </div>
+  </div>
 
-  <!-- 核心页面 -->
-  <a class="card" data-cat="core" href="pages/showroom.html"><div class="card-icon red">🚗</div><h3>豪车展厅</h3><p>在库车型一览</p></a>
-  <a class="card" data-cat="core" href="pages/car-detail.html"><div class="card-icon red">📋</div><h3>车辆详情</h3><p>参数/配置/评分</p></a>
-  <a class="card" data-cat="core" href="pages/crm-home.html"><div class="card-icon gray">🏠</div><h3>CRM首页</h3><p>客户管理概览</p></a>
-  <a class="card" data-cat="core" href="pages/crm-members.html"><div class="card-icon blue">👥</div><h3>会员管理</h3><p>会员列表分级</p></a>
-  <a class="card" data-cat="core" href="pages/crm-inventory.html"><div class="card-icon gray">📦</div><h3>库存台账</h3><p>车辆库存管理</p></a>
-  <a class="card" data-cat="core" href="pages/ai-chat.html"><div class="card-icon blue">🤖</div><h3>AI智能客服</h3><p>对话式购车助手</p></a>
+  <script>
+  (function() {
+    'use strict';
 
-  <!-- 高端服务 -->
-  <a class="card" data-cat="service" href="pages/concierge-service.html"><div class="card-icon gold">🛎</div><h3>私董服务</h3><p>尊享定制服务</p></a>
-  <a class="card" data-cat="service" href="pages/personal-advisor.html"><div class="card-icon gold">🤵</div><h3>专属顾问</h3><p>一对一顾问</p></a>
-  <a class="card" data-cat="service" href="pages/lifetime-butler.html"><div class="card-icon gold">🔑</div><h3>终身管家</h3><p>26项终身服务</p></a>
-  <a class="card" data-cat="service" href="pages/service-tracking.html"><div class="card-icon red">📍</div><h3>服务追踪</h3><p>8步流程追踪</p></a>
-  <a class="card" data-cat="service" href="pages/business-partner.html"><div class="card-icon green">🤝</div><h3>事业合伙人</h3><p>推荐赚取佣金</p></a>
-  <a class="card" data-cat="service" href="pages/finance-center.html"><div class="card-icon blue">💳</div><h3>金融服务</h3><p>贷款/保险/置换</p><span class="new-tag">NEW</span></a>
+    /* ══════════════════════════════════════════
+     * 页面注册表 — 定义所有 25 个页面的元信息
+     * ══════════════════════════════════════════ */
+    const PAGES = {
+      'role-select': { title: '角色选择', showTabBar: false, showBack: false },
+      // ── 买家角色 ──
+      'home-landing': { title: '豪车之家', role: 'buyer', tabs: [
+        { label: '首页', page: 'home-landing', icon: 'home' },
+        { label: '展厅', page: 'showroom', icon: 'car' },
+        { label: '发现', page: 'car-community', icon: 'compass' },
+        { label: '服务', page: 'finance-center', icon: 'wrench' },
+        { label: '我的', page: 'role-select', icon: 'user' }
+      ]},
+      'showroom': { title: '豪车展厅', tabs: 'buyer' },
+      'car-community': { title: '车友圈', showTabBar: false, showBack: true },
+      'finance-center': { title: '金融服务', showTabBar: false, showBack: true },
+      // ── VIP 角色 ──
+      'home-vip': { title: '私董会员', role: 'vip', tabs: [
+        { label: '首页', page: 'home-vip', icon: 'home' },
+        { label: '展厅', page: 'showroom', icon: 'car' },
+        { label: '服务', page: 'concierge-service', icon: 'wrench' },
+        { label: '管家', page: 'lifetime-butler', icon: 'key' },
+        { label: '我的', page: 'role-select', icon: 'user' }
+      ]},
+      'concierge-service': { title: '私董服务', showTabBar: false, showBack: true },
+      'lifetime-butler': { title: '终身管家', showTabBar: false, showBack: true },
+      // ── 车行角色 ──
+      'home-dealer': { title: '车行工作台', role: 'dealer', tabs: [
+        { label: '首页', page: 'home-dealer', icon: 'home' },
+        { label: '车源', page: 'crm-inventory', icon: 'package' },
+        { label: '线索', page: 'service-tracking', icon: 'map-pin' },
+        { label: '营销', page: 'content-marketing', icon: 'share-2' },
+        { label: '我的', page: 'role-select', icon: 'user' }
+      ]},
+      'crm-inventory': { title: '库存台账', showTabBar: false, showBack: true },
+      'service-tracking': { title: '服务追踪', showTabBar: false, showBack: true },
+      'content-marketing': { title: '内容营销', showTabBar: false, showBack: true },
+      // ── 创作者角色 ──
+      'home-creator': { title: '创作者工作台', role: 'creator', tabs: [
+        { label: '首页', page: 'home-creator', icon: 'home' },
+        { label: '创作', page: 'luxury-news', icon: 'pen-tool' },
+        { label: '数据', page: 'luxury-ranking', icon: 'bar-chart-3' },
+        { label: '消息', page: 'ai-chat', icon: 'message-circle' },
+        { label: '我的', page: 'role-select', icon: 'user' }
+      ]},
+      // ── 管理员角色 ──
+      'home-admin': { title: '管理后台', role: 'admin', tabs: [
+        { label: '首页', page: 'home-admin', icon: 'home' },
+        { label: '展厅', page: 'showroom', icon: 'car' },
+        { label: '会员', page: 'crm-members', icon: 'users' },
+        { label: '库存', page: 'crm-inventory', icon: 'package' },
+        { label: '我的', page: 'role-select', icon: 'user' }
+      ]},
+      'crm-members': { title: '会员管理', showTabBar: false, showBack: true },
+      // ── 子页面 (带返回按钮) ──
+      'crm-home': { title: 'CRM首页', showTabBar: false, showBack: true },
+      'car-detail': { title: '车辆详情', showTabBar: false, showBack: true },
+      'ai-chat': { title: 'AI客服', showTabBar: false, showBack: true },
+      'personal-advisor': { title: '专属顾问', showTabBar: false, showBack: true },
+      'business-partner': { title: '事业合伙人', showTabBar: false, showBack: true },
+      'luxury-news': { title: '豪车资讯', showTabBar: false, showBack: true },
+      'owner-reviews': { title: '车主口碑', showTabBar: false, showBack: true },
+      'luxury-ranking': { title: '豪车排行', showTabBar: false, showBack: true },
+      'event-center': { title: '活动中心', showTabBar: false, showBack: true },
+      'store-operations': { title: '门店运营', showTabBar: false, showBack: true }
+    };
 
-  <!-- 内容生态 -->
-  <a class="card" data-cat="content" href="pages/luxury-news.html"><div class="card-icon red">📰</div><h3>豪车资讯</h3><p>行业新闻动态</p><span class="new-tag">NEW</span></a>
-  <a class="card" data-cat="content" href="pages/owner-reviews.html"><div class="card-icon gold">⭐</div><h3>车主口碑</h3><p>真实车主评价</p><span class="new-tag">NEW</span></a>
-  <a class="card" data-cat="content" href="pages/car-community.html"><div class="card-icon green">💬</div><h3>车友圈</h3><p>车主社区互动</p><span class="new-tag">NEW</span></a>
-  <a class="card" data-cat="content" href="pages/luxury-ranking.html"><div class="card-icon red">🏆</div><h3>豪车排行</h3><p>销量/保值率/热度</p><span class="new-tag">NEW</span></a>
-  <a class="card" data-cat="content" href="pages/event-center.html"><div class="card-icon blue">🎯</div><h3>活动中心</h3><p>线下活动报名</p></a>
+    /* ══════════════════════════════════════════
+     * 角色到 Tab 配置的映射
+     * tabs 字段如果是字符串,则引用对应角色的 tab 配置
+     * ══════════════════════════════════════════ */
+    function resolveTabs(pageKey) {
+      const page = PAGES[pageKey];
+      if (!page) return null;
+      // 如果 tabs 是数组,直接返回
+      if (Array.isArray(page.tabs)) return page.tabs;
+      // 如果 tabs 是字符串(角色引用),找到对应角色的 home 页面获取 tabs
+      if (typeof page.tabs === 'string') {
+        const roleKey = page.tabs;
+        for (const [k, v] of Object.entries(PAGES)) {
+          if (v.role === roleKey && Array.isArray(v.tabs)) return v.tabs;
+        }
+      }
+      return null;
+    }
 
-  <!-- 运营管理 -->
-  <a class="card" data-cat="ops" href="pages/store-operations.html"><div class="card-icon gray">🏪</div><h3>门店运营</h3><p>日常运营管理</p></a>
-  <a class="card" data-cat="ops" href="pages/content-marketing.html"><div class="card-icon green">📱</div><h3>内容营销</h3><p>朋友圈素材管理</p></a>
-</div>
+    /* 根据页面查找所属角色,以确定应该显示哪个 tab 配置 */
+    function findRoleForPage(pageKey) {
+      // 直接有 role 属性
+      if (PAGES[pageKey] && PAGES[pageKey].role) return PAGES[pageKey].role;
+      // 遍历所有角色的 tab 列表
+      for (const [k, v] of Object.entries(PAGES)) {
+        if (!Array.isArray(v.tabs)) continue;
+        for (const tab of v.tabs) {
+          if (tab.page === pageKey) return v.role;
+        }
+      }
+      return null;
+    }
 
-<div class="footer">
-  <p>豪车之家 · <span class="brand">TRAE AI 创意大赛</span></p>
-  <p>大湾区高端汽车服务生态平台</p>
-</div>
+    /* 获取当前页面应该显示的 tab 配置 */
+    function getCurrentTabs(pageKey) {
+      const page = PAGES[pageKey];
+      if (!page) return null;
+      // 如果有 tabs (数组或引用),显示 tab bar
+      if (page.tabs) return resolveTabs(pageKey);
+      // 否则检查是否在某个角色的 tab 列表中
+      const role = findRoleForPage(pageKey);
+      if (role) {
+        // 子页面在某个角色的 tab 中出现 → 显示该角色的 tab bar
+        for (const [k, v] of Object.entries(PAGES)) {
+          if (v.role === role && Array.isArray(v.tabs)) return v.tabs;
+        }
+      }
+      return null;
+    }
 
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    /* ══════════════════════════════════════════
+     * DOM 引用
+     * ══════════════════════════════════════════ */
+    const $app = document.getElementById('app');
+    const $navBar = document.getElementById('nav-bar');
+    const $navTitle = document.getElementById('nav-title');
+    const $navBackBtn = document.getElementById('nav-back-btn');
+    const $container = document.getElementById('page-container');
+    const $content = document.getElementById('page-content');
+    const $tabBar = document.getElementById('tab-bar');
+    const $tabBarInner = document.getElementById('tab-bar-inner');
+    const $loading = document.getElementById('loading');
 
-<script>
-// Tab filtering
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const cat = tab.dataset.cat;
-    document.querySelectorAll('.card').forEach(card => {
-      if (cat === 'all' || card.dataset.cat === cat) {
-        card.style.display = 'flex';
+    /* ══════════════════════════════════════════
+     * 内存缓存
+     * ══════════════════════════════════════════ */
+    const cache = new Map();
+    let currentPage = null;
+    let isLoading = false;
+
+    /* ══════════════════════════════════════════
+     * 路由解析
+     * ══════════════════════════════════════════ */
+    function getPageKeyFromHash() {
+      const hash = window.location.hash || '';
+      const match = hash.match(/^#\/([a-z0-9-]+)$/i);
+      return match ? match[1].toLowerCase() : null;
+    }
+
+    /* ══════════════════════════════════════════
+     * 导航函数
+     * ══════════════════════════════════════════ */
+    function navigate(pageKey, pushState) {
+      if (!pageKey || !PAGES[pageKey]) {
+        // 未知页面,跳转到角色选择
+        if (pageKey !== 'role-select') {
+          window.location.hash = '#/role-select';
+        }
+        return;
+      }
+      if (pushState !== false) {
+        history.pushState(null, '', '#/' + pageKey);
+      }
+      currentPage = pageKey;
+      loadPage(pageKey);
+    }
+
+    /* ══════════════════════════════════════════
+     * 页面加载
+     * ══════════════════════════════════════════ */
+    async function loadPage(pageKey) {
+      if (isLoading) return;
+      isLoading = true;
+
+      const pageInfo = PAGES[pageKey];
+
+      // 更新 UI 状态
+      updateNavBar(pageKey, pageInfo);
+      updateTabBar(pageKey, pageInfo);
+      updateContainerPadding(pageInfo);
+
+      // 显示 loading
+      $content.classList.remove('loaded');
+      showLoading(true);
+
+      try {
+        let html;
+        // 从缓存读取
+        if (cache.has(pageKey)) {
+          html = cache.get(pageKey);
+        } else {
+          // fetch 页面
+          const resp = await fetch('pages/' + pageKey + '.html');
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          html = await resp.text();
+          cache.set(pageKey, html);
+        }
+
+        // 解析 HTML,提取 <main> 和 <style>
+        injectPageContent(html, pageKey);
+        showLoading(false);
+
+        // 触发入场动画
+        requestAnimationFrame(() => {
+          $content.classList.add('loaded');
+        });
+
+        // 更新 document title
+        document.title = pageInfo.title + ' — 豪车之家';
+
+      } catch (err) {
+        console.error('加载页面失败:', pageKey, err);
+        showLoading(false);
+        showError(pageKey, err.message);
+      }
+
+      isLoading = false;
+    }
+
+    /* ══════════════════════════════════════════
+     * HTML 解析与注入
+     * ══════════════════════════════════════════ */
+    function injectPageContent(rawHtml, pageKey) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(rawHtml, 'text/html');
+
+      // 提取 <main> 内容
+      const main = doc.querySelector('main');
+      if (!main) {
+        // 没有 <main>,取 body 内容
+        $content.innerHTML = doc.body.innerHTML;
       } else {
-        card.style.display = 'none';
+        $content.innerHTML = main.innerHTML;
+      }
+
+      // 收集所有 <style> 标签 (排除 theme-vars 和 tailwindcss)
+      let injectedStyles = '';
+      const styles = doc.querySelectorAll('style:not([id="theme-vars"]):not([type="text/tailwindcss"])');
+      styles.forEach(s => {
+        // 移除 reduced-motion 重复定义 (SPA 已有)
+        let css = s.textContent;
+        if (css.includes('prefers-reduced-motion')) {
+          // 合并而非重复
+          return;
+        }
+        injectedStyles += '<style>' + css + '</style>';
+      });
+
+      // 路径重写: ../assets/ → assets/, ../colors_and_type.css → colors_and_type.css
+      let content = $content.innerHTML;
+      content = content.replace(/\.\.\/assets\//g, 'assets/');
+      content = content.replace(/\.\.\/colors_and_type\.css/g, 'colors_and_type.css');
+      content = content.replace(/href="\.\.\//g, 'href="');
+      content = content.replace(/src="\.\.\//g, 'src="');
+      $content.innerHTML = content;
+
+      // 注入页面特有样式 (插在最前面)
+      if (injectedStyles) {
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = injectedStyles;
+        while (wrapper.firstChild) {
+          $content.insertBefore(wrapper.firstChild, $content.firstChild);
+        }
+      }
+
+      // 拦截页面内的链接和按钮
+      setupInterception();
+    }
+
+    /* ══════════════════════════════════════════
+     * 导航拦截 — 拦截页面内链接和返回按钮
+     * ══════════════════════════════════════════ */
+    function setupInterception() {
+      // 事件代理绑定到 page-content
+      $content.onclick = function(e) {
+        const target = e.target.closest('a[href]');
+        if (target) {
+          e.preventDefault();
+          e.stopPropagation();
+          let href = target.getAttribute('href');
+          if (!href) return;
+          // 处理 .html 链接
+          href = href.replace(/\.html$/i, '');
+          // 提取文件名
+          const parts = href.split('/');
+          const pageKey = parts[parts.length - 1].toLowerCase();
+          if (PAGES[pageKey]) {
+            navigate(pageKey);
+          } else {
+            console.warn('未注册的页面:', pageKey);
+          }
+          return;
+        }
+
+        // 返回按钮拦截
+        const backTarget = e.target.closest('[data-back], .back-btn, [data-dom-id="btn-back"]');
+        if (backTarget) {
+          e.preventDefault();
+          e.stopPropagation();
+          history.back();
+          return;
+        }
+      };
+
+      // 初始化 Lucide 图标
+      if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+      }
+    }
+
+    /* ══════════════════════════════════════════
+     * 导航栏更新
+     * ══════════════════════════════════════════ */
+    function updateNavBar(pageKey, pageInfo) {
+      const showBack = pageInfo.showBack === true;
+      if (showBack) {
+        $navBar.style.display = 'flex';
+        $navTitle.textContent = pageInfo.title;
+      } else {
+        $navBar.style.display = 'none';
+        $navTitle.textContent = '';
+      }
+    }
+
+    /* ══════════════════════════════════════════
+     * Tab Bar 更新
+     * ══════════════════════════════════════════ */
+    function updateTabBar(pageKey, pageInfo) {
+      const tabs = getCurrentTabs(pageKey);
+
+      if (!tabs) {
+        $tabBar.style.display = 'none';
+        return;
+      }
+
+      $tabBar.style.display = 'block';
+
+      // 构建 Tab Bar HTML
+      let html = '';
+      tabs.forEach(tab => {
+        const isActive = tab.page === pageKey;
+        html += '<button class="tab-item' + (isActive ? ' active' : '') + '" data-tab-page="' + tab.page + '" aria-label="' + tab.label + '">';
+        html += '<span class="tab-icon"><i data-lucide="' + tab.icon + '" style="width:20px;height:20px;"></i></span>';
+        html += '<span class="tab-label">' + tab.label + '</span>';
+        html += '</button>';
+      });
+      $tabBarInner.innerHTML = html;
+
+      // 初始化 Tab Bar 的 Lucide 图标
+      if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons({ attrs: { class: ['lucide-tab-icon'] }, nameAttr: 'data-lucide-tab' });
+        lucide.createIcons();
+      }
+
+      // 绑定 Tab 点击事件
+      $tabBarInner.querySelectorAll('.tab-item').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const tabPage = this.getAttribute('data-tab-page');
+          if (tabPage && PAGES[tabPage]) {
+            navigate(tabPage);
+          }
+        });
+      });
+    }
+
+    /* ══════════════════════════════════════════
+     * 容器 padding 调整
+     * ══════════════════════════════════════════ */
+    function updateContainerPadding(pageInfo) {
+      const showBack = pageInfo.showBack === true;
+      const hasTabs = getCurrentTabs(currentPage) !== null;
+
+      $container.className = '';
+      if (showBack) $container.classList.add('has-nav');
+      if (hasTabs) $container.classList.add('has-tab');
+
+      // 处理页面内容中已有的 pb-[72px] 等底部间距
+      // 让注入的页面不需要额外处理
+    }
+
+    /* ══════════════════════════════════════════
+     * Loading 显示/隐藏
+     * ══════════════════════════════════════════ */
+    function showLoading(show) {
+      $loading.style.display = show ? 'flex' : 'none';
+    }
+
+    /* ══════════════════════════════════════════
+     * 错误显示
+     * ══════════════════════════════════════════ */
+    function showError(pageKey, msg) {
+      $content.innerHTML = '<div id="error-view">' +
+        '<svg class="error-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+        '<div class="error-msg">页面加载失败<br><small style="color:var(--color-text-tertiary)">' + msg + '</small></div>' +
+        '<button class="error-retry" onclick="location.reload()">重新加载</button>' +
+        '</div>';
+      $content.classList.add('loaded');
+    }
+
+    /* ══════════════════════════════════════════
+     * 角色选择页面的特殊处理
+     * role-select 页面点击角色卡片后跳转对应首页
+     * ══════════════════════════════════════════ */
+    document.addEventListener('click', function(e) {
+      // 角色选择页的卡片点击
+      const roleBtn = e.target.closest('[data-dom-id="role-buyer"], [data-dom-id="role-dealer"], [data-dom-id="role-creator"], [data-dom-id="role-partner"], [data-dom-id="role-admin"]');
+      if (roleBtn) {
+        const domId = roleBtn.getAttribute('data-dom-id');
+        const roleMap = {
+          'role-buyer': 'home-landing',
+          'role-dealer': 'home-dealer',
+          'role-creator': 'home-creator',
+          'role-partner': 'role-select',
+          'role-admin': 'home-admin'
+        };
+        const target = roleMap[domId];
+        if (target) {
+          navigate(target);
+        }
+        return;
       }
     });
-  });
-});
 
-// Scroll to top button
-window.addEventListener('scroll', () => {
-  document.getElementById('scrollTop').style.display = window.scrollY > 400 ? 'flex' : 'none';
-});
-</script>
+    /* ══════════════════════════════════════════
+     * Tab Bar 中的 "我的" 特殊处理
+     * 点击 "我的" 时导航到 role-select
+     * ══════════════════════════════════════════ */
+    $tabBar.addEventListener('click', function(e) {
+      const tabItem = e.target.closest('.tab-item');
+      if (!tabItem) return;
+      const tabPage = tabItem.getAttribute('data-tab-page');
+      if (tabPage === 'role-select') {
+        e.preventDefault();
+        navigate('role-select');
+      }
+    });
+
+    /* ══════════════════════════════════════════
+     * 导航栏返回按钮
+     * ══════════════════════════════════════════ */
+    $navBackBtn.addEventListener('click', function() {
+      history.back();
+    });
+
+    /* ══════════════════════════════════════════
+     * Hash 变化监听 (浏览器前进/后退)
+     * ══════════════════════════════════════════ */
+    window.addEventListener('hashchange', function() {
+      const pageKey = getPageKeyFromHash();
+      if (pageKey && pageKey !== currentPage && PAGES[pageKey]) {
+        currentPage = pageKey;
+        loadPage(pageKey);
+      } else if (!pageKey || !PAGES[pageKey]) {
+        // 无效 hash,重定向
+        window.location.hash = '#/role-select';
+      }
+    });
+
+    /* ══════════════════════════════════════════
+     * 初始化
+     * ══════════════════════════════════════════ */
+    function init() {
+      // 初始化 Lucide
+      if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+      }
+
+      // 解析当前 hash
+      const pageKey = getPageKeyFromHash();
+      if (pageKey && PAGES[pageKey]) {
+        navigate(pageKey, false);
+      } else {
+        // 默认跳转角色选择
+        navigate('role-select', false);
+      }
+    }
+
+    // DOM 就绪后初始化
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+  })();
+  </script>
 </body>
 </html>
