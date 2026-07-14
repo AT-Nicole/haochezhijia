@@ -10,6 +10,7 @@
  *   const vehicles = await getVehicles({ brand: '保时捷' })
  */
 
+import Taro from '@tarojs/taro'
 import { mockVehicles } from './vehicles'
 import { mockDealers, mockVIPMembers, mockButlers } from './users'
 import { mockLeads } from './leads'

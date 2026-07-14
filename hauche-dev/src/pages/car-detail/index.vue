@@ -95,7 +95,10 @@ onMounted(() => {
   const params = Taro.getCurrentInstance().router?.params
   if (params?.name) {
     car.value.name = decodeURIComponent(params.name)
-    car.value.short = params.short || car.value.name.substring(0, 2)
+    car.value.short = decodeURIComponent(params.short || params.name).substring(0, 2)
+  }
+  if (params?.id) {
+    // TODO: 根据 id 从服务端加载车辆详情
   }
 })
 

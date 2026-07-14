@@ -67,7 +67,7 @@
   </View>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 import Taro from '@tarojs/taro'
 

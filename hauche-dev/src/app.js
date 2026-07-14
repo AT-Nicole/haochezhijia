@@ -1,4 +1,3 @@
-import { defineComponent, onLaunch } from 'vue'
 import { reactive } from 'vue'
 import Taro from '@tarojs/taro'
 
@@ -68,7 +67,7 @@ function getRole() {
     globalState.role = stored
     return stored
   }
-  return ''
+  return 'buyer'
 }
 
 function getCurrentTabs() {
@@ -76,24 +75,24 @@ function getCurrentTabs() {
   return TAB_CONFIGS[role] || TAB_CONFIGS.buyer
 }
 
-export default defineComponent({
+async function checkLogin() {
+  const token = Taro.getStorageSync('token')
+  if (!token) {
+    // 未登录时跳转到角色选择页
+    Taro.redirectTo({ url: '/pages/role-select/index' })
+  }
+}
+
+export default {
   onLaunch() {
     // Restore role from storage
     getRole()
-    // Check WeChat login
-    this.checkLogin()
+    console.log('豪车之家小程序启动')
   },
-  setup() {
-    onLaunch(() => {
-      console.log('豪车之家小程序启动')
-    })
-
-    return {
-      globalState,
-      setRole,
-      getRole,
-      getCurrentTabs,
-      TAB_CONFIGS
-    }
-  }
-})
+  globalState,
+  setRole,
+  getRole,
+  getCurrentTabs,
+  TAB_CONFIGS,
+  checkLogin
+}

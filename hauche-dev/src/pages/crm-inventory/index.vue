@@ -399,7 +399,7 @@ $font-mono: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
 .car-image-placeholder {
   width: 100%;
   height: 280rpx;
-  background: linear-gradient(135deg, $color-surface-elevated 0%, $color-surface 100%);
+  background: linear-gradient(135deg, $color-surface-hover 0%, $color-surface 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -548,7 +548,7 @@ $font-mono: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
   padding: 4rpx 16rpx;
   border-radius: 999rpx;
   font-size: 22rpx;
-  background: $color-surface-elevated;
+  background: $color-surface-hover;
   color: $color-text-secondary;
   border: 1px solid $color-border;
 }

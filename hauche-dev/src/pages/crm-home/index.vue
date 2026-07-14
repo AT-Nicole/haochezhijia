@@ -3,7 +3,7 @@
     <!-- Header -->
     <View class="header">
       <Text class="header-title">客户管理</Text>
-      <View class="search-wrap" @tap="goTo('/pages/crm-search/index')">
+      <View class="search-wrap" @tap="goTo('/pages/crm-members/index')">
         <Text class="search-icon">🔍</Text>
       </View>
     </View>

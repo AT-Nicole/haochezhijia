@@ -1,7 +1,7 @@
 <template>
   <View class="page">
     <View class="filter-tabs">
-      <ScrollView scrollX class="tabs-scroll">
+      <ScrollView scroll-x class="tabs-scroll">
         <View
           v-for="tab in tabs"
           :key="tab"
@@ -13,7 +13,7 @@
       </ScrollView>
     </View>
 
-    <ScrollView scrollY class="event-list">
+    <ScrollView scroll-y class="event-list">
       <View
         v-for="event in filteredEvents"
         :key="event.id"

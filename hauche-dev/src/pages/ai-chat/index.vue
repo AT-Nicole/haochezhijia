@@ -59,10 +59,10 @@
     <!-- Input Bar -->
     <View class="input-bar">
       <View class="input-row">
-        <input 
-          class="chat-input" 
-          v-model="inputText" 
-          placeholder="输入您的需求..." 
+        <Input
+          class="chat-input"
+          v-model="inputText"
+          placeholder="输入您的需求..."
           confirm-type="send"
           @confirm="sendMessage"
         />

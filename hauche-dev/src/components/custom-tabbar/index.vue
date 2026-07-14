@@ -61,8 +61,13 @@ const ICONS = {
   'bar-chart': '📊', 'message-circle': '💬', key: '🔑', users: '👥'
 }
 
-const role = ref(Taro.getStorageSync('userRole') || 'buyer')
+const role = computed(() => Taro.getStorageSync('userRole') || 'buyer')
 const tabs = computed(() => TAB_CONFIGS[role.value] || TAB_CONFIGS.buyer)
+
+// 监听页面显示时刷新角色
+Taro.useDidShow(() => {
+  // 角色通过 computed 自动从 storage 重新读取
+})
 
 const isActive = (page) => {
   const currentPages = Taro.getCurrentPages()

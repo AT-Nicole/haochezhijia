@@ -29,7 +29,7 @@ exports.main = async (event, context) => {
         }
 
         // 调用微信 code2Session 接口获取 openid 和 session_key
-        const res = await cloud.openapi().code2Session({ code })
+        const res = await cloud.openapi().code2Session({ jsCode: code })
         const { openid, session_key, unionid } = res
 
         // 查询用户是否已存在

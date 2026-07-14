@@ -1,4 +1,4 @@
-export default defineAppConfig({
+export default {
   pages: [
     // Entry
     'pages/index/index',
@@ -51,4 +51,4 @@ export default defineAppConfig({
     navigationBarTitleText: '豪车之家',
     backgroundColor: '#FAFAFA'
   }
-})
+}

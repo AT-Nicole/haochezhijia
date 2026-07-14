@@ -19,7 +19,7 @@ export function request(options) {
           resolve(res.data)
         } else if (res.statusCode === 401) {
           Taro.removeStorageSync('token')
-          Taro.navigateTo({ url: '/pages/login/index' })
+          Taro.navigateTo({ url: '/pages/role-select/index' })
           reject(new Error('登录已过期'))
         } else {
           reject(new Error(res.data.message || '请求失败'))

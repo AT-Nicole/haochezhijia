@@ -17,7 +17,7 @@
           <Text class="calc-label">贷款金额</Text>
           <Text class="calc-value">{{ loanAmount }} 万元</Text>
         </View>
-        <View class="slider-track">
+        <View class="slider-track" @tap="onSliderTap" @touchmove="onSliderMove" @touchend="onSliderEnd">
           <View class="slider-fill" :style="{ width: sliderPercent + '%' }" />
           <View class="slider-thumb" :style="{ left: sliderPercent + '%' }" />
         </View>
@@ -141,6 +141,32 @@ const products = ref([
 
 const handleApply = () => {
   Taro.showToast({ title: '申请已提交，顾问将尽快联系您', icon: 'none' })
+}
+
+// Slider 交互
+const sliderDragging = ref(false)
+
+const getSliderValue = (clientX, trackEl) => {
+  // 简易计算：基于 touch 位置与容器宽度的比例
+  const rect = { left: 32, width: 311 } // 近似值，实际可通过 getBoundingClientRect 获取
+  const percent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100))
+  const value = Math.round(10 + (percent / 100) * (500 - 10))
+  return Math.max(10, Math.min(500, value))
+}
+
+const onSliderTap = (e) => {
+  const x = e.detail?.x || e.clientX || 0
+  loanAmount.value = getSliderValue(x)
+}
+
+const onSliderMove = (e) => {
+  if (!e.touches?.[0]) return
+  sliderDragging.value = true
+  loanAmount.value = getSliderValue(e.touches[0].clientX)
+}
+
+const onSliderEnd = () => {
+  sliderDragging.value = false
 }
 </script>
 

@@ -79,6 +79,8 @@
         </View>
       </View>
 
+    </View>
+
     <View style="height: 160rpx" />
   </View>
 </template>

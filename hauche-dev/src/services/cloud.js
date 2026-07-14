@@ -3,6 +3,8 @@
  * 统一封装数据库、存储、云函数调用
  */
 
+import Taro from '@tarojs/taro'
+
 // 云开发环境ID（需要在微信云开发控制台创建后填入）
 // TODO: 替换为真实的云开发环境ID
 const ENV_ID = 'hauche-env-prod'

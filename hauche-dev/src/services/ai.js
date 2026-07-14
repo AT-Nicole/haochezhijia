@@ -1,3 +1,5 @@
+import Taro from '@tarojs/taro'
+
 /**
  * AI 服务层
  * 统一封装所有AI功能调用

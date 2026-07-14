@@ -1,7 +1,7 @@
 <template>
-  <view class="container">
-    <text>我的</text>
-  </view>
+  <View class="container">
+    <Text>我的</Text>
+  </View>
 </template>
 
 <script setup>

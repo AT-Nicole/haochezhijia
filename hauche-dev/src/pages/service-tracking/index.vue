@@ -11,7 +11,7 @@
       </View>
     </View>
 
-    <ScrollView scrollY class="order-list">
+    <ScrollView scroll-y class="order-list">
       <View
         v-for="order in filteredOrders"
         :key="order.id"
